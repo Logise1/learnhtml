@@ -2,17 +2,17 @@
   {
     "id": "1",
     "title": "1. El Nacimiento: Estructura Base",
-    "guide": "<h3>El Esqueleto</h3><p>Toda página web comienza igual. El navegador necesita saber que esto es HTML5 y dónde empieza y termina el documento.</p><pre>&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n  &lt;body&gt;\n  &lt;/body&gt;\n&lt;/html&gt;</pre><p><strong>Misión:</strong> Escribe la estructura sagrada desde cero.</p>",
+    "guide": "<h3>El Esqueleto</h3><p>Toda página web necesita una estructura fundacional. Primero, debes declarar al navegador que estás usando HTML5 con una etiqueta especial de tipo de documento. Luego, necesitas un elemento raíz que envuelva todo el código. Dentro de esa raíz, define el cuerpo del documento, que es donde vivirá todo el contenido visible para el usuario.</p><p><strong>Pistas:</strong> Usa <code>&lt;!DOCTYPE html&gt;</code> al principio, luego abre y cierra <code>html</code>, y dentro coloca las etiquetas de <code>body</code>.</p><p><strong>Misión:</strong> Escribe la estructura sagrada desde cero.</p>",
     "initialCode": "",
     "validation": {
-      "regex": "<!DOCTYPE\\s+html>[\\s\\S]*<html[\\s\\S]*<body[\\s\\S]*<\\/body>[\\s\\S]*<\\/html>",
+      "regex": "<!DOCTYPE\\s+html>\\s*<html[\\s\\S]*<body[\\s\\S]*<\\/body>[\\s\\S]*<\\/html>",
       "error": "Asegúrate de escribir el DOCTYPE, html y body correctamente."
     }
   },
   {
     "id": "2",
     "title": "2. La Cabecera Invisible (Head)",
-    "guide": "<h3>El Cerebro de la Página</h3><p>Antes del <code>body</code>, existe el <code>&lt;head&gt;</code>. Aquí va la información para el navegador, no para el usuario.</p><pre>&lt;html&gt;\n  &lt;head&gt;&lt;/head&gt;\n  &lt;body&gt;&lt;/body&gt;\n&lt;/html&gt;</pre><p><strong>Misión:</strong> Añade las etiquetas head antes del body.</p>",
+    "guide": "<h3>El Cerebro de la Página</h3><p>Una página web tiene dos partes principales dentro de la etiqueta <code>html</code>: el cuerpo (que ya conoces) y la cabeza. La cabecera o <code>head</code> contiene información técnica que el usuario no ve directamente en la página, como el título de la pestaña o configuraciones.</p><p><strong>Cómo hacerlo:</strong> Debes colocar la etiqueta de apertura y cierre del <code>head</code> justo antes de que empiece el <code>body</code>.</p><p><strong>Misión:</strong> Añade las etiquetas head antes del body.</p>",
     "initialCode": "<!DOCTYPE html>\n<html>\n  <body>\n  </body>\n</html>",
     "validation": {
       "regex": "<head>[\\s\\S]*<\\/head>\\s*<body",
@@ -22,7 +22,7 @@
   {
     "id": "3",
     "title": "3. Título de la Pestaña",
-    "guide": "<h3>Nombrando la Web</h3><p>Dentro del <code>head</code>, la etiqueta <code>&lt;title&gt;</code> define lo que se ve en la pestaña del navegador.</p><p><strong>Misión:</strong> Ponle de título 'Mi Primera Web' dentro del head.</p>",
+    "guide": "<h3>Nombrando la Web</h3><p>¿Has notado el texto que aparece en la pestaña superior de tu navegador? Eso se define dentro de la cabecera. Es crucial para que los usuarios identifiquen tu página y para los buscadores como Google.</p><p><strong>Cómo hacerlo:</strong> Dentro de las etiquetas <code>head</code> que acabas de crear, inserta una etiqueta llamada <code>title</code> y escribe el nombre de tu web dentro de ella.</p><p><strong>Misión:</strong> Ponle de título 'Mi Primera Web' dentro del head.</p>",
     "initialCode": "<html>\n  <head>\n    \n  </head>\n  <body></body>\n</html>",
     "validation": {
       "regex": "<title>\\s*Mi Primera Web\\s*<\\/title>",
@@ -32,7 +32,7 @@
   {
     "id": "4",
     "title": "4. Codificación de Caracteres",
-    "guide": "<h3>Evitando símbolos raros</h3><p>Para que se vean las tildes y ñ, debemos decir que usamos UTF-8. Esto se hace con una etiqueta meta.</p><pre>&lt;meta charset='UTF-8'&gt;</pre><p><strong>Misión:</strong> Añade el meta charset dentro del head.</p>",
+    "guide": "<h3>Evitando símbolos raros</h3><p>Si alguna vez has visto símbolos extraños en lugar de tildes o la letra 'ñ', es por falta de codificación. Debemos decirle al navegador que use el conjunto de caracteres UTF-8, que incluye casi todos los símbolos del mundo.</p><p><strong>Cómo hacerlo:</strong> Usa una etiqueta <code>meta</code> dentro del <code>head</code>. Esta etiqueta no necesita cierre. Añádele el atributo <code>charset</code> con el valor 'UTF-8'.</p><p><strong>Misión:</strong> Añade el meta charset dentro del head.</p>",
     "initialCode": "<head>\n  <title>Web</title>\n  \n</head>",
     "validation": {
       "regex": "<meta\\s+charset=['\"]UTF-8['\"]\\s*\\/?>",
@@ -42,7 +42,7 @@
   {
     "id": "5",
     "title": "5. El Título Principal (H1)",
-    "guide": "<h3>Jerarquía Visual</h3><p>Ahora vamos al <code>body</code>. El <code>&lt;h1&gt;</code> es el título más importante. Solo debe haber uno por página para un buen SEO (posicionamiento).</p><p><strong>Misión:</strong> Crea un H1 que diga 'Hola Mundo'.</p>",
+    "guide": "<h3>Jerarquía Visual</h3><p>Entramos en el <code>body</code>. Los encabezados son vitales para la estructura. El más importante es el H1, que funciona como el titular de un periódico. Por reglas de SEO (posicionamiento), solo deberías tener uno por página.</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>h1</code> (apertura y cierre) y pon tu texto principal dentro.</p><p><strong>Misión:</strong> Crea un H1 que diga 'Hola Mundo'.</p>",
     "initialCode": "<body>\n  \n</body>",
     "validation": {
       "regex": "<h1[^>]*>\\s*Hola Mundo\\s*<\\/h1>",
@@ -52,17 +52,17 @@
   {
     "id": "6",
     "title": "6. Párrafos de Texto",
-    "guide": "<h3>Bloques de Texto</h3><p>El texto normal va en etiquetas <code>&lt;p&gt;</code>. Los navegadores añaden un margen automático antes y después de cada párrafo.</p><p><strong>Misión:</strong> Escribe un párrafo presentándote.</p>",
+    "guide": "<h3>Bloques de Texto</h3><p>Para escribir contenido normal, no podemos dejar el texto suelto. Debemos encapsularlo en párrafos. Esto hace que el navegador añada automáticamente un espacio antes y después del bloque de texto para que sea legible.</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>p</code>. Abre la etiqueta, escribe tu descripción detallada y ciérrala.</p><p><strong>Misión:</strong> Escribe un párrafo presentándote. Debe tener al menos 30 caracteres para contar como válido.</p>",
     "initialCode": "<h1>Mi Blog</h1>\n",
     "validation": {
-      "regex": "<p>[\\s\\S]+<\\/p>",
-      "error": "Añade una etiqueta <p> con algo de texto dentro."
+      "regex": "<p>\\s*[\\s\\S]{30,}\\s*<\\/p>",
+      "error": "Añade un <p> con una descripción de al menos 30 letras."
     }
   },
   {
     "id": "7",
     "title": "7. Negritas y Énfasis",
-    "guide": "<h3>Destacando Texto</h3><p>Para poner texto en <strong>negrita</strong> usa <code>&lt;strong&gt;</code> (importante) o <code>&lt;b&gt;</code> (visual). Para <em>cursiva</em> usa <code>&lt;em&gt;</code> (énfasis) o <code>&lt;i&gt;</code>.</p><p><strong>Misión:</strong> Haz que la palabra 'importante' esté en negrita usando strong.</p>",
+    "guide": "<h3>Destacando Texto</h3><p>A veces necesitamos que una palabra resalte sobre las demás. Antiguamente se usaba la etiqueta 'b', pero hoy preferimos <code>strong</code> porque indica semánticamente que el texto es 'importante', no solo 'gordo'.</p><p><strong>Cómo hacerlo:</strong> Envuelve la palabra específica dentro de las etiquetas <code>strong</code>.</p><p><strong>Misión:</strong> Haz que la palabra 'importante' esté en negrita usando strong.</p>",
     "initialCode": "<p>Este es un mensaje importante.</p>",
     "validation": {
       "regex": "<strong[^>]*>\\s*importante\\s*<\\/strong>",
@@ -72,7 +72,7 @@
   {
     "id": "8",
     "title": "8. Subtítulos (H2-H6)",
-    "guide": "<h3>Organizando el Contenido</h3><p>Usa <code>h2</code> para secciones principales, <code>h3</code> para subsecciones, etc. Mantén el orden lógico.</p><p><strong>Misión:</strong> Añade un h2 que diga 'Mis Hobbies' y un h3 que diga 'Deportes'.</p>",
+    "guide": "<h3>Organizando el Contenido</h3><p>Igual que un libro tiene capítulos y subcapítulos, HTML tiene niveles de títulos desde el <code>h2</code> hasta el <code>h6</code>. El <code>h2</code> se usa para las secciones principales y el <code>h3</code> para subdivisiones dentro de esas secciones.</p><p><strong>Cómo hacerlo:</strong> Crea etiquetas de apertura y cierre para cada nivel de título que necesites.</p><p><strong>Misión:</strong> Añade un h2 que diga 'Mis Hobbies' y un h3 que diga 'Deportes'.</p>",
     "initialCode": "<h1>Sobre mí</h1>\n",
     "validation": {
       "regex": "<h2[^>]*>Mis Hobbies<\\/h2>[\\s\\S]*<h3[^>]*>Deportes<\\/h3>",
@@ -82,7 +82,7 @@
   {
     "id": "9",
     "title": "9. Listas Desordenadas",
-    "guide": "<h3>Bullets</h3><p>Para listas donde el orden no importa (ingredientes, items). Usa <code>&lt;ul&gt;</code> y dentro varios <code>&lt;li&gt;</code>.</p><p><strong>Misión:</strong> Crea una lista (ul) con 2 elementos (li): 'HTML' y 'CSS'.</p>",
+    "guide": "<h3>Bullets</h3><p>Cuando el orden de los elementos no importa (como una lista de la compra), usamos listas desordenadas. Estas crean los típicos puntitos negros (viñetas) a la izquierda de cada elemento.</p><p><strong>Cómo hacerlo:</strong> Primero crea el contenedor de la lista <code>ul</code> (Unordered List). Dentro de él, debes crear un elemento <code>li</code> (List Item) por cada punto que quieras mostrar.</p><p><strong>Misión:</strong> Crea una lista (ul) con 2 elementos (li): 'HTML' y 'CSS'.</p>",
     "initialCode": "<h2>Tecnologías</h2>\n",
     "validation": {
       "regex": "<ul[^>]*>[\\s\\S]*<li[^>]*>HTML<\\/li>[\\s\\S]*<li[^>]*>CSS<\\/li>[\\s\\S]*<\\/ul>",
@@ -92,7 +92,7 @@
   {
     "id": "10",
     "title": "10. Listas Ordenadas",
-    "guide": "<h3>1, 2, 3...</h3><p>Para pasos o rankings. Usa <code>&lt;ol&gt;</code> y dentro <code>&lt;li&gt;</code>.</p><p><strong>Misión:</strong> Crea un ranking de 2 películas favoritas.</p>",
+    "guide": "<h3>1, 2, 3...</h3><p>Si quieres hacer un ranking o un tutorial paso a paso, el orden sí importa. En este caso, el navegador pondrá números automáticamente (1, 2, 3...) en lugar de puntos.</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta contenedora <code>ol</code> (Ordered List) y, al igual que antes, usa etiquetas <code>li</code> para cada ítem dentro.</p><p><strong>Misión:</strong> Crea un ranking de 2 películas favoritas.</p>",
     "initialCode": "<h2>Top Películas</h2>\n",
     "validation": {
       "regex": "<ol[^>]*>[\\s\\S]*<li[\\s\\S]*<\\/li>[\\s\\S]*<li[\\s\\S]*<\\/li>[\\s\\S]*<\\/ol>",
@@ -102,7 +102,7 @@
   {
     "id": "11",
     "title": "11. Enlaces Básicos",
-    "guide": "<h3>El Hipervínculo</h3><p>La etiqueta <code>&lt;a&gt;</code> conecta la web. El atributo <code>href</code> es obligatorio.</p><pre>&lt;a href='https://google.com'&gt;Google&lt;/a&gt;</pre><p><strong>Misión:</strong> Enlace a 'https://wikipedia.org' con texto 'Wiki'.</p>",
+    "guide": "<h3>El Hipervínculo</h3><p>La magia de la web es poder saltar de una página a otra. Para esto usamos el 'ancla' o <code>a</code>. Pero una ancla por sí sola no hace nada, necesita saber a dónde ir.</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>a</code>. Dentro de la etiqueta de apertura, añade el atributo <code>href</code> igual a la dirección web (URL). El texto que pongas entre la apertura y el cierre será lo que el usuario puede clicar.</p><p><strong>Misión:</strong> Enlace a 'https://wikipedia.org' con texto 'Wiki'.</p>",
     "initialCode": "",
     "validation": {
       "regex": "<a\\s+href=['\"]https:\\/\\/wikipedia\\.org['\"][^>]*>Wiki<\\/a>",
@@ -112,7 +112,7 @@
   {
     "id": "12",
     "title": "12. Enlaces en Nueva Pestaña",
-    "guide": "<h3>Atributo Target</h3><p>Para no cerrar tu propia web al hacer clic, usa <code>target='_blank'</code>.</p><p><strong>Misión:</strong> Añade el target al enlace para que se abra fuera.</p>",
+    "guide": "<h3>Atributo Target</h3><p>A veces no quieres que el usuario abandone tu página al hacer clic en un enlace externo. Puedes forzar al navegador a abrir una nueva pestaña.</p><p><strong>Cómo hacerlo:</strong> Dentro de la etiqueta de apertura del enlace <code>a</code>, añade otro atributo llamado <code>target</code> y dale el valor especial <code>_blank</code> (con guion bajo).</p><p><strong>Misión:</strong> Añade el target al enlace para que se abra fuera.</p>",
     "initialCode": "<a href=\"https://youtube.com\">Ver Video</a>",
     "validation": {
       "regex": "target=['\"]_blank['\"]",
@@ -122,7 +122,7 @@
   {
     "id": "13",
     "title": "13. Imágenes",
-    "guide": "<h3>Multimedia Visual</h3><p>La etiqueta <code>&lt;img&gt;</code> se cierra sola (void tag). Necesita <code>src</code> (dónde está) y <code>alt</code> (descripción para ciegos/Google).</p><p><strong>Misión:</strong> Inserta una imagen 'logo.png' con alt 'Logotipo'.</p>",
+    "guide": "<h3>Multimedia Visual</h3><p>Una imagen vale más que mil palabras. La etiqueta de imagen es especial porque no tiene cierre (es una 'void tag'). Toda su información va en atributos.</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>img</code>. Obligatoriamente necesitas el atributo <code>src</code> (source) para decir dónde está el archivo, y el atributo <code>alt</code> para describir la imagen (vital para accesibilidad y si la imagen falla).</p><p><strong>Misión:</strong> Inserta una imagen 'logo.png' con alt 'Logotipo'.</p>",
     "initialCode": "",
     "validation": {
       "regex": "<img\\s+[^>]*src=['\"]logo\\.png['\"][^>]*alt=['\"]Logotipo['\"][^>]*>",
@@ -132,7 +132,7 @@
   {
     "id": "14",
     "title": "14. Imágenes con Dimensiones",
-    "guide": "<h3>Controlando el Tamaño</h3><p>Podemos forzar el tamaño con los atributos <code>width</code> y <code>height</code> (en píxeles).</p><p><strong>Misión:</strong> Haz que la imagen mida 200 de ancho.</p>",
+    "guide": "<h3>Controlando el Tamaño</h3><p>Si no especificamos tamaño, la imagen se mostrará en su tamaño original, lo cual puede romper tu diseño. Puedes controlar esto directamente en HTML.</p><p><strong>Cómo hacerlo:</strong> Añade los atributos <code>width</code> (ancho) o <code>height</code> (alto) dentro de la etiqueta <code>img</code>. El valor es un número que representa píxeles.</p><p><strong>Misión:</strong> Haz que la imagen mida 200 de ancho.</p>",
     "initialCode": "<img src=\"foto.jpg\" alt=\"Mi Foto\">",
     "validation": {
       "regex": "width=['\"]200['\"]",
@@ -142,7 +142,7 @@
   {
     "id": "15",
     "title": "15. Comentarios",
-    "guide": "<h3>Notas para ti</h3><p>Los comentarios no se ven en la página, pero ayudan a organizar el código.</p><pre>&lt;!-- Esto es un secreto --&gt;</pre><p><strong>Misión:</strong> Escribe un comentario que diga 'Sección principal'.</p>",
+    "guide": "<h3>Notas para ti</h3><p>Los desarrolladores dejan notas en el código para explicar qué hace una sección o para recordar algo en el futuro. Estas notas son invisibles para el usuario final.</p><p><strong>Cómo hacerlo:</strong> La sintaxis es muy específica. Empiezas con <code>&lt;!--</code>, escribes tu texto, y terminas con <code>--&gt;</code>.</p><p><strong>Misión:</strong> Escribe un comentario que diga 'Sección principal'.</p>",
     "initialCode": "<div></div>",
     "validation": {
       "regex": "<!--\\s*Sección principal\\s*-->",
@@ -152,7 +152,7 @@
   {
     "id": "16",
     "title": "16. Div: El Contenedor",
-    "guide": "<h3>Agrupando Bloques</h3><p>El <code>&lt;div&gt;</code> es una caja genérica. Se usa para agrupar elementos y aplicarles estilos CSS juntos.</p><p><strong>Misión:</strong> Mete el título y el párrafo dentro de un div.</p>",
+    "guide": "<h3>Agrupando Bloques</h3><p>A menudo necesitarás agrupar varios elementos (como un título y un párrafo) para moverlos juntos o ponerles un fondo común. Para esto usamos una caja genérica llamada división.</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>div</code>. Abre el div antes del primer elemento que quieras agrupar y ciérralo después del último.</p><p><strong>Misión:</strong> Mete el título y el párrafo dentro de un div.</p>",
     "initialCode": "<h1>Hola</h1>\n<p>Texto</p>",
     "validation": {
       "regex": "<div>\\s*<h1>[\\s\\S]*<\\/p>\\s*<\\/div>",
@@ -162,7 +162,7 @@
   {
     "id": "17",
     "title": "17. Span: Estilo en Línea",
-    "guide": "<h3>Agrupando Texto</h3><p>A diferencia del div, el <code>&lt;span&gt;</code> no crea un salto de línea. Sirve para colorear o cambiar una palabra específica.</p><p><strong>Misión:</strong> Envuelve la palabra 'rojo' en un span.</p>",
+    "guide": "<h3>Agrupando Texto</h3><p>Mientras que el <code>div</code> es para bloques grandes, el <code>span</code> es para trozos pequeños de texto dentro de una línea. No causa saltos de línea, por lo que es ideal para colorear una sola palabra en una frase.</p><p><strong>Cómo hacerlo:</strong> Envuelve solo la palabra que quieras modificar con las etiquetas <code>span</code>.</p><p><strong>Misión:</strong> Envuelve la palabra 'rojo' en un span.</p>",
     "initialCode": "<p>El coche rojo es rápido.</p>",
     "validation": {
       "regex": "coche <span[^>]*>rojo<\\/span> es",
@@ -172,7 +172,7 @@
   {
     "id": "18",
     "title": "18. Saltos y Líneas",
-    "guide": "<h3>BR y HR</h3><p><code>&lt;br&gt;</code> fuerza un salto de línea. <code>&lt;hr&gt;</code> dibuja una línea horizontal divisoria.</p><p><strong>Misión:</strong> Escribe 'Línea 1', un br, 'Línea 2', y luego un hr.</p>",
+    "guide": "<h3>BR y HR</h3><p>A veces necesitas forzar un salto de línea sin cerrar el párrafo, o dibujar una línea horizontal para separar temas.</p><p><strong>Cómo hacerlo:</strong> Usa <code>br</code> (break) para saltar de línea y <code>hr</code> (horizontal rule) para dibujar una línea. Ambas son etiquetas vacías y no necesitan cierre.</p><p><strong>Misión:</strong> Escribe 'Línea 1', un br, 'Línea 2', y luego un hr.</p>",
     "initialCode": "",
     "validation": {
       "regex": "Línea 1\\s*<br\\s*\\/?>\\s*Línea 2\\s*<hr\\s*\\/?>",
@@ -182,7 +182,7 @@
   {
     "id": "19",
     "title": "19. Semántica: Header",
-    "guide": "<h3>HTML5 con Significado</h3><p>No uses divs para todo. Usa <code>&lt;header&gt;</code> para la cabecera del sitio (logo, navegación principal).</p><p><strong>Misión:</strong> Crea un header y pon un h1 dentro.</p>",
+    "guide": "<h3>HTML5 con Significado</h3><p>Podríamos hacer webs solo con divs, pero Google no sabría qué es qué. HTML5 introdujo etiquetas con significado. Para la parte superior de tu web (donde suele ir el logo), usamos un contenedor específico.</p><p><strong>Cómo hacerlo:</strong> En lugar de un div, usa las etiquetas <code>header</code> para envolver el contenido introductorio.</p><p><strong>Misión:</strong> Crea un header y pon un h1 dentro.</p>",
     "initialCode": "<body>\n\n</body>",
     "validation": {
       "regex": "<header>\\s*<h1>[\\s\\S]*<\\/h1>\\s*<\\/header>",
@@ -192,7 +192,7 @@
   {
     "id": "20",
     "title": "20. Semántica: Nav",
-    "guide": "<h3>Navegación</h3><p>Usa <code>&lt;nav&gt;</code> para agrupar tus enlaces de menú.</p><p><strong>Misión:</strong> Envuelve los dos enlaces en un nav.</p>",
+    "guide": "<h3>Navegación</h3><p>Para la botonera principal o menú de enlaces que te lleva a otras partes del sitio, existe una etiqueta semántica específica. Esto ayuda a los lectores de pantalla para ciegos a encontrar el menú rápidamente.</p><p><strong>Cómo hacerlo:</strong> Agrupa tus enlaces dentro de una etiqueta <code>nav</code>.</p><p><strong>Misión:</strong> Envuelve los dos enlaces en un nav.</p>",
     "initialCode": "<a href=\"#\">Inicio</a>\n<a href=\"#\">Blog</a>",
     "validation": {
       "regex": "<nav>\\s*<a[\\s\\S]*<a[\\s\\S]*<\\/nav>",
@@ -202,17 +202,17 @@
   {
     "id": "21",
     "title": "21. Semántica: Main",
-    "guide": "<h3>Contenido Principal</h3><p>Todo el contenido único de esa página específica debe ir dentro de <code>&lt;main&gt;</code>. Solo debe haber un main por página.</p><p><strong>Misión:</strong> Crea un main y pon un párrafo dentro.</p>",
+    "guide": "<h3>Contenido Principal</h3><p>Cada página tiene una sección que es el corazón de su contenido, excluyendo cabeceras y pies de página repetidos. Esta sección única debe ir marcada.</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>main</code>. Recuerda que solo debe haber una etiqueta main visible por página.</p><p><strong>Misión:</strong> Crea un main y pon un párrafo dentro con al menos 10 letras.</p>",
     "initialCode": "<header>...</header>\n",
     "validation": {
-      "regex": "<main>\\s*<p>[\\s\\S]*<\\/p>\\s*<\\/main>",
-      "error": "Crea un <main> con un <p> dentro."
+      "regex": "<main>\\s*<p>[\\s\\S]{10,}<\\/p>\\s*<\\/main>",
+      "error": "Crea un <main> con un <p> dentro (mínimo 10 caracteres)."
     }
   },
   {
     "id": "22",
     "title": "22. Semántica: Article vs Section",
-    "guide": "<h3>Organización</h3><p><code>&lt;article&gt;</code> es para contenido independiente (un post de blog). <code>&lt;section&gt;</code> es para agrupar temas relacionados.</p><p><strong>Misión:</strong> Crea un article y dentro pon un h2.</p>",
+    "guide": "<h3>Organización</h3><p>HTML5 es muy específico. Si tienes un contenido que tiene sentido por sí mismo (como una noticia o un post de blog), usa <code>article</code>. Si es solo una agrupación temática de contenido, usa <code>section</code>.</p><p><strong>Cómo hacerlo:</strong> Crea un contenedor con la etiqueta <code>article</code>.</p><p><strong>Misión:</strong> Crea un article y dentro pon un h2.</p>",
     "initialCode": "<main>\n\n</main>",
     "validation": {
       "regex": "<article>\\s*<h2[\\s\\S]*<\\/h2>\\s*<\\/article>",
@@ -222,7 +222,7 @@
   {
     "id": "23",
     "title": "23. Semántica: Footer",
-    "guide": "<h3>El Pie de Página</h3><p>Para copyright, mapas del sitio y contacto al final. Usa <code>&lt;footer&gt;</code>.</p><p><strong>Misión:</strong> Añade un footer con el texto '© 2024'.</p>",
+    "guide": "<h3>El Pie de Página</h3><p>Para cerrar la web, donde solemos poner el copyright, enlaces legales o contacto, usamos una etiqueta semántica de cierre.</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>footer</code> al final de tu estructura (generalmente después del main, pero dentro del body).</p><p><strong>Misión:</strong> Añade un footer con el texto '© 2024'.</p>",
     "initialCode": "<body>\n  <main>...</main>\n  \n</body>",
     "validation": {
       "regex": "<footer>\\s*© 2024\\s*<\\/footer>",
@@ -232,7 +232,7 @@
   {
     "id": "24",
     "title": "24. Formularios: La Base",
-    "guide": "<h3>Interacción</h3><p>Los formularios permiten enviar datos al servidor. Todo empieza con <code>&lt;form&gt;</code>.</p><p><strong>Misión:</strong> Crea un formulario.</p>",
+    "guide": "<h3>Interacción</h3><p>Hasta ahora hemos hecho webs informativas. Para recibir datos del usuario (login, contacto), necesitamos formularios. Todo comienza con un contenedor que define dónde se enviarán los datos.</p><p><strong>Cómo hacerlo:</strong> Simplemente crea las etiquetas de apertura y cierre de <code>form</code>.</p><p><strong>Misión:</strong> Crea un formulario.</p>",
     "initialCode": "<h3>Contáctanos</h3>\n",
     "validation": {
       "regex": "<form>[\\s\\S]*<\\/form>",
@@ -242,7 +242,7 @@
   {
     "id": "25",
     "title": "25. Input Texto",
-    "guide": "<h3>Entrada de Datos</h3><p>El rey es <code>&lt;input&gt;</code>. No tiene cierre. El atributo <code>placeholder</code> es la pista gris.</p><pre>&lt;input type='text' placeholder='Nombre'&gt;</pre><p><strong>Misión:</strong> Crea un input para 'Apellidos'.</p>",
+    "guide": "<h3>Entrada de Datos</h3><p>El elemento más versátil es el input. Dependiendo de su tipo, cambia de forma. Para texto básico (nombres, títulos), usamos el tipo texto. También podemos poner un texto fantasma de ayuda.</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>input</code> (sin cierre). Añade <code>type='text'</code> y el atributo <code>placeholder</code> con el texto de ayuda.</p><p><strong>Misión:</strong> Crea un input para 'Apellidos'.</p>",
     "initialCode": "<form>\n  \n</form>",
     "validation": {
       "regex": "<input\\s+[^>]*type=['\"]text['\"][^>]*placeholder=['\"]Apellidos['\"]",
@@ -252,7 +252,7 @@
   {
     "id": "26",
     "title": "26. Labels (Etiquetas)",
-    "guide": "<h3>Accesibilidad en Forms</h3><p>Cada input debe tener una etiqueta descriptiva. Usamos <code>for</code> en el label e <code>id</code> en el input para vincularlos.</p><pre>&lt;label for='mail'&gt;Email&lt;/label&gt;\n&lt;input id='mail' ...&gt;</pre><p><strong>Misión:</strong> Vincula un label 'Edad' con un input de id 'edad'.</p>",
+    "guide": "<h3>Accesibilidad en Forms</h3><p>Un input solo no dice nada. Necesitamos una etiqueta de texto asociada. Para vincularlas y que al hacer clic en el texto se active el input, usamos IDs.</p><p><strong>Cómo hacerlo:</strong> Dale un atributo <code>id</code> único al input. Luego crea una etiqueta <code>label</code> y usa el atributo <code>for</code> con el mismo valor que el ID del input.</p><p><strong>Misión:</strong> Vincula un label 'Edad' con un input de id 'edad'.</p>",
     "initialCode": "<form>\n\n</form>",
     "validation": {
       "regex": "<label\\s+for=['\"]edad['\"]>Edad<\\/label>\\s*<input\\s+[^>]*id=['\"]edad['\"]",
@@ -262,7 +262,7 @@
   {
     "id": "27",
     "title": "27. Input Password",
-    "guide": "<h3>Secretos</h3><p>Para ocultar lo que se escribe, usa <code>type='password'</code>.</p><p><strong>Misión:</strong> Crea un campo de contraseña.</p>",
+    "guide": "<h3>Secretos</h3><p>Si pides una contraseña, no quieres que se vea en pantalla mientras el usuario escribe. HTML tiene un tipo de input específico que convierte los caracteres en puntos o asteriscos.</p><p><strong>Cómo hacerlo:</strong> Crea un input y cambia su atributo <code>type</code> a 'password'.</p><p><strong>Misión:</strong> Crea un campo de contraseña.</p>",
     "initialCode": "<form>\n  <label>Usuario: <input type=\"text\"></label>\n  \n</form>",
     "validation": {
       "regex": "<input\\s+[^>]*type=['\"]password['\"]",
@@ -272,7 +272,7 @@
   {
     "id": "28",
     "title": "28. Input Email",
-    "guide": "<h3>Validación Automática</h3><p>Si usas <code>type='email'</code>, el navegador validará que tenga una arroba en los móviles mostrará el teclado correcto.</p><p><strong>Misión:</strong> Input de tipo email.</p>",
+    "guide": "<h3>Validación Automática</h3><p>Para correos electrónicos, usa el tipo especial. Esto tiene dos ventajas: en móviles muestra el teclado con la arroba, y en navegadores modernos valida que el texto parezca un email real.</p><p><strong>Cómo hacerlo:</strong> Crea un input con <code>type='email'</code>.</p><p><strong>Misión:</strong> Input de tipo email.</p>",
     "initialCode": "<form>\n\n</form>",
     "validation": {
       "regex": "<input\\s+[^>]*type=['\"]email['\"]",
@@ -282,7 +282,7 @@
   {
     "id": "29",
     "title": "29. Textarea",
-    "guide": "<h3>Texto Largo</h3><p>Para mensajes largos no usamos input, sino <code>&lt;textarea&gt;</code>. Esta sí tiene etiqueta de cierre.</p><p><strong>Misión:</strong> Crea un textarea.</p>",
+    "guide": "<h3>Texto Largo</h3><p>El input de texto es de una sola línea. Si quieres que el usuario escriba una biografía o un mensaje largo, necesitas un área de texto multilínea.</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>textarea</code>. A diferencia del input, esta SÍ tiene etiqueta de cierre y el texto por defecto iría entre ellas.</p><p><strong>Misión:</strong> Crea un textarea.</p>",
     "initialCode": "<form>\n  <label>Mensaje:</label>\n  \n</form>",
     "validation": {
       "regex": "<textarea[^>]*>\\s*<\\/textarea>",
@@ -292,7 +292,7 @@
   {
     "id": "30",
     "title": "30. Checkbox",
-    "guide": "<h3>Selección Múltiple</h3><p>Para opciones de Sí/No independientes. <code>type='checkbox'</code>.</p><p><strong>Misión:</strong> Crea un checkbox con label 'Suscribirse'.</p>",
+    "guide": "<h3>Selección Múltiple</h3><p>Para preguntas de Sí/No o selecciones múltiples (como elegir ingredientes de una pizza), usamos casillas de verificación.</p><p><strong>Cómo hacerlo:</strong> Usa un input con <code>type='checkbox'</code>. Es buena práctica meterlo dentro de un label para que sea más fácil de clicar.</p><p><strong>Misión:</strong> Crea un checkbox con label 'Suscribirse'.</p>",
     "initialCode": "<form>\n\n</form>",
     "validation": {
       "regex": "<label>\\s*<input\\s+[^>]*type=['\"]checkbox['\"][^>]*>\\s*Suscribirse\\s*<\\/label>",
@@ -302,7 +302,7 @@
   {
     "id": "31",
     "title": "31. Radio Buttons",
-    "guide": "<h3>Selección Única</h3><p>Para elegir UNA opción de varias. El truco: todos deben tener el mismo atributo <code>name</code>.</p><pre>&lt;input type='radio' name='genero'&gt; H\n&lt;input type='radio' name='genero'&gt; M</pre><p><strong>Misión:</strong> Crea dos radios con name='color'.</p>",
+    "guide": "<h3>Selección Única</h3><p>Cuando el usuario solo puede elegir UNA opción de varias (como elegir la talla de ropa: S, M, L), usamos botones de radio. Para que funcionen como grupo (si marcas uno se desmarca el otro), deben compartir el mismo nombre.</p><p><strong>Cómo hacerlo:</strong> Crea inputs con <code>type='radio'</code> y asegúrate de darles a todos el mismo valor en el atributo <code>name</code>.</p><p><strong>Misión:</strong> Crea dos radios con name='color'.</p>",
     "initialCode": "<form>\n\n</form>",
     "validation": {
       "regex": "<input[^>]*type=['\"]radio['\"][^>]*name=['\"]color['\"][\\s\\S]*<input[^>]*type=['\"]radio['\"][^>]*name=['\"]color['\"]",
@@ -312,7 +312,7 @@
   {
     "id": "32",
     "title": "32. Select y Options",
-    "guide": "<h3>Menú Desplegable</h3><p>Para listas largas. El contenedor es <code>&lt;select&gt;</code> y cada opción es <code>&lt;option&gt;</code>.</p><p><strong>Misión:</strong> Crea un select con 2 opciones: 'España' y 'México'.</p>",
+    "guide": "<h3>Menú Desplegable</h3><p>Si tienes muchas opciones (como elegir un país), los radios ocupan mucho espacio. Lo mejor es un menú desplegable.</p><p><strong>Cómo hacerlo:</strong> Crea un elemento contenedor <code>select</code>. Dentro de él, crea una etiqueta <code>option</code> por cada elección posible que quieras ofrecer.</p><p><strong>Misión:</strong> Crea un select con 2 opciones: 'España' y 'México'.</p>",
     "initialCode": "<form>\n  <label>País:</label>\n  \n</form>",
     "validation": {
       "regex": "<select>\\s*<option>España<\\/option>\\s*<option>México<\\/option>\\s*<\\/select>",
@@ -322,7 +322,7 @@
   {
     "id": "33",
     "title": "33. Botón Submit",
-    "guide": "<h3>Enviarlo todo</h3><p>El botón que lanza el formulario. Puede ser <code>&lt;button type='submit'&gt;</code> o <code>&lt;input type='submit'&gt;</code>.</p><p><strong>Misión:</strong> Crea un botón que diga 'Enviar'.</p>",
+    "guide": "<h3>Enviarlo todo</h3><p>Para procesar el formulario, necesitamos un botón disparador. Cuando se pulsa, el navegador recopila todos los datos y los intenta enviar.</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>button</code> y especifica su atributo <code>type</code> como 'submit'. Pon el texto del botón dentro de la etiqueta.</p><p><strong>Misión:</strong> Crea un botón que diga 'Enviar'.</p>",
     "initialCode": "<form>\n\n</form>",
     "validation": {
       "regex": "<button\\s+type=['\"]submit['\"]>Enviar<\\/button>",
@@ -332,7 +332,7 @@
   {
     "id": "34",
     "title": "34. Atributo Required",
-    "guide": "<h3>Validación Obligatoria</h3><p>Para impedir que envíen el formulario vacío, añade el atributo <code>required</code> al input.</p><p><strong>Misión:</strong> Haz que el input sea obligatorio.</p>",
+    "guide": "<h3>Validación Obligatoria</h3><p>A veces no queremos que el usuario envíe el formulario si le falta un dato importante. HTML puede bloquear el envío automáticamente.</p><p><strong>Cómo hacerlo:</strong> Simplemente añade la palabra <code>required</code> (sin valor, es un atributo booleano) dentro de la etiqueta input que quieras hacer obligatoria.</p><p><strong>Misión:</strong> Haz que el input sea obligatorio.</p>",
     "initialCode": "<form>\n  <input type=\"text\" name=\"user\">\n  <button>Go</button>\n</form>",
     "validation": {
       "regex": "<input\\s+[^>]*required",
@@ -342,7 +342,7 @@
   {
     "id": "35",
     "title": "35. Tablas: Estructura",
-    "guide": "<h3>Rejillas de Datos</h3><p>Estructura: <code>table</code> > <code>tr</code> (fila) > <code>td</code> (celda).</p><p><strong>Misión:</strong> Crea una tabla con una fila y una celda que diga 'Dato'.</p>",
+    "guide": "<h3>Rejillas de Datos</h3><p>Las tablas son complejas porque tienen varios niveles de profundidad. Primero la tabla, luego las filas (Table Rows) y dentro las celdas (Table Data).</p><p><strong>Cómo hacerlo:</strong> Crea un <code>table</code>. Dentro, un <code>tr</code> para la primera fila. Dentro del tr, un <code>td</code> para el dato.</p><p><strong>Misión:</strong> Crea una tabla con una fila y una celda que diga 'Dato'.</p>",
     "initialCode": "",
     "validation": {
       "regex": "<table>\\s*<tr>\\s*<td>Dato<\\/td>\\s*<\\/tr>\\s*<\\/table>",
@@ -352,7 +352,7 @@
   {
     "id": "36",
     "title": "36. Encabezados de Tabla",
-    "guide": "<h3>Cabeceras</h3><p>Usa <code>&lt;th&gt;</code> en lugar de <code>td</code> para la primera fila. Se pondrán en negrita.</p><p><strong>Misión:</strong> Crea una fila con dos TH: 'Nombre' y 'Edad'.</p>",
+    "guide": "<h3>Cabeceras</h3><p>La primera fila de una tabla suele contener los títulos de las columnas. Para diferenciarla semánticamente y visualmente (negrita y centrada), usamos una celda especial.</p><p><strong>Cómo hacerlo:</strong> En lugar de usar <code>td</code> dentro de tu fila, usa <code>th</code> (Table Header).</p><p><strong>Misión:</strong> Crea una fila con dos TH: 'Nombre' y 'Edad'.</p>",
     "initialCode": "<table>\n\n</table>",
     "validation": {
       "regex": "<tr>\\s*<th>Nombre<\\/th>\\s*<th>Edad<\\/th>\\s*<\\/tr>",
@@ -362,7 +362,7 @@
   {
     "id": "37",
     "title": "37. Thead y Tbody",
-    "guide": "<h3>Semántica de Tablas</h3><p>Para tablas largas, agrupamos la cabecera en <code>&lt;thead&gt;</code> y el contenido en <code>&lt;tbody&gt;</code>.</p><p><strong>Misión:</strong> Estructura la tabla con thead y tbody.</p>",
+    "guide": "<h3>Semántica de Tablas</h3><p>Para tablas profesionales, no mezclamos las filas. Agrupamos la zona de cabecera y la zona de cuerpo por separado. Esto permite, por ejemplo, imprimir una tabla larga y que la cabecera se repita en cada hoja.</p><p><strong>Cómo hacerlo:</strong> Envuelve tus filas de título en <code>thead</code> y tus filas de datos en <code>tbody</code>.</p><p><strong>Misión:</strong> Estructura la tabla con thead y tbody.</p>",
     "initialCode": "<table>\n  <!-- Cabecera aquí -->\n  <!-- Cuerpo aquí -->\n</table>",
     "validation": {
       "regex": "<thead>[\\s\\S]*<\\/thead>\\s*<tbody>[\\s\\S]*<\\/tbody>",
@@ -372,7 +372,7 @@
   {
     "id": "38",
     "title": "38. Unir Columnas (Colspan)",
-    "guide": "<h3>Fusionar Celdas</h3><p>Si quieres que una celda ocupe el espacio de dos columnas, usa <code>colspan='2'</code>.</p><p><strong>Misión:</strong> Crea un td que ocupe 2 columnas.</p>",
+    "guide": "<h3>Fusionar Celdas</h3><p>A veces necesitas una celda que sea más ancha que las demás, ocupando el espacio de dos o más columnas (como un título totalizador).</p><p><strong>Cómo hacerlo:</strong> Añade el atributo <code>colspan</code> a la celda (td o th) y dale como valor el número de columnas que quieres que ocupe.</p><p><strong>Misión:</strong> Crea un td que ocupe 2 columnas.</p>",
     "initialCode": "<table>\n  <tr>\n    \n  </tr>\n</table>",
     "validation": {
       "regex": "<td\\s+colspan=['\"]2['\"]>",
@@ -382,7 +382,7 @@
   {
     "id": "39",
     "title": "39. Audio HTML5",
-    "guide": "<h3>Sonido Nativo</h3><p>Antes era difícil, ahora usamos <code>&lt;audio&gt;</code>. Atributo vital: <code>controls</code> para ver el play/pause.</p><pre>&lt;audio src='song.mp3' controls&gt;&lt;/audio&gt;</pre><p><strong>Misión:</strong> Añade un audio con controles.</p>",
+    "guide": "<h3>Sonido Nativo</h3><p>Para poner música o podcasts, usamos la etiqueta de audio. Es importante permitir que el usuario controle la reproducción (play, pausa, volumen).</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>audio</code>. Necesitas el atributo <code>src</code> para el archivo y el atributo booleano <code>controls</code> para mostrar la interfaz del reproductor.</p><p><strong>Misión:</strong> Añade un audio con controles.</p>",
     "initialCode": "<body>\n\n</body>",
     "validation": {
       "regex": "<audio\\s+[^>]*src=['\"][^'\"]+['\"][^>]*controls|<audio\\s+[^>]*controls[^>]*src=['\"][^'\"]+['\"]",
@@ -392,7 +392,7 @@
   {
     "id": "40",
     "title": "40. Video HTML5",
-    "guide": "<h3>Cine en la Web</h3><p>Igual que el audio, pero con <code>&lt;video&gt;</code>. Recomendable poner <code>width</code>.</p><pre>&lt;video src='clip.mp4' width='320' controls&gt;&lt;/video&gt;</pre><p><strong>Misión:</strong> Inserta un video con controles.</p>",
+    "guide": "<h3>Cine en la Web</h3><p>Insertar videos es muy similar al audio. La diferencia es que aquí solemos querer controlar el tamaño visual del reproductor.</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>video</code>. Añade <code>src</code>, <code>controls</code> y también un atributo <code>width</code> para definir el ancho en píxeles.</p><p><strong>Misión:</strong> Inserta un video con controles.</p>",
     "initialCode": "",
     "validation": {
       "regex": "<video\\s+[^>]*controls",
@@ -402,7 +402,7 @@
   {
     "id": "41",
     "title": "41. Iframe: Ventana al Mundo",
-    "guide": "<h3>Incrustar Contenido</h3><p>Para poner un mapa de Google o un video de YouTube, usamos <code>&lt;iframe&gt;</code>.</p><p><strong>Misión:</strong> Crea un iframe (puedes dejar el src vacío para probar).</p>",
+    "guide": "<h3>Incrustar Contenido</h3><p>¿Cómo pones un mapa de Google o un video de YouTube en tu web? No alojas el archivo tú, sino que abres una 'ventana' a otra web. Eso es un frame en línea.</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>iframe</code>. Se usa igual que una imagen o video, apuntando a una URL externa.</p><p><strong>Misión:</strong> Crea un iframe (puedes dejar el src vacío para probar).</p>",
     "initialCode": "",
     "validation": {
       "regex": "<iframe[\\s\\S]*<\\/iframe>",
@@ -412,7 +412,7 @@
   {
     "id": "42",
     "title": "42. Favicon",
-    "guide": "<h3>El Icono de la Pestaña</h3><p>Se define en el head con <code>&lt;link&gt;</code>. Relación 'icon'.</p><pre>&lt;link rel='icon' href='favicon.ico'&gt;</pre><p><strong>Misión:</strong> Define el favicon en el head.</p>",
+    "guide": "<h3>El Icono de la Pestaña</h3><p>Ese pequeño dibujito que sale al lado del título en la pestaña del navegador se llama Favicon. Se configura en la cabecera.</p><p><strong>Cómo hacerlo:</strong> En el <code>head</code>, usa una etiqueta <code>link</code>. Debes especificar que la relación (<code>rel</code>) es 'icon' y en <code>href</code> pones la ruta de la imagen.</p><p><strong>Misión:</strong> Define el favicon en el head.</p>",
     "initialCode": "<head>\n\n</head>",
     "validation": {
       "regex": "<link\\s+rel=['\"]icon['\"]\\s+href=['\"][^'\"]+['\"]",
@@ -422,7 +422,7 @@
   {
     "id": "43",
     "title": "43. Meta Description",
-    "guide": "<h3>SEO Vital</h3><p>El resumen que sale en Google se define aquí.</p><pre>&lt;meta name='description' content='Resumen...'&gt;</pre><p><strong>Misión:</strong> Añade una descripción que diga 'Curso HTML'.</p>",
+    "guide": "<h3>SEO Vital</h3><p>Cuando buscas en Google, debajo del enlace azul sale un pequeño texto descriptivo. Tú controlas ese texto desde tu código.</p><p><strong>Cómo hacerlo:</strong> Usa una etiqueta <code>meta</code> en el head. Necesita dos atributos: <code>name='description'</code> para decir qué es, y <code>content='...'</code> para escribir el texto real.</p><p><strong>Misión:</strong> Añade una descripción que diga 'Curso HTML'.</p>",
     "initialCode": "<head>\n\n</head>",
     "validation": {
       "regex": "<meta\\s+name=['\"]description['\"]\\s+content=['\"]Curso HTML['\"]",
@@ -432,7 +432,7 @@
   {
     "id": "44",
     "title": "44. Estilos Inline (CSS)",
-    "guide": "<h3>Maquillaje Rápido</h3><p>Puedes poner CSS directo en la etiqueta con el atributo <code>style</code>.</p><pre>&lt;p style='color: red;'&gt;Hola&lt;/p&gt;</pre><p><strong>Misión:</strong> Pon el color del h1 en 'blue'.</p>",
+    "guide": "<h3>Maquillaje Rápido</h3><p>Aunque lo ideal es usar archivos CSS separados, puedes aplicar estilos directamente a un elemento HTML. Esto se llama estilo en línea.</p><p><strong>Cómo hacerlo:</strong> Añade el atributo <code>style</code> a la etiqueta de apertura. Dentro, escribe la propiedad CSS y su valor separados por dos puntos (ej: <code>color: red;</code>).</p><p><strong>Misión:</strong> Pon el color del h1 en 'blue'.</p>",
     "initialCode": "<h1>Azul</h1>",
     "validation": {
       "regex": "<h1\\s+style=['\"]color:\\s*blue;?['\"]>",
@@ -442,7 +442,7 @@
   {
     "id": "45",
     "title": "45. Fondo con CSS",
-    "guide": "<h3>Background</h3><p>Cambiemos el fondo de un elemento.</p><pre>style='background-color: yellow;'</pre><p><strong>Misión:</strong> Pon el fondo del div en 'black'.</p>",
+    "guide": "<h3>Background</h3><p>Podemos cambiar no solo el color del texto, sino el color de fondo de cualquier caja o elemento.</p><p><strong>Cómo hacerlo:</strong> Dentro del atributo <code>style</code>, usa la propiedad CSS <code>background-color</code> seguida del color deseado.</p><p><strong>Misión:</strong> Pon el fondo del div en 'black'.</p>",
     "initialCode": "<div>Caja Oscura</div>",
     "validation": {
       "regex": "<div\\s+style=['\"]background-color:\\s*black;?['\"]>",
@@ -452,7 +452,7 @@
   {
     "id": "46",
     "title": "46. Tamaño de Fuente",
-    "guide": "<h3>Tipografía</h3><p>Para cambiar el tamaño del texto usamos <code>font-size</code>.</p><pre>style='font-size: 20px;'</pre><p><strong>Misión:</strong> Pon el párrafo a 18px.</p>",
+    "guide": "<h3>Tipografía</h3><p>Los encabezados tienen tamaños predefinidos, pero puedes controlar el tamaño exacto de cualquier texto.</p><p><strong>Cómo hacerlo:</strong> Usa la propiedad de estilo <code>font-size</code> y especifica el tamaño en píxeles (px).</p><p><strong>Misión:</strong> Pon el párrafo a 18px.</p>",
     "initialCode": "<p>Texto grande</p>",
     "validation": {
       "regex": "style=['\"]font-size:\\s*18px;?['\"]",
@@ -462,7 +462,7 @@
   {
     "id": "47",
     "title": "47. Alineación",
-    "guide": "<h3>Centrar cosas</h3><p>Para centrar texto horizontalmente: <code>text-align: center;</code>.</p><p><strong>Misión:</strong> Centra el h1.</p>",
+    "guide": "<h3>Centrar cosas</h3><p>Por defecto, el texto se alinea a la izquierda. Puedes cambiar esto para centrar títulos o justificar párrafos.</p><p><strong>Cómo hacerlo:</strong> Usa la propiedad de estilo <code>text-align</code> con el valor 'center'.</p><p><strong>Misión:</strong> Centra el h1.</p>",
     "initialCode": "<h1>Título</h1>",
     "validation": {
       "regex": "style=['\"]text-align:\\s*center;?['\"]",
@@ -472,7 +472,7 @@
   {
     "id": "48",
     "title": "48. Padding (Relleno)",
-    "guide": "<h3>Espacio Interior</h3><p>El espacio entre el borde y el contenido se llama <code>padding</code>.</p><p><strong>Misión:</strong> Añade 10px de padding al botón.</p>",
+    "guide": "<h3>Espacio Interior</h3><p>Imagina que un elemento es una caja. El <code>padding</code> es el relleno de espuma que hay DENTRO de la caja, entre el contenido y el borde. Si aumentas el padding, la caja se hace más grande pero el contenido no toca los bordes.</p><p><strong>Cómo hacerlo:</strong> Usa la propiedad <code>padding</code> con un valor en píxeles.</p><p><strong>Misión:</strong> Añade 10px de padding al botón.</p>",
     "initialCode": "<button>Click</button>",
     "validation": {
       "regex": "style=['\"][^'\"]*padding:\\s*10px;?[^'\"]*['\"]",
@@ -482,7 +482,7 @@
   {
     "id": "49",
     "title": "49. Margin (Margen)",
-    "guide": "<h3>Espacio Exterior</h3><p>El espacio entre elementos se llama <code>margin</code>.</p><p><strong>Misión:</strong> Separa el div con 20px de margen.</p>",
+    "guide": "<h3>Espacio Exterior</h3><p>Siguiendo con la analogía de la caja, el <code>margin</code> es el espacio que hay FUERA de la caja, separándola de otras cajas vecinas. Es el espacio personal del elemento.</p><p><strong>Cómo hacerlo:</strong> Usa la propiedad <code>margin</code> con un valor en píxeles.</p><p><strong>Misión:</strong> Separa el div con 20px de margen.</p>",
     "initialCode": "<div>Caja</div>",
     "validation": {
       "regex": "style=['\"][^'\"]*margin:\\s*20px;?[^'\"]*['\"]",
@@ -492,7 +492,7 @@
   {
     "id": "50",
     "title": "50. Clases CSS",
-    "guide": "<h3>Estilos Reutilizables</h3><p>En lugar de repetir el estilo, usamos una <code>class</code> definida en CSS (imaginario por ahora). Es la forma profesional.</p><p><strong>Misión:</strong> Asigna la clase 'tarjeta' al div.</p>",
+    "guide": "<h3>Estilos Reutilizables</h3><p>Escribir estilos en línea es tedioso si tienes 50 botones iguales. Lo correcto es crear una 'clase' (un nombre de grupo) y aplicar estilos a ese nombre en un archivo CSS aparte. Aquí solo aprenderemos a asignar el nombre.</p><p><strong>Cómo hacerlo:</strong> Añade el atributo <code>class</code> a tu elemento HTML y dale un nombre descriptivo.</p><p><strong>Misión:</strong> Asigna la clase 'tarjeta' al div.</p>",
     "initialCode": "<div>Contenido</div>",
     "validation": {
       "regex": "<div\\s+class=['\"]tarjeta['\"]>",
@@ -502,7 +502,7 @@
   {
     "id": "51",
     "title": "51. Identificadores (ID)",
-    "guide": "<h3>El DNI del Elemento</h3><p>El <code>id</code> debe ser único en toda la página. Se usa para JS o anclas.</p><p><strong>Misión:</strong> Pon el id 'unico' al título.</p>",
+    "guide": "<h3>El DNI del Elemento</h3><p>A diferencia de las clases (que pueden usarla muchos elementos), el ID es único. Solo puede haber un elemento con el ID 'header-principal' en toda la página. Se usa para enlazar con JS o CSS muy específico.</p><p><strong>Cómo hacerlo:</strong> Añade el atributo <code>id</code> con un nombre único.</p><p><strong>Misión:</strong> Pon el id 'unico' al título.</p>",
     "initialCode": "<h1>Hola</h1>",
     "validation": {
       "regex": "id=['\"]unico['\"]",
@@ -512,7 +512,7 @@
   {
     "id": "52",
     "title": "52. Script: Intro a JS",
-    "guide": "<h3>Lógica</h3><p>Para escribir JavaScript usamos <code>&lt;script&gt;</code>. Normalmente va al final del body.</p><p><strong>Misión:</strong> Añade las etiquetas script.</p>",
+    "guide": "<h3>Lógica</h3><p>HTML es estructura, CSS es estilo, y JavaScript es comportamiento. Para insertar código de programación en tu HTML, necesitas un contenedor especial.</p><p><strong>Cómo hacerlo:</strong> Usa las etiquetas de apertura y cierre de <code>script</code>. Todo lo que escribas dentro será interpretado como JavaScript, no como texto.</p><p><strong>Misión:</strong> Añade las etiquetas script.</p>",
     "initialCode": "<body>\n\n</body>",
     "validation": {
       "regex": "<script>[\\s\\S]*<\\/script>",
@@ -522,7 +522,7 @@
   {
     "id": "53",
     "title": "53. Alert JS",
-    "guide": "<h3>Molestando al usuario</h3><p>La función <code>alert('Texto')</code> lanza una ventana emergente.</p><p><strong>Misión:</strong> Lanza un alert que diga 'Hola'.</p>",
+    "guide": "<h3>Molestando al usuario</h3><p>Vamos a escribir tu primera línea de JS. Existe una función integrada que detiene la navegación y muestra un mensaje emergente.</p><p><strong>Cómo hacerlo:</strong> Dentro de tu script, escribe el comando <code>alert</code>, abre paréntesis, pon tu mensaje entre comillas y cierra paréntesis.</p><p><strong>Misión:</strong> Lanza un alert que diga 'Hola'.</p>",
     "initialCode": "<script>\n  \n</script>",
     "validation": {
       "regex": "alert\\(['\"]Hola['\"]\\)",
@@ -532,7 +532,7 @@
   {
     "id": "54",
     "title": "54. Evento Onclick",
-    "guide": "<h3>Acción-Reacción</h3><p>Podemos ejecutar JS cuando el usuario hace click con el atributo <code>onclick</code>.</p><p><strong>Misión:</strong> Al hacer click en el botón, lanza un alert('Click').</p>",
+    "guide": "<h3>Acción-Reacción</h3><p>Lo normal no es que el código se ejecute solo al cargar, sino cuando el usuario hace algo. Podemos detectar clics en elementos HTML.</p><p><strong>Cómo hacerlo:</strong> En la etiqueta HTML de un botón, añade el atributo <code>onclick</code>. Su valor debe ser el código JS que quieres ejecutar (como el alert de antes).</p><p><strong>Misión:</strong> Al hacer click en el botón, lanza un alert('Click').</p>",
     "initialCode": "<button>Púlsame</button>",
     "validation": {
       "regex": "onclick=['\"]alert\\(['\"]Click['\"]\\)['\"]",
@@ -542,7 +542,7 @@
   {
     "id": "55",
     "title": "55. Modificando Texto (DOM)",
-    "guide": "<h3>Hacking la Web</h3><p>Podemos cambiar el contenido de la web dinámicamente.</p><pre>document.getElementById('demo').innerText = 'Nuevo'</pre><p><strong>Misión:</strong> Usa JS para cambiar el texto del id 'demo' a 'Hola'.</p>",
+    "guide": "<h3>Hacking la Web</h3><p>JavaScript puede buscar elementos en tu HTML y cambiarlos en vivo. Para eso sirve el ID que aprendimos antes.</p><p><strong>Cómo hacerlo:</strong> Usa el comando <code>document.getElementById('id_del_elemento')</code> para buscarlo, y luego añade <code>.innerText = 'Nuevo Texto'</code> para cambiar su contenido.</p><p><strong>Misión:</strong> Usa JS para cambiar el texto del id 'demo' a 'Hola'.</p>",
     "initialCode": "<p id=\"demo\">Viejo</p>\n<script>\n  \n</script>",
     "validation": {
       "regex": "document\\.getElementById\\(['\"]demo['\"]\\)\\.innerText\\s*=\\s*['\"]Hola['\"]",
@@ -552,7 +552,7 @@
   {
     "id": "56",
     "title": "56. Estilos desde JS",
-    "guide": "<h3>CSS Dinámico</h3><p>JS también puede cambiar estilos.</p><pre>elemento.style.color = 'red'</pre><p><strong>Misión:</strong> Cambia el color del elemento 'demo' a 'red' con JS.</p>",
+    "guide": "<h3>CSS Dinámico</h3><p>Igual que cambiamos el texto, podemos inyectar estilos CSS desde el código. Esto es útil para animaciones o reacciones.</p><p><strong>Cómo hacerlo:</strong> Selecciona el elemento y accede a su propiedad <code>.style</code>, seguida de la propiedad que quieres cambiar (ej: <code>.color</code>).</p><p><strong>Misión:</strong> Cambia el color del elemento 'demo' a 'red' con JS.</p>",
     "initialCode": "<p id=\"demo\">Texto</p>\n<script>\n  let el = document.getElementById('demo');\n  \n</script>",
     "validation": {
       "regex": "el\\.style\\.color\\s*=\\s*['\"]red['\"]",
@@ -562,7 +562,7 @@
   {
     "id": "57",
     "title": "57. Botón Disabled",
-    "guide": "<h3>Desactivar Elementos</h3><p>El atributo booleano <code>disabled</code> impide usar un input o botón.</p><p><strong>Misión:</strong> Desactiva el botón.</p>",
+    "guide": "<h3>Desactivar Elementos</h3><p>A veces quieres mostrar un botón pero impedir que se pulse (por ejemplo, hasta que se rellene un formulario). HTML tiene un atributo especial para esto.</p><p><strong>Cómo hacerlo:</strong> Añade el atributo booleano <code>disabled</code> (sin valor) a tu botón o input.</p><p><strong>Misión:</strong> Desactiva el botón.</p>",
     "initialCode": "<button>No me toques</button>",
     "validation": {
       "regex": "<button\\s+[^>]*disabled",
@@ -572,7 +572,7 @@
   {
     "id": "58",
     "title": "58. Entidades HTML",
-    "guide": "<h3>Símbolos Especiales</h3><p>Algunos caracteres están reservados (como <). Para escribir un 'menor que' usamos <code>&lt;</code>.</p><p><strong>Misión:</strong> Escribe 5 &lt; 10 en un párrafo.</p>",
+    "guide": "<h3>Símbolos Especiales</h3><p>Si intentas escribir un símbolo 'menor que' en tu texto, el navegador pensará que estás abriendo una etiqueta. Para mostrar estos caracteres reservados, usamos códigos especiales que empiezan por <code>&</code> y terminan en <code>;</code>.</p><p><strong>Cómo hacerlo:</strong> Para el símbolo 'menor que', usa el código <code>&lt;</code> (less than).</p><p><strong>Misión:</strong> Escribe 5 &lt; 10 en un párrafo.</p>",
     "initialCode": "<p></p>",
     "validation": {
       "regex": "5\\s*&lt;\\s*10",
@@ -582,7 +582,7 @@
   {
     "id": "59",
     "title": "59. Details y Summary",
-    "guide": "<h3>Acordeón Nativo</h3><p>HTML5 tiene un widget desplegable nativo. <code>details</code> envuelve todo y <code>summary</code> es el título visible.</p><p><strong>Misión:</strong> Crea un details con un summary que diga 'Más info'.</p>",
+    "guide": "<h3>Acordeón Nativo</h3><p>HTML5 trajo un widget interactivo muy chulo que no requiere JavaScript: una caja que se abre y cierra para mostrar detalles.</p><p><strong>Cómo hacerlo:</strong> Usa un contenedor <code>details</code>. Dentro, el primer elemento debe ser <code>summary</code> (el título visible siempre). El resto del contenido dentro de details estará oculto hasta que se pulse.</p><p><strong>Misión:</strong> Crea un details con un summary que diga 'Más info'.</p>",
     "initialCode": "",
     "validation": {
       "regex": "<details>\\s*<summary>Más info<\\/summary>[\\s\\S]*<\\/details>",
@@ -592,11 +592,11 @@
   {
     "id": "60",
     "title": "60. La Meta Final",
-    "guide": "<h3>Todo junto</h3><p>Has llegado al final. Crea una estructura completa básica: DOCTYPE, html, head, title y body.</p><p><strong>Misión:</strong> Demuestra lo aprendido. Código base completo.</p>",
+    "guide": "<h3>Todo junto</h3><p>Has llegado al final. Es hora de demostrar que dominas la estructura básica de cualquier página web profesional. Recuerda las piezas clave: la declaración del tipo, la raíz, la cabeza con sus metadatos y título, y el cuerpo con contenido real.</p><p><strong>Lista de control:</strong> DOCTYPE, html, head, title, body y contenido dentro del body.</p><p><strong>Misión:</strong> Demuestra lo aprendido. Código base completo.</p>",
     "initialCode": "",
     "validation": {
-      "regex": "<!DOCTYPE html>\\s*<html>\\s*<head>\\s*<title>.*<\\/title>\\s*<\\/head>\\s*<body>[\\s\\S]*<\\/body>\\s*<\\/html>",
-      "error": "Estructura completa: Doctype, html, head, title, body."
+      "regex": "<!DOCTYPE html>\\s*<html>\\s*<head>\\s*<title>.*<\\/title>\\s*<\\/head>\\s*<body>[\\s\\S]{30,}<\\/body>\\s*<\\/html>",
+      "error": "Estructura completa con contenido real en el body (mínimo 30 letras)."
     }
   }
 ]
