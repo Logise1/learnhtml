@@ -253,7 +253,7 @@
     "id": "26",
     "title": "26. Labels (Etiquetas)",
     "guide": "<h3>Accesibilidad en Forms</h3><p>Un input solo no dice nada. Necesitamos una etiqueta de texto asociada. Para vincularlas y que al hacer clic en el texto se active el input, usamos IDs.</p><p><strong>Cómo hacerlo:</strong> Dale un atributo <code>id</code> único al input. Luego crea una etiqueta <code>label</code> y usa el atributo <code>for</code> con el mismo valor que el ID del input.</p><p><strong>Misión:</strong> Vincula un label 'Edad' con un input de id 'edad'.</p>",
-    "initialCode": "<form>\n  <input type=\"text\" placeholder=\"Apellidos\">\n  \n</form>",
+    "initialCode": "<form>\n  <input type=\"text\" placeholder=\"Apellidos\"><br>\n  \n</form>",
     "validation": {
       "regex": "<label\\s+for=['\"]edad['\"]>Edad<\\/label>\\s*<input\\s+[^>]*id=['\"]edad['\"]",
       "error": "El 'for' del label debe coincidir con el 'id' del input."
@@ -263,7 +263,7 @@
     "id": "27",
     "title": "27. Input Password",
     "guide": "<h3>Secretos</h3><p>Si pides una contraseña, no quieres que se vea en pantalla mientras el usuario escribe. HTML tiene un tipo de input específico que convierte los caracteres en puntos o asteriscos.</p><p><strong>Cómo hacerlo:</strong> Crea un input y cambia su atributo <code>type</code> a 'password'.</p><p><strong>Misión:</strong> Crea un campo de contraseña.</p>",
-    "initialCode": "<form>\n  <input type=\"text\" placeholder=\"Apellidos\">\n  <label for=\"edad\">Edad</label>\n  <input id=\"edad\">\n  \n</form>",
+    "initialCode": "<form>\n  <input type=\"text\" placeholder=\"Apellidos\"><br>\n  <label for=\"edad\">Edad</label> <input id=\"edad\"><br>\n  \n</form>",
     "validation": {
       "regex": "<input\\s+[^>]*type=['\"]password['\"]",
       "error": "Añade un input type='password'."
@@ -273,7 +273,7 @@
     "id": "28",
     "title": "28. Input Email",
     "guide": "<h3>Validación Automática</h3><p>Para correos electrónicos, usa el tipo especial. Esto tiene dos ventajas: en móviles muestra el teclado con la arroba, y en navegadores modernos valida que el texto parezca un email real.</p><p><strong>Cómo hacerlo:</strong> Crea un input con <code>type='email'</code>.</p><p><strong>Misión:</strong> Input de tipo email.</p>",
-    "initialCode": "<form>\n  <input type=\"text\" placeholder=\"Apellidos\">\n  <label for=\"edad\">Edad</label>\n  <input id=\"edad\">\n  <input type=\"password\">\n  \n</form>",
+    "initialCode": "<form>\n  <input type=\"text\" placeholder=\"Apellidos\"><br>\n  <label for=\"edad\">Edad</label> <input id=\"edad\"><br>\n  <input type=\"password\" placeholder=\"Contraseña\"><br>\n  \n</form>",
     "validation": {
       "regex": "<input\\s+[^>]*type=['\"]email['\"]",
       "error": "Usa type='email'."
@@ -283,7 +283,7 @@
     "id": "29",
     "title": "29. Textarea",
     "guide": "<h3>Texto Largo</h3><p>El input de texto es de una sola línea. Si quieres que el usuario escriba una biografía o un mensaje largo, necesitas un área de texto multilínea.</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>textarea</code>. A diferencia del input, esta SÍ tiene etiqueta de cierre y el texto por defecto iría entre ellas.</p><p><strong>Misión:</strong> Crea un textarea.</p>",
-    "initialCode": "<form>\n  <input type=\"text\" placeholder=\"Apellidos\">\n  <label for=\"edad\">Edad</label>\n  <input id=\"edad\">\n  <input type=\"password\">\n  <input type=\"email\">\n  \n</form>",
+    "initialCode": "<form>\n  <input type=\"text\" placeholder=\"Apellidos\"><br>\n  <label for=\"edad\">Edad</label> <input id=\"edad\"><br>\n  <input type=\"password\" placeholder=\"Contraseña\"><br>\n  <input type=\"email\" placeholder=\"correo@ejemplo.com\"><br>\n  \n</form>",
     "validation": {
       "regex": "<textarea[^>]*>\\s*<\\/textarea>",
       "error": "Añade una etiqueta <textarea></textarea>."
@@ -293,7 +293,7 @@
     "id": "30",
     "title": "30. Checkbox",
     "guide": "<h3>Selección Múltiple</h3><p>Para preguntas de Sí/No o selecciones múltiples (como elegir ingredientes de una pizza), usamos casillas de verificación.</p><p><strong>Cómo hacerlo:</strong> Usa un input con <code>type='checkbox'</code>. Es buena práctica meterlo dentro de un label para que sea más fácil de clicar.</p><p><strong>Misión:</strong> Crea un checkbox con label 'Suscribirse'.</p>",
-    "initialCode": "<form>\n  <input type=\"text\" placeholder=\"Apellidos\">\n  <label for=\"edad\">Edad</label>\n  <input id=\"edad\">\n  <input type=\"password\">\n  <input type=\"email\">\n  <textarea></textarea>\n  \n</form>",
+    "initialCode": "<form>\n  <input type=\"text\" placeholder=\"Apellidos\"><br>\n  <label for=\"edad\">Edad</label> <input id=\"edad\"><br>\n  <input type=\"password\" placeholder=\"Contraseña\"><br>\n  <input type=\"email\" placeholder=\"correo@ejemplo.com\"><br>\n  <textarea placeholder=\"Escribe algo...\"></textarea><br>\n  \n</form>",
     "validation": {
       "regex": "<label>\\s*<input\\s+[^>]*type=['\"]checkbox['\"][^>]*>\\s*Suscribirse\\s*<\\/label>",
       "error": "Mete el input checkbox dentro del label con el texto 'Suscribirse'."
@@ -303,7 +303,7 @@
     "id": "31",
     "title": "31. Radio Buttons",
     "guide": "<h3>Selección Única</h3><p>Cuando el usuario solo puede elegir UNA opción de varias (como elegir la talla de ropa: S, M, L), usamos botones de radio. Para que funcionen como grupo (si marcas uno se desmarca el otro), deben compartir el mismo nombre.</p><p><strong>Cómo hacerlo:</strong> Crea inputs con <code>type='radio'</code> y asegúrate de darles a todos el mismo valor en el atributo <code>name</code>.</p><p><strong>Misión:</strong> Crea dos radios con name='color'.</p>",
-    "initialCode": "<form>\n  <input type=\"text\" placeholder=\"Apellidos\">\n  <label for=\"edad\">Edad</label>\n  <input id=\"edad\">\n  <input type=\"password\">\n  <input type=\"email\">\n  <textarea></textarea>\n  <label><input type=\"checkbox\"> Suscribirse</label>\n  \n</form>",
+    "initialCode": "<form>\n  <input type=\"text\" placeholder=\"Apellidos\"><br>\n  <label for=\"edad\">Edad</label> <input id=\"edad\"><br>\n  <input type=\"password\" placeholder=\"Contraseña\"><br>\n  <input type=\"email\" placeholder=\"correo@ejemplo.com\"><br>\n  <textarea placeholder=\"Escribe algo...\"></textarea><br>\n  <label><input type=\"checkbox\"> Suscribirse</label><br>\n  \n</form>",
     "validation": {
       "regex": "<input[^>]*type=['\"]radio['\"][^>]*name=['\"]color['\"][\\s\\S]*<input[^>]*type=['\"]radio['\"][^>]*name=['\"]color['\"]",
       "error": "Crea dos inputs radio y asegúrate de que ambos tengan name='color'."
@@ -313,7 +313,7 @@
     "id": "32",
     "title": "32. Select y Options",
     "guide": "<h3>Menú Desplegable</h3><p>Si tienes muchas opciones (como elegir un país), los radios ocupan mucho espacio. Lo mejor es un menú desplegable.</p><p><strong>Cómo hacerlo:</strong> Crea un elemento contenedor <code>select</code>. Dentro de él, crea una etiqueta <code>option</code> por cada elección posible que quieras ofrecer.</p><p><strong>Misión:</strong> Crea un select con 2 opciones: 'España' y 'México'.</p>",
-    "initialCode": "<form>\n  <input type=\"text\" placeholder=\"Apellidos\">\n  <label for=\"edad\">Edad</label>\n  <input id=\"edad\">\n  <input type=\"password\">\n  <input type=\"email\">\n  <textarea></textarea>\n  <label><input type=\"checkbox\"> Suscribirse</label>\n  <input type=\"radio\" name=\"color\"> <input type=\"radio\" name=\"color\">\n  \n</form>",
+    "initialCode": "<form>\n  <input type=\"text\" placeholder=\"Apellidos\"><br>\n  <label for=\"edad\">Edad</label> <input id=\"edad\"><br>\n  <input type=\"password\" placeholder=\"Contraseña\"><br>\n  <input type=\"email\" placeholder=\"correo@ejemplo.com\"><br>\n  <textarea placeholder=\"Escribe algo...\"></textarea><br>\n  <label><input type=\"checkbox\"> Suscribirse</label><br>\n  <input type=\"radio\" name=\"color\"> Rojo <input type=\"radio\" name=\"color\"> Azul<br>\n  \n</form>",
     "validation": {
       "regex": "<select>\\s*<option>España<\\/option>\\s*<option>México<\\/option>\\s*<\\/select>",
       "error": "Estructura: <select> con dos <option> dentro."
@@ -323,7 +323,7 @@
     "id": "33",
     "title": "33. Botón Submit",
     "guide": "<h3>Enviarlo todo</h3><p>Para procesar el formulario, necesitamos un botón disparador. Cuando se pulsa, el navegador recopila todos los datos y los intenta enviar.</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>button</code> y especifica su atributo <code>type</code> como 'submit'. Pon el texto del botón dentro de la etiqueta.</p><p><strong>Misión:</strong> Crea un botón que diga 'Enviar'.</p>",
-    "initialCode": "<form>\n  <input type=\"text\" placeholder=\"Apellidos\">\n  <label for=\"edad\">Edad</label>\n  <input id=\"edad\">\n  <input type=\"password\">\n  <input type=\"email\">\n  <textarea></textarea>\n  <label><input type=\"checkbox\"> Suscribirse</label>\n  <input type=\"radio\" name=\"color\"> <input type=\"radio\" name=\"color\">\n  <select>\n    <option>España</option>\n    <option>México</option>\n  </select>\n  \n</form>",
+    "initialCode": "<form>\n  <input type=\"text\" placeholder=\"Apellidos\"><br>\n  <label for=\"edad\">Edad</label> <input id=\"edad\"><br>\n  <input type=\"password\" placeholder=\"Contraseña\"><br>\n  <input type=\"email\" placeholder=\"correo@ejemplo.com\"><br>\n  <textarea placeholder=\"Escribe algo...\"></textarea><br>\n  <label><input type=\"checkbox\"> Suscribirse</label><br>\n  <input type=\"radio\" name=\"color\"> Rojo <input type=\"radio\" name=\"color\"> Azul<br>\n  <select>\n    <option>España</option>\n    <option>México</option>\n  </select><br>\n  \n</form>",
     "validation": {
       "regex": "<button\\s+type=['\"]submit['\"]>Enviar<\\/button>",
       "error": "Usa <button type='submit'>Enviar</button>."
@@ -333,7 +333,7 @@
     "id": "34",
     "title": "34. Atributo Required",
     "guide": "<h3>Validación Obligatoria</h3><p>A veces no queremos que el usuario envíe el formulario si le falta un dato importante. HTML puede bloquear el envío automáticamente.</p><p><strong>Cómo hacerlo:</strong> Simplemente añade la palabra <code>required</code> (sin valor, es un atributo booleano) dentro de la etiqueta input que quieras hacer obligatoria.</p><p><strong>Misión:</strong> Haz que el input sea obligatorio.</p>",
-    "initialCode": "<form>\n  <input type=\"text\" placeholder=\"Apellidos\">\n  <label for=\"edad\">Edad</label>\n  <input id=\"edad\">\n  <input type=\"password\">\n  <input type=\"email\">\n  <textarea></textarea>\n  <label><input type=\"checkbox\"> Suscribirse</label>\n  <input type=\"radio\" name=\"color\"> <input type=\"radio\" name=\"color\">\n  <select>\n    <option>España</option>\n    <option>México</option>\n  </select>\n  <button type=\"submit\">Enviar</button>\n</form>",
+    "initialCode": "<form>\n  <input type=\"text\" placeholder=\"Apellidos\"><br>\n  <label for=\"edad\">Edad</label> <input id=\"edad\"><br>\n  <input type=\"password\" placeholder=\"Contraseña\"><br>\n  <input type=\"email\" placeholder=\"correo@ejemplo.com\"><br>\n  <textarea placeholder=\"Escribe algo...\"></textarea><br>\n  <label><input type=\"checkbox\"> Suscribirse</label><br>\n  <input type=\"radio\" name=\"color\"> Rojo <input type=\"radio\" name=\"color\"> Azul<br>\n  <select>\n    <option>España</option>\n    <option>México</option>\n  </select><br>\n  <button type=\"submit\">Enviar</button>\n</form>",
     "validation": {
       "regex": "<input\\s+[^>]*required",
       "error": "Añade la palabra 'required' dentro de la etiqueta input."
