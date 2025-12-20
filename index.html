@@ -74,6 +74,9 @@
         /* Loading Overlay */
         #loading-overlay { display: flex; }
         #loading-overlay.hidden { display: none; }
+        
+        /* Auth UI */
+        .hidden-auth { display: none !important; }
     </style>
 </head>
 <body class="h-screen bg-slate-950 text-slate-300 flex flex-col">
@@ -84,9 +87,58 @@
         <p class="text-blue-400 font-mono text-sm animate-pulse">Cargando curso...</p>
     </div>
 
+    <!-- AUTH MODAL -->
+    <div id="auth-modal" class="fixed inset-0 z-50 modal-overlay hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-xl w-full max-w-md p-6 shadow-2xl relative">
+            <button onclick="window.toggleAuthModal(false)" class="absolute top-4 right-4 text-slate-500 hover:text-white">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            
+            <h2 id="auth-title" class="text-2xl font-bold text-white mb-2">Iniciar Sesión</h2>
+            <p class="text-slate-400 text-sm mb-6">Guarda tu progreso en la nube y accede desde cualquier lugar.</p>
+            
+            <form id="auth-form" onsubmit="window.handleAuth(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-mono text-slate-500 mb-1">Email</label>
+                    <input type="email" id="auth-email" required class="w-full bg-slate-950 border border-slate-800 rounded p-2 text-white focus:border-blue-500 focus:outline-none transition">
+                </div>
+                <div>
+                    <label class="block text-xs font-mono text-slate-500 mb-1">Contraseña</label>
+                    <input type="password" id="auth-password" required minlength="6" class="w-full bg-slate-950 border border-slate-800 rounded p-2 text-white focus:border-blue-500 focus:outline-none transition">
+                </div>
+                
+                <p id="auth-error" class="text-red-400 text-xs hidden"></p>
+
+                <button type="submit" id="auth-submit-btn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded transition flex justify-center items-center gap-2">
+                    <span>Entrar</span>
+                </button>
+            </form>
+
+            <div class="mt-4 text-center text-sm text-slate-500">
+                <span id="auth-switch-text">¿No tienes cuenta?</span>
+                <button onclick="window.toggleAuthMode()" class="text-blue-400 hover:text-blue-300 font-medium ml-1 underline" id="auth-switch-btn">Regístrate</button>
+            </div>
+        </div>
+    </div>
+
     <!-- VISTA 1: HOME / LISTA DE LECCIONES (Visible al inicio) -->
-    <div id="view-home" class="flex-1 overflow-y-auto flex flex-col items-center p-6 md:p-12">
-        <div class="max-w-4xl w-full">
+    <div id="view-home" class="flex-1 overflow-y-auto flex flex-col items-center p-6 md:p-12 relative">
+        
+        <!-- User Bar (Top Right) -->
+        <div class="absolute top-6 right-6 flex items-center gap-4 z-10">
+            <div id="user-info" class="hidden items-center gap-3 bg-slate-900/80 p-2 pr-4 rounded-full border border-slate-800 backdrop-blur">
+                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-xs" id="user-avatar">U</div>
+                <span class="text-sm text-slate-300 hidden md:inline" id="user-email">usuario@email.com</span>
+                <button onclick="window.doLogout()" class="text-slate-500 hover:text-red-400 ml-2" title="Cerrar Sesión">
+                    <i data-lucide="log-out" class="w-4 h-4"></i>
+                </button>
+            </div>
+            <button id="login-btn" onclick="window.toggleAuthModal(true)" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-sm font-bold border border-slate-700 transition flex items-center gap-2">
+                <i data-lucide="log-in" class="w-4 h-4"></i> Entrar
+            </button>
+        </div>
+
+        <div class="max-w-4xl w-full mt-8">
             <header class="text-center mb-12 fade-in">
                 <div class="inline-block p-4 bg-blue-600/20 rounded-2xl mb-4 border border-blue-500/30">
                     <i data-lucide="code-2" class="w-12 h-12 text-blue-500"></i>
@@ -96,8 +148,8 @@
                 
                 <div class="mt-8 flex justify-center gap-4 text-sm text-slate-500">
                     <div class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i> Práctica Real</div>
-                    <div class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i> Validación Automática</div>
-                    <div class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i> Sin Instalación</div>
+                    <div class="flex items-center gap-2"><i data-lucide="cloud" class="w-4 h-4 text-blue-500"></i> Progreso en Nube</div>
+                    <div class="flex items-center gap-2"><i data-lucide="shield-check" class="w-4 h-4 text-purple-500"></i> Auth Segura</div>
                 </div>
             </header>
 
@@ -120,18 +172,18 @@
             <section id="panel-guide" class="mobile-panel active lg:flex w-full lg:w-1/3 flex-col border-r border-slate-700 bg-slate-900">
                 <header class="h-14 border-b border-slate-800 flex items-center px-4 justify-between bg-slate-950 shrink-0">
                     <div class="flex items-center gap-3">
-                        <button onclick="goHome()" class="text-slate-400 hover:text-white transition p-1.5 hover:bg-slate-800 rounded flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
+                        <button onclick="window.goHome()" class="text-slate-400 hover:text-white transition p-1.5 hover:bg-slate-800 rounded flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
                             <i data-lucide="arrow-left" class="w-4 h-4"></i>
                             <span class="hidden sm:inline">Menú</span>
                         </button>
                     </div>
                     
                     <div class="flex gap-2">
-                        <button onclick="prevLesson()" class="p-1.5 hover:bg-slate-800 rounded text-slate-400 disabled:opacity-30 transition" id="btn-prev" title="Anterior">
+                        <button onclick="window.prevLesson()" class="p-1.5 hover:bg-slate-800 rounded text-slate-400 disabled:opacity-30 transition" id="btn-prev" title="Anterior">
                             <i data-lucide="chevron-left" class="w-5 h-5"></i>
                         </button>
                         <div class="h-8 w-px bg-slate-800 mx-1"></div>
-                        <button onclick="checkAndNext()" id="btn-next" class="px-4 py-1.5 bg-slate-800 text-slate-400 rounded text-xs font-bold flex items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-wider">
+                        <button onclick="window.checkAndNext()" id="btn-next" class="px-4 py-1.5 bg-slate-800 text-slate-400 rounded text-xs font-bold flex items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-wider">
                             <span>Siguiente</span>
                             <i data-lucide="chevron-right" class="w-3 h-3"></i>
                         </button>
@@ -163,10 +215,13 @@
                         <i data-lucide="file-code" class="w-4 h-4 text-blue-500"></i> index.html
                     </span>
                     <div class="flex gap-2">
-                         <button onclick="checkCode()" class="text-xs bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded flex items-center gap-1.5 transition font-medium shadow-lg shadow-blue-900/20">
+                        <span id="save-status" class="text-[10px] uppercase tracking-wider font-bold text-slate-600 flex items-center mr-2">
+                            <!-- Estado de guardado -->
+                        </span>
+                         <button onclick="window.checkCode()" class="text-xs bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded flex items-center gap-1.5 transition font-medium shadow-lg shadow-blue-900/20">
                             <i data-lucide="play" class="w-3 h-3"></i> Ejecutar
                         </button>
-                        <button onclick="resetCode()" class="text-xs text-slate-500 hover:text-white p-1.5 rounded hover:bg-white/10 transition" title="Reiniciar código">
+                        <button onclick="window.resetCode()" class="text-xs text-slate-500 hover:text-white p-1.5 rounded hover:bg-white/10 transition" title="Reiniciar código">
                             <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
                         </button>
                     </div>
@@ -208,24 +263,51 @@
 
     <!-- MOBILE TABS -->
     <nav id="mobile-nav" class="lg:hidden h-[60px] bg-slate-950 border-t border-slate-800 flex justify-around items-center z-30 shrink-0 hidden">
-        <button onclick="switchTab('guide')" class="tab-btn active text-slate-400 hover:text-blue-500 flex flex-col items-center gap-1 p-2 w-1/3" data-target="guide">
+        <button onclick="window.switchTab('guide')" class="tab-btn active text-slate-400 hover:text-blue-500 flex flex-col items-center gap-1 p-2 w-1/3" data-target="guide">
             <i data-lucide="book-open" class="w-5 h-5"></i>
         </button>
-        <button onclick="switchTab('editor')" class="tab-btn text-slate-400 hover:text-blue-500 flex flex-col items-center gap-1 p-2 w-1/3" data-target="editor">
+        <button onclick="window.switchTab('editor')" class="tab-btn text-slate-400 hover:text-blue-500 flex flex-col items-center gap-1 p-2 w-1/3" data-target="editor">
             <i data-lucide="code" class="w-5 h-5"></i>
         </button>
-        <button onclick="switchTab('preview')" class="tab-btn text-slate-400 hover:text-blue-500 flex flex-col items-center gap-1 p-2 w-1/3" data-target="preview">
+        <button onclick="window.switchTab('preview')" class="tab-btn text-slate-400 hover:text-blue-500 flex flex-col items-center gap-1 p-2 w-1/3" data-target="preview">
             <i data-lucide="eye" class="w-5 h-5"></i>
         </button>
     </nav>
 
-    <script>
-        // VARIABLE GLOBAL VACIA INICIALMENTE
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+        import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+
+        // --- FIREBASE CONFIG ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyDTt30sY8iIZwJU1wAddeWg0k-rhdclgxs",
+            authDomain: "learnhtml-85f3c.firebaseapp.com",
+            projectId: "learnhtml-85f3c",
+            storageBucket: "learnhtml-85f3c.firebasestorage.app",
+            messagingSenderId: "244714837282",
+            appId: "1:244714837282:web:a55c079436668d4872c17b",
+            measurementId: "G-HXQEQFKF4L"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        
+        // Use a static app ID for the path structure
+        const APP_ID = 'html-master-v1';
+
+        // --- STATE ---
         let lessons = [];
         let currentLessonIndex = 0;
         let isCodeValid = false;
-        
-        // Elementos DOM
+        let currentUser = null;
+        let userProgressMap = {}; // Cache local del progreso
+        let saveTimeout = null;
+        let isLoginMode = true;
+
+        // --- DOM ELEMENTS ---
         const viewHome = document.getElementById('view-home');
         const viewWorkspace = document.getElementById('view-workspace');
         const homeLessonGrid = document.getElementById('home-lesson-grid');
@@ -236,55 +318,202 @@
         const btnNext = document.getElementById('btn-next');
         const mobileNav = document.getElementById('mobile-nav');
         const loadingOverlay = document.getElementById('loading-overlay');
+        const authModal = document.getElementById('auth-modal');
+        const authForm = document.getElementById('auth-form');
+        const authError = document.getElementById('auth-error');
+        const userInfo = document.getElementById('user-info');
+        const loginBtn = document.getElementById('login-btn');
+        const saveStatus = document.getElementById('save-status');
 
-        // --- INICIO ---
+        // --- INIT ---
         async function init() {
             lucide.createIcons();
             
             try {
-                // FETCH PARA CARGAR EL JSON LOCAL
+                // Cargar JSON
                 const response = await fetch('course.json');
                 if (!response.ok) throw new Error('Error cargando course.json');
-                
                 lessons = await response.json();
-                
-                // Ocultar loading
-                loadingOverlay.classList.add('hidden');
-                
-                // Cargar UI una vez tenemos datos
-                renderHome();
-
             } catch (error) {
-                console.error(error);
-                loadingOverlay.innerHTML = `
-                    <div class="text-red-400 text-center p-4">
-                        <i data-lucide="alert-triangle" class="w-8 h-8 mx-auto mb-2"></i>
-                        <p>Error cargando lecciones.</p>
-                        <p class="text-xs text-slate-500 mt-2">Si estás en local, usa Live Server.</p>
-                    </div>
-                `;
-                lucide.createIcons();
+                console.error("Fallback JSON error:", error);
+                // Fallback básico si falla el fetch local
+                loadingOverlay.innerHTML = `<div class='text-red-400 p-4'>Error: ${error.message} <br> <small>Usa Live Server</small></div>`;
+                return;
             }
+
+            // Auth Listener
+            onAuthStateChanged(auth, async (user) => {
+                currentUser = user;
+                if (user) {
+                    // Logged In
+                    userInfo.classList.remove('hidden');
+                    userInfo.classList.add('flex');
+                    loginBtn.classList.add('hidden');
+                    document.getElementById('user-email').textContent = user.email;
+                    document.getElementById('user-avatar').textContent = user.email[0].toUpperCase();
+                    
+                    await loadUserProgress();
+                } else {
+                    // Logged Out
+                    userInfo.classList.add('hidden');
+                    userInfo.classList.remove('flex');
+                    loginBtn.classList.remove('hidden');
+                    userProgressMap = {}; // Clear cache
+                }
+                
+                // Render UI
+                renderHome();
+                loadingOverlay.classList.add('hidden');
+            });
             
-            // Listener Editor
+            // Editor Listener (Debounce save)
             editor.addEventListener('input', () => {
                 updatePreview();
                 validateCode();
-                if(lessons[currentLessonIndex]) {
-                    localStorage.setItem(`htmlmaster_l${lessons[currentLessonIndex].id}`, editor.value);
-                }
+                
+                // Auto-save logic
+                if (saveTimeout) clearTimeout(saveTimeout);
+                saveStatus.textContent = "Escribiendo...";
+                saveStatus.className = "text-[10px] uppercase tracking-wider font-bold text-yellow-500 flex items-center mr-2";
+                
+                saveTimeout = setTimeout(() => {
+                    saveProgress();
+                }, 1500); // Guardar después de 1.5s de inactividad
             });
         }
 
-        // --- NAVEGACIÓN VISTAS ---
-        function goHome() {
+        // --- FIRESTORE LOGIC ---
+        async function loadUserProgress() {
+            if (!currentUser) return;
+            try {
+                // Leer colección completa de progreso
+                const q = collection(db, 'artifacts', APP_ID, 'users', currentUser.uid, 'progress');
+                const querySnapshot = await getDocs(q);
+                userProgressMap = {};
+                querySnapshot.forEach((doc) => {
+                    userProgressMap[doc.id] = doc.data(); // doc.id = lessonId ("1", "2"...)
+                });
+            } catch (e) {
+                console.error("Error loading progress:", e);
+            }
+        }
+
+        async function saveProgress() {
+            const lesson = lessons[currentLessonIndex];
+            if (!currentUser || !lesson) return;
+
+            const code = editor.value;
+            // Solo marcamos completado si la validación pasó
+            const isCompleted = isCodeValid; 
+
+            // Update Local Cache
+            userProgressMap[lesson.id] = { code, completed: isCompleted };
+
+            saveStatus.textContent = "Guardando...";
+            saveStatus.className = "text-[10px] uppercase tracking-wider font-bold text-blue-500 flex items-center mr-2";
+
+            try {
+                const docRef = doc(db, 'artifacts', APP_ID, 'users', currentUser.uid, 'progress', lesson.id);
+                await setDoc(docRef, {
+                    code: code,
+                    completed: isCompleted,
+                    updatedAt: new Date().toISOString()
+                }, { merge: true });
+                
+                saveStatus.textContent = "Guardado";
+                saveStatus.className = "text-[10px] uppercase tracking-wider font-bold text-green-500 flex items-center mr-2";
+                setTimeout(() => { saveStatus.textContent = ""; }, 2000);
+            } catch (e) {
+                console.error("Save error:", e);
+                saveStatus.textContent = "Error al guardar";
+                saveStatus.className = "text-[10px] uppercase tracking-wider font-bold text-red-500 flex items-center mr-2";
+            }
+        }
+
+        // --- AUTH UI FUNCTIONS (Attached to window) ---
+        window.toggleAuthModal = (show) => {
+            if (show) {
+                authModal.classList.remove('hidden');
+                authError.classList.add('hidden');
+                authForm.reset();
+            } else {
+                authModal.classList.add('hidden');
+            }
+        };
+
+        window.toggleAuthMode = () => {
+            isLoginMode = !isLoginMode;
+            const title = document.getElementById('auth-title');
+            const btn = document.getElementById('auth-submit-btn');
+            const switchText = document.getElementById('auth-switch-text');
+            const switchBtn = document.getElementById('auth-switch-btn');
+
+            if (isLoginMode) {
+                title.textContent = "Iniciar Sesión";
+                btn.innerHTML = `<span>Entrar</span>`;
+                switchText.textContent = "¿No tienes cuenta?";
+                switchBtn.textContent = "Regístrate";
+            } else {
+                title.textContent = "Crear Cuenta";
+                btn.innerHTML = `<span>Registrarse</span>`;
+                switchText.textContent = "¿Ya tienes cuenta?";
+                switchBtn.textContent = "Entra aquí";
+            }
+            authError.classList.add('hidden');
+        };
+
+        window.handleAuth = async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value;
+            const password = document.getElementById('auth-password').value;
+            authError.classList.add('hidden');
+            authError.textContent = "";
+
+            try {
+                if (isLoginMode) {
+                    await signInWithEmailAndPassword(auth, email, password);
+                } else {
+                    await createUserWithEmailAndPassword(auth, email, password);
+                }
+                window.toggleAuthModal(false);
+                // init logic handles state change
+            } catch (error) {
+                authError.classList.remove('hidden');
+                let msg = "Error de autenticación";
+                if (error.code === 'auth/invalid-credential') msg = "Credenciales incorrectas.";
+                if (error.code === 'auth/email-already-in-use') msg = "El email ya está registrado.";
+                if (error.code === 'auth/weak-password') msg = "La contraseña es muy débil.";
+                authError.textContent = msg;
+            }
+        };
+
+        window.doLogout = async () => {
+            if (confirm("¿Cerrar sesión?")) {
+                await signOut(auth);
+                window.goHome();
+            }
+        };
+
+        // --- NAVIGATION & APP LOGIC (Attached to window) ---
+        
+        window.goHome = () => {
             viewWorkspace.classList.add('hidden');
             viewHome.classList.remove('hidden');
             mobileNav.classList.add('hidden');
             document.title = "HTML Master: Curso Completo";
-        }
+            
+            // Re-render home to update progress bars/checks if changed
+            renderHome();
+        };
 
-        function enterWorkspace(index) {
+        window.enterWorkspace = (index) => {
+            if (!currentUser) {
+                // Opcional: Permitir modo invitado o forzar login
+                // Forzamos login visualmente abriendo el modal, pero permitimos cerrar
+                window.toggleAuthModal(true);
+                // Si quieres bloquear el acceso: return;
+            }
+
             currentLessonIndex = index;
             viewHome.classList.add('hidden');
             viewWorkspace.classList.remove('hidden');
@@ -292,18 +521,23 @@
             if(window.innerWidth < 1024) mobileNav.classList.remove('hidden');
             
             loadLesson(index);
-        }
+        };
 
-        // --- RENDER HOME ---
         function renderHome() {
             homeLessonGrid.innerHTML = lessons.map((l, idx) => {
-                const saved = localStorage.getItem(`htmlmaster_l${l.id}`);
-                const statusClass = saved ? 'border-blue-500/50 bg-slate-900' : 'border-slate-800 bg-slate-900/50 hover:bg-slate-800';
-                const icon = saved ? 'check-circle' : 'circle';
-                const iconColor = saved ? 'text-green-500' : 'text-slate-600';
+                // Recuperar estado desde Firestore Cache o LocalStorage (Legacy fallback)
+                const progress = userProgressMap[l.id];
+                const isDone = progress?.completed;
+                
+                const statusClass = isDone 
+                    ? 'border-blue-500/50 bg-slate-900 shadow-blue-900/10 shadow-lg' 
+                    : 'border-slate-800 bg-slate-900/50 hover:bg-slate-800';
+                
+                const icon = isDone ? 'check-circle' : 'circle';
+                const iconColor = isDone ? 'text-green-500' : 'text-slate-600';
 
                 return `
-                <button onclick="enterWorkspace(${idx})" class="text-left p-6 rounded-xl border ${statusClass} transition-all duration-300 hover:scale-[1.02] hover:shadow-xl group relative overflow-hidden">
+                <button onclick="window.enterWorkspace(${idx})" class="text-left p-6 rounded-xl border ${statusClass} transition-all duration-300 hover:scale-[1.02] group relative overflow-hidden w-full">
                     <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition">
                         <i data-lucide="code" class="w-16 h-16 text-blue-500"></i>
                     </div>
@@ -313,7 +547,7 @@
                             <i data-lucide="${icon}" class="w-5 h-5 ${iconColor}"></i>
                         </div>
                         <h3 class="text-lg font-bold text-slate-200 group-hover:text-blue-400 transition mb-1">${l.title}</h3>
-                        <div class="h-1 w-12 bg-blue-600 rounded mt-2 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        ${isDone ? '<div class="text-xs text-green-400 font-mono mt-2">Completado</div>' : '<div class="h-1 w-12 bg-blue-600 rounded mt-2 opacity-0 group-hover:opacity-100 transition-opacity"></div>'}
                     </div>
                 </button>
                 `;
@@ -321,25 +555,34 @@
             lucide.createIcons();
         }
 
-        // --- LÓGICA DE LECCIÓN ---
         function loadLesson(index) {
             const lesson = lessons[index];
             document.title = `${lesson.title} - HTML Master`;
 
-            // Cargar Contenido
+            // Reset state
             guideContent.innerHTML = lesson.guide;
-            const savedCode = localStorage.getItem(`htmlmaster_l${lesson.id}`);
-            editor.value = savedCode || lesson.initialCode;
+            
+            // Cargar código: 1. Firestore, 2. LocalStorage (Legacy), 3. Inicial
+            let initialCode = lesson.initialCode;
+            const savedProgress = userProgressMap[lesson.id];
+            
+            if (savedProgress && savedProgress.code) {
+                initialCode = savedProgress.code;
+            } else {
+                // Fallback legacy localstorage
+                const legacy = localStorage.getItem(`htmlmaster_l${lesson.id}`);
+                if (legacy) initialCode = legacy;
+            }
+
+            editor.value = initialCode;
             
             hideFeedback();
             updatePreview();
             validateCode(true); // Validación silenciosa
             
-            // Botones Nav
+            // UI Update
             document.getElementById('btn-prev').disabled = index === 0;
-            
-            // Scroll top guide
-            document.getElementById('panel-guide').querySelector('.overflow-y-auto').scrollTop = 0;
+            saveStatus.textContent = "";
         }
 
         function updatePreview() {
@@ -360,7 +603,7 @@
                 return;
             }
 
-            const regex = new RegExp(lesson.validation.regex, "i"); // Case insensitive
+            const regex = new RegExp(lesson.validation.regex, "i");
             isCodeValid = regex.test(code);
             
             updateNextButtonState();
@@ -368,13 +611,15 @@
             if (!silent) {
                 if (isCodeValid) {
                     showFeedback('success', '¡Excelente!', 'Código correcto.');
+                    // Forzar guardado inmediato al validar exitosamente
+                    saveProgress();
                 } else {
                     hideFeedback(); 
                 }
             }
         }
 
-        function checkCode() {
+        window.checkCode = () => {
              const lesson = lessons[currentLessonIndex];
              if (isCodeValid) {
                  showFeedback('success', '¡Genial!', 'El código cumple los requisitos.');
@@ -399,29 +644,33 @@
             }
         }
 
-        function checkAndNext() {
+        window.checkAndNext = () => {
             if (isCodeValid) {
+                // Asegurarse de guardar antes de salir
+                saveProgress();
+                
                 if (currentLessonIndex < lessons.length - 1) {
-                    enterWorkspace(currentLessonIndex + 1);
+                    window.enterWorkspace(currentLessonIndex + 1);
                 } else {
                     alert("¡Curso Completado!");
-                    goHome();
+                    window.goHome();
                 }
             } else {
-                checkCode();
+                window.checkCode();
             }
         }
 
-        function prevLesson() {
-            if (currentLessonIndex > 0) enterWorkspace(currentLessonIndex - 1);
+        window.prevLesson = () => {
+            if (currentLessonIndex > 0) window.enterWorkspace(currentLessonIndex - 1);
         }
 
-        function resetCode() {
+        window.resetCode = () => {
             if(confirm('¿Reiniciar esta lección?')) {
                 const lesson = lessons[currentLessonIndex];
                 editor.value = lesson.initialCode;
                 updatePreview();
                 validateCode();
+                saveProgress(); // Guardar el reset
             }
         }
 
@@ -457,7 +706,7 @@
             feedbackArea.classList.add('translate-y-full');
         }
 
-        function switchTab(targetId) {
+        window.switchTab = (targetId) => {
             document.querySelectorAll('.mobile-panel').forEach(p => p.classList.remove('active'));
             document.getElementById(`panel-${targetId}`).classList.add('active');
             document.querySelectorAll('.tab-btn').forEach(b => {
@@ -468,9 +717,11 @@
                     b.classList.remove('text-slate-400');
                 }
             });
-        }
+        };
 
-        window.addEventListener('DOMContentLoaded', init);
+        // Initialize
+        init();
+
     </script>
 </body>
 </html>
