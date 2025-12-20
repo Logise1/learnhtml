@@ -122,7 +122,7 @@
   {
     "id": "13",
     "title": "13. Imágenes",
-    "guide": "<h3>Multimedia Visual</h3><p>Una imagen vale más que mil palabras. La etiqueta de imagen es especial porque no tiene cierre (es una 'void tag'). Toda su información va en atributos.</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>img</code>. Obligatoriamente necesitas el atributo <code>src</code> (source) para decir dónde está el archivo, y el atributo <code>alt</code> para describir la imagen (vital para accesibilidad y si la imagen falla).</p><p><strong>Misión:</strong> Inserta una imagen 'logo.png' con alt 'Logotipo'.</p>",
+    "guide": "<h3>Multimedia Visual</h3><p>Una imagen vale más que mil palabras. La etiqueta de imagen es especial porque no tiene cierre (es una 'void tag'). Toda su información va en atributos.</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>img</code>. Obligatoriamente necesitas el atributo <code>src</code> (source) apuntando al archivo <strong>'logo.png'</strong> para decir dónde está el archivo, y el atributo <code>alt</code> para describir la imagen (vital para accesibilidad y si la imagen falla).</p><p><strong>Misión:</strong> Inserta una imagen 'logo.png' con alt 'Logotipo'.</p>",
     "initialCode": "",
     "validation": {
       "regex": "<img\\s+[^>]*src=['\"]logo\\.png['\"][^>]*alt=['\"]Logotipo['\"][^>]*>",
@@ -382,7 +382,7 @@
   {
     "id": "39",
     "title": "39. Audio HTML5",
-    "guide": "<h3>Sonido Nativo</h3><p>Para poner música o podcasts, usamos la etiqueta de audio. Es importante permitir que el usuario controle la reproducción (play, pausa, volumen).</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>audio</code>. Necesitas el atributo <code>src</code> para el archivo y el atributo booleano <code>controls</code> para mostrar la interfaz del reproductor.</p><p><strong>Misión:</strong> Añade un audio con controles.</p>",
+    "guide": "<h3>Sonido Nativo</h3><p>Para poner música o podcasts, usamos la etiqueta de audio. Es importante permitir que el usuario controle la reproducción (play, pausa, volumen).</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>audio</code>. Necesitas el atributo <code>src</code> apuntando al archivo <strong>'audio.mp3'</strong> y el atributo booleano <code>controls</code> para mostrar la interfaz del reproductor.</p><p><strong>Misión:</strong> Añade el audio 'audio.mp3' con controles.</p>",
     "initialCode": "<body>\n\n</body>",
     "validation": {
       "regex": "<audio\\s+[^>]*src=['\"][^'\"]+['\"][^>]*controls|<audio\\s+[^>]*controls[^>]*src=['\"][^'\"]+['\"]",
@@ -392,7 +392,7 @@
   {
     "id": "40",
     "title": "40. Video HTML5",
-    "guide": "<h3>Cine en la Web</h3><p>Insertar videos es muy similar al audio. La diferencia es que aquí solemos querer controlar el tamaño visual del reproductor.</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>video</code>. Añade <code>src</code>, <code>controls</code> y también un atributo <code>width</code> para definir el ancho en píxeles.</p><p><strong>Misión:</strong> Inserta un video con controles.</p>",
+    "guide": "<h3>Cine en la Web</h3><p>Insertar videos es muy similar al audio. La diferencia es que aquí solemos querer controlar el tamaño visual del reproductor.</p><p><strong>Cómo hacerlo:</strong> Usa la etiqueta <code>video</code>. Añade <code>src</code> apuntando a <strong>'video.mp4'</strong>, <code>controls</code> y también un atributo <code>width</code> para definir el ancho en píxeles.</p><p><strong>Misión:</strong> Inserta el video 'video.mp4' con controles.</p>",
     "initialCode": "",
     "validation": {
       "regex": "<video\\s+[^>]*controls",
