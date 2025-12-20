@@ -50,9 +50,6 @@
         /* Modal Overlay */
         .modal-overlay { background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); }
 
-        /* Sidebar Transition */
-        #sidebar { transition: width 0.3s ease, transform 0.3s ease; }
-
         /* Estilos específicos para la Guía en Modo Oscuro */
         .prose-custom h3 { color: #60a5fa !important; font-size: 1.25rem !important; margin-top: 1.5em !important; margin-bottom: 0.5em !important; font-weight: 700 !important; }
         .prose-custom p { color: #cbd5e1 !important; margin-bottom: 1em !important; line-height: 1.6 !important; }
@@ -114,23 +111,9 @@
     </div>
 
     <!-- VISTA 2: WORKSPACE (Visible al entrar a una lección) -->
-    <div id="view-workspace" class="hidden flex-1 flex flex-col lg:flex-row h-full overflow-hidden">
+    <div id="view-workspace" class="hidden flex-1 flex flex-col h-full overflow-hidden">
         
-        <!-- SIDEBAR (MODIFICADO: Visible en desktop por defecto) 
-             Antes: lg:-translate-x-full
-             Ahora: lg:translate-x-0
-        -->
-        <aside class="w-full lg:w-72 bg-slate-900 text-slate-300 flex flex-col flex-shrink-0 z-20 shadow-xl lg:h-full lg:relative absolute top-14 left-0 h-[calc(100vh-60px)] -translate-x-full lg:translate-x-0 overflow-hidden border-r border-slate-800 transition-transform duration-300" id="sidebar">
-            <div class="p-4 border-b border-slate-800 flex justify-between items-center bg-slate-950 h-14 min-h-[3.5rem]">
-                <span class="font-bold text-white">Temario</span>
-                <button onclick="toggleSidebar()" class="text-slate-400 hover:text-white lg:hidden">
-                    <i data-lucide="x"></i>
-                </button>
-            </div>
-            <div id="sidebar-lesson-list" class="flex-1 overflow-y-auto p-2 space-y-1"></div>
-        </aside>
-
-        <!-- AREA PRINCIPAL -->
+        <!-- AREA PRINCIPAL (Sin Sidebar) -->
         <main class="flex-1 flex flex-col lg:flex-row h-full relative overflow-hidden">
             
             <!-- PANEL 1: GUÍA (MODO OSCURO) -->
@@ -140,10 +123,6 @@
                         <button onclick="goHome()" class="text-slate-400 hover:text-white transition p-1.5 hover:bg-slate-800 rounded flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
                             <i data-lucide="arrow-left" class="w-4 h-4"></i>
                             <span class="hidden sm:inline">Menú</span>
-                        </button>
-                        <!-- Botón para mostrar Sidebar en Móvil -->
-                        <button onclick="toggleSidebar()" class="text-slate-400 hover:text-blue-500 transition p-1 hover:bg-slate-800 rounded lg:hidden" title="Ver lista">
-                            <i data-lucide="list" class="w-5 h-5"></i>
                         </button>
                     </div>
                     
@@ -253,10 +232,8 @@
         const editor = document.getElementById('code-editor');
         const preview = document.getElementById('preview-frame');
         const guideContent = document.getElementById('guide-content');
-        const sidebarLessonList = document.getElementById('sidebar-lesson-list');
         const feedbackArea = document.getElementById('feedback-area');
         const btnNext = document.getElementById('btn-next');
-        const sidebar = document.getElementById('sidebar');
         const mobileNav = document.getElementById('mobile-nav');
         const loadingOverlay = document.getElementById('loading-overlay');
 
@@ -276,7 +253,6 @@
                 
                 // Cargar UI una vez tenemos datos
                 renderHome();
-                renderSidebar();
 
             } catch (error) {
                 console.error(error);
@@ -306,12 +282,6 @@
             viewHome.classList.remove('hidden');
             mobileNav.classList.add('hidden');
             document.title = "HTML Master: Curso Completo";
-            
-            // En Home, nos aseguramos que el sidebar móvil esté cerrado
-            // Nota: En desktop ahora es visible siempre, no lo ocultamos
-            if(window.innerWidth < 1024) {
-                 sidebar.classList.add('-translate-x-full');
-            }
         }
 
         function enterWorkspace(index) {
@@ -351,35 +321,10 @@
             lucide.createIcons();
         }
 
-        // --- RENDER SIDEBAR LIST ---
-        function renderSidebar() {
-            sidebarLessonList.innerHTML = lessons.map((l, idx) => `
-                <button onclick="enterWorkspace(${idx})" class="w-full text-left px-4 py-3 hover:bg-slate-800 transition-colors flex items-center gap-3 border-l-2 border-transparent text-sm text-slate-400 hover:text-white" id="sidebar-btn-${idx}">
-                    <span class="font-mono text-xs w-5">${idx + 1}.</span>
-                    <span class="truncate flex-1">${l.title}</span>
-                </button>
-            `).join('');
-        }
-
         // --- LÓGICA DE LECCIÓN ---
         function loadLesson(index) {
             const lesson = lessons[index];
             document.title = `${lesson.title} - HTML Master`;
-
-            // Sidebar Active State
-            document.querySelectorAll('#sidebar-lesson-list button').forEach(b => {
-                b.classList.remove('bg-slate-800', 'border-blue-500', 'text-white');
-                b.classList.add('border-transparent');
-            });
-            const activeBtn = document.getElementById(`sidebar-btn-${index}`);
-            if(activeBtn) {
-                activeBtn.classList.add('bg-slate-800', 'border-blue-500', 'text-white');
-            }
-
-            // En móvil cerramos el sidebar al seleccionar
-            if(window.innerWidth < 1024) {
-                 sidebar.classList.add('-translate-x-full');
-            }
 
             // Cargar Contenido
             guideContent.innerHTML = lesson.guide;
@@ -481,15 +426,6 @@
         }
 
         // --- UI UTILS ---
-        function toggleSidebar() {
-            // En móvil: alterna -translate-x-full
-            // En desktop: alterna translate-x-0
-            if (sidebar.classList.contains('-translate-x-full')) {
-                sidebar.classList.remove('-translate-x-full');
-            } else {
-                sidebar.classList.add('-translate-x-full');
-            }
-        }
 
         function showFeedback(type, title, msg) {
             feedbackArea.classList.remove('translate-y-full');
