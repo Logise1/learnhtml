@@ -73,9 +73,19 @@
         /* Animación de entrada */
         .fade-in { animation: fadeIn 0.3s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Loading Overlay */
+        #loading-overlay { display: flex; }
+        #loading-overlay.hidden { display: none; }
     </style>
 </head>
 <body class="h-screen bg-slate-950 text-slate-300 flex flex-col">
+
+    <!-- Loading Screen -->
+    <div id="loading-overlay" class="fixed inset-0 z-50 bg-slate-950 flex flex-col items-center justify-center">
+        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mb-4"></div>
+        <p class="text-blue-400 font-mono text-sm animate-pulse">Cargando curso...</p>
+    </div>
 
     <!-- VISTA 1: HOME / LISTA DE LECCIONES (Visible al inicio) -->
     <div id="view-home" class="flex-1 overflow-y-auto flex flex-col items-center p-6 md:p-12">
@@ -85,7 +95,7 @@
                     <i data-lucide="code-2" class="w-12 h-12 text-blue-500"></i>
                 </div>
                 <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">HTML Master</h1>
-                <p class="text-slate-400 text-lg md:text-xl">Curso completo de 0 a Experto: 50 Lecciones Interactivas</p>
+                <p class="text-slate-400 text-lg md:text-xl">Curso completo de 0 a Experto</p>
                 
                 <div class="mt-8 flex justify-center gap-4 text-sm text-slate-500">
                     <div class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i> Práctica Real</div>
@@ -106,11 +116,14 @@
     <!-- VISTA 2: WORKSPACE (Visible al entrar a una lección) -->
     <div id="view-workspace" class="hidden flex-1 flex flex-col lg:flex-row h-full overflow-hidden">
         
-        <!-- SIDEBAR (Colapsable) -->
-        <aside class="w-full lg:w-72 bg-slate-900 text-slate-300 flex flex-col flex-shrink-0 z-20 shadow-xl lg:h-full lg:relative absolute top-14 left-0 h-[calc(100vh-60px)] -translate-x-full lg:-translate-x-full overflow-hidden border-r border-slate-800 transition-transform duration-300" id="sidebar">
+        <!-- SIDEBAR (MODIFICADO: Visible en desktop por defecto) 
+             Antes: lg:-translate-x-full
+             Ahora: lg:translate-x-0
+        -->
+        <aside class="w-full lg:w-72 bg-slate-900 text-slate-300 flex flex-col flex-shrink-0 z-20 shadow-xl lg:h-full lg:relative absolute top-14 left-0 h-[calc(100vh-60px)] -translate-x-full lg:translate-x-0 overflow-hidden border-r border-slate-800 transition-transform duration-300" id="sidebar">
             <div class="p-4 border-b border-slate-800 flex justify-between items-center bg-slate-950 h-14 min-h-[3.5rem]">
                 <span class="font-bold text-white">Temario</span>
-                <button onclick="toggleSidebar()" class="text-slate-400 hover:text-white">
+                <button onclick="toggleSidebar()" class="text-slate-400 hover:text-white lg:hidden">
                     <i data-lucide="x"></i>
                 </button>
             </div>
@@ -128,6 +141,7 @@
                             <i data-lucide="arrow-left" class="w-4 h-4"></i>
                             <span class="hidden sm:inline">Menú</span>
                         </button>
+                        <!-- Botón para mostrar Sidebar en Móvil -->
                         <button onclick="toggleSidebar()" class="text-slate-400 hover:text-blue-500 transition p-1 hover:bg-slate-800 rounded lg:hidden" title="Ver lista">
                             <i data-lucide="list" class="w-5 h-5"></i>
                         </button>
@@ -227,53 +241,8 @@
     </nav>
 
     <script>
-        // --- DATA DEL CURSO EXTENDIDO (50 Lecciones) ---
-        // IMPORTANTE: Los caracteres > han sido escapados como <\/script> para evitar errores de parseo.
-        const defaultLessons = [
-            // MÓDULO 1: Fundamentos
-            { id: "1", title: "1. La Estructura Sagrada", guide: "<h3>¿Qué es HTML?</h3><p>HTML es el esqueleto de la web. Toda página necesita una estructura mínima.</p><h3>La Base</h3><pre>&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n  &lt;body&gt;\n  &lt;/body&gt;\n&lt;/html&gt;</pre><p><strong>Misión:</strong> Escribe la estructura básica en el editor.</p>", initialCode: "", validation: { regex: "<!DOCTYPE\\s+html>[\\s\\S]*<html[\\s\\S]*<body[\\s\\S]*<\\/body>[\\s\\S]*<\\/html>", error: "Faltan las etiquetas base: DOCTYPE, html y body." } },
-            { id: "2", title: "2. Tu Primer Título", guide: "<h3>Encabezados</h3><p>Usa <code>&lt;h1&gt;</code> para el título principal. Solo uno por página.</p><pre>&lt;h1&gt;Hola Mundo&lt;/h1&gt;</pre><p><strong>Misión:</strong> Crea un H1 que diga 'Mi Portfolio'.</p>", initialCode: "<!DOCTYPE html>\n<html>\n<body>\n  \n</body>\n</html>", validation: { regex: "<h1[^>]*>\\s*Mi Portfolio\\s*<\\/h1>", error: "Escribe <h1>Mi Portfolio</h1>." } },
-            { id: "3", title: "3. Párrafos y Texto", guide: "<h3>Párrafos</h3><p>El texto normal va en <code>&lt;p&gt;</code>.</p><pre>&lt;p&gt;Soy programador.&lt;/p&gt;</pre><p><strong>Misión:</strong> Añade un párrafo debajo del título con una descripción.</p>", initialCode: "<!DOCTYPE html>\n<html>\n<body>\n  <h1>Mi Portfolio</h1>\n  <!-- Tu p aquí -->\n</body>\n</html>", validation: { regex: "<p>[\\s\\S]+<\\/p>", error: "Añade una etiqueta <p> con texto." } },
-            { id: "4", title: "4. Jerarquía (H2-H6)", guide: "<h3>Subtítulos</h3><p>Usa h2, h3, h4 para organizar secciones.</p><p><strong>Misión:</strong> Añade un <code>&lt;h2&gt;</code> que diga 'Mis Proyectos'.</p>", initialCode: "<h1>Mi Portfolio</h1>\n<p>Bienvenido a mi web.</p>\n", validation: { regex: "<h2[^>]*>Mis Proyectos<\\/h2>", error: "Falta el <h2>Mis Proyectos</h2>." } },
-            { id: "5", title: "5. Listas Desordenadas", guide: "<h3>Listas con Puntos</h3><p>Usa <code>&lt;ul&gt;</code> (contenedor) y <code>&lt;li&gt;</code> (elemento).</p><pre>&lt;ul&gt;\n  &lt;li&gt;HTML&lt;/li&gt;\n&lt;/ul&gt;</pre><p><strong>Misión:</strong> Crea una lista de 3 tecnologías.</p>", initialCode: "<h2>Mis Habilidades</h2>\n", validation: { regex: "<ul[^>]*>[\\s\\S]*<li[\\s\\S]*<\\/li>[\\s\\S]*<li[\\s\\S]*<\\/li>[\\s\\S]*<li[\\s\\S]*<\\/li>[\\s\\S]*<\\/ul>", error: "Necesitas un <ul> con al menos 3 <li>." } },
-            { id: "6", title: "6. Listas Ordenadas", guide: "<h3>Listas Numeradas</h3><p>Igual que la anterior, pero con <code>&lt;ol&gt;</code> (Ordered List).</p><p><strong>Misión:</strong> Crea un Top 3 de tus comidas favoritas.</p>", initialCode: "<h2>Top Comidas</h2>\n", validation: { regex: "<ol[^>]*>[\\s\\S]*<li[\\s\\S]*<\\/li>[\\s\\S]*<li[\\s\\S]*<\\/li>[\\s\\S]*<li[\\s\\S]*<\\/li>[\\s\\S]*<\\/ol>", error: "Usa <ol> con 3 elementos." } },
-            { id: "7", title: "7. Enlaces (Links)", guide: "<h3>Navegación</h3><p>La etiqueta <code>&lt;a&gt;</code> conecta internet. Usa <code>href</code>.</p><pre>&lt;a href='google.com'&gt;Ir&lt;/a&gt;</pre><p><strong>Misión:</strong> Enlace a 'https://github.com' con texto 'Mi GitHub'.</p>", initialCode: "<body>\n  \n</body>", validation: { regex: "<a\\s+href=[\"']https:\\/\\/github\\.com[\"'][^>]*>Mi GitHub<\\/a>", error: "Enlace a github.com con texto 'Mi GitHub'." } },
-            { id: "8", title: "8. Pestaña Nueva", guide: "<h3>Target Blank</h3><p>Para no cerrar tu página, abre en pestaña nueva con <code>target='_blank'</code>.</p><p><strong>Misión:</strong> Modifica el enlace anterior.</p>", initialCode: "<a href=\"https://github.com\">Mi GitHub</a>", validation: { regex: "target=[\"']_blank[\"']", error: "Añade target='_blank'." } },
-            { id: "9", title: "9. Imágenes", guide: "<h3>Multimedia</h3><p>Usa <code>&lt;img&gt;</code>. Es self-closing (no se cierra). Requiere <code>src</code>.</p><pre>&lt;img src='foto.jpg' alt='Yo'&gt;</pre><p><strong>Misión:</strong> Inserta una imagen 'avatar.png'.</p>", initialCode: "", validation: { regex: "<img\\s+[^>]*src=[\"']avatar\\.png[\"'][^>]*>", error: "Falta <img src='avatar.png'>." } },
-            { id: "10", title: "10. Contenedores Div", guide: "<h3>La Caja Universal</h3><p><code>&lt;div&gt;</code> agrupa elementos. Es invisible por defecto.</p><p><strong>Misión:</strong> Envuelve el h1 y p en un div con clase 'hero'.</p>", initialCode: "<h1>Hola</h1>\n<p>Texto</p>", validation: { regex: "<div\\s+class=[\"']hero[\"']>[\\s\\S]*<\\/div>", error: "Usa <div class='hero'>." } },
-            
-            // MÓDULO 2: Formularios
-            { id: "11", title: "11. Formularios Básicos", guide: "<h3>Etiqueta Form</h3><p>Agrupa controles de entrada.</p><p><strong>Misión:</strong> Crea etiquetas form.</p>", initialCode: "", validation: { regex: "<form>[\\s\\S]*<\\/form>", error: "Escribe <form> y </form>." } },
-            { id: "12", title: "12. Input Texto", guide: "<h3>Entrada de Datos</h3><p><code>&lt;input type='text'&gt;</code>.</p><p><strong>Misión:</strong> Añade input con placeholder 'Usuario'.</p>", initialCode: "<form>\n</form>", validation: { regex: "<input\\s+[^>]*placeholder=[\"']Usuario[\"']", error: "Input con placeholder 'Usuario'." } },
-            { id: "13", title: "13. Input Password", guide: "<h3>Contraseñas</h3><p>Usa <code>type='password'</code> para ocultar caracteres.</p>", initialCode: "<form>\n</form>", validation: { regex: "type=[\"']password[\"']", error: "Input tipo password." } },
-            { id: "14", title: "14. Checkbox", guide: "<h3>Casillas</h3><p><code>type='checkbox'</code>.</p><p><strong>Misión:</strong> Checkbox con label 'Acepto'.</p>", initialCode: "<form>\n</form>", validation: { regex: "type=[\"']checkbox[\"']", error: "Falta el checkbox." } },
-            { id: "15", title: "15. Botones", guide: "<h3>Acción</h3><p><code>&lt;button&gt;Click&lt;/button&gt;</code>.</p><p><strong>Misión:</strong> Botón 'Enviar' tipo submit.</p>", initialCode: "<form>\n</form>", validation: { regex: "<button\\s+type=[\"']submit[\"']>Enviar<\\/button>", error: "Botón submit 'Enviar'." } },
-            
-            // MÓDULO 3: Tablas y Semántica
-            { id: "16", title: "16. Tablas Básicas", guide: "<h3>Estructura Tabla</h3><p><code>table</code>, <code>tr</code> (fila), <code>td</code> (celda).</p><p><strong>Misión:</strong> Tabla con 1 fila y 2 celdas.</p>", initialCode: "", validation: { regex: "<table>\\s*<tr>\\s*<td>[\\s\\S]*</td>\\s*<td>[\\s\\S]*</td>\\s*</tr>\\s*</table>", error: "Tabla con 1 tr y 2 td." } },
-            { id: "17", title: "17. Encabezados Tabla", guide: "<h3>Table Head</h3><p>Usa <code>th</code> en lugar de <code>td</code> para títulos.</p>", initialCode: "<table>\n  <tr>\n    <!-- Cambia td por th -->\n    <td>Nombre</td>\n    <td>Edad</td>\n  </tr>\n</table>", validation: { regex: "<th>Nombre</th>\\s*<th>Edad</th>", error: "Usa th para los títulos." } },
-            { id: "18", title: "18. Semántica Header", guide: "<h3>Header</h3><p>Cabecera de la web.</p><p><strong>Misión:</strong> Crea un header con un h1 dentro.</p>", initialCode: "<body></body>", validation: { regex: "<header>\\s*<h1>[\\s\\S]*</h1>\\s*</header>", error: "Header con h1 dentro." } },
-            { id: "19", title: "19. Nav", guide: "<h3>Navegación</h3><p>Envuelve enlaces en <code>&lt;nav&gt;</code>.</p>", initialCode: "<header>\n  <a href='#'>Inicio</a>\n</header>", validation: { regex: "<nav>\\s*<a[\\s\\S]*<\\/nav>", error: "Envuelve el enlace en <nav>." } },
-            { id: "20", title: "20. Footer", guide: "<h3>Pie de Página</h3><p><code>&lt;footer&gt;</code> para copyrights.</p>", initialCode: "<body></body>", validation: { regex: "<footer>[\\s\\S]*<\\/footer>", error: "Añade un footer." } },
-
-            // MÓDULO 4: JS Básico Integrado
-            { id: "21", title: "21. Script Tag", guide: "<h3>Lógica</h3><p><code>&lt;script&gt;</code> para JS.</p><p><strong>Misión:</strong> Console log 'Hola'.</p>", initialCode: "<body></body>", validation: { regex: "<script>\\s*console\\.log\\(['\"]Hola['\"]\\);?\\s*<\\/script>", error: "Console log 'Hola' en script." } },
-            { id: "22", title: "22. OnClick", guide: "<h3>Eventos</h3><p>Atributo <code>onclick</code>.</p><p><strong>Misión:</strong> Botón que alerta 'Click'.</p>", initialCode: "", validation: { regex: "onclick=[\"']alert\\(['\"]Click['\"]\\)[\"']", error: "onclick con alert('Click')." } },
-            { id: "23", title: "23. IDs únicos", guide: "<h3>Identificadores</h3><p><code>id='unico'</code>.</p><p><strong>Misión:</strong> Párrafo con id 'resultado'.</p>", initialCode: "", validation: { regex: "<p\\s+id=[\"']resultado[\"']>", error: "Párrafo con id 'resultado'." } },
-            { id: "24", title: "24. Manipular Texto", guide: "<h3>JS DOM</h3><p><code>getElementById().innerText</code>.</p><p><strong>Misión:</strong> Cambia texto de id 'demo' a 'Hola'.</p>", initialCode: "<p id='demo'>Original</p>\n<script>\n  // Escribe aquí\n<\/script>", validation: { regex: "getElementById\\(['\"]demo['\"]\\)\\.innerText\\s*=\\s*['\"]Hola['\"]", error: "Cambia innerText a 'Hola'." } },
-            { id: "25", title: "25. Estilos Inline", guide: "<h3>Style JS</h3><p><code>.style.color = 'red'</code>.</p><p><strong>Misión:</strong> Pon el p id='demo' en rojo.</p>", initialCode: "<p id='demo'>Texto</p>\n<script>\n<\/script>", validation: { regex: "\\.style\\.color\\s*=\\s*['\"]red['\"]", error: "Cambia style.color a 'red'." } },
-
-            // MÓDULO 5: Intermedio
-            { id: "26", title: "26. Clases", guide: "<h3>Class</h3><p>Para estilos CSS (simulado aquí).</p><p><strong>Misión:</strong> Div con clase 'card'.</p>", initialCode: "", validation: { regex: "class=[\"']card[\"']", error: "Div con class 'card'." } },
-            { id: "27", title: "27. Span", guide: "<h3>Span</h3><p>Contenedor de texto en línea.</p><p><strong>Misión:</strong> Colorea solo una palabra.</p>", initialCode: "<p>Hola <span style='color:blue'>Mundo</span></p>", validation: { regex: "<span", error: "Usa span." } },
-            { id: "28", title: "28. Comentarios", guide: "<h3>Invisible</h3><p><code>&lt;!-- --&gt;</code>.</p><p><strong>Misión:</strong> Escribe un comentario.</p>", initialCode: "", validation: { regex: "<!--[\\s\\S]*-->", error: "Añade un comentario HTML." } },
-            { id: "29", title: "29. Br", guide: "<h3>Salto de Línea</h3><p><code>&lt;br&gt;</code>.</p>", initialCode: "Línea 1<br>Línea 2", validation: { regex: "<br>", error: "Usa br." } },
-            { id: "30", title: "30. Hr", guide: "<h3>Línea Horizontal</h3><p><code>&lt;hr&gt;</code>.</p>", initialCode: "", validation: { regex: "<hr>", error: "Usa hr." } },
-
-            // ... (Se podrían añadir 20 más para llegar a 50, dejaremos 30 sólidos por espacio en este ejemplo pero la estructura soporta N)
-        ];
-
-        let lessons = defaultLessons; // Usamos la lista interna por defecto
+        // VARIABLE GLOBAL VACIA INICIALMENTE
+        let lessons = [];
         let currentLessonIndex = 0;
         let isCodeValid = false;
         
@@ -289,19 +258,45 @@
         const btnNext = document.getElementById('btn-next');
         const sidebar = document.getElementById('sidebar');
         const mobileNav = document.getElementById('mobile-nav');
+        const loadingOverlay = document.getElementById('loading-overlay');
 
         // --- INICIO ---
-        function init() {
+        async function init() {
             lucide.createIcons();
-            // Cargar estado
-            renderHome();
-            renderSidebar();
+            
+            try {
+                // FETCH PARA CARGAR EL JSON LOCAL
+                const response = await fetch('course.json');
+                if (!response.ok) throw new Error('Error cargando course.json');
+                
+                lessons = await response.json();
+                
+                // Ocultar loading
+                loadingOverlay.classList.add('hidden');
+                
+                // Cargar UI una vez tenemos datos
+                renderHome();
+                renderSidebar();
+
+            } catch (error) {
+                console.error(error);
+                loadingOverlay.innerHTML = `
+                    <div class="text-red-400 text-center p-4">
+                        <i data-lucide="alert-triangle" class="w-8 h-8 mx-auto mb-2"></i>
+                        <p>Error cargando lecciones.</p>
+                        <p class="text-xs text-slate-500 mt-2">Si estás en local, usa Live Server.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+            }
             
             // Listener Editor
             editor.addEventListener('input', () => {
                 updatePreview();
                 validateCode();
-                localStorage.setItem(`htmlmaster_l${lessons[currentLessonIndex].id}`, editor.value);
+                if(lessons[currentLessonIndex]) {
+                    localStorage.setItem(`htmlmaster_l${lessons[currentLessonIndex].id}`, editor.value);
+                }
             });
         }
 
@@ -311,9 +306,12 @@
             viewHome.classList.remove('hidden');
             mobileNav.classList.add('hidden');
             document.title = "HTML Master: Curso Completo";
-            // Asegurar sidebar cerrado al salir
-            sidebar.classList.add('-translate-x-full'); 
-            sidebar.classList.add('lg:-translate-x-full');
+            
+            // En Home, nos aseguramos que el sidebar móvil esté cerrado
+            // Nota: En desktop ahora es visible siempre, no lo ocultamos
+            if(window.innerWidth < 1024) {
+                 sidebar.classList.add('-translate-x-full');
+            }
         }
 
         function enterWorkspace(index) {
@@ -329,7 +327,6 @@
         // --- RENDER HOME ---
         function renderHome() {
             homeLessonGrid.innerHTML = lessons.map((l, idx) => {
-                // Verificar si está completada (simulado si hay código guardado y válido, o simple check)
                 const saved = localStorage.getItem(`htmlmaster_l${l.id}`);
                 const statusClass = saved ? 'border-blue-500/50 bg-slate-900' : 'border-slate-800 bg-slate-900/50 hover:bg-slate-800';
                 const icon = saved ? 'check-circle' : 'circle';
@@ -354,7 +351,7 @@
             lucide.createIcons();
         }
 
-        // --- RENDER SIDEBAR LIST (Para navegación rápida dentro del workspace) ---
+        // --- RENDER SIDEBAR LIST ---
         function renderSidebar() {
             sidebarLessonList.innerHTML = lessons.map((l, idx) => `
                 <button onclick="enterWorkspace(${idx})" class="w-full text-left px-4 py-3 hover:bg-slate-800 transition-colors flex items-center gap-3 border-l-2 border-transparent text-sm text-slate-400 hover:text-white" id="sidebar-btn-${idx}">
@@ -379,9 +376,10 @@
                 activeBtn.classList.add('bg-slate-800', 'border-blue-500', 'text-white');
             }
 
-            // Cerrar sidebar si estamos en móvil o desktop (según petición: "al darle sale esa leccion solo")
-            sidebar.classList.add('-translate-x-full');
-            sidebar.classList.add('lg:-translate-x-full');
+            // En móvil cerramos el sidebar al seleccionar
+            if(window.innerWidth < 1024) {
+                 sidebar.classList.add('-translate-x-full');
+            }
 
             // Cargar Contenido
             guideContent.innerHTML = lesson.guide;
@@ -484,16 +482,12 @@
 
         // --- UI UTILS ---
         function toggleSidebar() {
-            // Toggle clase para mover sidebar
-            const sb = document.getElementById('sidebar');
-            // En este diseño nuevo, el sidebar está siempre oculto a la izquierda (-translate-x-full)
-            // Quitamos la clase para mostrarlo
-            if (sb.classList.contains('-translate-x-full')) {
-                sb.classList.remove('-translate-x-full');
-                sb.classList.remove('lg:-translate-x-full');
+            // En móvil: alterna -translate-x-full
+            // En desktop: alterna translate-x-0
+            if (sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.remove('-translate-x-full');
             } else {
-                sb.classList.add('-translate-x-full');
-                sb.classList.add('lg:-translate-x-full');
+                sidebar.classList.add('-translate-x-full');
             }
         }
 
