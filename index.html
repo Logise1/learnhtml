@@ -215,9 +215,6 @@
                         <i data-lucide="file-code" class="w-4 h-4 text-blue-500"></i> index.html
                     </span>
                     <div class="flex gap-2">
-                        <span id="save-status" class="text-[10px] uppercase tracking-wider font-bold text-slate-600 flex items-center mr-2">
-                            <!-- Estado de guardado -->
-                        </span>
                          <button onclick="window.checkCode()" class="text-xs bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded flex items-center gap-1.5 transition font-medium shadow-lg shadow-blue-900/20">
                             <i data-lucide="play" class="w-3 h-3"></i> Ejecutar
                         </button>
@@ -303,8 +300,7 @@
         let currentLessonIndex = 0;
         let isCodeValid = false;
         let currentUser = null;
-        let userProgressMap = {}; // Cache local del progreso
-        let saveTimeout = null;
+        let userProgressMap = {}; // Cache local del progreso (Solo completed status)
         let isLoginMode = true;
 
         // --- DOM ELEMENTS ---
@@ -323,7 +319,6 @@
         const authError = document.getElementById('auth-error');
         const userInfo = document.getElementById('user-info');
         const loginBtn = document.getElementById('login-btn');
-        const saveStatus = document.getElementById('save-status');
 
         // --- INIT ---
         async function init() {
@@ -366,19 +361,10 @@
                 loadingOverlay.classList.add('hidden');
             });
             
-            // Editor Listener (Debounce save)
+            // Editor Listener (Solo vista previa y validación, NO autoguardado)
             editor.addEventListener('input', () => {
                 updatePreview();
                 validateCode();
-                
-                // Auto-save logic
-                if (saveTimeout) clearTimeout(saveTimeout);
-                saveStatus.textContent = "Escribiendo...";
-                saveStatus.className = "text-[10px] uppercase tracking-wider font-bold text-yellow-500 flex items-center mr-2";
-                
-                saveTimeout = setTimeout(() => {
-                    saveProgress();
-                }, 1500); // Guardar después de 1.5s de inactividad
             });
         }
 
@@ -402,31 +388,18 @@
             const lesson = lessons[currentLessonIndex];
             if (!currentUser || !lesson) return;
 
-            const code = editor.value;
-            // Solo marcamos completado si la validación pasó
-            const isCompleted = isCodeValid; 
-
-            // Update Local Cache
-            userProgressMap[lesson.id] = { code, completed: isCompleted };
-
-            saveStatus.textContent = "Guardando...";
-            saveStatus.className = "text-[10px] uppercase tracking-wider font-bold text-blue-500 flex items-center mr-2";
+            // Update Local Cache (Only completed status)
+            userProgressMap[lesson.id] = { completed: isCodeValid };
 
             try {
                 const docRef = doc(db, 'artifacts', APP_ID, 'users', currentUser.uid, 'progress', lesson.id);
+                // SOLO GUARDAMOS EL ESTADO DE COMPLETADO, NO EL CÓDIGO
                 await setDoc(docRef, {
-                    code: code,
-                    completed: isCompleted,
+                    completed: isCodeValid,
                     updatedAt: new Date().toISOString()
                 }, { merge: true });
-                
-                saveStatus.textContent = "Guardado";
-                saveStatus.className = "text-[10px] uppercase tracking-wider font-bold text-green-500 flex items-center mr-2";
-                setTimeout(() => { saveStatus.textContent = ""; }, 2000);
             } catch (e) {
                 console.error("Save error:", e);
-                saveStatus.textContent = "Error al guardar";
-                saveStatus.className = "text-[10px] uppercase tracking-wider font-bold text-red-500 flex items-center mr-2";
             }
         }
 
@@ -476,7 +449,6 @@
                     await createUserWithEmailAndPassword(auth, email, password);
                 }
                 window.toggleAuthModal(false);
-                // init logic handles state change
             } catch (error) {
                 authError.classList.remove('hidden');
                 let msg = "Error de autenticación";
@@ -508,10 +480,7 @@
 
         window.enterWorkspace = (index) => {
             if (!currentUser) {
-                // Opcional: Permitir modo invitado o forzar login
-                // Forzamos login visualmente abriendo el modal, pero permitimos cerrar
                 window.toggleAuthModal(true);
-                // Si quieres bloquear el acceso: return;
             }
 
             currentLessonIndex = index;
@@ -525,7 +494,6 @@
 
         function renderHome() {
             homeLessonGrid.innerHTML = lessons.map((l, idx) => {
-                // Recuperar estado desde Firestore Cache o LocalStorage (Legacy fallback)
                 const progress = userProgressMap[l.id];
                 const isDone = progress?.completed;
                 
@@ -562,19 +530,8 @@
             // Reset state
             guideContent.innerHTML = lesson.guide;
             
-            // Cargar código: 1. Firestore, 2. LocalStorage (Legacy), 3. Inicial
-            let initialCode = lesson.initialCode;
-            const savedProgress = userProgressMap[lesson.id];
-            
-            if (savedProgress && savedProgress.code) {
-                initialCode = savedProgress.code;
-            } else {
-                // Fallback legacy localstorage
-                const legacy = localStorage.getItem(`htmlmaster_l${lesson.id}`);
-                if (legacy) initialCode = legacy;
-            }
-
-            editor.value = initialCode;
+            // Cargar SIEMPRE el código inicial, ignorando guardados previos
+            editor.value = lesson.initialCode;
             
             hideFeedback();
             updatePreview();
@@ -582,7 +539,6 @@
             
             // UI Update
             document.getElementById('btn-prev').disabled = index === 0;
-            saveStatus.textContent = "";
         }
 
         function updatePreview() {
@@ -611,7 +567,7 @@
             if (!silent) {
                 if (isCodeValid) {
                     showFeedback('success', '¡Excelente!', 'Código correcto.');
-                    // Forzar guardado inmediato al validar exitosamente
+                    // Guardar SOLO cuando es válido para marcar completado
                     saveProgress();
                 } else {
                     hideFeedback(); 
@@ -646,7 +602,7 @@
 
         window.checkAndNext = () => {
             if (isCodeValid) {
-                // Asegurarse de guardar antes de salir
+                // Guardar completado antes de avanzar
                 saveProgress();
                 
                 if (currentLessonIndex < lessons.length - 1) {
@@ -670,7 +626,8 @@
                 editor.value = lesson.initialCode;
                 updatePreview();
                 validateCode();
-                saveProgress(); // Guardar el reset
+                // Si reinician, potencialmente dejan de estar "completados" si la validación falla
+                saveProgress(); 
             }
         }
 
