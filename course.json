@@ -2,7 +2,7 @@
   {
     "id": "1",
     "title": "1. La Estructura Sagrada",
-    "guide": "<h3>¿Qué es HTML?</h3><p>HTML es el esqueleto de la web. Toda página necesita una estructura mínima.</p><h3>La Base</h3><pre>&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n  &lt;body&gt;\n  &lt;/body&gt;\n&lt;/html&gt;</pre><p><strong>Misión:</strong> Escribe la estructura básica en el editor.</p>",
+    "guide": "<h3>¿Qué es HTML?</h3><p>HTML es el esqueleto de la web. Toda página necesita una estructura mínima estándar.</p><h3>La Base</h3><pre>&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n  &lt;body&gt;\n  &lt;/body&gt;\n&lt;/html&gt;</pre><p><strong>Misión:</strong> Escribe la estructura básica en el editor.</p>",
     "initialCode": "",
     "validation": {
       "regex": "<!DOCTYPE\\s+html>[\\s\\S]*<html[\\s\\S]*<body[\\s\\S]*<\\/body>[\\s\\S]*<\\/html>",
@@ -12,7 +12,7 @@
   {
     "id": "2",
     "title": "2. Tu Primer Título",
-    "guide": "<h3>Encabezados</h3><p>Usa <code>&lt;h1&gt;</code> para el título principal. Solo uno por página.</p><pre>&lt;h1&gt;Hola Mundo&lt;/h1&gt;</pre><p><strong>Misión:</strong> Crea un H1 que diga 'Mi Portfolio'.</p>",
+    "guide": "<h3>Encabezados</h3><p>Los motores de búsqueda aman los títulos. Usa <code>&lt;h1&gt;</code> para el título principal. Solo debe haber uno por página para un buen SEO.</p><pre>&lt;h1&gt;Hola Mundo&lt;/h1&gt;</pre><p><strong>Misión:</strong> Crea un H1 que diga 'Mi Portfolio'.</p>",
     "initialCode": "<!DOCTYPE html>\n<html>\n<body>\n  \n</body>\n</html>",
     "validation": {
       "regex": "<h1[^>]*>\\s*Mi Portfolio\\s*<\\/h1>",
@@ -22,7 +22,7 @@
   {
     "id": "3",
     "title": "3. Párrafos y Texto",
-    "guide": "<h3>Párrafos</h3><p>El texto normal va en <code>&lt;p&gt;</code>.</p><pre>&lt;p&gt;Soy programador.&lt;/p&gt;</pre><p><strong>Misión:</strong> Añade un párrafo debajo del título con una descripción.</p>",
+    "guide": "<h3>Párrafos</h3><p>El texto normal siempre debe ir dentro de etiquetas <code>&lt;p&gt;</code>. Esto asegura que haya un espaciado correcto entre líneas.</p><pre>&lt;p&gt;Soy desarrollador web.&lt;/p&gt;</pre><p><strong>Misión:</strong> Añade un párrafo debajo del título con una breve descripción sobre ti.</p>",
     "initialCode": "<!DOCTYPE html>\n<html>\n<body>\n  <h1>Mi Portfolio</h1>\n  <!-- Tu p aquí -->\n</body>\n</html>",
     "validation": {
       "regex": "<p>[\\s\\S]+<\\/p>",
@@ -32,7 +32,7 @@
   {
     "id": "4",
     "title": "4. Jerarquía (H2-H6)",
-    "guide": "<h3>Subtítulos</h3><p>Usa h2, h3, h4 para organizar secciones.</p><p><strong>Misión:</strong> Añade un <code>&lt;h2&gt;</code> que diga 'Mis Proyectos'.</p>",
+    "guide": "<h3>Subtítulos</h3><p>Para organizar el contenido, usamos niveles inferiores de encabezados: <code>h2</code>, <code>h3</code>, hasta <code>h6</code>. Es como un índice de un libro.</p><p><strong>Misión:</strong> Añade un <code>&lt;h2&gt;</code> que diga 'Mis Proyectos'.</p>",
     "initialCode": "<h1>Mi Portfolio</h1>\n<p>Bienvenido a mi web.</p>\n",
     "validation": {
       "regex": "<h2[^>]*>Mis Proyectos<\\/h2>",
@@ -42,7 +42,7 @@
   {
     "id": "5",
     "title": "5. Listas Desordenadas",
-    "guide": "<h3>Listas con Puntos</h3><p>Usa <code>&lt;ul&gt;</code> (contenedor) y <code>&lt;li&gt;</code> (elemento).</p><pre>&lt;ul&gt;\n  &lt;li&gt;HTML&lt;/li&gt;\n&lt;/ul&gt;</pre><p><strong>Misión:</strong> Crea una lista de 3 tecnologías.</p>",
+    "guide": "<h3>Listas con Puntos (Bullets)</h3><p>Ideales para elementos sin un orden específico. Usa <code>&lt;ul&gt;</code> (Unordered List) como contenedor y <code>&lt;li&gt;</code> (List Item) para cada ítem.</p><pre>&lt;ul&gt;\n  &lt;li&gt;HTML&lt;/li&gt;\n  &lt;li&gt;CSS&lt;/li&gt;\n&lt;/ul&gt;</pre><p><strong>Misión:</strong> Crea una lista de 3 tecnologías que quieras aprender.</p>",
     "initialCode": "<h2>Mis Habilidades</h2>\n",
     "validation": {
       "regex": "<ul[^>]*>[\\s\\S]*<li[\\s\\S]*<\\/li>[\\s\\S]*<li[\\s\\S]*<\\/li>[\\s\\S]*<li[\\s\\S]*<\\/li>[\\s\\S]*<\\/ul>",
@@ -52,7 +52,7 @@
   {
     "id": "6",
     "title": "6. Listas Ordenadas",
-    "guide": "<h3>Listas Numeradas</h3><p>Igual que la anterior, pero con <code>&lt;ol&gt;</code> (Ordered List).</p><p><strong>Misión:</strong> Crea un Top 3 de tus comidas favoritas.</p>",
+    "guide": "<h3>Listas Numeradas</h3><p>Cuando el orden importa (pasos de una receta, ranking), usamos <code>&lt;ol&gt;</code> (Ordered List). El navegador pondrá los números automáticamente.</p><p><strong>Misión:</strong> Crea un Top 3 de tus comidas favoritas usando OL.</p>",
     "initialCode": "<h2>Top Comidas</h2>\n",
     "validation": {
       "regex": "<ol[^>]*>[\\s\\S]*<li[\\s\\S]*<\\/li>[\\s\\S]*<li[\\s\\S]*<\\/li>[\\s\\S]*<li[\\s\\S]*<\\/li>[\\s\\S]*<\\/ol>",
@@ -62,7 +62,7 @@
   {
     "id": "7",
     "title": "7. Enlaces (Links)",
-    "guide": "<h3>Navegación</h3><p>La etiqueta <code>&lt;a&gt;</code> conecta internet. Usa <code>href</code>.</p><pre>&lt;a href='google.com'&gt;Ir&lt;/a&gt;</pre><p><strong>Misión:</strong> Enlace a 'https://github.com' con texto 'Mi GitHub'.</p>",
+    "guide": "<h3>La Web es Conexión</h3><p>La etiqueta <code>&lt;a&gt;</code> (anchor) es la más importante de internet. Usa el atributo <code>href</code> para decir a dónde ir.</p><pre>&lt;a href='https://google.com'&gt;Ir a Google&lt;/a&gt;</pre><p><strong>Misión:</strong> Crea un enlace a 'https://github.com' con el texto 'Mi GitHub'.</p>",
     "initialCode": "<body>\n  \n</body>",
     "validation": {
       "regex": "<a\\s+href=[\"']https:\\/\\/github\\.com[\"'][^>]*>Mi GitHub<\\/a>",
@@ -72,231 +72,231 @@
   {
     "id": "8",
     "title": "8. Pestaña Nueva",
-    "guide": "<h3>Target Blank</h3><p>Para no cerrar tu página, abre en pestaña nueva con <code>target='_blank'</code>.</p><p><strong>Misión:</strong> Modifica el enlace anterior.</p>",
+    "guide": "<h3>Atributo Target</h3><p>A veces no queremos que el usuario abandone nuestra página. Usa <code>target='_blank'</code> para abrir el enlace en una pestaña nueva.</p><p><strong>Misión:</strong> Añade el atributo target al enlace existente.</p>",
     "initialCode": "<a href=\"https://github.com\">Mi GitHub</a>",
     "validation": {
       "regex": "target=[\"']_blank[\"']",
-      "error": "Añade target='_blank'."
+      "error": "Añade target='_blank' a la etiqueta <a>."
     }
   },
   {
     "id": "9",
     "title": "9. Imágenes",
-    "guide": "<h3>Multimedia</h3><p>Usa <code>&lt;img&gt;</code>. Es self-closing (no se cierra). Requiere <code>src</code>.</p><pre>&lt;img src='foto.jpg' alt='Yo'&gt;</pre><p><strong>Misión:</strong> Inserta una imagen 'avatar.png'.</p>",
-    "initialCode": "",
+    "guide": "<h3>Multimedia Visual</h3><p>Una imagen vale más que mil palabras. La etiqueta <code>&lt;img&gt;</code> es especial: no tiene etiqueta de cierre. Necesita <code>src</code> (fuente) y <code>alt</code> (texto alternativo).</p><pre>&lt;img src='gato.jpg' alt='Un gato lindo'&gt;</pre><p><strong>Misión:</strong> Inserta una imagen con src 'avatar.png'.</p>",
+    "initialCode": "<h1>Mi Perfil</h1>\n",
     "validation": {
       "regex": "<img\\s+[^>]*src=[\"']avatar\\.png[\"'][^>]*>",
-      "error": "Falta <img src='avatar.png'>."
+      "error": "Falta la etiqueta <img src='avatar.png'>."
     }
   },
   {
     "id": "10",
     "title": "10. Contenedores Div",
-    "guide": "<h3>La Caja Universal</h3><p><code>&lt;div&gt;</code> agrupa elementos. Es invisible por defecto.</p><p><strong>Misión:</strong> Envuelve el h1 y p en un div con clase 'hero'.</p>",
-    "initialCode": "<h1>Hola</h1>\n<p>Texto</p>",
+    "guide": "<h3>La Caja Universal</h3><p>El <code>&lt;div&gt;</code> es un contenedor genérico. Por sí solo no hace nada visualmente, pero sirve para agrupar elementos y darles estilo con CSS o manejarlos con JS.</p><p><strong>Misión:</strong> Envuelve el h1 y el p dentro de un div con <code>class='hero'</code>.</p>",
+    "initialCode": "<h1>Bienvenido</h1>\n<p>Explora mi mundo.</p>",
     "validation": {
-      "regex": "<div\\s+class=[\"']hero[\"']>[\\s\\S]*<\\/div>",
-      "error": "Usa <div class='hero'>."
+      "regex": "<div\\s+class=[\"']hero[\"']>[\\s\\S]*<h1>[\\s\\S]*<\\/p>[\\s\\S]*<\\/div>",
+      "error": "Envuelve todo el contenido en un <div class='hero'>."
     }
   },
   {
     "id": "11",
-    "title": "11. Formularios Básicos",
-    "guide": "<h3>Etiqueta Form</h3><p>Agrupa controles de entrada.</p><p><strong>Misión:</strong> Crea etiquetas form.</p>",
-    "initialCode": "",
+    "title": "11. Formularios (Forms)",
+    "guide": "<h3>Recogiendo Datos</h3><p>Para interactuar con el usuario necesitamos formularios. La etiqueta madre es <code>&lt;form&gt;</code>. Define dónde empieza y termina el área interactiva.</p><pre>&lt;form&gt;\n  <!-- Inputs van aquí -->\n&lt;/form&gt;</pre><p><strong>Misión:</strong> Crea una estructura de formulario vacía.</p>",
+    "initialCode": "<h2>Contacto</h2>\n",
     "validation": {
       "regex": "<form>[\\s\\S]*<\\/form>",
-      "error": "Escribe <form> y </form>."
+      "error": "Debes crear las etiquetas de apertura y cierre de <form>."
     }
   },
   {
     "id": "12",
-    "title": "12. Input Texto",
-    "guide": "<h3>Entrada de Datos</h3><p><code>&lt;input type='text'&gt;</code>.</p><p><strong>Misión:</strong> Añade input con placeholder 'Usuario'.</p>",
-    "initialCode": "<form>\n</form>",
+    "title": "12. Input de Texto",
+    "guide": "<h3>Campos de Entrada</h3><p>El elemento más versátil es <code>&lt;input&gt;</code>. Con <code>type='text'</code> creamos una caja de escritura de una línea. El atributo <code>placeholder</code> muestra un texto gris de ayuda.</p><pre>&lt;input type='text' placeholder='Tu Nombre'&gt;</pre><p><strong>Misión:</strong> Crea un input para 'Nombre de Usuario'.</p>",
+    "initialCode": "<form>\n  \n</form>",
     "validation": {
-      "regex": "<input\\s+[^>]*placeholder=[\"']Usuario[\"']",
-      "error": "Input con placeholder 'Usuario'."
+      "regex": "<input\\s+[^>]*type=[\"']text[\"'][^>]*placeholder=[\"'].*[\"']",
+      "error": "Crea un input type='text' con algún placeholder."
     }
   },
   {
     "id": "13",
-    "title": "13. Input Password",
-    "guide": "<h3>Contraseñas</h3><p>Usa <code>type='password'</code> para ocultar caracteres.</p>",
-    "initialCode": "<form>\n</form>",
+    "title": "13. Input Seguro",
+    "guide": "<h3>Contraseñas</h3><p>Para datos sensibles, usar <code>type='text'</code> es peligroso porque se ve lo que escribes. Usa <code>type='password'</code> para que los caracteres se conviertan en puntos.</p><p><strong>Misión:</strong> Añade un campo para contraseña debajo del usuario.</p>",
+    "initialCode": "<form>\n  <input type='text' placeholder='Usuario'>\n  <br>\n</form>",
     "validation": {
-      "regex": "type=[\"']password[\"']",
-      "error": "Input tipo password."
+      "regex": "<input\\s+[^>]*type=[\"']password[\"']",
+      "error": "Añade un input con type='password'."
     }
   },
   {
     "id": "14",
-    "title": "14. Checkbox",
-    "guide": "<h3>Casillas</h3><p><code>type='checkbox'</code>.</p><p><strong>Misión:</strong> Checkbox con label 'Acepto'.</p>",
+    "title": "14. Checkbox y Labels",
+    "guide": "<h3>Selección Binaria</h3><p>Para preguntas de 'Sí/No' usamos <code>type='checkbox'</code>. Es buena práctica asociarlo con un <code>&lt;label&gt;</code> para mejorar la accesibilidad.</p><pre>&lt;label&gt;\n  &lt;input type='checkbox'&gt; Acepto términos\n&lt;/label&gt;</pre><p><strong>Misión:</strong> Crea una casilla para aceptar condiciones.</p>",
     "initialCode": "<form>\n</form>",
     "validation": {
-      "regex": "type=[\"']checkbox[\"']",
-      "error": "Falta el checkbox."
+      "regex": "<label>[\\s\\S]*<input\\s+[^>]*type=[\"']checkbox[\"'][\\s\\S]*<\\/label>",
+      "error": "Pon un input checkbox dentro de una etiqueta label."
     }
   },
   {
     "id": "15",
-    "title": "15. Botones",
-    "guide": "<h3>Acción</h3><p><code>&lt;button&gt;Click&lt;/button&gt;</code>.</p><p><strong>Misión:</strong> Botón 'Enviar' tipo submit.</p>",
-    "initialCode": "<form>\n</form>",
+    "title": "15. Botón de Envío",
+    "guide": "<h3>Enviar Datos</h3><p>Para procesar el formulario necesitamos un botón. Dentro de un form, un <code>&lt;button&gt;</code> por defecto intenta enviar los datos.</p><pre>&lt;button type='submit'&gt;Registrarme&lt;/button&gt;</pre><p><strong>Misión:</strong> Añade el botón final al formulario.</p>",
+    "initialCode": "<form>\n  <input type='text' placeholder='Email'>\n  <!-- Botón aquí -->\n</form>",
     "validation": {
-      "regex": "<button\\s+type=[\"']submit[\"']>Enviar<\\/button>",
-      "error": "Botón submit 'Enviar'."
+      "regex": "<button\\s+type=[\"']submit[\"']>[\\s\\S]+<\\/button>",
+      "error": "Añade un botón con type='submit' y texto."
     }
   },
   {
     "id": "16",
-    "title": "16. Tablas Básicas",
-    "guide": "<h3>Estructura Tabla</h3><p><code>table</code>, <code>tr</code> (fila), <code>td</code> (celda).</p><p><strong>Misión:</strong> Tabla con 1 fila y 2 celdas.</p>",
+    "title": "16. Tablas: La Estructura",
+    "guide": "<h3>Datos Tabulares</h3><p>Las tablas son complejas. Estructura básica:<br>1. <code>&lt;table&gt;</code>: El contenedor.<br>2. <code>&lt;tr&gt;</code> (Table Row): Cada fila horizontal.<br>3. <code>&lt;td&gt;</code> (Table Data): Cada celda de datos.</p><p><strong>Misión:</strong> Crea una tabla con 2 filas y 2 celdas en cada fila.</p>",
     "initialCode": "",
     "validation": {
-      "regex": "<table>\\s*<tr>\\s*<td>[\\s\\S]*</td>\\s*<td>[\\s\\S]*</td>\\s*</tr>\\s*</table>",
-      "error": "Tabla con 1 tr y 2 td."
+      "regex": "<table>\\s*<tr>\\s*<td>.*<\\/td>\\s*<td>.*<\\/td>\\s*<\\/tr>\\s*<tr>\\s*<td>.*<\\/td>\\s*<td>.*<\\/td>\\s*<\\/tr>\\s*<\\/table>",
+      "error": "Debes crear una tabla con 2 filas (tr) y 2 celdas (td) en cada una."
     }
   },
   {
     "id": "17",
-    "title": "17. Encabezados Tabla",
-    "guide": "<h3>Table Head</h3><p>Usa <code>th</code> en lugar de <code>td</code> para títulos.</p>",
-    "initialCode": "<table>\n  <tr>\n    <!-- Cambia td por th -->\n    <td>Nombre</td>\n    <td>Edad</td>\n  </tr>\n</table>",
+    "title": "17. Encabezados de Tabla",
+    "guide": "<h3>Títulos de Columna</h3><p>La primera fila suele contener los títulos. Para esto usamos <code>&lt;th&gt;</code> (Table Header) en lugar de <code>td</code>. El navegador los pondrá en negrita y centrados automáticamente.</p><p><strong>Misión:</strong> Cambia los `td` de la primera fila por `th`.</p>",
+    "initialCode": "<table>\n  <tr>\n    <td>Producto</td>\n    <td>Precio</td>\n  </tr>\n  <tr>\n    <td>Manzana</td>\n    <td>1€</td>\n  </tr>\n</table>",
     "validation": {
-      "regex": "<th>Nombre</th>\\s*<th>Edad</th>",
-      "error": "Usa th para los títulos."
+      "regex": "<tr>\\s*<th>Producto<\\/th>\\s*<th>Precio<\\/th>\\s*<\\/tr>",
+      "error": "Usa <th> para Producto y Precio en la primera fila."
     }
   },
   {
     "id": "18",
-    "title": "18. Semántica Header",
-    "guide": "<h3>Header</h3><p>Cabecera de la web.</p><p><strong>Misión:</strong> Crea un header con un h1 dentro.</p>",
-    "initialCode": "<body></body>",
+    "title": "18. Semántica: Header",
+    "guide": "<h3>HTML5 Semántico</h3><p>Antiguamente todo eran divs. Ahora usamos etiquetas que describen el contenido. <code>&lt;header&gt;</code> se usa para la cabecera del sitio (logo, menú principal).</p><p><strong>Misión:</strong> Crea un header que contenga el título principal de la web.</p>",
+    "initialCode": "<body>\n  <!-- Tu header aquí -->\n</body>",
     "validation": {
-      "regex": "<header>\\s*<h1>[\\s\\S]*</h1>\\s*</header>",
-      "error": "Header con h1 dentro."
+      "regex": "<header>\\s*<h1>[\\s\\S]*<\\/h1>\\s*<\\/header>",
+      "error": "Crea un <header> y pon un <h1> dentro."
     }
   },
   {
     "id": "19",
-    "title": "19. Nav",
-    "guide": "<h3>Navegación</h3><p>Envuelve enlaces en <code>&lt;nav&gt;</code>.</p>",
-    "initialCode": "<header>\n  <a href='#'>Inicio</a>\n</header>",
+    "title": "19. Semántica: Nav",
+    "guide": "<h3>Zona de Navegación</h3><p>Para los menús de enlaces, usamos la etiqueta <code>&lt;nav&gt;</code>. Esto ayuda a los lectores de pantalla a saber que aquí están los links principales.</p><p><strong>Misión:</strong> Envuelve los enlaces en una etiqueta nav.</p>",
+    "initialCode": "<header>\n  <h1>Mi Web</h1>\n  <a href='#'>Inicio</a> | <a href='#'>Contacto</a>\n</header>",
     "validation": {
       "regex": "<nav>\\s*<a[\\s\\S]*<\\/nav>",
-      "error": "Envuelve el enlace en <nav>."
+      "error": "Mete los enlaces dentro de un <nav>."
     }
   },
   {
     "id": "20",
-    "title": "20. Footer",
-    "guide": "<h3>Pie de Página</h3><p><code>&lt;footer&gt;</code> para copyrights.</p>",
-    "initialCode": "<body></body>",
+    "title": "20. Semántica: Footer",
+    "guide": "<h3>Pie de Página</h3><p>Para la información legal, copyright y redes sociales al final de la página, usamos <code>&lt;footer&gt;</code>.</p><p><strong>Misión:</strong> Crea un footer que diga 'Copyright 2024'.</p>",
+    "initialCode": "<body>\n  <main>Contenido...</main>\n  \n</body>",
     "validation": {
-      "regex": "<footer>[\\s\\S]*<\\/footer>",
-      "error": "Añade un footer."
+      "regex": "<footer>\\s*Copyright 2024\\s*<\\/footer>",
+      "error": "Añade un <footer> con el texto 'Copyright 2024'."
     }
   },
   {
     "id": "21",
-    "title": "21. Script Tag",
-    "guide": "<h3>Lógica</h3><p><code>&lt;script&gt;</code> para JS.</p><p><strong>Misión:</strong> Console log 'Hola'.</p>",
-    "initialCode": "<body></body>",
+    "title": "21. Introducción a JS",
+    "guide": "<h3>El Cerebro de la Web</h3><p>HTML es estructura, CSS es estilo, JS es acción. Podemos escribir JS dentro de HTML usando la etiqueta <code>&lt;script&gt;</code>.</p><p><strong>Misión:</strong> Usa JS para mostrar un mensaje en la consola: <code>console.log('Hola');</code></p>",
+    "initialCode": "<body>\n  <h1>Prueba JS</h1>\n</body>",
     "validation": {
       "regex": "<script>\\s*console\\.log\\(['\"]Hola['\"]\\);?\\s*<\\/script>",
-      "error": "Console log 'Hola' en script."
+      "error": "Escribe un <script> que contenga console.log('Hola')."
     }
   },
   {
     "id": "22",
-    "title": "22. OnClick",
-    "guide": "<h3>Eventos</h3><p>Atributo <code>onclick</code>.</p><p><strong>Misión:</strong> Botón que alerta 'Click'.</p>",
-    "initialCode": "",
+    "title": "22. Eventos Inline",
+    "guide": "<h3>Reacción al Usuario</h3><p>Podemos ejecutar código cuando el usuario hace algo. El atributo <code>onclick</code> ejecuta JS al hacer clic.</p><pre>&lt;button onclick=\"alert('Hola')\"&gt;Saludo&lt;/button&gt;</pre><p><strong>Misión:</strong> Haz que el botón lance una alerta con el texto 'Click'.</p>",
+    "initialCode": "<button>Púlsame</button>",
     "validation": {
-      "regex": "onclick=[\"']alert\\(['\"]Click['\"]\\)[\"']",
-      "error": "onclick con alert('Click')."
+      "regex": "<button\\s+onclick=[\"']alert\\(['\"]Click['\"]\\)[\"']>",
+      "error": "Añade onclick=\"alert('Click')\" al botón."
     }
   },
   {
     "id": "23",
-    "title": "23. IDs únicos",
-    "guide": "<h3>Identificadores</h3><p><code>id='unico'</code>.</p><p><strong>Misión:</strong> Párrafo con id 'resultado'.</p>",
-    "initialCode": "",
+    "title": "23. Identificadores (ID)",
+    "guide": "<h3>Nombres Únicos</h3><p>El atributo <code>id</code> da un nombre único a un elemento. Es como su DNI. No puede haber dos elementos con el mismo ID en la página.</p><p><strong>Misión:</strong> Asigna el id 'mensaje-secreto' al párrafo.</p>",
+    "initialCode": "<p>Este texto es especial.</p>",
     "validation": {
-      "regex": "<p\\s+id=[\"']resultado[\"']>",
-      "error": "Párrafo con id 'resultado'."
+      "regex": "<p\\s+id=[\"']mensaje-secreto[\"']>",
+      "error": "Añade id='mensaje-secreto' al párrafo."
     }
   },
   {
     "id": "24",
-    "title": "24. Manipular Texto",
-    "guide": "<h3>JS DOM</h3><p><code>getElementById().innerText</code>.</p><p><strong>Misión:</strong> Cambia texto de id 'demo' a 'Hola'.</p>",
-    "initialCode": "<p id='demo'>Original</p>\n<script>\n  // Escribe aquí\n<\/script>",
+    "title": "24. Manipular el DOM",
+    "guide": "<h3>Magia con JS</h3><p>Con el ID, podemos buscar el elemento y cambiarlo usando JS: <code>document.getElementById('id').innerText = 'Nuevo'</code>.</p><p><strong>Misión:</strong> Cambia el texto del elemento 'demo' a 'Hackeado'.</p>",
+    "initialCode": "<h1 id='demo'>Texto Original</h1>\n<script>\n  // Tu código JS aquí\n</script>",
     "validation": {
-      "regex": "getElementById\\(['\"]demo['\"]\\)\\.innerText\\s*=\\s*['\"]Hola['\"]",
-      "error": "Cambia innerText a 'Hola'."
+      "regex": "document\\.getElementById\\(['\"]demo['\"]\\)\\.innerText\\s*=\\s*['\"]Hackeado['\"]",
+      "error": "Usa JS para cambiar el innerText a 'Hackeado'."
     }
   },
   {
     "id": "25",
-    "title": "25. Estilos Inline",
-    "guide": "<h3>Style JS</h3><p><code>.style.color = 'red'</code>.</p><p><strong>Misión:</strong> Pon el p id='demo' en rojo.</p>",
-    "initialCode": "<p id='demo'>Texto</p>\n<script>\n<\/script>",
+    "title": "25. Estilos desde JS",
+    "guide": "<h3>Pintando con Código</h3><p>También podemos cambiar el CSS. La propiedad <code>style</code> nos da acceso.</p><pre>elemento.style.color = 'blue';</pre><p><strong>Misión:</strong> Haz que el párrafo con id 'alerta' se ponga de color 'red'.</p>",
+    "initialCode": "<p id='alerta'>Cuidado!</p>\n<script>\n  let el = document.getElementById('alerta');\n  // Completa la línea\n</script>",
     "validation": {
-      "regex": "\\.style\\.color\\s*=\\s*['\"]red['\"]",
-      "error": "Cambia style.color a 'red'."
+      "regex": "el\\.style\\.color\\s*=\\s*['\"]red['\"]",
+      "error": "Establece el.style.color a 'red'."
     }
   },
   {
     "id": "26",
-    "title": "26. Clases",
-    "guide": "<h3>Class</h3><p>Para estilos CSS (simulado aquí).</p><p><strong>Misión:</strong> Div con clase 'card'.</p>",
+    "title": "26. Clases (Class)",
+    "guide": "<h3>Etiquetas de Grupo</h3><p>A diferencia de los IDs, las clases (<code>class</code>) se pueden repetir. Sirven para agrupar elementos y darles el mismo estilo.</p><p><strong>Misión:</strong> Crea dos botones y dales a ambos la clase 'btn-primary'.</p>",
     "initialCode": "",
     "validation": {
-      "regex": "class=[\"']card[\"']",
-      "error": "Div con class 'card'."
+      "regex": "<button\\s+class=[\"']btn-primary[\"'][\\s\\S]*<button\\s+class=[\"']btn-primary[\"']",
+      "error": "Crea dos botones, ambos con class='btn-primary'."
     }
   },
   {
     "id": "27",
-    "title": "27. Span",
-    "guide": "<h3>Span</h3><p>Contenedor de texto en línea.</p><p><strong>Misión:</strong> Colorea solo una palabra.</p>",
-    "initialCode": "<p>Hola <span style='color:blue'>Mundo</span></p>",
+    "title": "27. Span: Texto en línea",
+    "guide": "<h3>Selección Precisa</h3><p>El <code>&lt;div&gt;</code> es un bloque (salto de línea), pero el <code>&lt;span&gt;</code> es en línea. Se usa para aplicar estilo a una parte pequeña del texto.</p><p><strong>Misión:</strong> Envuelve la palabra 'importante' en un span.</p>",
+    "initialCode": "<p>Este es un texto muy importante para leer.</p>",
     "validation": {
-      "regex": "<span",
-      "error": "Usa span."
+      "regex": "muy <span[^>]*>importante<\\/span> para",
+      "error": "Usa <span> alrededor de la palabra 'importante'."
     }
   },
   {
     "id": "28",
     "title": "28. Comentarios",
-    "guide": "<h3>Invisible</h3><p><code>&lt;!-- --&gt;</code>.</p><p><strong>Misión:</strong> Escribe un comentario.</p>",
-    "initialCode": "",
+    "guide": "<h3>Notas Invisibles</h3><p>Los desarrolladores dejan notas en el código que el navegador ignora. En HTML se escriben entre <code>&lt;!--</code> y <code>--&gt;</code>.</p><p><strong>Misión:</strong> Deja un comentario que diga 'TODO: Arreglar esto'.</p>",
+    "initialCode": "<h1>Mi web</h1>\n",
     "validation": {
-      "regex": "<!--[\\s\\S]*-->",
-      "error": "Añade un comentario HTML."
+      "regex": "<!--\\s*TODO: Arreglar esto\\s*-->",
+      "error": "Escribe el comentario exacto: <!-- TODO: Arreglar esto -->"
     }
   },
   {
     "id": "29",
-    "title": "29. Br",
-    "guide": "<h3>Salto de Línea</h3><p><code>&lt;br&gt;</code>.</p>",
-    "initialCode": "Línea 1<br>Línea 2",
+    "title": "29. Salto de Línea (BR)",
+    "guide": "<h3>Rompiendo el flujo</h3><p>Normalmente el texto fluye hasta el final. Si necesitas forzar un salto de línea (como en un poema o una dirección), usa <code>&lt;br&gt;</code>. Es una etiqueta vacía.</p><p><strong>Misión:</strong> Escribe dos líneas de texto separadas por un br.</p>",
+    "initialCode": "Calle Falsa 123\nSpringfield",
     "validation": {
-      "regex": "<br>",
-      "error": "Usa br."
+      "regex": "Calle Falsa 123\\s*<br>\\s*Springfield",
+      "error": "Inserta un <br> entre las dos líneas de texto."
     }
   },
   {
     "id": "30",
-    "title": "30. Hr",
-    "guide": "<h3>Línea Horizontal</h3><p><code>&lt;hr&gt;</code>.</p>",
-    "initialCode": "",
+    "title": "30. Línea Horizontal (HR)",
+    "guide": "<h3>Separación Temática</h3><p>La etiqueta <code>&lt;hr&gt;</code> (Horizontal Rule) dibuja una línea divisoria en la pantalla. Es útil semánticamente para indicar un cambio de tema dentro de una sección.</p><p><strong>Misión:</strong> Crea un título, una línea horizontal debajo, y luego un párrafo.</p>",
+    "initialCode": "<h1>Capítulo 1</h1>\n<p>El comienzo de la historia.</p>",
     "validation": {
-      "regex": "<hr>",
-      "error": "Usa hr."
+      "regex": "<h1>[\\s\\S]*<\\/h1>\\s*<hr>\\s*<p>[\\s\\S]*<\\/p>",
+      "error": "La estructura debe ser: Título, luego <hr>, luego Párrafo."
     }
   }
 ]
