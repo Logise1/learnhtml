@@ -2,7 +2,7 @@
   {
     "id": "1",
     "title": "1.1 Estructura: El Nacimiento",
-    "guide": "<h3>Unidad 1: Los Cimientos</h3><p>Empezamos la primera unidad. Toda web necesita un esqueleto. Define el tipo de documento, la raíz, la cabecera y el cuerpo.</p><p><strong>Misión:</strong> Escribe <code>&lt;!DOCTYPE html&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code> y <code>&lt;body&gt;</code>.</p>",
+    "guide": "<h3>Unidad 1: Los Cimientos</h3><p>El HTML se construye con <strong>etiquetas (tags)</strong>. Son comandos encerrados en <code>&lt; &gt;</code>. Casi todas funcionan en parejas: una abre <code>&lt;etiqueta&gt;</code> y otra cierra con una barra <code>&lt;/etiqueta&gt;</code>. Todo el contenido va en medio.</p><p>Vamos a crear el esqueleto. Primero declara el documento con <code>&lt;!DOCTYPE html&gt;</code> (esta es especial y no se cierra). Luego crea la etiqueta raíz <code>html</code>, y dentro de ella coloca las etiquetas <code>head</code> y <code>body</code>.</p><p><strong>Misión:</strong> Escribe la estructura completa cerrando correctamente <code>html</code>, <code>head</code> y <code>body</code>.</p>",
     "initialCode": "",
     "validation": {
       "regex": "<!DOCTYPE\\s+html>\\s*<html[\\s\\S]*<head[\\s\\S]*<\\/head>\\s*<body[\\s\\S]*<\\/body>[\\s\\S]*<\\/html>",
@@ -12,10 +12,10 @@
   {
     "id": "2",
     "title": "1.2 Configuración: Meta y Título",
-    "guide": "<h3>Metadatos</h3><p>Dentro del <code>head</code>, configuramos la web. El <code>title</code> es lo que sale en la pestaña del navegador y el <code>meta charset='UTF-8'</code> permite usar tildes y ñ.</p><p><strong>Misión:</strong> Añade un título 'Mi Web' y el meta charset UTF-8 en el head.</p>",
+    "guide": "<h3>Metadatos</h3><p>Dentro del <code>head</code>, configuramos la web.</p><p>1. <strong>Título:</strong> Define el texto de la pestaña con <code>&lt;title&gt;Texto&lt;/title&gt;</code>.</p><p>2. <strong>Codificación:</strong> Para usar tildes y ñ, usa <code>&lt;meta charset='UTF-8'&gt;</code>. <strong>¡Ojo!</strong> La etiqueta <code>meta</code> es 'void' (vacía), lo que significa que <strong>NO</strong> tiene etiqueta de cierre (no escribas <code>&lt;/meta&gt;</code>).</p><p><strong>Misión:</strong> Añade un título 'Mi Web' y el meta charset UTF-8 en el head (el orden no importa).</p>",
     "initialCode": "<!DOCTYPE html>\n<html>\n  <head>\n  </head>\n  <body></body>\n</html>",
     "validation": {
-      "regex": "<head>[\\s\\S]*<meta\\s+charset=['\"]UTF-8['\"]\\s*\\/?>[\\s\\S]*<title>Mi Web<\\/title>[\\s\\S]*<\\/head>",
+      "regex": "<head>(?:[\\s\\S]*<meta\\s+charset=['\"]UTF-8['\"]\\s*\\/?>[\\s\\S]*<title>Mi Web<\\/title>|[\\s\\S]*<title>Mi Web<\\/title>[\\s\\S]*<meta\\s+charset=['\"]UTF-8['\"]\\s*\\/?>)[\\s\\S]*<\\/head>",
       "error": "Añade <meta charset='UTF-8'> y <title>Mi Web</title> dentro del head."
     }
   },
