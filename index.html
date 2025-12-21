@@ -428,6 +428,13 @@
         // --- INIT ---
         async function init() {
             lucide.createIcons();
+
+            // --- CHECK CHEAT FLAG ON LOAD ---
+            if (localStorage.getItem('cheat_detected') === 'true') {
+                localStorage.removeItem('cheat_detected');
+                alert("🚫 ¡ALERTA DE SEGURIDAD!\n\nSe ha detectado un intento de pegar código externo.\nSolo puedes copiar de la guía o de tu propio código.\n\nLa aplicación se ha reiniciado por seguridad.");
+            }
+
             try {
                 const response = await fetch('course.json');
                 if (!response.ok) throw new Error('Error cargando course.json');
@@ -468,7 +475,7 @@
                 // Si lo que pegan NO coincide con lo último que copiaron DENTRO de la app...
                 if (pastedData.trim() !== lastInternalCopy.trim()) {
                     e.preventDefault(); // Bloquear el pegado
-                    alert("🚫 ¡ALERTA DE SEGURIDAD!\n\nSe ha detectado un intento de pegar código externo.\nSolo puedes copiar de la guía o de tu propio código.\n\nLa aplicación se reiniciará por seguridad.");
+                    localStorage.setItem('cheat_detected', 'true'); // Guardar flag
                     location.reload(); // Reiniciar la página (castigo)
                 }
             });
