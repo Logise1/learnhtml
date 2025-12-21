@@ -435,7 +435,6 @@
                     userInfo.classList.remove('hidden');
                     userInfo.classList.add('flex');
                     loginBtn.classList.add('hidden');
-                    document.getElementById('user-email').textContent = user.email;
                     document.getElementById('user-avatar').textContent = user.email[0].toUpperCase();
                     await Promise.all([loadUserProgress(), initStreak()]);
                 } else {
