@@ -231,7 +231,6 @@
         <main class="flex-1 flex flex-col lg:flex-row h-full relative overflow-hidden">
             
             <!-- PANEL 1: GUÍA -->
-            <!-- Elimino overflow-hidden del panel principal para permitir scroll -->
             <section id="panel-guide" class="mobile-panel active lg:flex w-full lg:w-[350px] flex-col border-r border-slate-800/60 bg-[#0b1120] relative">
                 <header class="h-16 border-b border-slate-800/60 flex items-center px-5 justify-between bg-[#0f172a]/80 backdrop-blur-md shrink-0">
                     <button onclick="window.goHome()" class="text-slate-400 hover:text-white transition-colors flex items-center gap-2 group">
@@ -366,7 +365,7 @@
         let currentUser = null;
         let userProgressMap = {};
         let isLoginMode = true;
-        // let debounceTimer; // REMOVED: No more debounce for instant reset
+        let feedbackTimeout; // Variable para controlar el timer del feedback
 
         // --- DOM ELEMENTS ---
         const viewHome = document.getElementById('view-home');
@@ -701,18 +700,23 @@
         }
 
         function showFeedback(type, title, msg) {
-            feedbackArea.classList.remove('translate-y-4', 'opacity-0', 'pointer-events-none', 'border-transparent');
+            clearTimeout(feedbackTimeout);
+            // IMPORTANTE: Primero removemos clases conflictivas para limpiar el estado anterior
+            feedbackArea.className = "absolute bottom-6 left-4 right-4 p-4 rounded-xl border transform transition-all duration-500 z-50 shadow-2xl backdrop-blur-xl flex items-start gap-4"; // Base class reset
+            
             const iconContainer = document.getElementById('feedback-icon');
             const titleEl = document.getElementById('feedback-title');
             const msgEl = document.getElementById('feedback-msg');
             
             if (type === 'success') {
-                feedbackArea.className = "absolute bottom-6 left-4 right-4 p-4 rounded-xl border transform transition-all duration-500 z-50 shadow-2xl backdrop-blur-xl flex items-start gap-4 bg-emerald-900/80 border-emerald-500/30 text-emerald-50 opacity-100 translate-y-0";
+                // Añadimos estados de éxito
+                feedbackArea.classList.add('bg-emerald-900/80', 'border-emerald-500/30', 'text-emerald-50', 'opacity-100', 'translate-y-0');
                 iconContainer.innerHTML = `<div class="p-1 rounded-full bg-emerald-500/20 text-emerald-400"><i data-lucide="check" class="w-5 h-5"></i></div>`;
                 titleEl.className = "font-bold text-sm mb-0.5 text-emerald-300";
                 msgEl.className = "text-xs opacity-90 leading-relaxed text-emerald-100/80";
             } else {
-                feedbackArea.className = "absolute bottom-6 left-4 right-4 p-4 rounded-xl border transform transition-all duration-500 z-50 shadow-2xl backdrop-blur-xl flex items-start gap-4 bg-red-900/80 border-red-500/30 text-red-50 opacity-100 translate-y-0";
+                // Añadimos estados de error
+                feedbackArea.classList.add('bg-red-900/80', 'border-red-500/30', 'text-red-50', 'opacity-100', 'translate-y-0');
                 iconContainer.innerHTML = `<div class="p-1 rounded-full bg-red-500/20 text-red-400"><i data-lucide="x" class="w-5 h-5"></i></div>`;
                 titleEl.className = "font-bold text-sm mb-0.5 text-red-300";
                 msgEl.className = "text-xs opacity-90 leading-relaxed text-red-100/80";
@@ -720,10 +724,17 @@
             titleEl.textContent = title;
             msgEl.textContent = msg;
             lucide.createIcons();
-            setTimeout(() => hideFeedback(), 4000);
+            
+            // Set new hide timer
+            feedbackTimeout = setTimeout(() => hideFeedback(), 4000);
         }
 
-        function hideFeedback() { feedbackArea.classList.add('translate-y-4', 'opacity-0', 'pointer-events-none', 'border-transparent'); }
+        function hideFeedback() {
+            clearTimeout(feedbackTimeout);
+            // REINICIO TOTAL: Volvemos al estado base invisible
+            // Esto elimina 'bg-emerald...', 'opacity-100', etc. y fuerza el estado oculto.
+            feedbackArea.className = "absolute bottom-6 left-4 right-4 p-4 rounded-xl border border-transparent transform translate-y-4 opacity-0 transition-all duration-500 z-50 shadow-2xl backdrop-blur-xl flex items-start gap-4 pointer-events-none";
+        }
 
         window.switchTab = (targetId) => {
             document.querySelectorAll('.mobile-panel').forEach(p => p.classList.remove('active'));
