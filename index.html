@@ -50,13 +50,48 @@
     <style>
         body { font-family: 'Inter', sans-serif; overflow: hidden; background-color: #020617; } /* Slate 950 base */
         
-        /* Editor Styles Overrides for Alignment */
-        #code-editor, #highlighting-pre {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.875rem; /* text-sm */
-            line-height: 1.5rem; /* leading-7 */
-            letter-spacing: 0px;
-            tab-size: 2;
+        /* --- EDITOR ALIGNMENT FIXES (CRITICAL) --- */
+        .editor-layer {
+            font-family: 'Fira Code', monospace !important;
+            font-size: 14px !important;
+            line-height: 24px !important;
+            letter-spacing: 0px !important;
+            tab-size: 2 !important;
+            padding: 24px !important;
+            margin: 0 !important;
+            border: none !important;
+            box-sizing: border-box !important;
+            white-space: pre !important; /* Evita wrapping diferente */
+            overflow-wrap: normal !important;
+            overflow: auto !important; /* Scrollbars iguales */
+        }
+
+        #highlighting-pre {
+            z-index: 0;
+            background-color: #0f172a !important; /* Match bg */
+            pointer-events: none; /* Clicks go through to textarea */
+        }
+        
+        #highlighting-pre code {
+            font-family: inherit !important;
+            font-size: inherit !important;
+            line-height: inherit !important;
+            padding: 0 !important; /* Prism adds padding sometimes, remove it */
+            margin: 0 !important;
+            white-space: pre !important;
+        }
+
+        #code-editor {
+            z-index: 1;
+            color: transparent !important;
+            background: transparent !important;
+            caret-color: #fff; /* White cursor */
+            resize: none;
+        }
+
+        /* Ocultar scrollbar del pre para que no se doble */
+        #highlighting-pre::-webkit-scrollbar {
+            display: none; 
         }
         
         /* Glassmorphism Utilities */
@@ -74,9 +109,9 @@
         }
         
         /* Scrollbars Custom */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #475569; }
         
         @media (max-width: 1024px) {
@@ -84,7 +119,7 @@
             .mobile-panel.active { display: flex; }
         }
 
-        /* Typography improvements for the Guide */
+        /* Typography improvements */
         .prose-custom h3 { 
             background: linear-gradient(to right, #818cf8, #c084fc); 
             -webkit-background-clip: text; 
@@ -98,24 +133,10 @@
         .prose-custom p { color: #94a3b8 !important; margin-bottom: 1.25em !important; line-height: 1.7 !important; }
         .prose-custom strong { color: #f1f5f9 !important; font-weight: 600 !important; }
         .prose-custom ul { list-style-type: none !important; padding-left: 0 !important; margin-bottom: 1.5em !important; }
-        .prose-custom li { 
-            position: relative; 
-            padding-left: 1.5em; 
-            margin-bottom: 0.5em !important; 
-            color: #cbd5e1;
-        }
-        .prose-custom li::before {
-            content: "•";
-            position: absolute;
-            left: 0.25em;
-            color: #6366f1;
-            font-weight: bold;
-        }
+        .prose-custom li { position: relative; padding-left: 1.5em; margin-bottom: 0.5em !important; color: #cbd5e1; }
+        .prose-custom li::before { content: "•"; position: absolute; left: 0.25em; color: #6366f1; font-weight: bold; }
         
-        .prose-custom pre, .prose-custom code { 
-            /* Prism overrides handled by theme usually, but ensuring consistency */
-            font-family: 'Fira Code', monospace;
-        }
+        .prose-custom pre, .prose-custom code { font-family: 'Fira Code', monospace; }
         
         /* Loading */
         #loading-overlay { display: flex; }
@@ -276,7 +297,7 @@
                 </div>
             </section>
 
-            <!-- PANEL 2: EDITOR CON SYNTAX HIGHLIGHTING -->
+            <!-- PANEL 2: EDITOR CON SYNTAX HIGHLIGHTING (ALIGNED) -->
             <section id="panel-editor" class="mobile-panel lg:flex w-full lg:flex-1 flex-col border-r border-slate-800/60 bg-[#0f172a] relative">
                 <header class="h-16 border-b border-slate-800/60 flex items-center px-6 justify-between bg-[#0f172a] text-slate-400 shrink-0 z-20 relative">
                     <div class="flex items-center gap-3">
@@ -296,20 +317,20 @@
                 <div class="flex-1 relative group bg-[#0f172a]">
                     <!-- Editor Wrapper for Overlay -->
                     <div class="absolute inset-0 flex">
-                        <!-- Line Numbers (Static for now, simpler) -->
-                        <div class="hidden sm:block w-14 bg-[#0f172a] border-r border-slate-800/40 text-slate-600 text-xs font-mono text-right py-6 pr-4 select-none leading-6 opacity-50 z-10 h-full">
+                        <!-- Line Numbers (Static for now) -->
+                        <div class="hidden sm:block w-14 bg-[#0f172a] border-r border-slate-800/40 text-slate-600 text-xs font-mono text-right py-6 pr-4 select-none leading-[24px] opacity-50 z-10 h-full pt-[24px]">
                             1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20
                         </div>
                         
                         <!-- Main Overlay Container -->
                         <div class="relative flex-1 h-full overflow-hidden" id="editor-container">
                             <!-- Highlighting Layer (Bottom) -->
-                            <pre id="highlighting-pre" aria-hidden="true" class="absolute inset-0 m-0 p-6 pointer-events-none overflow-auto custom-scroll text-sm font-mono z-0 bg-[#0f172a]"><code id="highlighting-code" class="language-html"></code></pre>
+                            <pre id="highlighting-pre" aria-hidden="true" class="absolute inset-0 m-0 editor-layer"><code id="highlighting-code" class="language-html"></code></pre>
                             
                             <!-- Input Layer (Top) -->
                             <textarea 
                                 id="code-editor" 
-                                class="absolute inset-0 w-full h-full p-6 bg-transparent text-transparent caret-white resize-none border-none focus:outline-none custom-scroll overflow-auto z-10 text-sm font-mono" 
+                                class="absolute inset-0 w-full h-full editor-layer" 
                                 spellcheck="false"
                                 placeholder="// Escribe tu código HTML aquí..."
                             ></textarea>
