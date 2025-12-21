@@ -72,7 +72,7 @@
   {
     "id": "8",
     "title": "2.1 Multimedia: Enlaces",
-    "guide": "<h3>Unidad 2: Multimedia</h3><p>Conecta páginas con <code>&lt;a&gt;</code>. El atributo <code>href</code> es el destino.</p><p><strong>Misión:</strong> Enlace a 'https://google.com' con texto 'Buscar'.</p>",
+    "guide": "<h3>Unidad 2: Multimedia</h3><p>Las etiquetas pueden tener <strong>atributos</strong>, que son configuraciones extra que se ponen <em>dentro</em> de la etiqueta de apertura. Siguen el formato <code>nombre=\"valor\"</code>.</p><p>Para hacer un enlace usamos la etiqueta <code>&lt;a&gt;</code>. Esta etiqueta necesita el atributo <code>href</code> para saber a dónde ir.</p><pre>&lt;a href=\"https://sitio.com\"&gt;Texto&lt;/a&gt;</pre><p><strong>Misión:</strong> Crea un enlace a 'https://google.com' con el texto visible 'Buscar'.</p>",
     "initialCode": "",
     "validation": {
       "regex": "<a\\s+href=['\"]https:\\/\\/google\\.com['\"][^>]*>Buscar<\\/a>",
