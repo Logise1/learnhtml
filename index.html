@@ -231,8 +231,8 @@
         <main class="flex-1 flex flex-col lg:flex-row h-full relative overflow-hidden">
             
             <!-- PANEL 1: GUÍA -->
-            <!-- FIX: Añadido 'overflow-hidden' para que el toast no sobresalga y cree scroll al esconderse -->
-            <section id="panel-guide" class="mobile-panel active lg:flex w-full lg:w-[350px] flex-col border-r border-slate-800/60 bg-[#0b1120] relative overflow-hidden">
+            <!-- Elimino overflow-hidden del panel principal para permitir scroll -->
+            <section id="panel-guide" class="mobile-panel active lg:flex w-full lg:w-[350px] flex-col border-r border-slate-800/60 bg-[#0b1120] relative">
                 <header class="h-16 border-b border-slate-800/60 flex items-center px-5 justify-between bg-[#0f172a]/80 backdrop-blur-md shrink-0">
                     <button onclick="window.goHome()" class="text-slate-400 hover:text-white transition-colors flex items-center gap-2 group">
                         <div class="p-1.5 rounded-lg bg-slate-800 group-hover:bg-slate-700 transition">
@@ -259,8 +259,9 @@
                     </div>
                 </div>
 
-                <!-- Feedback Toast (Movido fuera del overflow para que flote siempre abajo) -->
-                <div id="feedback-area" class="absolute bottom-6 left-4 right-4 p-4 rounded-xl border transform translate-y-[150%] transition-all duration-500 z-50 shadow-2xl backdrop-blur-xl flex items-start gap-4 pointer-events-none">
+                <!-- Feedback Toast (Cambio de estrategia: fade + small transform en lugar de desplazamiento grande) -->
+                <!-- Agregado border-transparent al inicio para evitar el borde blanco -->
+                <div id="feedback-area" class="absolute bottom-6 left-4 right-4 p-4 rounded-xl border border-transparent transform translate-y-4 opacity-0 transition-all duration-500 z-50 shadow-2xl backdrop-blur-xl flex items-start gap-4 pointer-events-none">
                     <div id="feedback-icon" class="mt-0.5"></div>
                     <div>
                         <h4 id="feedback-title" class="font-bold text-sm mb-0.5"></h4>
@@ -700,18 +701,18 @@
         }
 
         function showFeedback(type, title, msg) {
-            feedbackArea.classList.remove('translate-y-[150%]');
+            feedbackArea.classList.remove('translate-y-4', 'opacity-0', 'pointer-events-none', 'border-transparent');
             const iconContainer = document.getElementById('feedback-icon');
             const titleEl = document.getElementById('feedback-title');
             const msgEl = document.getElementById('feedback-msg');
             
             if (type === 'success') {
-                feedbackArea.className = "absolute bottom-6 left-4 right-4 p-4 rounded-xl border transform transition-all duration-500 z-50 shadow-2xl backdrop-blur-xl flex items-start gap-4 bg-emerald-900/80 border-emerald-500/30 text-emerald-50";
+                feedbackArea.className = "absolute bottom-6 left-4 right-4 p-4 rounded-xl border transform transition-all duration-500 z-50 shadow-2xl backdrop-blur-xl flex items-start gap-4 bg-emerald-900/80 border-emerald-500/30 text-emerald-50 opacity-100 translate-y-0";
                 iconContainer.innerHTML = `<div class="p-1 rounded-full bg-emerald-500/20 text-emerald-400"><i data-lucide="check" class="w-5 h-5"></i></div>`;
                 titleEl.className = "font-bold text-sm mb-0.5 text-emerald-300";
                 msgEl.className = "text-xs opacity-90 leading-relaxed text-emerald-100/80";
             } else {
-                feedbackArea.className = "absolute bottom-6 left-4 right-4 p-4 rounded-xl border transform transition-all duration-500 z-50 shadow-2xl backdrop-blur-xl flex items-start gap-4 bg-red-900/80 border-red-500/30 text-red-50";
+                feedbackArea.className = "absolute bottom-6 left-4 right-4 p-4 rounded-xl border transform transition-all duration-500 z-50 shadow-2xl backdrop-blur-xl flex items-start gap-4 bg-red-900/80 border-red-500/30 text-red-50 opacity-100 translate-y-0";
                 iconContainer.innerHTML = `<div class="p-1 rounded-full bg-red-500/20 text-red-400"><i data-lucide="x" class="w-5 h-5"></i></div>`;
                 titleEl.className = "font-bold text-sm mb-0.5 text-red-300";
                 msgEl.className = "text-xs opacity-90 leading-relaxed text-red-100/80";
@@ -722,7 +723,7 @@
             setTimeout(() => hideFeedback(), 4000);
         }
 
-        function hideFeedback() { feedbackArea.classList.add('translate-y-[150%]'); }
+        function hideFeedback() { feedbackArea.classList.add('translate-y-4', 'opacity-0', 'pointer-events-none', 'border-transparent'); }
 
         window.switchTab = (targetId) => {
             document.querySelectorAll('.mobile-panel').forEach(p => p.classList.remove('active'));
