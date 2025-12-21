@@ -11,29 +11,58 @@
             theme: {
                 extend: {
                     colors: {
-                        editor: { bg: '#1e1e1e', fg: '#d4d4d4' },
-                        brand: { 500: '#3b82f6', 600: '#2563eb' },
-                        success: { 500: '#22c55e', 600: '#16a34a' }
+                        editor: { bg: '#0f172a', fg: '#e2e8f0' }, // Slate 900 / 200
+                        brand: { 500: '#6366f1', 600: '#4f46e5' }, // Indigo modern
                     },
                     fontFamily: {
                         mono: ['"Fira Code"', 'monospace'],
                         sans: ['"Inter"', 'sans-serif']
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
                     }
                 }
             }
         }
     </script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Inter', sans-serif; overflow: hidden; }
+        body { font-family: 'Inter', sans-serif; overflow: hidden; background-color: #020617; } /* Slate 950 base */
         textarea { font-family: 'Fira Code', monospace; tab-size: 2; }
         
-        /* Scrollbars */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-hover:hover {
+            background: rgba(30, 41, 59, 0.7);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Scrollbars Custom */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #475569; }
         
         @media (max-width: 1024px) {
@@ -41,37 +70,46 @@
             .mobile-panel.active { display: flex; }
         }
 
-        @keyframes bounce-sm {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-2px); }
+        /* Typography improvements for the Guide */
+        .prose-custom h3 { 
+            background: linear-gradient(to right, #818cf8, #c084fc); 
+            -webkit-background-clip: text; 
+            color: transparent; 
+            font-size: 1.25rem !important; 
+            margin-top: 2em !important; 
+            margin-bottom: 0.75em !important; 
+            font-weight: 700 !important; 
+            letter-spacing: -0.02em;
         }
-        .animate-bounce-sm { animation: bounce-sm 1s infinite; }
+        .prose-custom p { color: #94a3b8 !important; margin-bottom: 1.25em !important; line-height: 1.7 !important; }
+        .prose-custom strong { color: #f1f5f9 !important; font-weight: 600 !important; }
+        .prose-custom ul { list-style-type: none !important; padding-left: 0 !important; margin-bottom: 1.5em !important; }
+        .prose-custom li { 
+            position: relative; 
+            padding-left: 1.5em; 
+            margin-bottom: 0.5em !important; 
+            color: #cbd5e1;
+        }
+        .prose-custom li::before {
+            content: "•";
+            position: absolute;
+            left: 0.25em;
+            color: #6366f1;
+            font-weight: bold;
+        }
         
-        /* Modal Overlay */
-        .modal-overlay { background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); }
-
-        /* Estilos específicos para la Guía en Modo Oscuro */
-        .prose-custom h3 { color: #60a5fa !important; font-size: 1.25rem !important; margin-top: 1.5em !important; margin-bottom: 0.5em !important; font-weight: 700 !important; }
-        .prose-custom p { color: #cbd5e1 !important; margin-bottom: 1em !important; line-height: 1.6 !important; }
-        .prose-custom strong { color: #f8fafc !important; font-weight: 700 !important; }
-        .prose-custom ul { list-style-type: disc !important; padding-left: 1.5em !important; color: #cbd5e1 !important; margin-bottom: 1em !important; }
-        .prose-custom li { margin-bottom: 0.5em !important; }
-        
-        /* Corrección para los bloques de código en la guía */
         .prose-custom pre, .prose-custom code { 
             background-color: #0f172a !important; 
-            color: #a5b4fc !important; 
-            border-radius: 0.375rem;
+            color: #e2e8f0 !important; 
+            border-radius: 0.5rem;
             font-family: 'Fira Code', monospace;
+            border: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.9em;
         }
-        .prose-custom pre { padding: 1rem !important; border: 1px solid #1e293b; overflow-x: auto; }
-        .prose-custom p > code { padding: 0.2em 0.4em; font-size: 0.9em; }
+        .prose-custom pre { padding: 1.25rem !important; overflow-x: auto; box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); }
+        .prose-custom p > code { padding: 0.2em 0.5em; background: rgba(99, 102, 241, 0.1) !important; color: #818cf8 !important; border: 1px solid rgba(99, 102, 241, 0.2); }
 
-        /* Animación de entrada */
-        .fade-in { animation: fadeIn 0.3s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        /* Loading Overlay */
+        /* Loading */
         #loading-overlay { display: flex; }
         #loading-overlay.hidden { display: none; }
         
@@ -79,195 +117,222 @@
         .hidden-auth { display: none !important; }
     </style>
 </head>
-<body class="h-screen bg-slate-950 text-slate-300 flex flex-col">
+<body class="h-screen flex flex-col relative text-slate-300">
+
+    <!-- Ambient Background Effects -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-purple-500/20 rounded-full blur-[100px] animate-blob"></div>
+        <div class="absolute top-[20%] right-[-10%] w-96 h-96 bg-blue-500/20 rounded-full blur-[100px] animate-blob" style="animation-delay: 2s"></div>
+        <div class="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-indigo-500/20 rounded-full blur-[100px] animate-blob" style="animation-delay: 4s"></div>
+        <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150"></div>
+    </div>
 
     <!-- Loading Screen -->
-    <div id="loading-overlay" class="fixed inset-0 z-50 bg-slate-950 flex flex-col items-center justify-center">
-        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mb-4"></div>
-        <p class="text-blue-400 font-mono text-sm animate-pulse">Cargando curso...</p>
+    <div id="loading-overlay" class="fixed inset-0 z-50 bg-[#020617] flex flex-col items-center justify-center">
+        <div class="relative">
+            <div class="w-16 h-16 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <i data-lucide="code-2" class="w-6 h-6 text-indigo-400"></i>
+            </div>
+        </div>
+        <p class="text-slate-500 font-medium text-sm mt-4 tracking-wider uppercase animate-pulse">Cargando experiencia...</p>
     </div>
 
     <!-- AUTH MODAL -->
-    <div id="auth-modal" class="fixed inset-0 z-50 modal-overlay hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-700 rounded-xl w-full max-w-md p-6 shadow-2xl relative">
-            <button onclick="window.toggleAuthModal(false)" class="absolute top-4 right-4 text-slate-500 hover:text-white">
-                <i data-lucide="x" class="w-5 h-5"></i>
+    <div id="auth-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="glass bg-[#0f172a]/90 rounded-2xl w-full max-w-md p-8 shadow-2xl relative overflow-hidden transform transition-all scale-100">
+            <!-- Decorative gradient inside modal -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+            
+            <button onclick="window.toggleAuthModal(false)" class="absolute top-4 right-4 text-slate-400 hover:text-white transition">
+                <i data-lucide="x" class="w-6 h-6"></i>
             </button>
             
-            <h2 id="auth-title" class="text-2xl font-bold text-white mb-2">Iniciar Sesión</h2>
-            <p class="text-slate-400 text-sm mb-6">Guarda tu progreso en la nube y accede desde cualquier lugar.</p>
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 mb-4 border border-indigo-500/20">
+                    <i data-lucide="user-circle" class="w-6 h-6"></i>
+                </div>
+                <h2 id="auth-title" class="text-2xl font-bold text-white tracking-tight">Bienvenido</h2>
+                <p class="text-slate-400 text-sm mt-2">Sincroniza tu progreso en la nube.</p>
+            </div>
             
             <form id="auth-form" onsubmit="window.handleAuth(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-mono text-slate-500 mb-1">Email</label>
-                    <input type="email" id="auth-email" required class="w-full bg-slate-950 border border-slate-800 rounded p-2 text-white focus:border-blue-500 focus:outline-none transition">
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold text-slate-500 uppercase tracking-wider ml-1">Email</label>
+                    <input type="email" id="auth-email" required class="w-full bg-slate-950/50 border border-slate-700/50 rounded-lg px-4 py-3 text-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/50 focus:outline-none transition placeholder-slate-600" placeholder="tu@email.com">
                 </div>
-                <div>
-                    <label class="block text-xs font-mono text-slate-500 mb-1">Contraseña</label>
-                    <input type="password" id="auth-password" required minlength="6" class="w-full bg-slate-950 border border-slate-800 rounded p-2 text-white focus:border-blue-500 focus:outline-none transition">
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold text-slate-500 uppercase tracking-wider ml-1">Contraseña</label>
+                    <input type="password" id="auth-password" required minlength="6" class="w-full bg-slate-950/50 border border-slate-700/50 rounded-lg px-4 py-3 text-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/50 focus:outline-none transition placeholder-slate-600" placeholder="••••••••">
                 </div>
                 
-                <p id="auth-error" class="text-red-400 text-xs hidden"></p>
+                <p id="auth-error" class="text-red-400 text-xs bg-red-900/20 p-2 rounded border border-red-900/50 hidden flex items-center gap-2">
+                    <i data-lucide="alert-circle" class="w-3 h-3"></i> <span>Error</span>
+                </p>
 
-                <button type="submit" id="auth-submit-btn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded transition flex justify-center items-center gap-2">
+                <button type="submit" id="auth-submit-btn" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold py-3.5 rounded-lg transition shadow-lg shadow-indigo-900/20 flex justify-center items-center gap-2 transform active:scale-[0.98]">
                     <span>Entrar</span>
                 </button>
             </form>
 
-            <div class="mt-4 text-center text-sm text-slate-500">
+            <div class="mt-6 text-center text-sm text-slate-500 border-t border-slate-800/50 pt-6">
                 <span id="auth-switch-text">¿No tienes cuenta?</span>
-                <button onclick="window.toggleAuthMode()" class="text-blue-400 hover:text-blue-300 font-medium ml-1 underline" id="auth-switch-btn">Regístrate</button>
+                <button onclick="window.toggleAuthMode()" class="text-indigo-400 hover:text-indigo-300 font-medium ml-1 transition hover:underline" id="auth-switch-btn">Regístrate gratis</button>
             </div>
         </div>
     </div>
 
-    <!-- VISTA 1: HOME / LISTA DE LECCIONES (Visible al inicio) -->
-    <div id="view-home" class="flex-1 overflow-y-auto flex flex-col items-center p-6 md:p-12 relative">
+    <!-- VISTA 1: HOME (Mejorada) -->
+    <div id="view-home" class="flex-1 overflow-y-auto flex flex-col items-center p-6 md:p-12 relative z-10 scroll-smooth">
         
-        <!-- User Bar (Top Right) -->
-        <div class="absolute top-6 right-6 flex items-center gap-4 z-10">
-            <div id="user-info" class="hidden items-center gap-3 bg-slate-900/80 p-2 pr-4 rounded-full border border-slate-800 backdrop-blur">
-                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-xs" id="user-avatar">U</div>
-                <span class="text-sm text-slate-300 hidden md:inline" id="user-email">usuario@email.com</span>
-                <button onclick="window.doLogout()" class="text-slate-500 hover:text-red-400 ml-2" title="Cerrar Sesión">
-                    <i data-lucide="log-out" class="w-4 h-4"></i>
+        <!-- Navbar Flotante -->
+        <div class="w-full max-w-6xl flex justify-end mb-8">
+             <div class="glass rounded-full p-1.5 pl-4 pr-1.5 flex items-center gap-4 shadow-xl">
+                <div id="user-info" class="hidden items-center gap-3">
+                    <div class="flex flex-col items-end leading-tight">
+                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Conectado como</span>
+                        <span class="text-xs text-slate-300 font-medium truncate max-w-[150px]" id="user-email">...</span>
+                    </div>
+                    <div class="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-indigo-500/30" id="user-avatar">U</div>
+                    <div class="h-6 w-px bg-slate-700/50 mx-1"></div>
+                    <button onclick="window.doLogout()" class="w-9 h-9 rounded-full hover:bg-red-500/10 hover:text-red-400 text-slate-400 transition flex items-center justify-center" title="Cerrar Sesión">
+                        <i data-lucide="log-out" class="w-4 h-4"></i>
+                    </button>
+                </div>
+                <button id="login-btn" onclick="window.toggleAuthModal(true)" class="bg-slate-800 hover:bg-slate-700 text-white px-5 py-2 rounded-full text-sm font-semibold transition flex items-center gap-2 border border-slate-700">
+                    <span>Acceder</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
                 </button>
             </div>
-            <button id="login-btn" onclick="window.toggleAuthModal(true)" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-sm font-bold border border-slate-700 transition flex items-center gap-2">
-                <i data-lucide="log-in" class="w-4 h-4"></i> Entrar
-            </button>
         </div>
 
-        <div class="max-w-4xl w-full mt-8">
-            <header class="text-center mb-12 fade-in">
-                <div class="inline-block p-4 bg-blue-600/20 rounded-2xl mb-4 border border-blue-500/30">
-                    <i data-lucide="code-2" class="w-12 h-12 text-blue-500"></i>
+        <div class="max-w-5xl w-full">
+            <header class="text-center mb-16 animate-fade-in-up">
+                <div class="inline-flex p-3 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 mb-6 backdrop-blur shadow-[0_0_30px_-10px_rgba(99,102,241,0.3)]">
+                    <i data-lucide="sparkles" class="w-8 h-8 text-indigo-400"></i>
                 </div>
-                <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">HTML Master</h1>
-                <p class="text-slate-400 text-lg md:text-xl">Curso completo de 0 a Experto</p>
-                
-                <div class="mt-8 flex justify-center gap-4 text-sm text-slate-500">
-                    <div class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i> Práctica Real</div>
-                    <div class="flex items-center gap-2"><i data-lucide="lock" class="w-4 h-4 text-slate-500"></i> Niveles Progresivos</div>
-                    <div class="flex items-center gap-2"><i data-lucide="cloud" class="w-4 h-4 text-blue-500"></i> Progreso en Nube</div>
-                </div>
+                <h1 class="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-200 to-indigo-400 mb-6 tracking-tight drop-shadow-sm">
+                    HTML Master
+                </h1>
+                <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
+                    Domina el lenguaje de la web. <span class="text-slate-200 font-normal">Aprende haciendo</span> con nuestro editor interactivo inteligente.
+                </p>
             </header>
 
-            <!-- Grid de Lecciones (Ahora por Unidades) -->
-            <div id="home-lesson-grid" class="flex flex-col gap-12 fade-in pb-20">
-                <!-- Se llena con JS -->
+            <!-- Grid de Lecciones -->
+            <div id="home-lesson-grid" class="flex flex-col gap-12 pb-24">
+                <!-- Inyectado por JS -->
             </div>
-            
         </div>
     </div>
 
-    <!-- VISTA 2: WORKSPACE (Visible al entrar a una lección) -->
-    <div id="view-workspace" class="hidden flex-1 flex flex-col h-full overflow-hidden">
+    <!-- VISTA 2: WORKSPACE (Mejorada) -->
+    <div id="view-workspace" class="hidden flex-1 flex flex-col h-full overflow-hidden relative z-10 bg-[#020617]">
         
-        <!-- AREA PRINCIPAL (Sin Sidebar) -->
         <main class="flex-1 flex flex-col lg:flex-row h-full relative overflow-hidden">
             
-            <!-- PANEL 1: GUÍA (MODO OSCURO) -->
-            <section id="panel-guide" class="mobile-panel active lg:flex w-full lg:w-1/3 flex-col border-r border-slate-700 bg-slate-900">
-                <header class="h-14 border-b border-slate-800 flex items-center px-4 justify-between bg-slate-950 shrink-0">
-                    <div class="flex items-center gap-3">
-                        <button onclick="window.goHome()" class="text-slate-400 hover:text-white transition p-1.5 hover:bg-slate-800 rounded flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
-                            <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                            <span class="hidden sm:inline">Menú</span>
-                        </button>
-                    </div>
+            <!-- PANEL 1: GUÍA -->
+            <section id="panel-guide" class="mobile-panel active lg:flex w-full lg:w-[350px] flex-col border-r border-slate-800/60 bg-[#0b1120]">
+                <header class="h-16 border-b border-slate-800/60 flex items-center px-5 justify-between bg-[#0f172a]/80 backdrop-blur-md shrink-0">
+                    <button onclick="window.goHome()" class="text-slate-400 hover:text-white transition-colors flex items-center gap-2 group">
+                        <div class="p-1.5 rounded-lg bg-slate-800 group-hover:bg-slate-700 transition">
+                            <i data-lucide="layout-grid" class="w-4 h-4"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-wider">Menú</span>
+                    </button>
                     
-                    <div class="flex gap-2">
-                        <button onclick="window.prevLesson()" class="p-1.5 hover:bg-slate-800 rounded text-slate-400 disabled:opacity-30 transition" id="btn-prev" title="Anterior">
-                            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                    <div class="flex items-center gap-1 bg-slate-900 rounded-lg p-1 border border-slate-800">
+                        <button onclick="window.prevLesson()" class="w-8 h-8 flex items-center justify-center rounded hover:bg-slate-800 text-slate-400 hover:text-white disabled:opacity-30 transition" id="btn-prev">
+                            <i data-lucide="chevron-left" class="w-4 h-4"></i>
                         </button>
-                        <div class="h-8 w-px bg-slate-800 mx-1"></div>
-                        <button onclick="window.checkAndNext()" id="btn-next" class="px-4 py-1.5 bg-slate-800 text-slate-400 rounded text-xs font-bold flex items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-wider">
-                            <span>Siguiente</span>
-                            <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                        <div class="w-px h-4 bg-slate-800"></div>
+                        <button onclick="window.checkAndNext()" id="btn-next" class="px-3 h-8 flex items-center gap-2 rounded hover:bg-slate-800 text-slate-400 hover:text-white disabled:opacity-50 transition text-xs font-bold uppercase tracking-wide">
+                            <span>Sig</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4"></i>
                         </button>
                     </div>
                 </header>
                 
-                <div class="flex-1 overflow-y-auto relative bg-slate-900">
+                <div class="flex-1 overflow-y-auto relative custom-scroll">
                     <div id="guide-content" class="p-8 prose-custom max-w-none pb-32">
-                        <!-- Contenido inyectado -->
+                        <!-- Content -->
                     </div>
                     
-                    <!-- Feedback Flotante -->
-                    <div id="feedback-area" class="absolute bottom-0 left-0 right-0 p-4 bg-slate-900/95 backdrop-blur border-t border-slate-700 transform translate-y-full transition-transform duration-300 z-10 shadow-[0_-4px_20px_-5px_rgba(0,0,0,0.5)]">
-                        <div class="flex items-start gap-3">
-                            <div id="feedback-icon" class="p-2 rounded-full flex-shrink-0"></div>
-                            <div class="flex-1">
-                                <h4 id="feedback-title" class="font-bold text-sm"></h4>
-                                <p id="feedback-msg" class="text-xs mt-1"></p>
-                            </div>
+                    <!-- Feedback Toast -->
+                    <div id="feedback-area" class="absolute bottom-6 left-4 right-4 p-4 rounded-xl border transform translate-y-[150%] transition-all duration-500 z-20 shadow-2xl backdrop-blur-xl flex items-start gap-4">
+                        <div id="feedback-icon" class="mt-0.5"></div>
+                        <div>
+                            <h4 id="feedback-title" class="font-bold text-sm mb-0.5"></h4>
+                            <p id="feedback-msg" class="text-xs opacity-90 leading-relaxed"></p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- PANEL 2: EDITOR (OSCURO) -->
-            <section id="panel-editor" class="mobile-panel lg:flex w-full lg:w-1/3 flex-col border-r border-slate-700 bg-[#1e1e1e]">
-                <header class="h-14 border-b border-white/5 flex items-center px-4 justify-between bg-[#1e1e1e] text-slate-400 shrink-0">
-                    <span class="text-xs font-mono flex items-center gap-2 text-slate-500">
-                        <i data-lucide="file-code" class="w-4 h-4 text-blue-500"></i> index.html
-                    </span>
+            <!-- PANEL 2: EDITOR -->
+            <section id="panel-editor" class="mobile-panel lg:flex w-full lg:flex-1 flex-col border-r border-slate-800/60 bg-[#0f172a] relative">
+                <header class="h-16 border-b border-slate-800/60 flex items-center px-6 justify-between bg-[#0f172a] text-slate-400 shrink-0">
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="file-code" class="w-5 h-5 text-indigo-500"></i>
+                        <span class="text-sm font-mono text-slate-300">index.html</span>
+                    </div>
                     <div class="flex gap-2">
-                         <button onclick="window.checkCode()" class="text-xs bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded flex items-center gap-1.5 transition font-medium shadow-lg shadow-blue-900/20">
-                            <i data-lucide="play" class="w-3 h-3"></i> Ejecutar
+                         <button onclick="window.checkCode()" class="group relative px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-lg flex items-center gap-2 transition-all shadow-lg shadow-indigo-900/20 overflow-hidden">
+                            <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1s_infinite]"></div>
+                            <i data-lucide="play" class="w-3 h-3 fill-current"></i> <span>Ejecutar</span>
                         </button>
-                        <button onclick="window.resetCode()" class="text-xs text-slate-500 hover:text-white p-1.5 rounded hover:bg-white/10 transition" title="Reiniciar código">
+                        <button onclick="window.resetCode()" class="p-2 text-slate-500 hover:text-white hover:bg-white/5 rounded-lg transition" title="Reiniciar código">
                             <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
                         </button>
                     </div>
                 </header>
                 <div class="flex-1 relative flex">
-                    <div class="hidden sm:block w-12 bg-[#1e1e1e] border-r border-white/5 text-slate-600 text-xs font-mono text-right py-4 pr-3 select-none leading-relaxed opacity-40">
+                    <!-- Line Numbers -->
+                    <div class="hidden sm:block w-14 bg-[#0f172a] border-r border-slate-800/40 text-slate-600 text-xs font-mono text-right py-6 pr-4 select-none leading-7 opacity-50">
                         1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20
                     </div>
                     <textarea 
                         id="code-editor" 
-                        class="flex-1 bg-[#1e1e1e] text-slate-300 p-4 font-mono text-sm border-none resize-none focus:outline-none focus:ring-0 leading-relaxed" 
+                        class="flex-1 bg-[#0f172a] text-slate-200 p-6 font-mono text-sm border-none resize-none focus:outline-none focus:ring-0 leading-7 placeholder-slate-700" 
                         spellcheck="false"
-                        placeholder="Cargando..."
+                        placeholder="// Escribe tu código HTML aquí..."
                     ></textarea>
                 </div>
             </section>
 
-            <!-- PANEL 3: PREVIEW (CLARO) -->
-            <section id="panel-preview" class="mobile-panel lg:flex w-full lg:w-1/3 flex-col bg-slate-100">
-                <header class="h-14 border-b border-slate-200 flex items-center px-4 justify-between bg-white shrink-0">
+            <!-- PANEL 3: PREVIEW -->
+            <section id="panel-preview" class="mobile-panel lg:flex w-full lg:w-[40%] flex-col bg-[#f8fafc]">
+                <header class="h-16 border-b border-slate-200 flex items-center px-6 justify-between bg-white shrink-0">
                     <span class="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                        <i data-lucide="monitor" class="w-4 h-4 text-slate-400"></i> Vista Previa
+                        <i data-lucide="globe" class="w-4 h-4 text-slate-400"></i> Navegador
                     </span>
-                    <div class="flex gap-1">
-                        <div class="w-2 h-2 rounded-full bg-red-400"></div>
-                        <div class="w-2 h-2 rounded-full bg-yellow-400"></div>
-                        <div class="w-2 h-2 rounded-full bg-green-400"></div>
+                    <div class="flex gap-1.5 opacity-50">
+                        <div class="w-2.5 h-2.5 rounded-full bg-slate-300"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-slate-300"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-slate-300"></div>
                     </div>
                 </header>
-                <div class="flex-1 p-4 flex flex-col h-full overflow-hidden bg-slate-100">
-                    <div class="bg-white flex-1 rounded-lg shadow-sm overflow-hidden border border-slate-200 relative">
-                        <!-- Sandbox añadido para mayor seguridad, pero permitiendo scripts -->
+                <div class="flex-1 p-6 flex flex-col h-full overflow-hidden bg-slate-50/50">
+                    <div class="bg-white flex-1 rounded-xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] overflow-hidden border border-slate-200 relative transform transition-all hover:shadow-xl">
                         <iframe id="preview-frame" sandbox="allow-scripts allow-modals allow-same-origin allow-popups allow-forms" class="w-full h-full border-none"></iframe>
-                        <div class="pointer-events-none absolute inset-0"></div>
                     </div>
                 </div>
             </section>
         </main>
     </div>
 
-    <!-- MOBILE TABS -->
-    <nav id="mobile-nav" class="lg:hidden h-[60px] bg-slate-950 border-t border-slate-800 flex justify-around items-center z-30 shrink-0 hidden">
-        <button onclick="window.switchTab('guide')" class="tab-btn active text-slate-400 hover:text-blue-500 flex flex-col items-center gap-1 p-2 w-1/3" data-target="guide">
+    <!-- MOBILE NAV (Glass) -->
+    <nav id="mobile-nav" class="lg:hidden h-16 glass fixed bottom-0 left-0 right-0 flex justify-around items-center z-40 hidden border-t-0">
+        <button onclick="window.switchTab('guide')" class="tab-btn active text-slate-400 flex flex-col items-center gap-1 p-2 w-1/3 transition" data-target="guide">
             <i data-lucide="book-open" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Guía</span>
         </button>
-        <button onclick="window.switchTab('editor')" class="tab-btn text-slate-400 hover:text-blue-500 flex flex-col items-center gap-1 p-2 w-1/3" data-target="editor">
-            <i data-lucide="code" class="w-5 h-5"></i>
+        <button onclick="window.switchTab('editor')" class="tab-btn text-slate-400 flex flex-col items-center gap-1 p-2 w-1/3 transition" data-target="editor">
+            <i data-lucide="code-2" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Código</span>
         </button>
-        <button onclick="window.switchTab('preview')" class="tab-btn text-slate-400 hover:text-blue-500 flex flex-col items-center gap-1 p-2 w-1/3" data-target="preview">
-            <i data-lucide="eye" class="w-5 h-5"></i>
+        <button onclick="window.switchTab('preview')" class="tab-btn text-slate-400 flex flex-col items-center gap-1 p-2 w-1/3 transition" data-target="preview">
+            <i data-lucide="monitor" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Vista</span>
         </button>
     </nav>
 
@@ -287,12 +352,9 @@
             measurementId: "G-HXQEQFKF4L"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-        
-        // Use a static app ID for the path structure
         const APP_ID = 'html-master-v1';
 
         // --- STATE ---
@@ -300,9 +362,9 @@
         let currentLessonIndex = 0;
         let isCodeValid = false;
         let currentUser = null;
-        let userProgressMap = {}; // Cache local del progreso (Solo completed status)
+        let userProgressMap = {};
         let isLoginMode = true;
-        let debounceTimer; // Para el retardo de escritura
+        let debounceTimer;
 
         // --- DOM ELEMENTS ---
         const viewHome = document.getElementById('view-home');
@@ -324,100 +386,75 @@
         // --- INIT ---
         async function init() {
             lucide.createIcons();
-            
             try {
-                // Cargar JSON
                 const response = await fetch('course.json');
                 if (!response.ok) throw new Error('Error cargando course.json');
                 lessons = await response.json();
             } catch (error) {
                 console.error("Fallback JSON error:", error);
-                // Fallback básico si falla el fetch local
-                loadingOverlay.innerHTML = `<div class='text-red-400 p-4'>Error: ${error.message} <br> <small>Usa Live Server</small></div>`;
+                loadingOverlay.innerHTML = `<div class='text-red-400 p-4 font-mono'>Error: ${error.message} <br> <small>Usa Live Server</small></div>`;
                 return;
             }
 
-            // Auth Listener
             onAuthStateChanged(auth, async (user) => {
                 currentUser = user;
                 if (user) {
-                    // Logged In
                     userInfo.classList.remove('hidden');
                     userInfo.classList.add('flex');
                     loginBtn.classList.add('hidden');
                     document.getElementById('user-email').textContent = user.email;
                     document.getElementById('user-avatar').textContent = user.email[0].toUpperCase();
-                    
                     await loadUserProgress();
                 } else {
-                    // Logged Out
                     userInfo.classList.add('hidden');
                     userInfo.classList.remove('flex');
                     loginBtn.classList.remove('hidden');
-                    userProgressMap = {}; // Clear cache
+                    userProgressMap = {};
                 }
-                
-                // Render UI
                 renderHome();
                 loadingOverlay.classList.add('hidden');
             });
             
-            // Editor Listener (Con Debounce y validación inmediata)
             editor.addEventListener('input', () => {
-                // 1. Validar inmediatamente para dar feedback rápido
                 validateCode();
-
-                // 2. Actualizar la vista previa con retardo para evitar errores de redeclaración
                 clearTimeout(debounceTimer);
-                debounceTimer = setTimeout(() => {
-                    updatePreview();
-                }, 300); // 300ms de espera antes de renderizar
+                debounceTimer = setTimeout(() => { updatePreview(); }, 300);
             });
         }
 
-        // --- FIRESTORE LOGIC ---
+        // --- LOGIC ---
         async function loadUserProgress() {
             if (!currentUser) return;
             try {
-                // Leer colección completa de progreso
                 const q = collection(db, 'artifacts', APP_ID, 'users', currentUser.uid, 'progress');
                 const querySnapshot = await getDocs(q);
                 userProgressMap = {};
                 querySnapshot.forEach((doc) => {
-                    userProgressMap[doc.id] = doc.data(); // doc.id = lessonId ("1", "2"...)
+                    userProgressMap[doc.id] = doc.data();
                 });
-            } catch (e) {
-                console.error("Error loading progress:", e);
-            }
+            } catch (e) { console.error(e); }
         }
 
         async function saveProgress() {
             const lesson = lessons[currentLessonIndex];
             if (!currentUser || !lesson) return;
-
-            // Update Local Cache (Only completed status)
             userProgressMap[lesson.id] = { completed: isCodeValid };
-
             try {
                 const docRef = doc(db, 'artifacts', APP_ID, 'users', currentUser.uid, 'progress', lesson.id);
-                // SOLO GUARDAMOS EL ESTADO DE COMPLETADO, NO EL CÓDIGO
-                await setDoc(docRef, {
-                    completed: isCodeValid,
-                    updatedAt: new Date().toISOString()
-                }, { merge: true });
-            } catch (e) {
-                console.error("Save error:", e);
-            }
+                await setDoc(docRef, { completed: isCodeValid, updatedAt: new Date().toISOString() }, { merge: true });
+            } catch (e) { console.error(e); }
         }
 
-        // --- AUTH UI FUNCTIONS (Attached to window) ---
+        // --- AUTH ---
         window.toggleAuthModal = (show) => {
             if (show) {
                 authModal.classList.remove('hidden');
+                setTimeout(() => authModal.children[0].classList.remove('scale-95', 'opacity-0'), 10);
                 authError.classList.add('hidden');
                 authForm.reset();
             } else {
-                authModal.classList.add('hidden');
+                authModal.children[0].classList.add('scale-95', 'opacity-0');
+                setTimeout(() => authModal.classList.add('hidden'), 200);
             }
         };
 
@@ -429,15 +466,15 @@
             const switchBtn = document.getElementById('auth-switch-btn');
 
             if (isLoginMode) {
-                title.textContent = "Iniciar Sesión";
+                title.textContent = "Bienvenido de nuevo";
                 btn.innerHTML = `<span>Entrar</span>`;
                 switchText.textContent = "¿No tienes cuenta?";
-                switchBtn.textContent = "Regístrate";
+                switchBtn.textContent = "Regístrate gratis";
             } else {
-                title.textContent = "Crear Cuenta";
+                title.textContent = "Crea tu cuenta";
                 btn.innerHTML = `<span>Registrarse</span>`;
                 switchText.textContent = "¿Ya tienes cuenta?";
-                switchBtn.textContent = "Entra aquí";
+                switchBtn.textContent = "Inicia sesión";
             }
             authError.classList.add('hidden');
         };
@@ -447,22 +484,18 @@
             const email = document.getElementById('auth-email').value;
             const password = document.getElementById('auth-password').value;
             authError.classList.add('hidden');
-            authError.textContent = "";
 
             try {
-                if (isLoginMode) {
-                    await signInWithEmailAndPassword(auth, email, password);
-                } else {
-                    await createUserWithEmailAndPassword(auth, email, password);
-                }
+                if (isLoginMode) await signInWithEmailAndPassword(auth, email, password);
+                else await createUserWithEmailAndPassword(auth, email, password);
                 window.toggleAuthModal(false);
             } catch (error) {
                 authError.classList.remove('hidden');
                 let msg = "Error de autenticación";
-                if (error.code === 'auth/invalid-credential') msg = "Credenciales incorrectas.";
-                if (error.code === 'auth/email-already-in-use') msg = "El email ya está registrado.";
-                if (error.code === 'auth/weak-password') msg = "La contraseña es muy débil.";
-                authError.textContent = msg;
+                if (error.code === 'auth/invalid-credential') msg = "Usuario o contraseña incorrectos.";
+                if (error.code === 'auth/email-already-in-use') msg = "Este email ya está en uso.";
+                if (error.code === 'auth/weak-password') msg = "La contraseña es muy débil (min 6 caracteres).";
+                authError.querySelector('span').textContent = msg;
             }
         };
 
@@ -473,78 +506,59 @@
             }
         };
 
-        // --- NAVIGATION & APP LOGIC (Attached to window) ---
-        
+        // --- NAVIGATION ---
         window.goHome = () => {
             viewWorkspace.classList.add('hidden');
             viewHome.classList.remove('hidden');
             mobileNav.classList.add('hidden');
             document.title = "HTML Master: Curso Completo";
-            
-            // Re-render home to update progress bars/checks if changed
             renderHome();
         };
 
         window.enterWorkspace = (index) => {
-            if (!currentUser) {
-                window.toggleAuthModal(true);
-                return;
-            }
-
-            // --- BLOQUEO DE NIVELES ---
+            if (!currentUser) { window.toggleAuthModal(true); return; }
             if (index > 0) {
                 const prevLesson = lessons[index - 1];
                 const prevProgress = userProgressMap[prevLesson.id];
                 if (!prevProgress || !prevProgress.completed) {
-                    alert("¡Alto ahí! 🛑 Debes completar la lección anterior para desbloquear esta.");
+                    // Shake effect on locked item could go here
+                    alert("¡Ups! 🔒 Completa la lección anterior para desbloquear esta.");
                     return;
                 }
             }
-
             currentLessonIndex = index;
             viewHome.classList.add('hidden');
             viewWorkspace.classList.remove('hidden');
-            
             if(window.innerWidth < 1024) mobileNav.classList.remove('hidden');
-            
             loadLesson(index);
         };
 
         function renderHome() {
-            // AGRUPAR LECCIONES POR UNIDAD
             const units = {};
             lessons.forEach(l => {
-                // Si el JSON no tiene unit, calculamos (opcional)
                 const unitNum = l.unit || Math.ceil(parseInt(l.id) / 7);
                 if (!units[unitNum]) units[unitNum] = [];
                 units[unitNum].push(l);
             });
 
-            // GENERAR HTML POR CADA UNIDAD
             let htmlContent = '';
-
             Object.keys(units).forEach(unitNum => {
                 const unitLessons = units[unitNum];
-                
-                // Header de Unidad
                 htmlContent += `
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-3 px-2">
-                            <div class="h-px bg-slate-800 flex-1"></div>
-                            <h2 class="text-xl font-bold text-slate-400 uppercase tracking-widest font-mono">Unidad ${unitNum}</h2>
-                            <div class="h-px bg-slate-800 flex-1"></div>
+                    <div class="animate-fade-in-up" style="animation-delay: ${unitNum * 0.1}s">
+                        <div class="flex items-center gap-4 mb-6">
+                            <span class="text-xs font-bold text-indigo-400 uppercase tracking-[0.2em] bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Unidad ${unitNum}</span>
+                            <div class="h-px bg-gradient-to-r from-indigo-500/20 to-transparent flex-1"></div>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 `;
 
-                // Tarjetas de la Unidad
                 htmlContent += unitLessons.map(l => {
-                    const idx = lessons.indexOf(l); // Índice global real
+                    const idx = lessons.indexOf(l);
                     const progress = userProgressMap[l.id];
                     const isDone = progress?.completed;
                     const isChallenge = l.type === 'challenge';
-
-                    // Lógica de Bloqueo Visual
+                    
                     let isLocked = false;
                     if (idx > 0) {
                         const prevLesson = lessons[idx - 1];
@@ -553,59 +567,48 @@
                     }
 
                     if (isLocked) {
-                        // Tarjeta Bloqueada
                         return `
-                        <div class="p-6 rounded-xl border border-slate-800 bg-slate-900/30 opacity-50 cursor-not-allowed group relative overflow-hidden w-full">
-                            <div class="relative z-10 flex flex-col h-full">
-                                <div class="flex items-center justify-between mb-3">
-                                    <span class="text-xs font-mono text-slate-600 bg-slate-950 px-2 py-1 rounded">
-                                        ${isChallenge ? 'RETO FINAL' : 'LECCIÓN ' + (idx + 1)}
-                                    </span>
-                                    <i data-lucide="lock" class="w-5 h-5 text-slate-600"></i>
-                                </div>
-                                <h3 class="text-lg font-bold text-slate-500 mb-1">${l.title}</h3>
-                                <div class="text-xs text-slate-600 font-mono mt-2 flex items-center gap-1">
-                                    <i data-lucide="lock" class="w-3 h-3"></i> Bloqueado
-                                </div>
+                        <div class="glass p-6 rounded-2xl opacity-40 grayscale select-none cursor-not-allowed relative overflow-hidden group">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="text-[10px] font-bold text-slate-500 bg-slate-800/50 px-2 py-1 rounded uppercase tracking-wider">Lección ${idx + 1}</span>
+                                <i data-lucide="lock" class="w-5 h-5 text-slate-600"></i>
                             </div>
+                            <h3 class="text-lg font-semibold text-slate-400 mb-2">${l.title}</h3>
+                            <div class="absolute inset-0 bg-slate-950/20"></div>
                         </div>`;
                     }
 
-                    // Estilos según tipo (Normal vs Challenge)
-                    const borderColor = isChallenge ? 'border-amber-500/30' : 'border-slate-800';
-                    const hoverBorder = isChallenge ? 'hover:border-amber-500' : 'hover:border-blue-500';
-                    const bgClass = isDone ? 'bg-slate-900' : 'bg-slate-900/50';
-                    const icon = isDone ? 'check-circle' : (isChallenge ? 'trophy' : 'circle');
-                    const iconColor = isDone ? 'text-green-500' : (isChallenge ? 'text-amber-500' : 'text-slate-600');
-                    const accentColor = isChallenge ? 'text-amber-500' : 'text-blue-500';
-                    const labelBg = isChallenge ? 'bg-amber-900/30 text-amber-500' : 'bg-slate-950 text-slate-500';
+                    const borderClass = isChallenge ? 'border-amber-500/30' : 'border-slate-700/50';
+                    const hoverClass = isChallenge ? 'hover:border-amber-500/60 hover:shadow-amber-500/10' : 'hover:border-indigo-500/50 hover:shadow-indigo-500/20';
+                    const iconColor = isDone ? 'text-emerald-400' : (isChallenge ? 'text-amber-400' : 'text-slate-400');
+                    const iconBg = isDone ? 'bg-emerald-500/10' : (isChallenge ? 'bg-amber-500/10' : 'bg-slate-800');
+                    const icon = isDone ? 'check' : (isChallenge ? 'trophy' : 'code-2');
 
                     return `
-                    <button onclick="window.enterWorkspace(${idx})" class="text-left p-6 rounded-xl border ${borderColor} ${bgClass} ${hoverBorder} transition-all duration-300 hover:scale-[1.02] group relative overflow-hidden w-full">
-                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition">
-                            <i data-lucide="${isChallenge ? 'trophy' : 'code'}" class="w-16 h-16 ${accentColor}"></i>
-                        </div>
+                    <button onclick="window.enterWorkspace(${idx})" class="glass glass-hover text-left p-6 rounded-2xl transition-all duration-300 group relative overflow-hidden w-full ${borderClass} ${hoverClass}">
+                        ${isChallenge ? '<div class="absolute top-0 right-0 p-12 bg-amber-500/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>' : ''}
+                        
                         <div class="relative z-10">
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="text-xs font-mono px-2 py-1 rounded ${labelBg}">
-                                    ${isChallenge ? '🏆 RETO FINAL' : 'LECCIÓN ' + (idx + 1)}
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="text-[10px] font-bold ${isChallenge ? 'text-amber-400 bg-amber-500/10 border-amber-500/20' : 'text-slate-400 bg-slate-800 border-slate-700'} px-2.5 py-1 rounded border uppercase tracking-wider">
+                                    ${isChallenge ? 'Reto Final' : `Lección ${idx + 1}`}
                                 </span>
-                                <i data-lucide="${icon}" class="w-5 h-5 ${iconColor}"></i>
+                                <div class="w-8 h-8 rounded-lg ${iconBg} flex items-center justify-center ${iconColor} transition-colors">
+                                    <i data-lucide="${icon}" class="w-4 h-4"></i>
+                                </div>
                             </div>
-                            <h3 class="text-lg font-bold text-slate-200 group-hover:text-white transition mb-1">${l.title}</h3>
+                            
+                            <h3 class="text-lg font-bold text-slate-200 group-hover:text-white transition-colors mb-1 pr-4 leading-tight">${l.title}</h3>
+                            
                             ${isDone 
-                                ? '<div class="text-xs text-green-400 font-mono mt-2">Completado</div>' 
-                                : `<div class="h-1 w-12 ${isChallenge ? 'bg-amber-500' : 'bg-blue-600'} rounded mt-2 opacity-0 group-hover:opacity-100 transition-opacity"></div>`
+                                ? '<div class="mt-3 flex items-center gap-1.5 text-[10px] font-bold text-emerald-400 uppercase tracking-wider"><div class="w-1.5 h-1.5 rounded-full bg-emerald-400"></div> Completado</div>' 
+                                : `<div class="mt-4 h-1 w-full bg-slate-800 rounded-full overflow-hidden"><div class="h-full ${isChallenge ? 'bg-amber-500' : 'bg-indigo-500'} w-0 group-hover:w-full transition-all duration-700 ease-out"></div></div>`
                             }
                         </div>
                     </button>
                     `;
-                }).join('') + `
-                        </div>
-                    </div>
-                `;
+                }).join('') + `</div></div>`;
             });
-
             homeLessonGrid.innerHTML = htmlContent;
             lucide.createIcons();
         }
@@ -613,189 +616,127 @@
         function loadLesson(index) {
             const lesson = lessons[index];
             document.title = `${lesson.title} - HTML Master`;
-
-            // Reset state
             guideContent.innerHTML = lesson.guide;
-            
-            // Cargar SIEMPRE el código inicial, ignorando guardados previos
             editor.value = lesson.initialCode;
             
             hideFeedback();
-            // Limpiar preview antes de cargar
             preview.srcdoc = ""; 
             setTimeout(() => { updatePreview(); }, 100);
-            validateCode(true); // Validación silenciosa
-            
-            // UI Update
+            validateCode(true);
             document.getElementById('btn-prev').disabled = index === 0;
+            
+            // Animación scroll top
+            document.getElementById('panel-guide').querySelector('.custom-scroll').scrollTop = 0;
         }
 
         function updatePreview() {
             let code = editor.value;
-            
-            // NEUTRALIZAR REDIRECTS (META REFRESH)
-            code = code.replace(/<meta\s+http-equiv=["']refresh["'][^>]*>/gi, '<!-- meta refresh disabled for preview -->');
-
-            // SCRIPT DE SEGURIDAD E INTERCEPCIÓN
+            code = code.replace(/<meta\s+http-equiv=["']refresh["'][^>]*>/gi, '<!-- meta refresh disabled -->');
             const safetyScript = `
                 <script>
                     document.addEventListener('DOMContentLoaded', () => {
                         document.body.addEventListener('click', (e) => {
                             const link = e.target.closest('a');
-                            if (link) {
-                                const href = link.getAttribute('href');
-                                if (href && href.startsWith('#')) return;
+                            if (link && !link.getAttribute('href')?.startsWith('#')) {
                                 e.preventDefault();
-                                if (href && href !== 'javascript:void(0)') {
-                                    if(confirm('Has hecho click en un enlace externo: ' + href + '\\n\\n¿Quieres abrirlo en una nueva pestaña?')) {
-                                        window.open(href, '_blank');
-                                    }
-                                }
+                                if(link.getAttribute('href') !== 'javascript:void(0)')
+                                    if(confirm('¿Abrir enlace externo: ' + link.getAttribute('href') + '?')) window.open(link.getAttribute('href'), '_blank');
                             }
                         });
-                        document.body.addEventListener('submit', (e) => {
-                            e.preventDefault();
-                            alert('¡Formulario enviado! (Simulación: los datos no salen de este entorno)');
-                        });
+                        document.body.addEventListener('submit', (e) => { e.preventDefault(); alert('🚀 Formulario enviado (Simulación)'); });
                     });
-                <\/script>
-            `;
-
-            // USAR SRCDOC PARA REINICIAR COMPLETAMENTE EL CONTEXTO DE EJECUCIÓN (WINDOW)
-            // Esto arregla el error "Identifier 'el' has already been declared"
+                <\/script>`;
             preview.srcdoc = code + safetyScript;
         }
 
         function validateCode(silent = false) {
             const lesson = lessons[currentLessonIndex];
             const code = editor.value;
-            
-            if (!lesson.validation) {
-                isCodeValid = true;
-                updateNextButtonState();
-                return;
-            }
-
+            if (!lesson.validation) { isCodeValid = true; updateNextButtonState(); return; }
             const regex = new RegExp(lesson.validation.regex, "i");
             isCodeValid = regex.test(code);
-            
             updateNextButtonState();
-
             if (!silent) {
-                if (isCodeValid) {
-                    showFeedback('success', '¡Excelente!', 'Código correcto.');
-                    // Guardar SOLO cuando es válido para marcar completado
-                    saveProgress();
-                } else {
-                    hideFeedback(); 
-                }
+                if (isCodeValid) { showFeedback('success', '¡Excelente!', 'Has completado la misión.'); saveProgress(); }
+                else hideFeedback();
             }
         }
 
         window.checkCode = () => {
              const lesson = lessons[currentLessonIndex];
-             if (isCodeValid) {
-                 showFeedback('success', '¡Genial!', 'El código cumple los requisitos.');
-             } else {
-                 showFeedback('error', 'Revisa el código', lesson.validation.error);
-             }
+             if (isCodeValid) showFeedback('success', '¡Todo correcto!', 'Puedes avanzar.');
+             else showFeedback('error', 'Algo falta...', lesson.validation.error);
         }
 
         function updateNextButtonState() {
             if (isCodeValid) {
                 btnNext.disabled = false;
-                btnNext.classList.remove('bg-slate-800', 'text-slate-400');
-                btnNext.classList.add('bg-green-600', 'text-white', 'hover:bg-green-700', 'animate-bounce-sm');
-                btnNext.innerHTML = `<span>Siguiente</span> <i data-lucide="arrow-right" class="w-3 h-3"></i>`;
+                btnNext.className = "px-4 h-8 flex items-center gap-2 rounded bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg shadow-emerald-900/20 transition-all text-xs font-bold uppercase tracking-wide transform hover:scale-105";
+                btnNext.innerHTML = `<span>Siguiente</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>`;
                 lucide.createIcons();
             } else {
                 btnNext.disabled = true;
-                btnNext.classList.add('bg-slate-800', 'text-slate-400');
-                btnNext.classList.remove('bg-green-600', 'text-white', 'hover:bg-green-700', 'animate-bounce-sm');
-                btnNext.innerHTML = `<span>Siguiente</span> <i data-lucide="chevron-right" class="w-3 h-3"></i>`;
+                btnNext.className = "px-3 h-8 flex items-center gap-2 rounded bg-slate-800 text-slate-500 cursor-not-allowed transition text-xs font-bold uppercase tracking-wide";
+                btnNext.innerHTML = `<span>Sig</span> <i data-lucide="chevron-right" class="w-4 h-4"></i>`;
                 lucide.createIcons();
             }
         }
 
         window.checkAndNext = () => {
             if (isCodeValid) {
-                // Guardar completado antes de avanzar
                 saveProgress();
-                
-                if (currentLessonIndex < lessons.length - 1) {
-                    window.enterWorkspace(currentLessonIndex + 1);
-                } else {
-                    alert("¡Curso Completado!");
-                    window.goHome();
-                }
-            } else {
-                window.checkCode();
-            }
+                if (currentLessonIndex < lessons.length - 1) window.enterWorkspace(currentLessonIndex + 1);
+                else { alert("🎉 ¡Felicidades! Has completado todo el curso."); window.goHome(); }
+            } else window.checkCode();
         }
 
-        window.prevLesson = () => {
-            if (currentLessonIndex > 0) window.enterWorkspace(currentLessonIndex - 1);
-        }
-
+        window.prevLesson = () => { if (currentLessonIndex > 0) window.enterWorkspace(currentLessonIndex - 1); }
         window.resetCode = () => {
-            if(confirm('¿Reiniciar esta lección?')) {
-                const lesson = lessons[currentLessonIndex];
-                editor.value = lesson.initialCode;
-                updatePreview();
-                validateCode();
-                // Si reinician, potencialmente dejan de estar "completados" si la validación falla
-                saveProgress(); 
+            if(confirm('¿Reiniciar código?')) {
+                editor.value = lessons[currentLessonIndex].initialCode;
+                updatePreview(); validateCode(); saveProgress();
             }
         }
-
-        // --- UI UTILS ---
 
         function showFeedback(type, title, msg) {
-            feedbackArea.classList.remove('translate-y-full');
+            feedbackArea.classList.remove('translate-y-[150%]');
             const iconContainer = document.getElementById('feedback-icon');
             const titleEl = document.getElementById('feedback-title');
             const msgEl = document.getElementById('feedback-msg');
             
             if (type === 'success') {
-                feedbackArea.classList.add('border-green-800', 'bg-green-900/50');
-                feedbackArea.classList.remove('border-red-800', 'bg-red-900/50');
-                iconContainer.className = 'p-2 rounded-full bg-green-900 text-green-400 border border-green-700';
-                iconContainer.innerHTML = `<i data-lucide="check" class="w-5 h-5"></i>`;
-                titleEl.className = "font-bold text-sm text-green-400";
-                msgEl.className = "text-xs mt-1 text-green-300";
+                feedbackArea.className = "absolute bottom-6 left-4 right-4 p-4 rounded-xl border transform transition-all duration-500 z-20 shadow-2xl backdrop-blur-xl flex items-start gap-4 bg-emerald-900/80 border-emerald-500/30 text-emerald-50";
+                iconContainer.innerHTML = `<div class="p-1 rounded-full bg-emerald-500/20 text-emerald-400"><i data-lucide="check" class="w-5 h-5"></i></div>`;
+                titleEl.className = "font-bold text-sm mb-0.5 text-emerald-300";
+                msgEl.className = "text-xs opacity-90 leading-relaxed text-emerald-100/80";
             } else {
-                feedbackArea.classList.add('border-red-800', 'bg-red-900/50');
-                feedbackArea.classList.remove('border-green-800', 'bg-green-900/50');
-                iconContainer.className = 'p-2 rounded-full bg-red-900 text-red-400 border border-red-700';
-                iconContainer.innerHTML = `<i data-lucide="x" class="w-5 h-5"></i>`;
-                titleEl.className = "font-bold text-sm text-red-400";
-                msgEl.className = "text-xs mt-1 text-red-300";
+                feedbackArea.className = "absolute bottom-6 left-4 right-4 p-4 rounded-xl border transform transition-all duration-500 z-20 shadow-2xl backdrop-blur-xl flex items-start gap-4 bg-red-900/80 border-red-500/30 text-red-50";
+                iconContainer.innerHTML = `<div class="p-1 rounded-full bg-red-500/20 text-red-400"><i data-lucide="x" class="w-5 h-5"></i></div>`;
+                titleEl.className = "font-bold text-sm mb-0.5 text-red-300";
+                msgEl.className = "text-xs opacity-90 leading-relaxed text-red-100/80";
             }
             titleEl.textContent = title;
             msgEl.textContent = msg;
             lucide.createIcons();
+            setTimeout(() => hideFeedback(), 4000);
         }
 
-        function hideFeedback() {
-            feedbackArea.classList.add('translate-y-full');
-        }
+        function hideFeedback() { feedbackArea.classList.add('translate-y-[150%]'); }
 
         window.switchTab = (targetId) => {
             document.querySelectorAll('.mobile-panel').forEach(p => p.classList.remove('active'));
             document.getElementById(`panel-${targetId}`).classList.add('active');
             document.querySelectorAll('.tab-btn').forEach(b => {
-                b.classList.remove('text-blue-500', 'active');
+                b.classList.remove('text-indigo-400', 'active');
                 b.classList.add('text-slate-400');
                 if(b.dataset.target === targetId) {
-                    b.classList.add('text-blue-500', 'active');
+                    b.classList.add('text-indigo-400', 'active');
                     b.classList.remove('text-slate-400');
                 }
             });
         };
 
-        // Initialize
         init();
-
     </script>
 </body>
 </html>
