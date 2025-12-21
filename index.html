@@ -417,6 +417,42 @@
                 return;
             }
 
+            // --- ANTI-CHEAT SYSTEM ---
+            let lastInternalCopy = "";
+
+            // 1. Escuchar copy/cut en el documento para "legitimar" el contenido
+            document.addEventListener('copy', (e) => {
+                if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') {
+                    // Si copian de un input/textarea, cogemos su selección exacta
+                    lastInternalCopy = e.target.value.substring(e.target.selectionStart, e.target.selectionEnd);
+                } else {
+                    // Si copian texto normal (ej: de la guía), cogemos la selección global
+                    lastInternalCopy = window.getSelection().toString();
+                }
+            });
+            
+            document.addEventListener('cut', (e) => {
+                if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') {
+                    lastInternalCopy = e.target.value.substring(e.target.selectionStart, e.target.selectionEnd);
+                } else {
+                    lastInternalCopy = window.getSelection().toString();
+                }
+            });
+
+            // 2. Interceptar el pegado en el editor
+            editor.addEventListener('paste', (e) => {
+                // Obtenemos los datos que intentan pegar
+                const pastedData = (e.clipboardData || window.clipboardData).getData('text');
+                
+                // Si lo que pegan NO coincide con lo último que copiaron DENTRO de la app...
+                if (pastedData.trim() !== lastInternalCopy.trim()) {
+                    e.preventDefault(); // Bloquear el pegado
+                    alert("🚫 ¡ALERTA DE SEGURIDAD!\n\nSe ha detectado un intento de pegar código externo.\nSolo puedes copiar de la guía o de tu propio código.\n\nLa aplicación se reiniciará por seguridad.");
+                    location.reload(); // Reiniciar la página (castigo)
+                }
+            });
+            // ------------------------
+
             onAuthStateChanged(auth, async (user) => {
                 currentUser = user;
                 if (user) {
