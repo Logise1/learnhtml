@@ -2,7 +2,7 @@
   {
     "id": "1",
     "title": "1.1 Estructura: El Esqueleto",
-    "guide": "<h3>Unidad 1: Los Cimientos de la Web</h3><p>Bienvenido al mundo del código. Todo sitio web comienza con <strong>HTML</strong> (HyperText Markup Language). Imagina que HTML es el <strong>esqueleto</strong> de una persona: le da forma y estructura, aunque no tenga 'belleza' (estilo) ni 'movimiento' (funcionalidad) todavía.</p><h4>Conceptos Clave:</h4><ul><li><strong>Etiquetas (Tags):</strong> Son los ladrillos. Van entre símbolos <code>&lt;</code> y <code>&gt;</code>.</li><li><strong>Apertura y Cierre:</strong> La mayoría tiene una etiqueta de inicio <code>&lt;html&gt;</code> y una de fin con barra <code>&lt;/html&gt;</code>.</li><li><strong>Anidación:</strong> Unas etiquetas van dentro de otras, como muñecas rusas.</li></ul><h4>La Estructura Sagrada:</h4><p>1. <code>&lt;!DOCTYPE html&gt;</code>: Dice al navegador 'Esto es HTML5 moderno'. (Es única, no se cierra).<br>2. <code>&lt;html&gt;</code>: La raíz de todo.<br>3. <code>&lt;head&gt;</code>: El cerebro (configuraciones invisibles).<br>4. <code>&lt;body&gt;</code>: El cuerpo (lo que el usuario ve en pantalla).</p><p><strong>Misión:</strong> Escribe la estructura base completa anidando <code>head</code> y <code>body</code> dentro de <code>html</code>.</p>",
+    "guide": "<h3>Unidad 1: Los Cimientos de la Web</h3><p>Bienvenido. Todo sitio web comienza con una estructura base obligatoria. Imagina que es el esqueleto humano.</p><h4>La Estructura Sagrada:</h4><p>1. <code>&lt;!DOCTYPE html&gt;</code>: La declaración de tipo (siempre la primera línea).<br>2. <code>&lt;html&gt;</code>: La etiqueta raíz que envuelve todo.<br>3. <code>&lt;head&gt;</code>: La cabeza (configuraciones invisibles).<br>4. <code>&lt;body&gt;</code>: El cuerpo (lo que se ve en pantalla).</p><p><strong>Misión:</strong> Escribe la estructura completa desde cero (Doctype, html, head y body) para aprenderla de memoria una vez.</p>",
     "initialCode": "",
     "validation": {
       "regex": "<!DOCTYPE\\s+html>\\s*<html[\\s\\S]*<head[\\s\\S]*<\\/head>\\s*<body[\\s\\S]*<\\/body>[\\s\\S]*<\\/html>",
@@ -12,418 +12,418 @@
   {
     "id": "2",
     "title": "1.2 Configuración: El Cerebro",
-    "guide": "<h3>Configurando el Head</h3><p>El <code>&lt;head&gt;</code> contiene información que el usuario no ve en la página, pero el navegador necesita. Aquí definimos el título de la pestaña y el juego de caracteres.</p><h4>1. Título de la Pestaña</h4><p>Se define con <code>&lt;title&gt;Texto&lt;/title&gt;</code>. Esto es lo que ves en la pestaña superior de Chrome o Firefox.</p><h4>2. Codificación (Charset)</h4><p>Para que el navegador entienda acentos, eñes y emojis, debemos decirle que usamos el formato universal <strong>UTF-8</strong>. Usamos la etiqueta <code>meta</code>. <br><strong>¡Ojo!</strong> La etiqueta <code>meta</code> es una etiqueta <em>vacía</em> (void tag), no tiene cierre <code>&lt;/meta&gt;</code>.</p><pre>&lt;meta charset=\"UTF-8\"&gt;</pre><p><strong>Misión:</strong> Dentro del <code>head</code>, añade un título que diga 'Mi Web' y la etiqueta meta para UTF-8.</p>",
-    "initialCode": "<!DOCTYPE html>\n<html>\n  <head>\n    <!-- Escribe aquí -->\n  </head>\n  <body></body>\n</html>",
+    "guide": "<h3>Configurando el Head</h3><p>El <code>&lt;head&gt;</code> contiene metadatos vitales.</p><h4>1. Título</h4><p><code>&lt;title&gt;Texto&lt;/title&gt;</code> define el nombre de la pestaña del navegador.</p><h4>2. Codificación</h4><p><code>&lt;meta charset=\"UTF-8\"&gt;</code> permite usar tildes y ñ. Es una etiqueta vacía (sin cierre).</p><p><strong>Misión:</strong> Tienes la estructura base. Añade dentro del <code>head</code> el título 'Mi Web' y el meta charset UTF-8.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <!-- Añade tu código aquí -->\n  </head>\n  <body>\n  </body>\n</html>",
     "validation": {
       "regex": "<head>(?:[\\s\\S]*<meta\\s+charset=['\"]UTF-8['\"]\\s*\\/?>[\\s\\S]*<title>Mi Web<\\/title>|[\\s\\S]*<title>Mi Web<\\/title>[\\s\\S]*<meta\\s+charset=['\"]UTF-8['\"]\\s*\\/?>)[\\s\\S]*<\\/head>",
-      "error": "Necesitas <meta charset='UTF-8'> y <title>Mi Web</title> dentro de las etiquetas <head>."
+      "error": "Dentro del <head>: añade <meta charset='UTF-8'> y <title>Mi Web</title>."
     }
   },
   {
     "id": "3",
     "title": "1.3 Texto: Jerarquía Visual",
-    "guide": "<h3>Títulos y Párrafos</h3><p>En el <code>body</code> va todo el contenido visible. Google y los lectores de pantalla necesitan saber qué es importante. Para ello usamos una <strong>jerarquía</strong>.</p><h4>Encabezados (Headings)</h4><p>Van del <code>&lt;h1&gt;</code> (el más importante, el título principal) al <code>&lt;h6&gt;</code>. <br><strong>Regla de oro:</strong> Solo debe haber UN <code>h1</code> por página.</p><h4>Párrafos</h4><p>Para bloques de texto normal usamos <code>&lt;p&gt;</code>. Los navegadores añaden automáticamente un margen separador entre párrafos.</p><p><strong>Misión:</strong> Dentro del body, crea un <code>h1</code> con el texto 'Noticias' y debajo un párrafo <code>p</code> con una frase larga (al menos 10 letras).</p>",
-    "initialCode": "<body>\n\n</body>",
+    "guide": "<h3>Títulos y Párrafos</h3><p>En el <code>body</code> va el contenido. Usamos encabezados para títulos importantes.</p><ul><li><code>&lt;h1&gt;</code>: Título principal (Solo uno por página).</li><li><code>&lt;p&gt;</code>: Párrafos de texto estándar.</li></ul><p><strong>Misión:</strong> Dentro del body, crea un <code>h1</code> 'Noticias' y un <code>p</code> con una frase larga.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Texto</title>\n  </head>\n  <body>\n    <!-- Escribe tu código aquí -->\n  </body>\n</html>",
     "validation": {
       "regex": "<h1[^>]*>Noticias<\\/h1>\\s*<p>[\\s\\S]{10,}<\\/p>",
-      "error": "Asegúrate de tener un <h1>Noticias</h1> y un <p> con suficiente texto."
+      "error": "Necesitas un <h1>Noticias</h1> y un <p> con texto dentro del body."
     }
   },
   {
     "id": "4",
     "title": "1.4 Texto: Importancia y Énfasis",
-    "guide": "<h3>Más allá de la negrita</h3><p>Antiguamente se usaba `b` (bold) y `i` (italic), pero hoy usamos etiquetas con <strong>valor semántico</strong> (significado).</p><ul><li><strong>Importancia fuerte:</strong> Usa <code>&lt;strong&gt;</code>. Visualmente se ve en negrita, pero le dice a Google 'esto es crucial'.</li><li><strong>Énfasis:</strong> Usa <code>&lt;em&gt;</code>. Visualmente se ve cursiva, y sirve para cambiar la entonación al leer.</li></ul><p>Estas etiquetas van <strong>dentro</strong> de los párrafos.</p><p><strong>Misión:</strong> Escribe un párrafo <code>p</code> cualquiera, pero que contenga la palabra <strong>Urgente</strong> dentro de etiquetas <code>strong</code>.</p>",
-    "initialCode": "",
+    "guide": "<h3>Negritas y Cursivas Semánticas</h3><p>Para destacar texto usamos etiquetas con significado:</p><ul><li><code>&lt;strong&gt;</code>: Importancia fuerte (se ve negrita).</li><li><code>&lt;em&gt;</code>: Énfasis al hablar (se ve cursiva).</li></ul><p><strong>Misión:</strong> Escribe un párrafo que contenga la palabra <strong>Urgente</strong> dentro de etiquetas strong.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Énfasis</title>\n  </head>\n  <body>\n    <!-- Escribe tu código aquí -->\n  </body>\n</html>",
     "validation": {
       "regex": "<p>[\\s\\S]*<strong[^>]*>Urgente<\\/strong>[\\s\\S]*<\\/p>",
-      "error": "Debes crear un <p> y dentro de él poner <strong>Urgente</strong>."
+      "error": "Crea un <p> y pon 'Urgente' entre etiquetas <strong>."
     }
   },
   {
     "id": "5",
     "title": "1.5 Listas: Sin Orden",
-    "guide": "<h3>Agrupando Elementos</h3><p>Las listas son fundamentales para menús, características, ingredientes, etc. Hay dos tipos principales.</p><h4>Lista Desordenada (Unordered List)</h4><p>Se usa cuando el orden no importa (tienen 'bullets' o puntos).<br>1. Creamos el contenedor: <code>&lt;ul&gt;</code>.<br>2. Dentro, ponemos cada ítem de la lista: <code>&lt;li&gt;</code> (List Item).</p><pre>&lt;ul&gt;\n  &lt;li&gt;Café&lt;/li&gt;\n  &lt;li&gt;Té&lt;/li&gt;\n&lt;/ul&gt;</pre><p><strong>Misión:</strong> Crea una lista desordenada con dos elementos: 'Pan' y 'Leche'.</p>",
-    "initialCode": "",
+    "guide": "<h3>Listas con Viñetas</h3><p>Para agrupar elementos sin orden numérico.</p><pre>&lt;ul&gt;\n  &lt;li&gt;Elemento 1&lt;/li&gt;\n  &lt;li&gt;Elemento 2&lt;/li&gt;\n&lt;/ul&gt;</pre><p><strong>Misión:</strong> Crea una lista <code>ul</code> con dos <code>li</code>: 'Pan' y 'Leche'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Listas</title>\n  </head>\n  <body>\n    <!-- Escribe tu código aquí -->\n  </body>\n</html>",
     "validation": {
       "regex": "<ul>\\s*<li>Pan<\\/li>\\s*<li>Leche<\\/li>\\s*<\\/ul>",
-      "error": "Usa la estructura <ul> con dos <li> dentro: uno para Pan y otro para Leche."
+      "error": "Usa <ul> con dos <li> dentro (Pan y Leche)."
     }
   },
   {
     "id": "6",
     "title": "1.6 Listas: Ordenadas",
-    "guide": "<h3>Rankings y Pasos</h3><p>Cuando el orden SÍ importa (pasos de una receta, top 10), usamos listas ordenadas. El navegador pondrá los números (1, 2, 3...) automáticamente.</p><h4>Lista Ordenada (Ordered List)</h4><p>La lógica es idéntica a la anterior, solo cambia la etiqueta padre.</p><pre>&lt;ol&gt;\n  &lt;li&gt;Primer paso&lt;/li&gt;\n  &lt;li&gt;Segundo paso&lt;/li&gt;\n&lt;/ol&gt;</pre><p><strong>Misión:</strong> Crea una lista ordenada <code>ol</code> con dos ítems: 'Oro' y 'Plata'.</p>",
-    "initialCode": "",
+    "guide": "<h3>Rankings Numéricos</h3><p>Cuando el orden importa (1, 2, 3...).</p><pre>&lt;ol&gt;\n  &lt;li&gt;Primero&lt;/li&gt;\n  &lt;li&gt;Segundo&lt;/li&gt;\n&lt;/ol&gt;</pre><p><strong>Misión:</strong> Crea una lista <code>ol</code> con dos <code>li</code>: 'Oro' y 'Plata'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Listas Ordenadas</title>\n  </head>\n  <body>\n    <!-- Escribe tu código aquí -->\n  </body>\n</html>",
     "validation": {
       "regex": "<ol>\\s*<li>Oro<\\/li>\\s*<li>Plata<\\/li>\\s*<\\/ol>",
-      "error": "Usa la estructura <ol> con dos <li> dentro: uno para Oro y otro para Plata."
+      "error": "Usa <ol> con dos <li> dentro (Oro y Plata)."
     }
   },
   {
     "id": "7",
-    "title": "1.7 JEFE UNIDAD 1: La Estructura Maestra",
-    "guide": "<h3>🔥 RETO FINAL: Consolidación</h3><p>Has aprendido a crear el esqueleto, configurar el cerebro, poner títulos, textos y listas. Es hora de juntarlo todo en un documento real.</p><p><strong>Tu Misión:</strong> Construye una página web completa desde cero.</p><h4>Requisitos exactos:</h4><ol><li><code>!DOCTYPE html</code> al principio.</li><li>Etiqueta <code>html</code> conteniendo <code>head</code> y <code>body</code>.</li><li>Dentro del <code>body</code>:<br> - Un título principal <code>h1</code> que diga 'Última Hora'.<br> - Un párrafo <code>p</code> con cualquier texto explicativo.<br> - Una lista desordenada <code>ul</code> con al menos 2 ítems (<code>li</code>) de detalles.</li></ol>",
-    "initialCode": "",
+    "title": "1.7 JEFE UNIDAD 1: La Noticia",
+    "guide": "<h3>🔥 RETO FINAL UNIDAD 1</h3><p>Escribe el contenido de una noticia completa dentro del body.</p><h4>Requisitos:</h4><ol><li>Un H1 'Última Hora'.</li><li>Un Párrafo explicativo cualquiera.</li><li>Una lista desordenada (ul) con 2 detalles.</li></ol>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Reto 1</title>\n  </head>\n  <body>\n    <!-- Construye la noticia aquí -->\n\n  </body>\n</html>",
     "validation": {
-      "regex": "<!DOCTYPE html>[\\s\\S]*<body[\\s\\S]*<h1>Última Hora<\\/h1>[\\s\\S]*<p>[\\s\\S]+<\\/p>[\\s\\S]*<ul>[\\s\\S]*<li>[\\s\\S]*<li>",
-      "error": "Revisa: Doctype, html, body. Dentro del body: H1 'Última Hora', un P, y un UL con dos LI."
+      "regex": "<body[\\s\\S]*<h1>Última Hora<\\/h1>[\\s\\S]*<p>[\\s\\S]+<\\/p>[\\s\\S]*<ul>[\\s\\S]*<li>[\\s\\S]*<li>",
+      "error": "Falta algún elemento: H1 'Última Hora', un P, o un UL con dos LI."
     }
   },
   {
     "id": "8",
-    "title": "2.1 Multimedia: El hipervínculo",
-    "guide": "<h3>Unidad 2: La Web Conectada</h3><p>HTML no es solo texto estático. Su poder reside en los enlaces (hipervínculos) y multimedia. Para configurar estas etiquetas más complejas, usamos <strong>Atributos</strong>.</p><h4>Atributos</h4><p>Son configuraciones que van DENTRO de la etiqueta de apertura. <br>Sintaxis: <code>&lt;etiqueta atributo=\"valor\"&gt;</code>.</p><h4>El Enlace (Anchor)</h4><p>La etiqueta es <code>&lt;a&gt;</code>. Necesita el atributo <code>href</code> (Hypertext Reference) para saber a dónde llevar al usuario.</p><pre>&lt;a href=\"https://ejemplo.com\"&gt;Haz clic aquí&lt;/a&gt;</pre><p><strong>Misión:</strong> Crea un enlace que apunte a 'https://google.com' y cuyo texto visible sea 'Buscar'.</p>",
-    "initialCode": "",
+    "title": "2.1 Multimedia: Enlaces",
+    "guide": "<h3>Unidad 2: Conectando la Web</h3><p>Usamos la etiqueta de ancla <code>&lt;a&gt;</code> con el atributo <code>href</code>.</p><pre>&lt;a href=\"URL\"&gt;Texto Visible&lt;/a&gt;</pre><p><strong>Misión:</strong> Enlace a 'https://google.com' con texto 'Buscar'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Enlaces</title>\n  </head>\n  <body>\n    <!-- Tu enlace aquí -->\n  </body>\n</html>",
     "validation": {
       "regex": "<a\\s+href=['\"]https:\\/\\/google\\.com['\"][^>]*>Buscar<\\/a>",
-      "error": "La etiqueta es <a>, el atributo href debe ser 'https://google.com' y el texto 'Buscar'."
+      "error": "Etiqueta <a> con href='https://google.com' y texto 'Buscar'."
     }
   },
   {
     "id": "9",
-    "title": "2.2 Multimedia: Comportamiento del Enlace",
-    "guide": "<h3>Controlando el destino</h3><p>Por defecto, un enlace abre la nueva página en la <em>misma</em> pestaña, cerrando la tuya. Para mantener al usuario en tu web, podemos forzar que se abra en una pestaña nueva.</p><h4>El atributo Target</h4><p>Usamos el atributo <code>target</code> con el valor especial <code>_blank</code>.</p><pre>&lt;a href=\"...\" target=\"_blank\"&gt;Texto&lt;/a&gt;</pre><p><strong>Misión:</strong> Crea un enlace a 'https://bing.com' que se abra en una nueva pestaña (target blank).</p>",
-    "initialCode": "",
+    "title": "2.2 Multimedia: Target Blank",
+    "guide": "<h3>Abriendo en Nueva Pestaña</h3><p>Para no cerrar tu web al hacer clic, añade <code>target=\"_blank\"</code> dentro de la etiqueta de apertura.</p><p><strong>Misión:</strong> Enlace a 'https://bing.com' que abra en nueva pestaña.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Target Blank</title>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
       "regex": "<a\\s+href=['\"]https:\\/\\/bing\\.com['\"][^>]*target=['\"]_blank['\"]",
-      "error": "Añade target='_blank' a tu etiqueta <a> que apunta a bing.com."
+      "error": "Enlace a bing.com con target='_blank'."
     }
   },
   {
     "id": "10",
     "title": "2.3 Multimedia: Imágenes",
-    "guide": "<h3>Insertando Imágenes</h3><p>Una imagen vale más que mil palabras. Usamos la etiqueta <code>&lt;img&gt;</code>. <br><strong>¡Nota!</strong> Es una etiqueta vacía (no tiene cierre ni texto dentro).</p><h4>Atributos obligatorios:</h4><ol><li><strong>src (Source):</strong> La ruta o URL de la imagen.</li><li><strong>alt (Alternative Text):</strong> Una descripción para ciegos o por si la imagen falla. Es vital para la accesibilidad.</li></ol><pre>&lt;img src=\"foto.jpg\" alt=\"Un gatito\"&gt;</pre><p><strong>Misión:</strong> Muestra la imagen llamada 'logo.png' con el texto alternativo 'Logo'.</p>",
-    "initialCode": "",
+    "guide": "<h3>Insertar Fotos</h3><p>Usa <code>&lt;img&gt;</code> (sin cierre). Atributos obligatorios: <code>src</code> (ruta) y <code>alt</code> (descripción).</p><p><strong>Misión:</strong> Muestra 'logo.png' con alt 'Logo'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Imágenes</title>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
       "regex": "<img\\s+[^>]*src=['\"]logo\\.png['\"][^>]*alt=['\"]Logo['\"]",
-      "error": "Usa <img src='logo.png' alt='Logo'>. No necesitas cerrarla con </img>."
+      "error": "<img src='logo.png' alt='Logo'>."
     }
   },
   {
     "id": "11",
-    "title": "2.4 Multimedia: Audio Nativo",
-    "guide": "<h3>Reproductor de Sonido</h3><p>HTML5 trajo reproductores nativos sin necesidad de Flash ni plugins. Usamos <code>&lt;audio&gt;</code>.</p><h4>Atributos Clave:</h4><ul><li><strong>src:</strong> El archivo de audio.</li><li><strong>controls:</strong> Este atributo no tiene valor (es booleano). Si lo pones, aparece el play/pausa/volumen. Si no lo pones, el audio es invisible.</li></ul><pre>&lt;audio src=\"cancion.mp3\" controls&gt;&lt;/audio&gt;</pre><p><strong>Misión:</strong> Inserta el archivo 'audio.mp3' y asegúrate de añadir el atributo <code>controls</code>.</p>",
-    "initialCode": "",
+    "title": "2.4 Multimedia: Audio",
+    "guide": "<h3>Sonido Nativo</h3><p>Usa <code>&lt;audio&gt;</code>. Necesita el atributo <code>controls</code> para que aparezca el botón de play.</p><p><strong>Misión:</strong> Reproduce 'audio.mp3' con controles.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Audio</title>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
       "regex": "<audio\\s+[^>]*src=['\"]audio\\.mp3['\"][^>]*controls",
-      "error": "Necesitas la etiqueta <audio>, el src='audio.mp3' y el atributo controls."
+      "error": "<audio src='audio.mp3' controls>."
     }
   },
   {
     "id": "12",
     "title": "2.5 Multimedia: Video",
-    "guide": "<h3>Cine en la Web</h3><p>Similar al audio, usamos <code>&lt;video&gt;</code>. Sin embargo, los videos ocupan mucho espacio, por lo que casi siempre controlamos su tamaño.</p><h4>Atributos:</h4><ul><li><strong>src:</strong> El archivo de video.</li><li><strong>controls:</strong> Para que el usuario pueda dar play.</li><li><strong>width:</strong> El ancho en píxeles (no hace falta poner 'px', solo el número).</li></ul><pre>&lt;video src=\"eli.mp4\" width=\"400\" controls&gt;&lt;/video&gt;</pre><p><strong>Misión:</strong> Inserta el video 'video.mp4', con un ancho de 300 y controles activados.</p>",
-    "initialCode": "",
+    "guide": "<h3>Video Player</h3><p>Usa <code>&lt;video&gt;</code>. Recomendamos fijar el <code>width</code>.</p><p><strong>Misión:</strong> Video 'video.mp4', ancho 300 y controles.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Video</title>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
       "regex": "<video\\s+[^>]*src=['\"]video\\.mp4['\"][^>]*width=['\"]300['\"][^>]*controls",
-      "error": "Usa <video src='video.mp4' width='300' controls>."
+      "error": "<video src='video.mp4' width='300' controls>."
     }
   },
   {
     "id": "13",
-    "title": "2.6 Multimedia: El Favicon",
-    "guide": "<h3>El Icono de la Pestaña</h3><p>¿Ves el pequeño logo en la pestaña de tu navegador? Eso es un <strong>Favicon</strong>. Se configura en el <code>&lt;head&gt;</code>, no en el body.</p><p>Usamos la etiqueta genérica <code>&lt;link&gt;</code> (que sirve para vincular archivos externos) y le decimos su relación (<code>rel</code>).</p><pre>&lt;link rel=\"icon\" href=\"icono.png\"&gt;</pre><p><strong>¡Cuidado!</strong> Aquí se usa <code>href</code>, no <code>src</code>.</p><p><strong>Misión:</strong> Configura el archivo 'logo.png' como icono de la web dentro del head.</p>",
-    "initialCode": "<head>\n</head>",
+    "title": "2.6 Multimedia: Favicon",
+    "guide": "<h3>Icono de Pestaña</h3><p>Se pone en el <code>head</code>. Usa <code>&lt;link rel=\"icon\" href=\"...\"&gt;</code>.</p><p><strong>Misión:</strong> Pon 'logo.png' como favicon en el head.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Favicon</title>\n    <!-- Tu link aquí -->\n  </head>\n  <body>\n  </body>\n</html>",
     "validation": {
       "regex": "<link\\s+rel=['\"]icon['\"]\\s+href=['\"]logo\\.png['\"]",
-      "error": "Dentro del head: <link rel='icon' href='logo.png'>."
+      "error": "<link rel='icon' href='logo.png'> dentro del head."
     }
   },
   {
     "id": "14",
-    "title": "2.7 JEFE UNIDAD 2: El Contenedor Multimedia",
-    "guide": "<h3>📦 El Concepto de Contenedor (DIV)</h3><p>Antes del reto final, una herramienta nueva: el <code>&lt;div&gt;</code>. Un div no hace nada por sí mismo, es una <strong>caja vacía</strong>. Lo usamos para agrupar otros elementos. Imagina que metes fotos y textos en una carpeta de cartón.</p><h3>🔥 RETO FINAL UNIDAD 2</h3><p>Vamos a crear una tarjeta de perfil multimedia. Sigue estos pasos dentro del editor:</p><ol><li>Crea un <code>&lt;div&gt;</code> contenedor (hemos puesto un borde rojo para que lo veas).</li><li><strong>DENTRO del div</strong>, añade:<br> - Un título <code>h2</code> que diga 'Mis Archivos'.<br> - Un enlace a 'google.com' que abra en pestaña nueva (<code>_blank</code>).<br> - Una imagen 'logo.png' pequeña (ancho 100).<br> - Un audio 'audio.mp3' con controles.</li></ol>",
-    "initialCode": "<style>\n  /* Esto hace visible la caja div para que entiendas el concepto */\n  div { border: 3px dashed red; padding: 15px; background: #fff5f5; display: inline-block; }\n</style>\n\n<!-- Escribe tu código debajo -->",
+    "title": "2.7 JEFE UNIDAD 2: Galería",
+    "guide": "<h3>🔥 RETO FINAL UNIDAD 2</h3><p>Crea un contenedor <code>div</code> y dentro coloca:</p><ul><li>H2 'Mis Archivos'</li><li>Enlace a Google (_blank)</li><li>Imagen 'logo.png' (width 100)</li><li>Audio 'audio.mp3' (controls)</li></ul>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Reto 2</title>\n    <style>\n      /* Estilo para ver el contenedor div */\n      div { border: 2px dashed red; padding: 20px; }\n    </style>\n  </head>\n  <body>\n    <!-- Tu div aquí -->\n  </body>\n</html>",
     "validation": {
       "regex": "<div>[\\s\\S]*<h2>Mis Archivos<\\/h2>[\\s\\S]*<a[^>]*href=['\"][^'\"]*google[^'\"]*['\"][^>]*target=['\"]_blank['\"][\\s\\S]*<img[^>]*logo\\.png[^>]*width=['\"]100['\"][\\s\\S]*<audio[^>]*audio\\.mp3[^>]*controls",
-      "error": "Verifica: Div envolviendo a -> H2, Enlace (_blank), Img (logo.png, width 100) y Audio (controls)."
+      "error": "Div conteniendo: H2, Enlace (_blank), Img (width 100) y Audio (controls)."
     }
   },
   {
     "id": "15",
     "title": "3.1 Semántica: Header y Nav",
-    "guide": "<h3>Unidad 3: HTML Semántico</h3><p>Podríamos hacer toda la web usando solo <code>divs</code>, pero Google no sabría qué es el menú y qué es el pie de página. El <strong>HTML Semántico</strong> usa etiquetas con nombres lógicos para definir las partes de la web.</p><h4>La Cabecera (Header)</h4><p><code>&lt;header&gt;</code>: Se usa para la parte superior (logo, título principal).</p><h4>La Navegación (Nav)</h4><p><code>&lt;nav&gt;</code>: Se usa para envolver los enlaces del menú principal.</p><p><strong>Misión:</strong> Crea un <code>header</code> y, dentro de él, coloca un <code>nav</code> (hemos coloreado las etiquetas para que veas las áreas).</p>",
-    "initialCode": "<style>\n  header { background: #e3f2fd; padding: 20px; border: 2px solid #2196f3; margin-bottom: 10px; }\n  nav { background: #ffe0b2; padding: 10px; border: 2px dashed #ff9800; }\n</style>\n<body>\n  <!-- Escribe tu código aquí -->\n\n</body>",
+    "guide": "<h3>Unidad 3: Estructura Semántica</h3><p>Usamos etiquetas con nombre lógico. <code>header</code> (cabecera) y <code>nav</code> (menú).</p><p><strong>Misión:</strong> Un header que contenga un nav dentro.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Semántica I</title>\n    <style>\n      header { background: #e3f2fd; padding: 20px; border: 2px solid #2196f3; }\n      nav { background: #ffe0b2; padding: 10px; border: 2px dashed #ff9800; }\n    </style>\n  </head>\n  <body>\n    <!-- Tu código aquí -->\n  </body>\n</html>",
     "validation": {
       "regex": "<header>\\s*<nav>[\\s\\S]*<\\/nav>\\s*<\\/header>",
-      "error": "Coloca las etiquetas: <header> y dentro <nav>."
+      "error": "<header> envolviendo a un <nav>."
     }
   },
   {
     "id": "16",
     "title": "3.2 Semántica: Main y Section",
-    "guide": "<h3>El Cuerpo del Contenido</h3><p>Después de la cabecera, viene el contenido.</p><h4>Main (Principal)</h4><p><code>&lt;main&gt;</code>: Indica el contenido único y central de la página. Solo debe haber uno por página.</p><h4>Section (Sección)</h4><p><code>&lt;section&gt;</code>: Sirve para dividir el contenido en temas (como los capítulos de un libro). Por ejemplo: sección de 'Sobre mí', sección de 'Contacto'.</p><p><strong>Misión:</strong> Crea un bloque <code>main</code> y dentro coloca una <code>section</code>.</p>",
-    "initialCode": "<style>\n  main { background: #e8f5e9; padding: 20px; border: 2px solid #4caf50; min-height: 100px; }\n  section { background: white; padding: 10px; border: 1px solid #999; margin: 10px 0; }\n</style>\n<!-- Escribe tu código aquí -->\n",
+    "guide": "<h3>Contenido Principal</h3><p><code>main</code> es para lo importante y <code>section</code> para dividir temas.</p><p><strong>Misión:</strong> Un main con una section dentro.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Semántica II</title>\n    <style>\n      main { background: #e8f5e9; padding: 20px; border: 2px solid #4caf50; }\n      section { background: white; padding: 10px; border: 1px solid #999; margin: 10px 0; }\n    </style>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
       "regex": "<main>\\s*<section>[\\s\\S]*<\\/section>\\s*<\\/main>",
-      "error": "Estructura requerida: <main> envolviendo a una <section>."
+      "error": "<main> envolviendo a una <section>."
     }
   },
   {
     "id": "17",
     "title": "3.3 Semántica: Article y Footer",
-    "guide": "<h3>Contenido Independiente y Pie</h3><h4>Article (Artículo)</h4><p><code>&lt;article&gt;</code>: Se usa para contenido que tiene sentido por sí mismo, como una noticia, un post de blog o un tweet. Si lo sacas de la web y lo pones en otro lado, ¿se entiende? Entonces es un article.</p><h4>Footer (Pie de página)</h4><p><code>&lt;footer&gt;</code>: La zona inferior con copyright, enlaces legales y contacto.</p><p><strong>Misión:</strong> Crea un <code>article</code> y, <strong>después</strong> (fuera de él), un <code>footer</code>.</p>",
-    "initialCode": "<style>\n  article { background: #f5f5f5; padding: 15px; border-left: 5px solid #333; margin-bottom: 20px; }\n  footer { background: #333; color: white; padding: 10px; text-align: center; }\n</style>\n<!-- Escribe tu código aquí -->\n",
+    "guide": "<h3>Artículos y Pie</h3><p><code>article</code> para contenido independiente (posts) y <code>footer</code> para el final.</p><p><strong>Misión:</strong> Crea un article y, fuera de él, un footer.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Semántica III</title>\n    <style>\n      article { background: #f5f5f5; padding: 15px; border-left: 5px solid #333; }\n      footer { background: #333; color: white; padding: 10px; margin-top: 20px; }\n    </style>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
       "regex": "<article>[\\s\\S]*<\\/article>\\s*<footer>[\\s\\S]*<\\/footer>",
-      "error": "Coloca un <article> y después un <footer>."
+      "error": "Un <article> seguido de un <footer>."
     }
   },
   {
     "id": "18",
-    "title": "3.4 Estructura: Class y Span",
-    "guide": "<h3>Identificando Elementos</h3><p>Hasta ahora usábamos etiquetas estándar. ¿Pero qué pasa si quiero dos divs diferentes? Usamos el atributo <strong>class</strong>.</p><pre>&lt;div class=\"tarjeta\"&gt;...&lt;/div&gt;</pre><h4>Span (Texto en línea)</h4><p>El <code>&lt;span&gt;</code> es como un div, pero para trozos pequeños de texto en la misma línea. Se usa para colorear o destacar una sola palabra.</p><p><strong>Misión:</strong> Crea un div con <code>class='caja'</code> (hemos programado CSS para que esa clase tenga borde morado). Dentro del div, pon un <code>span</code> con algo de texto.</p>",
-    "initialCode": "<style>\n  .caja { border: 2px dotted purple; padding: 20px; background: #f3e5f5; }\n  span { background: yellow; font-weight: bold; }\n</style>\n<!-- Escribe tu código aquí -->\n",
+    "title": "3.4 Estructura: Class",
+    "guide": "<h3>Clases CSS</h3><p>El atributo <code>class=\"nombre\"</code> conecta HTML con CSS.</p><p><strong>Misión:</strong> Un div con <strong>class='caja'</strong> y dentro un span con texto.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Clases</title>\n    <style>\n      .caja { border: 2px dotted purple; padding: 20px; background: #f3e5f5; }\n      span { background: yellow; font-weight: bold; }\n    </style>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
       "regex": "<div\\s+class=['\"]caja['\"]>\\s*<span>[\\s\\S]*<\\/span>\\s*<\\/div>",
-      "error": "Necesitas <div class='caja'> y dentro un <span>."
+      "error": "<div class='caja'> con un <span> dentro."
     }
   },
   {
     "id": "19",
     "title": "3.5 Estructura: Separadores",
-    "guide": "<h3>Cortando el Flujo</h3><p>A veces necesitas forzar espacios visuales.</p><h4>Salto de Línea (Break)</h4><p><code>&lt;br&gt;</code>: Corta la línea y baja al renglón siguiente. Es una etiqueta vacía.</p><h4>Línea Horizontal (Horizontal Rule)</h4><p><code>&lt;hr&gt;</code>: Dibuja una línea separadora visual. También es vacía.</p><p><strong>Misión:</strong> Escribe 'Hola', luego un <code>br</code>, luego 'Mundo', y finalmente un <code>hr</code>.</p>",
-    "initialCode": "",
+    "guide": "<h3>Saltos y Líneas</h3><p><code>br</code> (salto de línea) y <code>hr</code> (línea horizontal).</p><p><strong>Misión:</strong> Texto, br, Texto, hr.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Separadores</title>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
       "regex": ".+<br\\s*\\/?>.+<hr\\s*\\/?>",
-      "error": "Escribe texto, luego <br>, luego más texto, luego <hr>."
+      "error": "Texto, luego <br>, luego texto, luego <hr>."
     }
   },
   {
     "id": "20",
-    "title": "3.6 Estructura: Acordeones (Details)",
-    "guide": "<h3>Elementos Interactivos Nativos</h3><p>HTML5 permite crear desplegables sin usar JavaScript.</p><ul><li><code>&lt;details&gt;</code>: El contenedor que se abre y cierra.</li><li><code>&lt;summary&gt;</code>: El título visible siempre (el botón para abrir).</li></ul><p>Todo lo que pongas dentro de <code>details</code> (después del summary) estará oculto hasta que el usuario haga clic.</p><p><strong>Misión:</strong> Crea un <code>details</code> cuyo <code>summary</code> sea 'Ver más'.</p>",
-    "initialCode": "<style>\n  details { background: #e0f7fa; padding: 10px; border-radius: 5px; }\n  summary { cursor: pointer; font-weight: bold; color: #006064; }\n</style>\n<!-- Escribe tu código aquí -->\n",
+    "title": "3.6 Estructura: Details",
+    "guide": "<h3>Desplegables Nativos</h3><p><code>details</code> (contenedor) y <code>summary</code> (título clickeable).</p><p><strong>Misión:</strong> Details con summary 'Ver más'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Details</title>\n    <style>\n      details { background: #e0f7fa; padding: 10px; border-radius: 5px; }\n      summary { cursor: pointer; font-weight: bold; color: #006064; }\n    </style>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
       "regex": "<details>\\s*<summary>\\s*Ver más\\s*<\\/summary>[\\s\\S]*?<\\/details>",
-      "error": "Estructura: <details> conteniendo <summary>Ver más</summary>."
+      "error": "<details> con <summary>Ver más</summary>."
     }
   },
   {
     "id": "21",
-    "title": "3.7 JEFE UNIDAD 3: Maquetando un Blog",
-    "guide": "<h3>🔥 RETO FINAL UNIDAD 3</h3><p>Vas a construir la estructura semántica de un sitio web moderno. Hemos precargado CSS para que, si usas las etiquetas correctas, se vea espectacular automáticamente.</p><h4>Plano de Construcción:</h4><ol><li><strong>Cabecera:</strong> Un <code>header</code> con un <code>h1</code> dentro.</li><li><strong>Menú:</strong> Un <code>nav</code> con dos enlaces <code>a</code> dentro.</li><li><strong>Cuerpo:</strong> Un <code>main</code>.</li><li><strong>Contenido:</strong> DENTRO del main, un <code>article</code>.</li><li><strong>Pie:</strong> FUERA del main, un <code>footer</code>.</li></ol>",
-    "initialCode": "<style>\n  body { font-family: sans-serif; display: flex; flex-direction: column; gap: 10px; }\n  header { background: #2c3e50; color: white; padding: 1rem; text-align: center; border-radius: 5px; }\n  nav { background: #34495e; padding: 10px; text-align: center; border-radius: 5px; }\n  nav a { color: white; margin: 0 10px; text-decoration: none; font-weight: bold; }\n  main { padding: 20px; background: #ecf0f1; border-radius: 5px; min-height: 150px; }\n  article { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }\n  footer { background: #2c3e50; color: white; text-align: center; padding: 1rem; margin-top: auto; border-radius: 5px; }\n</style>\n<body>\n  <!-- Construye tu blog aquí -->\n\n</body>",
+    "title": "3.7 JEFE UNIDAD 3: Blog Layout",
+    "guide": "<h3>🔥 RETO FINAL UNIDAD 3</h3><p>Estructura de blog completa:</p><ul><li>Header (con h1)</li><li>Nav (con 2 enlaces)</li><li>Main (con Article dentro)</li><li>Footer</li></ul>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Blog</title>\n    <style>\n      header { background: #2c3e50; color: white; padding: 1rem; text-align: center; }\n      nav { background: #34495e; padding: 0.5rem; text-align: center; }\n      nav a { color: white; margin: 0 10px; text-decoration: none; }\n      main { padding: 20px; background: #ecf0f1; min-height: 100px; }\n      article { background: white; padding: 20px; border-radius: 8px; }\n      footer { background: #2c3e50; color: white; text-align: center; padding: 1rem; margin-top: 20px; }\n    </style>\n  </head>\n  <body>\n    <!-- Tu estructura aquí -->\n\n  </body>\n</html>",
     "validation": {
       "regex": "<header>\\s*<h1>[\\s\\S]*<\\/h1>\\s*<\\/header>\\s*<nav>\\s*<a[\\s\\S]*<a[\\s\\S]*<\\/nav>\\s*<main>\\s*<article>[\\s\\S]*<\\/article>\\s*<\\/main>\\s*<footer>[\\s\\S]*<\\/footer>",
-      "error": "Sigue el orden estricto: Header(h1) -> Nav(2 links) -> Main(Article) -> Footer."
+      "error": "Header(h1) + Nav(2 links) + Main(article) + Footer."
     }
   },
   {
     "id": "22",
-    "title": "4.1 Formularios: Recogiendo Datos",
-    "guide": "<h3>Unidad 4: Interactividad</h3><p>Para que el usuario nos envíe datos, usamos formularios. Todo comienza con la etiqueta contenedora <code>&lt;form&gt;</code>.</p><h4>Input de Texto</h4><p>La etiqueta más común es <code>&lt;input&gt;</code>. Es vacía. <br>El atributo <code>placeholder</code> muestra un texto gris de ayuda que desaparece al escribir.</p><pre>&lt;input type=\"text\" placeholder=\"Escribe aquí...\"&gt;</pre><p><strong>Misión:</strong> Crea un formulario <code>form</code> y dentro un input de texto con placeholder 'Nombre'.</p>",
-    "initialCode": "",
+    "title": "4.1 Formularios: Input",
+    "guide": "<h3>Unidad 4: Datos</h3><p>Usa <code>form</code>. Dentro, <code>input type=\"text\"</code>.</p><p><strong>Misión:</strong> Form con input (placeholder 'Nombre').</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Formularios</title>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
       "regex": "<form>\\s*<input\\s+type=['\"]text['\"]\\s+placeholder=['\"]Nombre['\"]",
-      "error": "Crea un <form> y dentro un <input type='text' placeholder='Nombre'>."
+      "error": "<form> con input type='text' y placeholder 'Nombre'."
     }
   },
   {
     "id": "23",
-    "title": "4.2 Formularios: Labels y Accesibilidad",
-    "guide": "<h3>Etiquetando Campos</h3><p>Un input solo no dice nada. Necesitamos una etiqueta de texto: <code>&lt;label&gt;</code>.</p><h4>El vínculo mágico: ID y FOR</h4><p>Para que al hacer clic en el texto 'Edad' el cursor se active en la casilla, debemos vincularlos:</p><ol><li>Al input le ponemos un nombre único: <code>id=\"mi-id\"</code>.</li><li>Al label le decimos a quién apunta: <code>for=\"mi-id\"</code>.</li></ol><pre>&lt;label for=\"x\"&gt;Email:&lt;/label&gt;\n&lt;input id=\"x\" type=\"text\"&gt;</pre><p><strong>Misión:</strong> Crea un label con texto 'Edad' (vinculado a 'edad') y un input con id 'edad'.</p>",
-    "initialCode": "<form>\n  <input type=\"text\" placeholder=\"Nombre\"><br>\n  <!-- Tu código aquí -->\n</form>",
+    "title": "4.2 Formularios: Labels",
+    "guide": "<h3>Etiquetas</h3><p>Vincula con <code>for</code> (en label) e <code>id</code> (en input).</p><p><strong>Misión:</strong> Label 'Edad' vinculado a input id 'edad'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Labels</title>\n  </head>\n  <body>\n    <form>\n      \n    </form>\n  </body>\n</html>",
     "validation": {
       "regex": "<label\\s+for=['\"]edad['\"]>Edad<\\/label>\\s*<input\\s+[^>]*id=['\"]edad['\"]",
-      "error": "El 'for' del label debe coincidir con el 'id' del input (ambos 'edad')."
+      "error": "Label for='edad' y input id='edad'."
     }
   },
   {
     "id": "24",
-    "title": "4.3 Formularios: Tipos de Datos",
-    "guide": "<h3>Validación Automática</h3><p>El navegador nos ayuda si elegimos el <code>type</code> correcto en el input:</p><ul><li><code>type=\"password\"</code>: Oculta los caracteres con puntos.</li><li><code>type=\"email\"</code>: Obliga a que el texto tenga una '@' al enviar.</li><li><code>type=\"number\"</code>: Solo permite números.</li></ul><p><strong>Misión:</strong> Añade dos inputs más al formulario: uno de tipo password y otro de tipo email.</p>",
-    "initialCode": "<form>\n  <label>Nombre:</label> <input type=\"text\"><br>\n  \n</form>",
+    "title": "4.3 Formularios: Tipos",
+    "guide": "<h3>Password y Email</h3><p><code>type=\"password\"</code> y <code>type=\"email\"</code>.</p><p><strong>Misión:</strong> Añade ambos inputs.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Tipos</title>\n  </head>\n  <body>\n    <form>\n      \n    </form>\n  </body>\n</html>",
     "validation": {
       "regex": "<input[^>]*type=['\"]password['\"][\\s\\S]*<input[^>]*type=['\"]email['\"]",
-      "error": "Añade un <input type='password'> y un <input type='email'>."
+      "error": "Un input password y un input email."
     }
   },
   {
     "id": "25",
-    "title": "4.4 Formularios: Elecciones",
-    "guide": "<h3>Checkbox y Radio</h3><h4>Checkbox (Casilla)</h4><p>Para opciones de Sí/No o selección múltiple. <code>type=\"checkbox\"</code>.</p><h4>Radio Buttons (Opción única)</h4><p>Para elegir UNA opción entre varias (ej: Sexo, Talla). <code>type=\"radio\"</code>.<br><strong>Truco:</strong> Para que funcionen como grupo (si marcas uno se desmarca el otro), todos deben tener el <strong>mismo atributo <code>name</code></strong>.</p><pre>&lt;input type=\"radio\" name=\"talla\"&gt; S\n&lt;input type=\"radio\" name=\"talla\"&gt; M</pre><p><strong>Misión:</strong> Crea un checkbox 'Acepto' y dos radios 'Si/No' que compartan el name='opcion'.</p>",
-    "initialCode": "<form>\n  <h3>Encuesta</h3>\n  \n</form>",
+    "title": "4.4 Formularios: Selección",
+    "guide": "<h3>Checks y Radios</h3><p>Radios del mismo grupo necesitan mismo <code>name</code>.</p><p><strong>Misión:</strong> Checkbox 'Acepto' y 2 Radios (name='opcion').</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Selección</title>\n  </head>\n  <body>\n    <form>\n      \n    </form>\n  </body>\n</html>",
     "validation": {
       "regex": "<input[^>]*checkbox[^>]*>\\s*Acepto[\\s\\S]*<input[^>]*radio[^>]*name=['\"]opcion['\"][\\s\\S]*<input[^>]*radio[^>]*name=['\"]opcion['\"]",
-      "error": "Necesitas: 1 checkbox con texto Acepto, y 2 radios con name='opcion'."
+      "error": "Checkbox 'Acepto' y 2 Radios con name='opcion'."
     }
   },
   {
     "id": "26",
-    "title": "4.5 Formularios: Selectores",
-    "guide": "<h3>Menús Desplegables</h3><p>Para ahorrar espacio con muchas opciones (como elegir país), usamos <code>&lt;select&gt;</code>.</p><p>Dentro del select, cada opción es un <code>&lt;option&gt;</code>.</p><pre>&lt;select&gt;\n  &lt;option&gt;Rojo&lt;/option&gt;\n  &lt;option&gt;Verde&lt;/option&gt;\n&lt;/select&gt;</pre><p><strong>Misión:</strong> Crea un selector con dos opciones: 'Madrid' y 'Barcelona'.</p>",
-    "initialCode": "<form>\n  <label>Ciudad:</label>\n  \n</form>",
+    "title": "4.5 Formularios: Desplegable",
+    "guide": "<h3>Select y Option</h3><p>Lista desplegable.</p><p><strong>Misión:</strong> Select con opciones 'Madrid' y 'Barcelona'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Select</title>\n  </head>\n  <body>\n    <form>\n      \n    </form>\n  </body>\n</html>",
     "validation": {
       "regex": "<select>\\s*<option>Madrid<\\/option>\\s*<option>Barcelona<\\/option>\\s*<\\/select>",
-      "error": "Usa <select> envolviendo a dos <option> (Madrid y Barcelona)."
+      "error": "<select> con options Madrid y Barcelona."
     }
   },
   {
     "id": "27",
     "title": "4.6 Formularios: Enviar",
-    "guide": "<h3>Botones y Obligaciones</h3><h4>Hacerlo obligatorio</h4><p>Si añades el atributo <code>required</code> a un input, el navegador no dejará enviar el formulario si está vacío.</p><h4>El Botón de Envío</h4><p>Para procesar el formulario, usamos <code>&lt;button type=\"submit\"&gt;Enviar&lt;/button&gt;</code>. Debe estar dentro del <code>&lt;form&gt;</code>.</p><p><strong>Misión:</strong> Crea un input con el atributo <code>required</code> y un botón de tipo submit.</p>",
-    "initialCode": "<form>\n  \n</form>",
+    "guide": "<h3>Botón Submit</h3><p><code>&lt;button type=\"submit\"&gt;Enviar&lt;/button&gt;</code>.</p><p><strong>Misión:</strong> Input 'required' y botón submit.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Submit</title>\n  </head>\n  <body>\n    <form>\n      \n    </form>\n  </body>\n</html>",
     "validation": {
       "regex": "<input[^>]*required[\\s\\S]*<button\\s+type=['\"]submit['\"]>Enviar<\\/button>",
-      "error": "Input con atributo 'required' y un button type='submit'."
+      "error": "Input con required y botón submit 'Enviar'."
     }
   },
   {
     "id": "28",
-    "title": "4.7 JEFE UNIDAD 4: Pantalla de Login",
-    "guide": "<h3>🔥 RETO FINAL UNIDAD 4</h3><p>Vamos a crear un formulario de registro completo y profesional.</p><h4>Especificaciones:</h4><p>Todo debe ir dentro de un <code>form</code>:</p><ol><li><strong>Usuario:</strong> Input de texto, obligatorio (required).</li><li><strong>Contraseña:</strong> Input de tipo password.</li><li><strong>País:</strong> Un select con al menos 2 países.</li><li><strong>Términos:</strong> Un checkbox que diga 'Recordarme'.</li><li><strong>Acción:</strong> Un botón 'Entrar' para enviar.</li></ol>",
-    "initialCode": "<style>\n  form { background: #eee; padding: 20px; border-radius: 10px; max-width: 300px; display: flex; flex-direction: column; gap: 10px; }\n</style>\n\n<!-- Tu formulario aquí -->",
+    "title": "4.7 JEFE UNIDAD 4: Login",
+    "guide": "<h3>🔥 RETO FINAL UNIDAD 4</h3><p>Formulario Completo:</p><ul><li>Input Texto (required)</li><li>Input Password</li><li>Select (2 países)</li><li>Checkbox 'Recordarme'</li><li>Botón Entrar</li></ul>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Login</title>\n    <style>\n      form { background: #eee; padding: 20px; border-radius: 10px; max-width: 300px; display: flex; flex-direction: column; gap: 10px; }\n    </style>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
       "regex": "<form>[\\s\\S]*<input[^>]*text[^>]*required[\\s\\S]*<input[^>]*password[\\s\\S]*<select>[\\s\\S]*<option>[\\s\\S]*<option>[\\s\\S]*<\\/select>[\\s\\S]*<input[^>]*checkbox[\\s\\S]*<button[^>]*submit",
-      "error": "Verifica: Form > Input Text Required > Input Password > Select (2 opts) > Checkbox > Button Submit."
+      "error": "Form con: Text(required), Password, Select(2 opts), Checkbox, Button."
     }
   },
   {
     "id": "29",
-    "title": "5.1 Tablas: La Rejilla Básica",
-    "guide": "<h3>Unidad 5: Datos Estructurados</h3><p>Las tablas sirven para mostrar datos (Excel), no para maquetar la web. Su estructura es estricta.</p><h4>Jerarquía:</h4><ol><li><code>&lt;table&gt;</code>: El contenedor.</li><li><code>&lt;tr&gt;</code> (Table Row): Cada fila horizontal.</li><li><code>&lt;td&gt;</code> (Table Data): Cada celda dentro de la fila.</li></ol><pre>&lt;table&gt;\n  &lt;tr&gt;\n    &lt;td&gt;Celda 1&lt;/td&gt;\n    &lt;td&gt;Celda 2&lt;/td&gt;\n  &lt;/tr&gt;\n&lt;/table&gt;</pre><p><strong>Misión:</strong> Crea una tabla con una fila y dos celdas ('A' y 'B').</p>",
-    "initialCode": "",
+    "title": "5.1 Tablas: Básicas",
+    "guide": "<h3>Unidad 5: Tablas</h3><p><code>table</code> > <code>tr</code> (fila) > <code>td</code> (dato).</p><p><strong>Misión:</strong> Tabla de 1 fila y 2 celdas ('A' y 'B').</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Tablas</title>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
       "regex": "<table>\\s*<tr>\\s*<td>A<\\/td>\\s*<td>B<\\/td>\\s*<\\/tr>\\s*<\\/table>",
-      "error": "Table > TR > dos TDs con 'A' y 'B'."
+      "error": "Table > TR > dos TDs (A y B)."
     }
   },
   {
     "id": "30",
-    "title": "5.2 Tablas: Cabeceras Semánticas",
-    "guide": "<h3>Organizando la Tabla</h3><p>Una tabla profesional divide los encabezados de los datos.</p><ul><li><code>&lt;thead&gt;</code>: Zona de títulos. Aquí usamos <code>&lt;th&gt;</code> (Table Header) en lugar de <code>td</code>. Se ponen en negrita automáticamente.</li><li><code>&lt;tbody&gt;</code>: Zona de datos (aquí usamos <code>td</code> normales).</li></ul><p><strong>Misión:</strong> Crea un <code>thead</code> con un título <code>th</code> 'Precio', y un <code>tbody</code> con una celda <code>td</code> '10€'. Recuerda las filas <code>tr</code>.</p>",
-    "initialCode": "<style>table, th, td { border: 1px solid black; }</style>\n<table>\n  <!-- Escribe dentro -->\n</table>",
+    "title": "5.2 Tablas: Cabeceras",
+    "guide": "<h3>Thead y Tbody</h3><p>Usa <code>th</code> para cabeceras.</p><p><strong>Misión:</strong> Thead (TH 'Precio') y Tbody (TD '10€').</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Cabeceras</title>\n    <style>table, th, td { border: 1px solid black; }</style>\n  </head>\n  <body>\n    <table>\n      <!-- Código aquí -->\n    </table>\n  </body>\n</html>",
     "validation": {
       "regex": "<thead>\\s*<tr>\\s*<th>Precio<\\/th>\\s*<\\/tr>\\s*<\\/thead>\\s*<tbody>\\s*<tr>\\s*<td>10€<\\/td>",
-      "error": "Estructura: thead > tr > th(Precio) ... tbody > tr > td(10€)."
+      "error": "Thead(TH Precio) y Tbody(TD 10€)."
     }
   },
   {
     "id": "31",
-    "title": "5.3 Tablas: Fusión de Celdas",
-    "guide": "<h3>Rompiendo la Rejilla</h3><p>¿Y si quiero que una celda ocupe el ancho de dos columnas? Usamos el atributo <code>colspan</code> (column span).</p><pre>&lt;td colspan=\"2\"&gt;Esta celda es doble&lt;/td&gt;</pre><p><strong>Misión:</strong> Crea una fila con una sola celda <code>td</code> que tenga el texto 'Total' y ocupe 2 columnas.</p>",
-    "initialCode": "<style>table, td { border: 1px solid black; }</style>\n<table>\n  <tr> <td>A</td> <td>B</td> </tr>\n  <tr> \n    <!-- Tu celda fusionada aquí -->\n  </tr>\n</table>",
+    "title": "5.3 Tablas: Fusión",
+    "guide": "<h3>Colspan</h3><p>Fusionar columnas.</p><p><strong>Misión:</strong> TD con colspan='2' y texto 'Total'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Colspan</title>\n    <style>table, td { border: 1px solid black; }</style>\n  </head>\n  <body>\n    <table>\n      <tr><td>A</td><td>B</td></tr>\n      <tr>\n        <!-- Tu celda aquí -->\n      </tr>\n    </table>\n  </body>\n</html>",
     "validation": {
       "regex": "<td\\s+colspan=['\"]2['\"]>Total<\\/td>",
-      "error": "Crea un <td colspan='2'>Total</td>."
+      "error": "TD con colspan='2' y texto Total."
     }
   },
   {
     "id": "32",
-    "title": "5.4 CSS: Introducción al Estilo",
-    "guide": "<h3>Dando Color</h3><p>HTML es estructura, CSS es estilo. Aunque lo ideal es usar archivos separados, aprenderemos usando el atributo <code>style</code> (CSS en línea).</p><h4>Sintaxis CSS</h4><p><code>propiedad: valor;</code> (siempre acaba en punto y coma).</p><ul><li><code>color</code>: Color del texto.</li><li><code>background-color</code>: Color de fondo.</li></ul><p><strong>Misión:</strong> Crea un <code>div</code> con estilo: texto rojo y fondo negro.</p>",
-    "initialCode": "",
+    "title": "5.4 CSS: Color",
+    "guide": "<h3>Estilo Inline</h3><p><code>style=\"color: red; background-color: black;\"</code>.</p><p><strong>Misión:</strong> Div texto rojo fondo negro.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>CSS Color</title>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
       "regex": "<div\\s+style=['\"]color:\\s*red;\\s*background-color:\\s*black;?['\"]>",
-      "error": "Usa style='color: red; background-color: black;' dentro del div."
+      "error": "Div con style='color: red; background-color: black;'."
     }
   },
   {
     "id": "33",
-    "title": "5.5 CSS: Tipografía",
-    "guide": "<h3>Formato de Texto</h3><p>Cambiemos el aspecto de las letras.</p><ul><li><code>font-size</code>: Tamaño (ej: 20px).</li><li><code>text-align</code>: Alineación (ej: center, right, left).</li></ul><p><strong>Misión:</strong> Un párrafo <code>p</code> con tamaño 20px y alineado al centro.</p>",
-    "initialCode": "",
+    "title": "5.5 CSS: Texto",
+    "guide": "<h3>Formato</h3><p><code>font-size</code> y <code>text-align</code>.</p><p><strong>Misión:</strong> Párrafo de 20px centrado.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>CSS Texto</title>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
       "regex": "<p\\s+style=['\"]font-size:\\s*20px;\\s*text-align:\\s*center;?['\"]>",
-      "error": "Usa style='font-size: 20px; text-align: center;'."
+      "error": "P con style='font-size: 20px; text-align: center;'."
     }
   },
   {
     "id": "34",
-    "title": "5.6 CSS: El Modelo de Caja",
-    "guide": "<h3>Espaciado: Padding vs Margin</h3><p>Este es el concepto más importante de diseño.</p><ul><li><strong>Padding (Relleno):</strong> Espacio DENTRO de la caja, entre el borde y el texto. (Engorda la caja).</li><li><strong>Margin (Margen):</strong> Espacio FUERA de la caja, para separarla de los vecinos. (Empuja la caja).</li></ul><p><strong>Misión:</strong> Crea un <code>button</code> con 10px de padding y 5px de margin.</p>",
-    "initialCode": "<button>Normal</button>\n<!-- Tu botón modificado -->",
+    "title": "5.6 CSS: Espaciado",
+    "guide": "<h3>Padding y Margin</h3><p>Relleno interno y margen externo.</p><p><strong>Misión:</strong> Botón (padding 10px, margin 5px).</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>CSS Espaciado</title>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
       "regex": "<button\\s+style=['\"]padding:\\s*10px;\\s*margin:\\s*5px;?['\"]>",
-      "error": "Style con padding: 10px; y margin: 5px;."
+      "error": "Button con padding:10px y margin:5px."
     }
   },
   {
     "id": "35",
-    "title": "5.7 JEFE UNIDAD 5: La Factura",
-    "guide": "<h3>🔥 RETO FINAL UNIDAD 5</h3><p>Combina tablas y CSS para hacer una factura visualmente clara.</p><h4>Instrucciones:</h4><ol><li>Crea una <code>table</code> y dale estilo de fondo gris (<code>background-color: lightgray</code>).</li><li>Añade un <code>thead</code> con dos cabeceras: 'Producto' y 'Precio'.</li><li>Añade un <code>tbody</code> con una fila: 'Pan' y '1€'.</li><li>Añade una última fila con una celda fusionada (colspan 2) que diga 'Total: 1€'.</li></ol>",
-    "initialCode": "",
+    "title": "5.7 JEFE UNIDAD 5: Factura",
+    "guide": "<h3>🔥 RETO FINAL UNIDAD 5</h3><p>Factura completa:</p><ul><li>Tabla fondo 'lightgray'</li><li>Thead: Producto, Precio</li><li>Tbody: Pan, 1€</li><li>TD final colspan 2: Total: 1€</li></ul>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Factura</title>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
       "regex": "<table\\s+style=['\"]background-color:\\s*lightgray;?['\"]>[\\s\\S]*<thead>[\\s\\S]*<th>Producto<\\/th>[\\s\\S]*<th>Precio<\\/th>[\\s\\S]*<tbody>[\\s\\S]*<td>Pan<\\/td>[\\s\\S]*<td>1€<\\/td>[\\s\\S]*<td\\s+colspan=['\"]2['\"]>Total: 1€<\\/td>",
-      "error": "Verifica: Table(bg gray) > Thead(Producto, Precio) > Tbody(Fila Pan, Fila Total con colspan 2)."
+      "error": "Tabla gris, thead(Producto/Precio), tbody(Pan/1€), td final(colspan 2)."
     }
   },
   {
     "id": "36",
-    "title": "6.1 JS: El Despertar",
-    "guide": "<h3>Unidad 6: Programación en JavaScript</h3><p>HTML define qué hay. CSS define cómo se ve. <strong>JavaScript (JS)</strong> define qué hace (lógica).</p><p>Para escribir JS dentro de HTML, usamos la etiqueta <code>&lt;script&gt;</code>.</p><h4>La Consola</h4><p>Los programadores usan la consola para enviar mensajes ocultos al sistema. El comando es <code>console.log('Mensaje')</code>.</p><p><strong>Misión:</strong> Escribe un script que envíe 'Hola' a la consola.</p>",
-    "initialCode": "",
+    "title": "6.1 JS: Hola Mundo",
+    "guide": "<h3>Unidad 6: JavaScript</h3><p>Usa <code>&lt;script&gt;</code>.</p><p><strong>Misión:</strong> <code>console.log('Hola')</code>.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>JS Hola</title>\n  </head>\n  <body>\n    <script>\n      // Escribe aquí\n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "<script>\\s*console\\.log\\(['\"]Hola['\"]\\);?\\s*<\\/script>",
-      "error": "Dentro de <script>, escribe console.log('Hola')."
+      "error": "Script con console.log('Hola')."
     }
   },
   {
     "id": "37",
     "title": "6.2 JS: Variables",
-    "guide": "<h3>Cajas de Memoria</h3><p>Una variable es una caja con un nombre donde guardamos un dato. En JS moderno usamos <code>let</code>.</p><pre>let puntuacion = 0;</pre><p>Ahora, cada vez que usemos la palabra `puntuacion`, el ordenador entenderá `0`.</p><p><strong>Misión:</strong> Declara una variable llamada <code>x</code> y asígnale el valor <code>10</code> dentro del script.</p>",
-    "initialCode": "<script>\n  // Escribe aquí\n</script>",
+    "guide": "<h3>Let</h3><p>Guardar datos.</p><p><strong>Misión:</strong> <code>let x = 10</code>.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Variables</title>\n  </head>\n  <body>\n    <script>\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "let\\s+x\\s*=\\s*10;?",
-      "error": "Usa: let x = 10;"
+      "error": "Escribe let x = 10."
     }
   },
   {
     "id": "38",
-    "title": "6.3 JS: Tipos de Datos",
-    "guide": "<h3>Strings vs Números</h3><p>Es vital diferenciar texto de números.</p><ul><li><strong>String (Cadena):</strong> Texto. SIEMPRE va entre comillas. <code>'Hola'</code>.</li><li><strong>Number:</strong> Valor matemático. NUNCA lleva comillas. <code>25</code>.</li></ul><p>Si pones <code>'25'</code> (con comillas), JS creerá que es una palabra y no podrá sumar matemáticas correctamente.</p><p><strong>Misión:</strong> Crea una variable <code>nombre</code> con valor 'Ana' (texto) y una variable <code>edad</code> con valor 25 (número).</p>",
-    "initialCode": "<script>\n  \n</script>",
+    "title": "6.3 JS: Tipos",
+    "guide": "<h3>String y Number</h3><p>Texto vs Número.</p><p><strong>Misión:</strong> nombre='Ana', edad=25.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Tipos</title>\n  </head>\n  <body>\n    <script>\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "let\\s+nombre\\s*=\\s*['\"]Ana['\"];?\\s*let\\s+edad\\s*=\\s*25;?",
-      "error": "Define: let nombre = 'Ana'; y let edad = 25;"
+      "error": "Variable nombre='Ana' y edad=25."
     }
   },
   {
     "id": "39",
-    "title": "6.4 JS: Interacción Básica",
-    "guide": "<h3>Alertas Molestas</h3><p>La forma más primitiva de hablar con el usuario es <code>alert()</code>. Detiene toda la ejecución de la página hasta que el usuario acepta.</p><p><strong>Misión:</strong> Haz que la página salude con un alert que diga 'Bienvenido'.</p>",
-    "initialCode": "<script>\n  \n</script>",
+    "title": "6.4 JS: Alertas",
+    "guide": "<h3>Popups</h3><p>Mensaje bloqueante.</p><p><strong>Misión:</strong> <code>alert('Bienvenido')</code>.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Alert</title>\n  </head>\n  <body>\n    <script>\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "alert\\(['\"]Bienvenido['\"]\\)",
-      "error": "Escribe alert('Bienvenido')."
+      "error": "alert('Bienvenido')."
     }
   },
   {
     "id": "40",
-    "title": "6.5 JS: Recibir Datos",
-    "guide": "<h3>El Prompt</h3><p><code>prompt()</code> es como un alert, pero tiene un campo de texto para que el usuario responda. Lo que el usuario escribe, podemos guardarlo en una variable.</p><pre>let respuesta = prompt('¿Color favorito?');</pre><p><strong>Misión:</strong> Usa prompt para preguntar '¿Tu nombre?' (no hace falta guardar la respuesta aún).</p>",
-    "initialCode": "<script>\n  \n</script>",
+    "title": "6.5 JS: Prompt",
+    "guide": "<h3>Preguntar</h3><p>Pedir datos.</p><p><strong>Misión:</strong> <code>prompt('¿Tu nombre?')</code>.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Prompt</title>\n  </head>\n  <body>\n    <script>\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "prompt\\(['\"]¿?Tu nombre\\??['\"]\\)",
-      "error": "Usa prompt('¿Tu nombre?')."
+      "error": "prompt('¿Tu nombre?')."
     }
   },
   {
     "id": "41",
-    "title": "6.6 JS: Operaciones Matemáticas",
-    "guide": "<h3>Calculadora</h3><p>JS puede sumar (<code>+</code>), restar (<code>-</code>), multiplicar (<code>*</code>) y dividir (<code>/</code>). Puedes usar variables en las operaciones.</p><pre>let total = precio + envio;</pre><p><strong>Misión:</strong> Crea una variable <code>suma</code> que sea el resultado de <code>5 + 5</code>.</p>",
-    "initialCode": "<script>\n  \n</script>",
+    "title": "6.6 JS: Matemáticas",
+    "guide": "<h3>Operaciones</h3><p>Suma, resta, multi, div.</p><p><strong>Misión:</strong> <code>let suma = 5 + 5</code>.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Mates</title>\n  </head>\n  <body>\n    <script>\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "let\\s+suma\\s*=\\s*5\\s*\\+\\s*5",
-      "error": "Escribe let suma = 5 + 5;"
+      "error": "let suma = 5 + 5."
     }
   },
   {
     "id": "42",
-    "title": "6.7 JEFE UNIDAD 6: La Calculadora de Área",
-    "guide": "<h3>🔥 RETO FINAL UNIDAD 6</h3><p>Vamos a programar lógica real. Calcula el área de un cuadrado.</p><h4>Algoritmo:</h4><ol><li>Declara una variable <code>lado</code> y dale el valor <code>10</code>.</li><li>Declara una variable <code>area</code> que sea la multiplicación de <code>lado * lado</code>.</li><li>Muestra el resultado al usuario usando <code>alert(area)</code>.</li></ol>",
-    "initialCode": "<script>\n\n</script>",
+    "title": "6.7 JEFE UNIDAD 6: Calculadora",
+    "guide": "<h3>🔥 RETO FINAL UNIDAD 6</h3><p>Área Cuadrado:</p><ul><li>lado = 10</li><li>area = lado * lado</li><li>alert(area)</li></ul>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Reto 6</title>\n  </head>\n  <body>\n    <script>\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "let\\s+lado\\s*=\\s*10;?\\s*let\\s+area\\s*=\\s*lado\\s*\\*\\s*lado;?\\s*alert\\(area\\)",
-      "error": "Sigue los pasos: let lado=10, let area=lado*lado, alert(area)."
+      "error": "Define lado=10, calcula area=lado*lado y haz alert(area)."
     }
   },
   {
     "id": "43",
-    "title": "7.1 DOM: El Gancho",
-    "guide": "<h3>Unidad 7: Manipulando la Web (DOM)</h3><p>Aquí ocurre la magia. JS puede leer y modificar el HTML en vivo. A esto lo llamamos manipular el <strong>DOM</strong>.</p><h4>Paso 1: Encontrar el elemento</h4><p>Para tocar algo, primero debemos 'agarrarlo'. Usamos el ID del elemento.</p><pre>document.getElementById('mi-id')</pre><p><strong>Misión:</strong> Usa ese comando para seleccionar el elemento con id 'titulo' dentro del script.</p>",
-    "initialCode": "<h1 id=\"titulo\">Hola</h1>\n<script>\n  \n</script>",
+    "title": "7.1 DOM: Selección",
+    "guide": "<h3>Unidad 7: DOM</h3><p>Buscar por ID.</p><p><strong>Misión:</strong> <code>document.getElementById('titulo')</code>.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>DOM</title>\n  </head>\n  <body>\n    <h1 id=\"titulo\">Hola</h1>\n    <script>\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "document\\.getElementById\\(['\"]titulo['\"]\\)",
       "error": "Usa document.getElementById('titulo')."
@@ -431,29 +431,29 @@
   },
   {
     "id": "44",
-    "title": "7.2 DOM: Leyendo Texto",
-    "guide": "<h3>Extrayendo información</h3><p>Una vez tienes el elemento, puedes leer sus propiedades. <br><code>.innerText</code> nos da el texto que hay dentro de la etiqueta.</p><pre>let contenido = document.getElementById('x').innerText;</pre><p><strong>Misión:</strong> Selecciona el elemento 'demo' y accede a su propiedad <code>.innerText</code>.</p>",
-    "initialCode": "<p id=\"demo\">Soy un texto</p>\n<script>\n  let el = document.getElementById('demo');\n  // Tu código aquí para leer .innerText\n</script>",
+    "title": "7.2 DOM: Leer",
+    "guide": "<h3>InnerText</h3><p>Leer contenido.</p><p><strong>Misión:</strong> Leer .innerText de 'demo'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>DOM Leer</title>\n  </head>\n  <body>\n    <p id=\"demo\">Texto</p>\n    <script>\n      let el = document.getElementById('demo');\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "\\.innerText",
-      "error": "Debes escribir .innerText (fíjate en la T mayúscula)."
+      "error": "Usa la propiedad .innerText."
     }
   },
   {
     "id": "45",
-    "title": "7.3 DOM: Modificando Texto",
-    "guide": "<h3>Reescribiendo la Web</h3><p>Si usamos el signo igual <code>=</code>, podemos <strong>cambiar</strong> el contenido de la web dinámicamente.</p><pre>elemento.innerText = \"Nuevo texto\";</pre><p><strong>Misión:</strong> Cambia el texto del elemento con id 'aviso' para que diga 'Cargando...'.</p>",
-    "initialCode": "<p id=\"aviso\">Listo</p>\n<script>\n  \n</script>",
+    "title": "7.3 DOM: Escribir",
+    "guide": "<h3>Modificar</h3><p>Asignar valor.</p><p><strong>Misión:</strong> innerText de 'aviso' = 'Cargando...'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>DOM Write</title>\n  </head>\n  <body>\n    <p id=\"aviso\">Listo</p>\n    <script>\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "document\\.getElementById\\(['\"]aviso['\"]\\)\\.innerText\\s*=\\s*['\"]Cargando\\.\\.\\.['\"]",
-      "error": "Selecciona 'aviso' y asigna .innerText = 'Cargando...'."
+      "error": "Selecciona 'aviso' y pon su innerText = 'Cargando...'."
     }
   },
   {
     "id": "46",
-    "title": "7.4 DOM: Inyectando HTML",
-    "guide": "<h3>InnerHTML vs InnerText</h3><p><code>innerText</code> solo escribe texto plano. Si quieres poner negritas o etiquetas dentro, usa <code>.innerHTML</code>.</p><p><strong>Misión:</strong> Inserta <code>&lt;b&gt;Hola&lt;/b&gt;</code> dentro del elemento 'caja' usando innerHTML.</p>",
-    "initialCode": "<div id=\"caja\"></div>\n<script>\n  \n</script>",
+    "title": "7.4 DOM: HTML",
+    "guide": "<h3>InnerHTML</h3><p>Inyectar etiquetas.</p><p><strong>Misión:</strong> innerHTML de 'caja' = '<b>Hola</b>'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>InnerHTML</title>\n  </head>\n  <body>\n    <div id=\"caja\"></div>\n    <script>\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "getElementById\\(['\"]caja['\"]\\)\\.innerHTML\\s*=\\s*['\"]<b>Hola<\\/b>['\"]",
       "error": "Usa .innerHTML = '<b>Hola</b>'."
@@ -461,39 +461,39 @@
   },
   {
     "id": "47",
-    "title": "7.5 DOM: Leyendo Inputs",
-    "guide": "<h3>Inputs: Un caso especial</h3><p>Los inputs de formulario NO tienen texto dentro (no tienen etiqueta de cierre), tienen un <strong>valor</strong>. Por eso, no usamos innerText, usamos <code>.value</code>.</p><p><strong>Misión:</strong> Lee lo que hay escrito en el input 'user' usando <code>.value</code>.</p>",
-    "initialCode": "<input id=\"user\" value=\"Pepe\">\n<script>\n  \n</script>",
+    "title": "7.5 DOM: Inputs",
+    "guide": "<h3>Value</h3><p>Leer inputs.</p><p><strong>Misión:</strong> Leer .value de 'user'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>DOM Value</title>\n  </head>\n  <body>\n    <input id=\"user\" value=\"Pepe\">\n    <script>\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "getElementById\\(['\"]user['\"]\\)\\.value",
-      "error": "Para inputs usa .value, no .innerText."
+      "error": "Usa .value para leer el input."
     }
   },
   {
     "id": "48",
-    "title": "7.6 DOM: Cambiando Atributos",
-    "guide": "<h3>Control Total</h3><p>Puedes cambiar cualquier atributo HTML desde JS. Por ejemplo, cambiar la imagen <code>src</code>.</p><pre>imagen.src = \"nueva-foto.jpg\";</pre><p><strong>Misión:</strong> Cambia el atributo <code>src</code> de la imagen con id 'foto' para que sea 'logo.png'.</p>",
-    "initialCode": "<img id=\"foto\" src=\"vacio.jpg\">\n<script>\n  \n</script>",
+    "title": "7.6 DOM: Atributos",
+    "guide": "<h3>Propiedades</h3><p>Cambiar src, href...</p><p><strong>Misión:</strong> src de 'foto' = 'logo.png'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>DOM Attr</title>\n  </head>\n  <body>\n    <img id=\"foto\" src=\"vacio.jpg\">\n    <script>\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "getElementById\\(['\"]foto['\"]\\)\\.src\\s*=\\s*['\"]logo\\.png['\"]",
-      "error": "Accede a .src y asígnale 'logo.png'."
+      "error": "Cambia la propiedad .src a 'logo.png'."
     }
   },
   {
     "id": "49",
-    "title": "7.7 JEFE UNIDAD 7: El Hacker",
-    "guide": "<h3>🔥 RETO FINAL UNIDAD 7</h3><p>Vamos a 'hackear' visualmente la página usando solo JavaScript. Tienes que hacer dos cambios:</p><ol><li>Busca el título h1 (id 'titulo') y cambia su texto a 'Hackeado'.</li><li>Cambia el color de fondo de toda la página a negro. El elemento es <code>document.body</code> y la propiedad CSS se accede así: <code>document.body.style.backgroundColor = 'black'</code>.</li></ol>",
-    "initialCode": "<h1 id=\"titulo\">Web Segura</h1>\n<script>\n\n</script>",
+    "title": "7.7 JEFE UNIDAD 7: Hacker",
+    "guide": "<h3>🔥 RETO FINAL UNIDAD 7</h3><p>Modifica la web:</p><ul><li>H1 'titulo' a 'Hackeado'</li><li>Fondo body a 'black'</li></ul>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Hacker</title>\n  </head>\n  <body>\n    <h1 id=\"titulo\">Web Segura</h1>\n    <script>\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "getElementById\\(['\"]titulo['\"]\\)\\.innerText\\s*=\\s*['\"]Hackeado['\"][\\s\\S]*document\\.body\\.style\\.backgroundColor\\s*=\\s*['\"]black['\"]",
-      "error": "1. innerText = 'Hackeado'. 2. body.style.backgroundColor = 'black'."
+      "error": "Cambia el innerText del título y el backgroundColor del body."
     }
   },
   {
     "id": "50",
-    "title": "8.1 Estilos Dinámicos",
-    "guide": "<h3>Unidad 8: Estilos y Eventos</h3><p>Como viste en el reto anterior, podemos cambiar CSS desde JS. La regla es: si en CSS es <code>background-color</code>, en JS es <code>backgroundColor</code> (camelCase, sin guiones).</p><p><strong>Misión:</strong> Cambia el color de texto (propiedad <code>color</code>) del elemento 'texto' a 'red'.</p>",
-    "initialCode": "<p id=\"texto\">Hola</p>\n<script>\n  \n</script>",
+    "title": "8.1 CSS-JS: Colores",
+    "guide": "<h3>Unidad 8: Estilos</h3><p><code>.style.color</code> (camelCase).</p><p><strong>Misión:</strong> Color 'texto' a 'red'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>JS CSS</title>\n  </head>\n  <body>\n    <p id=\"texto\">Hola</p>\n    <script>\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "getElementById\\(['\"]texto['\"]\\)\\.style\\.color\\s*=\\s*['\"]red['\"]",
       "error": "Usa .style.color = 'red'."
@@ -501,29 +501,29 @@
   },
   {
     "id": "51",
-    "title": "8.2 Visibilidad",
-    "guide": "<h3>Aparecer y Desaparecer</h3><p>Para ocultar algo, cambiamos su estilo <code>display</code> a <code>'none'</code>. Para mostrarlo de nuevo, usamos <code>'block'</code>.</p><p><strong>Misión:</strong> Haz desaparecer el elemento con id 'secreto'.</p>",
-    "initialCode": "<div id=\"secreto\">Shhh</div>\n<script>\n  \n</script>",
+    "title": "8.2 CSS-JS: Display",
+    "guide": "<h3>Ocultar</h3><p><code>.style.display = 'none'</code>.</p><p><strong>Misión:</strong> Oculta 'secreto'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Display</title>\n  </head>\n  <body>\n    <div id=\"secreto\">Shhh</div>\n    <script>\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "getElementById\\(['\"]secreto['\"]\\)\\.style\\.display\\s*=\\s*['\"]none['\"]",
-      "error": "Usa .style.display = 'none'."
+      "error": "Pon .style.display = 'none'."
     }
   },
   {
     "id": "52",
-    "title": "8.3 Eventos: Onclick Básico",
-    "guide": "<h3>Acción y Reacción</h3><p>Hasta ahora el código se ejecutaba solo al cargar. Queremos que se ejecute <strong>cuando el usuario haga algo</strong>.</p><p>El atributo HTML <code>onclick</code> nos permite poner código JS dentro.</p><pre>&lt;button onclick=\"alert('Hola')\"&gt;Click&lt;/button&gt;</pre><p><strong>Misión:</strong> Crea un botón que lance un <code>alert('Click')</code> al pulsarlo. (Cuidado con las comillas: usa dobles fuera y simples dentro).</p>",
-    "initialCode": "",
+    "title": "8.3 Eventos: Inline",
+    "guide": "<h3>Onclick HTML</h3><p>Atributo <code>onclick</code>.</p><p><strong>Misión:</strong> Botón con alert('Click').</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Onclick</title>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
       "regex": "onclick=['\"]alert\\(['\"]Click['\"]\\)['\"]",
-      "error": "Usa onclick=\"alert('Click')\" alternando comillas."
+      "error": "Usa onclick=\"alert('Click')\"."
     }
   },
   {
     "id": "53",
-    "title": "8.4 Eventos: Event Listener",
-    "guide": "<h3>La forma profesional</h3><p>Mezclar JS en el HTML (onclick) es mala práctica. Es mejor separar lógica y estructura usando <code>addEventListener</code>.</p><ol><li>Buscas el elemento.</li><li>Le añades el 'oído'.</li></ol><pre>boton.addEventListener('click', funcion...)</pre><p><strong>Misión:</strong> En el script, añade un listener 'click' al botón 'btn' que lance un alert.</p>",
-    "initialCode": "<button id=\"btn\">Tocame</button>\n<script>\n  let b = document.getElementById('btn');\n  // Añade el listener a 'b' aquí\n</script>",
+    "title": "8.4 Eventos: Listener",
+    "guide": "<h3>AddEventListener</h3><p>JS puro.</p><p><strong>Misión:</strong> Listener 'click' a 'btn'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Listener</title>\n  </head>\n  <body>\n    <button id=\"btn\">Tocame</button>\n    <script>\n      let b = document.getElementById('btn');\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "b\\.addEventListener\\(['\"]click['\"]",
       "error": "Usa b.addEventListener('click', ...)."
@@ -531,69 +531,69 @@
   },
   {
     "id": "54",
-    "title": "8.5 Lógica: Condicionales (If)",
-    "guide": "<h3>Tomando Decisiones</h3><p>Programar es evaluar condiciones: 'Si pasa esto, haz aquello'.</p><pre>if (edad > 18) {\n  alert('Pasas');\n}</pre><p><strong>Misión:</strong> Escribe una condición: si la variable <code>x</code> es mayor que <code>5</code>, ejecuta un alert.</p>",
-    "initialCode": "<script>\n  let x = 10;\n  \n</script>",
+    "title": "8.5 Lógica: If",
+    "guide": "<h3>Condicional</h3><p><code>if (x > 5) {}</code>.</p><p><strong>Misión:</strong> Si x > 5, alert.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>If</title>\n  </head>\n  <body>\n    <script>\n      let x = 10;\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "if\\s*\\(x\\s*>\\s*5\\)\\s*\\{\\s*alert",
-      "error": "Estructura: if (x > 5) { alert(...) }."
+      "error": "Estructura if (x > 5) { alert(...) }."
     }
   },
   {
     "id": "55",
-    "title": "8.6 Lógica: Comparadores",
-    "guide": "<h3>Tipos de Comparación</h3><p><ul><li><code>></code> Mayor que</li><li><code><</code> Menor que</li><li><code>===</code> Igual estricto (mismo valor y tipo).</li><li><code>!==</code> Diferente.</li></ul><p><strong>Misión:</strong> Comprueba en un if si <code>clave</code> es estrictamente igual a <code>'1234'</code>.</p>",
-    "initialCode": "<script>\n  let clave = '0000';\n  \n</script>",
+    "title": "8.6 Lógica: Igualdad",
+    "guide": "<h3>Comparar</h3><p><code>===</code> estricto.</p><p><strong>Misión:</strong> Si clave === '1234'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Igualdad</title>\n  </head>\n  <body>\n    <script>\n      let clave = '0000';\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "if\\s*\\(clave\\s*===\\s*['\"]1234['\"]\\)",
-      "error": "Usa === para comparar clave con '1234'."
+      "error": "Usa if (clave === '1234')."
     }
   },
   {
     "id": "56",
-    "title": "8.7 JEFE UNIDAD 8: El Interruptor de Luz",
-    "guide": "<h3>🔥 RETO FINAL UNIDAD 8</h3><p>Vamos a crear un botón de 'Modo Oscuro'.</p><h4>Requisitos:</h4><ol><li>Crea un <code>&lt;button&gt;</code> que diga 'Apagar Luz'.</li><li>Añádele un evento <code>onclick</code>.</li><li>Dentro del onclick, ejecuta dos órdenes (separadas por punto y coma):<br> - Cambiar el fondo del body a 'black'.<br> - Cambiar el color del body a 'white' (para que el texto se lea).</li></ol>",
-    "initialCode": "<body>\n  <h1>Habitación</h1>\n  <!-- Tu botón aquí -->\n</body>",
+    "title": "8.7 JEFE UNIDAD 8: Interruptor",
+    "guide": "<h3>🔥 RETO FINAL UNIDAD 8</h3><p>Modo Oscuro:</p><ul><li>Botón con onclick</li><li>Fondo body negro</li><li>Texto body blanco</li></ul>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Reto 8</title>\n  </head>\n  <body>\n    <button>Modo Oscuro</button>\n  </body>\n</html>",
     "validation": {
       "regex": "<button\\s+onclick=['\"]document\\.body\\.style\\.backgroundColor\\s*=\\s*['\"]black['\"];\\s*document\\.body\\.style\\.color\\s*=\\s*['\"]white['\"];?['\"]>",
-      "error": "El botón debe tener un onclick con dos instrucciones: cambiar backgroundColor y cambiar color."
+      "error": "Botón onclick cambia backgroundColor a black y color a white."
     }
   },
   {
     "id": "57",
-    "title": "9.1 Funciones: La Receta",
-    "guide": "<h3>Unidad 9: Organización Avanzada</h3><p>Una función es un bloque de código reutilizable. Como una receta de cocina que guardas para usar luego.</p><pre>function cocinar() {\n  // Instrucciones\n}</pre><p><strong>Misión:</strong> Declara una función llamada <code>hola</code> que, dentro, haga un alert.</p>",
-    "initialCode": "<script>\n  \n</script>",
+    "title": "9.1 Funciones: Crear",
+    "guide": "<h3>Unidad 9: Funciones</h3><p>Agrupar código.</p><p><strong>Misión:</strong> Función <code>hola()</code> con alert.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Funciones</title>\n  </head>\n  <body>\n    <script>\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "function\\s+hola\\(\\)\\s*\\{\\s*alert",
-      "error": "Escribe: function hola() { alert(...) }."
+      "error": "Define function hola() { alert(...) }."
     }
   },
   {
     "id": "58",
-    "title": "9.2 Funciones: Ejecutar",
-    "guide": "<h3>Llamando a la Función</h3><p>Definir la función no hace nada por sí solo. Tienes que invocarla (llamarla) escribiendo su nombre seguido de paréntesis.</p><p><strong>Misión:</strong> Ejecuta la función <code>hola()</code> que ya está definida.</p>",
-    "initialCode": "<script>\n  function hola() { alert('Hi'); }\n  // Llámala aquí\n</script>",
+    "title": "9.2 Funciones: Llamar",
+    "guide": "<h3>Ejecutar</h3><p>Invocar con <code>()</code>.</p><p><strong>Misión:</strong> Llama a <code>hola()</code>.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Call</title>\n  </head>\n  <body>\n    <script>\n      function hola() { alert('Hi'); }\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "hola\\(\\);",
-      "error": "Escribe hola(); para que funcione."
+      "error": "Escribe hola(); para ejecutarla."
     }
   },
   {
     "id": "59",
-    "title": "9.3 Strings: Propiedades",
-    "guide": "<h3>Midiendo Texto</h3><p>Todo texto (string) tiene una propiedad llamada <code>.length</code> que nos dice cuántas letras tiene. Es muy útil para validar contraseñas cortas.</p><p><strong>Misión:</strong> Usa <code>console.log</code> para mostrar la longitud de la variable <code>pass</code>.</p>",
-    "initialCode": "<script>\n  let pass = 'secreto';\n  \n</script>",
+    "title": "9.3 Strings: Length",
+    "guide": "<h3>Longitud</h3><p><code>.length</code>.</p><p><strong>Misión:</strong> Loguea length de 'pass'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Length</title>\n  </head>\n  <body>\n    <script>\n      let pass = 'secreto';\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "console\\.log\\(pass\\.length\\)",
-      "error": "console.log(pass.length)."
+      "error": "Usa console.log(pass.length)."
     }
   },
   {
     "id": "60",
-    "title": "9.4 Clases Dinámicas",
-    "guide": "<h3>CSS desde JS: La forma elegante</h3><p>En lugar de cambiar estilos uno a uno (<code>.style.color</code>...), es mejor añadir o quitar clases CSS enteras.</p><pre>elemento.classList.add('activa');\nelemento.classList.remove('activa');</pre><p><strong>Misión:</strong> Añade la clase 'activa' al elemento 'menu'.</p>",
-    "initialCode": "<div id=\"menu\"></div>\n<script>\n  let el = document.getElementById('menu');\n  \n</script>",
+    "title": "9.4 Clases: List",
+    "guide": "<h3>ClassList</h3><p>Añadir clase.</p><p><strong>Misión:</strong> Añade 'activa' a 'menu'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>ClassList</title>\n  </head>\n  <body>\n    <div id=\"menu\"></div>\n    <script>\n      let el = document.getElementById('menu');\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "el\\.classList\\.add\\(['\"]activa['\"]\\)",
       "error": "Usa el.classList.add('activa')."
@@ -601,32 +601,32 @@
   },
   {
     "id": "61",
-    "title": "9.5 Eventos: Tiempo Real",
-    "guide": "<h3>Input Event</h3><p>El evento 'click' es útil para botones. Pero para campos de texto, usamos 'input'. Se dispara cada vez que pulsas una tecla.</p><p><strong>Misión:</strong> Añade un listener 'input' al elemento 'campo'.</p>",
-    "initialCode": "<input id=\"campo\">\n<script>\n  let c = document.getElementById('campo');\n  \n</script>",
+    "title": "9.5 Eventos: Input",
+    "guide": "<h3>Escribiendo</h3><p>Evento 'input'.</p><p><strong>Misión:</strong> Listener 'input' a 'campo'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Input Event</title>\n  </head>\n  <body>\n    <input id=\"campo\">\n    <script>\n      let c = document.getElementById('campo');\n      \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "c\\.addEventListener\\(['\"]input['\"]",
-      "error": "Usa c.addEventListener('input', ...)."
+      "error": "c.addEventListener('input', ...)."
     }
   },
   {
     "id": "62",
-    "title": "9.6 Lógica: Template Strings",
-    "guide": "<h3>Insertando Variables en Texto</h3><p>La forma moderna de mezclar texto y variables es usando comillas invertidas (backticks: `` ` ``). Las variables van dentro de <code>${}</code>.</p><pre>let frase = `Hola ${nombre}, qué tal`;</pre><p><strong>Misión:</strong> Crea una variable <code>saludo</code> que use backticks para incluir la variable <code>user</code>.</p>",
-    "initialCode": "<script>\n  let user = 'Juan';\n  let saludo = \n</script>",
+    "title": "9.6 Lógica: Template",
+    "guide": "<h3>Backticks</h3><p><code>`Hola ${var}`</code>.</p><p><strong>Misión:</strong> Saludo con variable 'user'.</p>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Template</title>\n  </head>\n  <body>\n    <script>\n      let user = 'Juan';\n      let saludo = \n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "`.*\\$\\{user\\}.*`",
-      "error": "Debes usar comillas invertidas ` ` y poner ${user} dentro."
+      "error": "Usa backticks ` ` y ${user}."
     }
   },
   {
     "id": "63",
-    "title": "9.7 JEFE FINAL: El Guardián",
-    "guide": "<h3>🎓 RETO FINAL DEL CURSO</h3><p>Bienvenido a la prueba final. Vas a crear un sistema de login funcional.</p><h4>Instrucciones:</h4><p>Tienes el HTML preparado. Debes escribir la función <code>validar()</code> dentro del script:</p><ol><li>Obtén el <strong>valor</strong> del input con id 'pass'.</li><li>Usa un <code>if/else</code>: <br> - SI el valor es exactamente <code>'1234'</code>, lanza un alert 'Correcto'.<br> - SI NO (else), lanza un alert 'Error'.</li></ol><p>¡Suerte!</p>",
-    "initialCode": "<input id=\"pass\" placeholder=\"Contraseña\">\n<button onclick=\"validar()\">Login</button>\n<script>\n  function validar() {\n    // 1. Obtener valor\n    \n    // 2. Comprobar if/else\n    \n  }\n</script>",
+    "title": "9.7 JEFE FINAL: Validador",
+    "guide": "<h3>🔥 RETO FINAL DEL CURSO</h3><p>Login System:</p><ul><li>Si pass.value === '1234' -> Alert Correcto</li><li>Else -> Alert Error</li></ul>",
+    "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Final</title>\n  </head>\n  <body>\n    <input id=\"pass\">\n    <button onclick=\"validar()\">Login</button>\n    <script>\n      function validar() {\n        let val = document.getElementById('pass').value;\n        // Tu if/else aquí\n      }\n    </script>\n  </body>\n</html>",
     "validation": {
       "regex": "if\\s*\\(val\\s*===\\s*['\"]1234['\"]\\)\\s*\\{\\s*alert\\(['\"]Correcto['\"]\\);?\\s*\\}\\s*else\\s*\\{\\s*alert\\(['\"]Error['\"]\\);?\\s*\\}",
-      "error": "La lógica debe ser: Si (val === '1234') { alert('Correcto') } sino { alert('Error') }."
+      "error": "Implementa el if/else comprobando si val === '1234'."
     }
   }
 ]
