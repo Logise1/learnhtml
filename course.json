@@ -172,7 +172,7 @@
   {
     "id": "18",
     "title": "3.4 Estructura: Divisiones",
-    "guide": "<h3>Cajas Genéricas</h3><p>Cuando no haya una etiqueta semántica, usa <code>div</code> (bloque) o <code>span</code> (texto en línea).</p><p><strong>Misión:</strong> Un div con clase 'caja' (tendrá borde punteado) y un span dentro (texto resaltado).</p>",
+    "guide": "<h3>Atributo Class</h3><p>Las etiquetas <code>div</code> y <code>span</code> son cajas genéricas. Para diferenciarlas y darles estilo, usamos el atributo <strong>class</strong>.</p><p>Se escribe dentro de la etiqueta de apertura así: <code>&lt;div class=\"nombreclase\"&gt;</code>.</p><p><strong>Misión:</strong> Crea un div con <strong>class='caja'</strong> (esto activará un borde punteado que hemos preparado) y pon un span con texto dentro.</p>",
     "initialCode": "<style>\n  .caja { border: 2px dotted purple; padding: 20px; background: #f3e5f5; }\n  span { background: yellow; font-weight: bold; }\n</style>\n<!-- Escribe tu código aquí -->\n",
     "validation": {
       "regex": "<div\\s+class=['\"]caja['\"]>\\s*<span>[\\s\\S]*<\\/span>\\s*<\\/div>",
@@ -182,7 +182,7 @@
   {
     "id": "19",
     "title": "3.5 Estructura: Separadores",
-    "guide": "<h3>Saltos Visuales</h3><p><code>br</code> salta de línea. <code>hr</code> dibuja una línea horizontal.</p><p><strong>Misión:</strong> Texto, br, Texto, hr.</p>",
+    "guide": "<h3>Saltos Visuales</h3><p><code>br</code> salta de línea. <code>hr</code> dibuja una línea horizontal.</p><p><strong>Misión:</strong> Texto, br, Texto, hr.</p><p>Ponlo todo en la misma línea.</p>",
     "initialCode": "",
     "validation": {
       "regex": ".+<br\\s*\\/?>.+<hr\\s*\\/?>",
@@ -221,8 +221,8 @@
   },
   {
     "id": "23",
-    "title": "4.2 Formularios: Labels",
-    "guide": "<h3>Accesibilidad</h3><p>Vincula texto e input usando <code>for</code> en el label e <code>id</code> en el input.</p><p><strong>Misión:</strong> Label 'Edad' vinculado a un input con id 'edad'.</p>",
+    "title": "4.2 Formularios: Labels e IDs",
+    "guide": "<h3>Accesibilidad</h3><p>Para conectar un texto con su casilla, usamos <strong>IDs</strong>. El atributo <code>id</code> da nombre al input, y el atributo <code>for</code> del label lo busca.</p><pre>&lt;label for=\"x\"&gt;..&lt;/label&gt;\n&lt;input id=\"x\"&gt;</pre><p><strong>Misión:</strong> Label 'Edad' (for='edad') vinculado a un input con id='edad'.</p>",
     "initialCode": "<form>\n  <input type=\"text\" placeholder=\"Nombre\"><br>\n  \n</form>",
     "validation": {
       "regex": "<label\\s+for=['\"]edad['\"]>Edad<\\/label>\\s*<input\\s+[^>]*id=['\"]edad['\"]",
@@ -242,7 +242,7 @@
   {
     "id": "25",
     "title": "4.4 Formularios: Selección",
-    "guide": "<h3>Checks y Radios</h3><p><code>checkbox</code> para selección múltiple. <code>radio</code> para única (mismo atributo <code>name</code>).</p><p><strong>Misión:</strong> Un checkbox 'Acepto' y dos radios 'Si/No' con name='opcion'.</p>",
+    "guide": "<h3>Checks y Radios</h3><p><code>checkbox</code> es para elegir varios. <code>radio</code> es para elegir uno solo. Para que los radios funcionen como grupo, deben tener el <strong>mismo nombre</strong> (<code>name=\"grupo\"</code>).</p><p><strong>Misión:</strong> Un checkbox 'Acepto' y dos radios 'Si/No' que compartan name='opcion'.</p>",
     "initialCode": "<form>\n  <input type=\"email\"><br>\n  \n</form>",
     "validation": {
       "regex": "<input[^>]*checkbox[^>]*>\\s*Acepto[\\s\\S]*<input[^>]*radio[^>]*name=['\"]opcion['\"][\\s\\S]*<input[^>]*radio[^>]*name=['\"]opcion['\"]",
