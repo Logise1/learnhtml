@@ -8,6 +8,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <!-- Marked for Markdown Rendering -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -993,7 +995,13 @@
                         document.body.addEventListener('submit', (e) => { e.preventDefault(); alert('🚀 Formulario enviado (Simulación)'); });
                     });
                 <\/script>`;
-            preview.srcdoc = code + safetyScript;
+            
+            // Improved injection logic to handle unclosed tags
+            if (code.match(/<!DOCTYPE\s+html>/i)) {
+                preview.srcdoc = code.replace(/(<!DOCTYPE\s+html>)/i, '$1' + safetyScript);
+            } else {
+                preview.srcdoc = safetyScript + code;
+            }
         }
 
         function validateCode(silent = false) {
@@ -1004,7 +1012,11 @@
             isCodeValid = regex.test(code);
             updateNextButtonState();
             if (!silent) {
-                if (isCodeValid) { showFeedback('success', '¡Excelente!', 'Has completado la misión.'); saveProgress(); }
+                if (isCodeValid) { 
+                    showFeedback('success', '¡Excelente!', 'Has completado la misión.'); 
+                    saveProgress(); 
+                    triggerConfetti(); // Add this
+                }
                 else hideFeedback();
             }
         }
@@ -1073,6 +1085,16 @@
         function hideFeedback() {
             clearTimeout(feedbackTimeout);
             feedbackArea.className = "absolute bottom-6 left-4 right-4 p-4 rounded-xl border border-transparent transform translate-y-4 opacity-0 transition-all duration-500 z-50 shadow-2xl backdrop-blur-xl flex items-start gap-4 pointer-events-none";
+        }
+
+        // --- CONFETTI FUNCTION ---
+        function triggerConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                zIndex: 100
+            });
         }
 
         window.switchTab = (targetId) => {
