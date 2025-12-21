@@ -202,7 +202,7 @@
                 <!-- AI Content will be injected here -->
                 <div class="flex flex-col items-center justify-center py-8 text-slate-500 gap-3">
                     <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-indigo-500"></div>
-                    <p class="text-sm animate-pulse">Analizando tu código...</p>
+                    <p class="text-sm font-mono animate-pulse">Analizando tu código...</p>
                 </div>
             </div>
 
@@ -482,12 +482,6 @@
         async function init() {
             lucide.createIcons();
 
-            // --- CHECK CHEAT FLAG ON LOAD ---
-            if (localStorage.getItem('cheat_detected') === 'true') {
-                localStorage.removeItem('cheat_detected');
-                alert("🚫 ¡ALERTA DE SEGURIDAD!\n\nSe ha detectado un intento de pegar código externo.\nSolo puedes copiar de la guía o de tu propio código.\n\nLa aplicación se ha reiniciado por seguridad.");
-            }
-
             try {
                 const response = await fetch('course.json');
                 if (!response.ok) throw new Error('Error cargando course.json');
@@ -497,34 +491,6 @@
                 loadingOverlay.innerHTML = `<div class='text-red-400 p-4 font-mono'>Error: ${error.message} <br> <small>Usa Live Server</small></div>`;
                 return;
             }
-
-            // --- ANTI-CHEAT SYSTEM ---
-            let lastInternalCopy = "";
-
-            document.addEventListener('copy', (e) => {
-                if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') {
-                    lastInternalCopy = e.target.value.substring(e.target.selectionStart, e.target.selectionEnd);
-                } else {
-                    lastInternalCopy = window.getSelection().toString();
-                }
-            });
-            
-            document.addEventListener('cut', (e) => {
-                if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') {
-                    lastInternalCopy = e.target.value.substring(e.target.selectionStart, e.target.selectionEnd);
-                } else {
-                    lastInternalCopy = window.getSelection().toString();
-                }
-            });
-
-            editor.addEventListener('paste', (e) => {
-                const pastedData = (e.clipboardData || window.clipboardData).getData('text');
-                if (pastedData.trim() !== lastInternalCopy.trim()) {
-                    e.preventDefault(); 
-                    localStorage.setItem('cheat_detected', 'true');
-                    location.reload(); 
-                }
-            });
 
             onAuthStateChanged(auth, async (user) => {
                 currentUser = user;
