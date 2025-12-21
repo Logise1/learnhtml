@@ -231,8 +231,8 @@
         <main class="flex-1 flex flex-col lg:flex-row h-full relative overflow-hidden">
             
             <!-- PANEL 1: GUÍA -->
-            <!-- Nota: Añadido 'relative' para posicionar el toast de feedback correctamente dentro de este panel -->
-            <section id="panel-guide" class="mobile-panel active lg:flex w-full lg:w-[350px] flex-col border-r border-slate-800/60 bg-[#0b1120] relative">
+            <!-- FIX: Añadido 'overflow-hidden' para que el toast no sobresalga y cree scroll al esconderse -->
+            <section id="panel-guide" class="mobile-panel active lg:flex w-full lg:w-[350px] flex-col border-r border-slate-800/60 bg-[#0b1120] relative overflow-hidden">
                 <header class="h-16 border-b border-slate-800/60 flex items-center px-5 justify-between bg-[#0f172a]/80 backdrop-blur-md shrink-0">
                     <button onclick="window.goHome()" class="text-slate-400 hover:text-white transition-colors flex items-center gap-2 group">
                         <div class="p-1.5 rounded-lg bg-slate-800 group-hover:bg-slate-700 transition">
