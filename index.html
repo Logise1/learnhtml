@@ -3,63 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Learn</title>
-    <!-- PrismJS Theme (Light) -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
-    <!-- Marked -->
+    <title>HTML Learn: Curso Interactivo</title>
+    <!-- PrismJS Theme (Tomorrow Night - Dark) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <!-- Marked for Markdown Rendering -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <!-- Confetti -->
+    <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['"Nunito"', 'sans-serif'],
-                        mono: ['"Fira Code"', 'monospace'],
-                    },
                     colors: {
-                        // Paleta estilo Duolingo
-                        'duo-green': { DEFAULT: '#58cc02', hover: '#46a302', shade: '#46a302' },
-                        'duo-blue':  { DEFAULT: '#1cb0f6', hover: '#1899d6', shade: '#1899d6' },
-                        'duo-yellow': { DEFAULT: '#ffc800', hover: '#e5b300', shade: '#e5b300' },
-                        'duo-gray':  { DEFAULT: '#e5e5e5', hover: '#d3d3d3', shade: '#afafaf', text: '#4b4b4b' },
+                        editor: { bg: '#0f172a', fg: '#e2e8f0' }, // Slate 900 / 200
+                        brand: { 500: '#6366f1', 600: '#4f46e5' }, // Indigo modern
                     },
-                    boxShadow: {
-                        'btn': '0px 4px 0px 0px rgba(0,0,0,0.2)',
-                        'card': '0px 2px 0px 0px #e5e7eb',
+                    fontFamily: {
+                        mono: ['"Fira Code"', 'monospace'],
+                        sans: ['"Inter"', 'sans-serif']
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+                        'bounce-fire': 'bounceFire 1s infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        bounceFire: {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.2)' },
+                        }
                     }
                 }
             }
         }
     </script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- PrismJS -->
+    <!-- PrismJS Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-html.min.js"></script>
     
-    <!-- Fuente Nunito (Redondita y amigable) -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Nunito', sans-serif; background-color: #ffffff; color: #4b4b4b; overflow: hidden; }
+        body { font-family: 'Inter', sans-serif; overflow: hidden; background-color: #020617; } /* Slate 950 base */
         
-        /* Botones estilo "Chunky" (3D flat) */
-        .btn-chunky {
-            transition: all 0.1s;
-            border-bottom-width: 4px;
-        }
-        .btn-chunky:active {
-            transform: translateY(2px);
-            border-bottom-width: 0px;
-            margin-top: 4px; /* Compensar movimiento */
-        }
-
-        /* Editor Layers Alignment */
+        /* --- EDITOR ALIGNMENT FIXES (CRITICAL) --- */
         .editor-layer {
             font-family: 'Fira Code', monospace !important;
-            font-size: 15px !important;
+            font-size: 14px !important;
             line-height: 24px !important;
             letter-spacing: 0px !important;
             tab-size: 2 !important;
@@ -67,274 +70,352 @@
             margin: 0 !important;
             border: none !important;
             box-sizing: border-box !important;
-            white-space: pre !important;
+            white-space: pre !important; /* Evita wrapping diferente */
             overflow-wrap: normal !important;
-            overflow: auto !important;
+            overflow: auto !important; /* Scrollbars iguales */
         }
 
         #highlighting-pre {
             z-index: 0;
-            background-color: #ffffff !important;
-            pointer-events: none;
+            background-color: #0f172a !important; /* Match bg */
+            pointer-events: none; /* Clicks go through to textarea */
         }
         
         #highlighting-pre code {
             font-family: inherit !important;
-            padding: 0 !important;
-            background: transparent !important;
-            text-shadow: none !important;
+            font-size: inherit !important;
+            line-height: inherit !important;
+            padding: 0 !important; /* Prism adds padding sometimes, remove it */
+            margin: 0 !important;
+            white-space: pre !important;
         }
 
         #code-editor {
             z-index: 1;
             color: transparent !important;
             background: transparent !important;
-            caret-color: #000;
+            caret-color: #fff; /* White cursor */
             resize: none;
         }
 
-        #highlighting-pre::-webkit-scrollbar { display: none; }
+        /* Ocultar scrollbar del pre para que no se doble */
+        #highlighting-pre::-webkit-scrollbar {
+            display: none; 
+        }
         
-        /* Scrollbars Amigables */
-        ::-webkit-scrollbar { width: 10px; height: 10px; }
-        ::-webkit-scrollbar-track { background: #f0f0f0; }
-        ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 99px; border: 2px solid #f0f0f0; }
-        ::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-hover:hover {
+            background: rgba(30, 41, 59, 0.7);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Scrollbars Custom */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        
+        @media (max-width: 1024px) {
+            .mobile-panel { display: none; }
+            .mobile-panel.active { display: flex; }
+        }
 
-        /* Typography */
-        .prose-custom h3 { color: #374151 !important; font-size: 1.2rem !important; margin-top: 1.5em !important; font-weight: 800 !important; }
-        .prose-custom p { color: #4b5563 !important; margin-bottom: 1em !important; line-height: 1.6 !important; font-weight: 600; }
-        .prose-custom code { background: #f3f4f6; color: #ef4444; padding: 2px 6px; border-radius: 6px; font-family: 'Fira Code'; font-size: 0.9em; border: 1px solid #e5e7eb; }
-        .prose-custom pre { background: #1f2937 !important; color: #f3f4f6 !important; border-radius: 12px; padding: 12px; overflow-x: auto; }
-        .prose-custom pre code { color: inherit; background: transparent; border: none; }
+        /* Typography improvements */
+        .prose-custom h3 { 
+            background: linear-gradient(to right, #818cf8, #c084fc); 
+            -webkit-background-clip: text; 
+            color: transparent; 
+            font-size: 1.25rem !important; 
+            margin-top: 2em !important; 
+            margin-bottom: 0.75em !important; 
+            font-weight: 700 !important; 
+            letter-spacing: -0.02em;
+        }
+        .prose-custom p { color: #94a3b8 !important; margin-bottom: 1.25em !important; line-height: 1.7 !important; }
+        .prose-custom strong { color: #f1f5f9 !important; font-weight: 600 !important; }
+        .prose-custom ul { list-style-type: none !important; padding-left: 0 !important; margin-bottom: 1.5em !important; }
+        .prose-custom li { position: relative; padding-left: 1.5em; margin-bottom: 0.5em !important; color: #cbd5e1; }
+        .prose-custom li::before { content: "•"; position: absolute; left: 0.25em; color: #6366f1; font-weight: bold; }
         
+        .prose-custom pre, .prose-custom code { font-family: 'Fira Code', monospace; }
+        
+        /* Markdown Styles for AI Response */
+        .markdown-body { color: #e2e8f0; font-size: 0.95rem; line-height: 1.6; }
+        .markdown-body p { margin-bottom: 1rem; }
+        .markdown-body strong { color: #818cf8; font-weight: 600; }
+        .markdown-body code { background: rgba(99, 102, 241, 0.15); padding: 0.2em 0.4em; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.85em; color: #a5b4fc; }
+        .markdown-body ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
+        .markdown-body li { margin-bottom: 0.5rem; }
+
+        /* Loading */
+        #loading-overlay { display: flex; }
+        #loading-overlay.hidden { display: none; }
+        
+        /* Auth UI */
         .hidden-auth { display: none !important; }
     </style>
 </head>
-<body class="h-screen flex flex-col relative bg-white">
+<body class="h-screen flex flex-col relative text-slate-300">
 
-    <!-- Loading Screen (Light) -->
-    <div id="loading-overlay" class="fixed inset-0 z-50 bg-white flex flex-col items-center justify-center">
-        <div class="relative animate-bounce">
-            <i data-lucide="code-2" class="w-16 h-16 text-duo-green"></i>
-        </div>
-        <p class="text-slate-400 font-bold text-lg mt-4 uppercase tracking-wider">Cargando...</p>
+    <!-- Ambient Background Effects -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-purple-500/20 rounded-full blur-[100px] animate-blob"></div>
+        <div class="absolute top-[20%] right-[-10%] w-96 h-96 bg-blue-500/20 rounded-full blur-[100px] animate-blob" style="animation-delay: 2s"></div>
+        <div class="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-indigo-500/20 rounded-full blur-[100px] animate-blob" style="animation-delay: 4s"></div>
+        <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150"></div>
     </div>
 
-    <!-- AI HELP MODAL (Light) -->
-    <div id="ai-modal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl w-full max-w-lg p-6 shadow-[0_8px_0_0_rgba(0,0,0,0.1)] border-2 border-slate-100 relative overflow-hidden transform transition-all scale-100">
+    <!-- Loading Screen -->
+    <div id="loading-overlay" class="fixed inset-0 z-50 bg-[#020617] flex flex-col items-center justify-center">
+        <div class="relative">
+            <div class="w-16 h-16 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <i data-lucide="code-2" class="w-6 h-6 text-indigo-400"></i>
+            </div>
+        </div>
+        <p class="text-slate-500 font-medium text-sm mt-4 tracking-wider uppercase animate-pulse">Cargando experiencia...</p>
+    </div>
+
+    <!-- AI HELP MODAL -->
+    <div id="ai-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="glass bg-[#0f172a]/95 rounded-2xl w-full max-w-lg p-6 shadow-2xl relative overflow-hidden transform transition-all scale-100 border border-indigo-500/30">
+            <!-- Decorative header -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-orange-500 to-red-500"></div>
+            
             <div class="flex justify-between items-center mb-6">
                 <div class="flex items-center gap-3">
-                    <div class="p-3 rounded-2xl bg-duo-blue/10 text-duo-blue">
-                        <i data-lucide="bot" class="w-8 h-8"></i>
+                    <div class="p-2 rounded-lg bg-indigo-500/20 text-indigo-400">
+                        <i data-lucide="bot" class="w-6 h-6"></i>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-extrabold text-slate-700 leading-none">Profe IA</h3>
-                        <p class="text-sm text-slate-400 mt-1 font-bold">Impulsado por Mistral</p>
+                        <h3 class="text-xl font-bold text-white leading-none">Asistente IA</h3>
+                        <p class="text-xs text-slate-400 mt-1">Impulsado por Mistral AI</p>
                     </div>
                 </div>
-                <button onclick="window.closeAIModal()" class="text-slate-300 hover:text-slate-500 transition">
-                    <i data-lucide="x" class="w-8 h-8"></i>
+                <button onclick="window.closeAIModal()" class="text-slate-400 hover:text-white transition p-1 rounded-lg hover:bg-white/10">
+                    <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
             </div>
             
-            <div id="ai-content" class="min-h-[100px] max-h-[60vh] overflow-y-auto custom-scroll text-slate-600 font-medium">
-                <!-- AI Content -->
-                <div class="flex flex-col items-center justify-center py-8 text-slate-400 gap-3">
-                    <div class="animate-spin rounded-full h-8 w-8 border-4 border-duo-blue border-t-transparent"></div>
-                    <p class="text-sm font-bold">Pensando...</p>
+            <div id="ai-content" class="min-h-[100px] max-h-[60vh] overflow-y-auto custom-scroll">
+                <!-- AI Content will be injected here -->
+                <div class="flex flex-col items-center justify-center py-8 text-slate-500 gap-3">
+                    <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-indigo-500"></div>
+                    <p class="text-sm font-mono animate-pulse">Analizando tu código...</p>
                 </div>
             </div>
 
-            <div class="mt-6 pt-4 border-t-2 border-slate-100 flex justify-end">
-                <button onclick="window.closeAIModal()" class="btn-chunky w-full md:w-auto px-6 py-3 bg-duo-green hover:bg-duo-green-hover text-white font-extrabold rounded-2xl border-duo-green-shade text-center">
-                    ¡ENTENDIDO!
+            <div class="mt-6 pt-4 border-t border-slate-800 flex justify-end">
+                <button onclick="window.closeAIModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white text-sm font-medium rounded-lg transition">
+                    Entendido
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- AUTH MODAL (Light & Playful) -->
-    <div id="auth-modal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl w-full max-w-md p-8 shadow-[0_8px_0_0_rgba(0,0,0,0.1)] border-2 border-slate-100 relative">
-            <button onclick="window.toggleAuthModal(false)" class="absolute top-4 right-4 text-slate-300 hover:text-slate-500">
+    <!-- AUTH MODAL -->
+    <div id="auth-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="glass bg-[#0f172a]/90 rounded-2xl w-full max-w-md p-8 shadow-2xl relative overflow-hidden transform transition-all scale-100">
+            <!-- Decorative gradient inside modal -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+            
+            <button onclick="window.toggleAuthModal(false)" class="absolute top-4 right-4 text-slate-400 hover:text-white transition">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
             
             <div class="text-center mb-8">
-                <h2 id="auth-title" class="text-3xl font-extrabold text-slate-700 tracking-tight mb-2">¡Hola! 👋</h2>
-                <p class="text-slate-400 font-bold">Guarda tu progreso gratis.</p>
+                <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 mb-4 border border-indigo-500/20">
+                    <i data-lucide="user-circle" class="w-6 h-6"></i>
+                </div>
+                <h2 id="auth-title" class="text-2xl font-bold text-white tracking-tight">Bienvenido</h2>
+                <p class="text-slate-400 text-sm mt-2">Sincroniza tu progreso en la nube.</p>
             </div>
             
             <form id="auth-form" onsubmit="window.handleAuth(event)" class="space-y-4">
-                <div class="space-y-2">
-                    <input type="email" id="auth-email" required class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl px-4 py-3 text-slate-700 font-bold focus:border-duo-blue focus:outline-none transition placeholder-slate-300" placeholder="Email">
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold text-slate-500 uppercase tracking-wider ml-1">Email</label>
+                    <input type="email" id="auth-email" required class="w-full bg-slate-950/50 border border-slate-700/50 rounded-lg px-4 py-3 text-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/50 focus:outline-none transition placeholder-slate-600" placeholder="tu@email.com">
                 </div>
-                <div class="space-y-2">
-                    <input type="password" id="auth-password" required minlength="6" class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl px-4 py-3 text-slate-700 font-bold focus:border-duo-blue focus:outline-none transition placeholder-slate-300" placeholder="Contraseña">
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold text-slate-500 uppercase tracking-wider ml-1">Contraseña</label>
+                    <input type="password" id="auth-password" required minlength="6" class="w-full bg-slate-950/50 border border-slate-700/50 rounded-lg px-4 py-3 text-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/50 focus:outline-none transition placeholder-slate-600" placeholder="••••••••">
                 </div>
                 
-                <p id="auth-error" class="text-red-500 text-sm bg-red-50 p-3 rounded-xl border-2 border-red-100 hidden flex items-center gap-2 font-bold">
-                    <i data-lucide="alert-circle" class="w-4 h-4"></i> <span>Error</span>
+                <p id="auth-error" class="text-red-400 text-xs bg-red-900/20 p-2 rounded border border-red-900/50 hidden flex items-center gap-2">
+                    <i data-lucide="alert-circle" class="w-3 h-3"></i> <span>Error</span>
                 </p>
 
-                <button type="submit" id="auth-submit-btn" class="btn-chunky w-full bg-duo-blue hover:bg-duo-blue-hover text-white font-extrabold py-3.5 rounded-xl border-duo-blue-shade flex justify-center items-center gap-2">
-                    <span>ENTRAR</span>
+                <button type="submit" id="auth-submit-btn" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold py-3.5 rounded-lg transition shadow-lg shadow-indigo-900/20 flex justify-center items-center gap-2 transform active:scale-[0.98]">
+                    <span>Entrar</span>
                 </button>
             </form>
 
-            <div class="mt-6 text-center text-sm text-slate-400 pt-4">
-                <span id="auth-switch-text">¿Nuevo aquí?</span>
-                <button onclick="window.toggleAuthMode()" class="text-duo-blue hover:text-duo-blue-hover font-extrabold ml-1 uppercase tracking-wide" id="auth-switch-btn">CREAR CUENTA</button>
+            <div class="mt-6 text-center text-sm text-slate-500 border-t border-slate-800/50 pt-6">
+                <span id="auth-switch-text">¿No tienes cuenta?</span>
+                <button onclick="window.toggleAuthMode()" class="text-indigo-400 hover:text-indigo-300 font-medium ml-1 transition hover:underline" id="auth-switch-btn">Regístrate gratis</button>
             </div>
         </div>
     </div>
 
-    <!-- VISTA 1: HOME (Estilo Mapa de Aprendizaje) -->
-    <div id="view-home" class="flex-1 overflow-y-auto flex flex-col items-center p-6 md:p-12 relative z-10 bg-white">
+    <!-- VISTA 1: HOME (Mejorada) -->
+    <div id="view-home" class="flex-1 overflow-y-auto flex flex-col items-center p-6 md:p-12 relative z-10 scroll-smooth">
         
-        <!-- Top Bar -->
-        <div class="w-full max-w-4xl flex justify-between items-center mb-12 sticky top-0 z-20 bg-white/90 backdrop-blur-md py-4 border-b-2 border-slate-100">
-             <div class="flex items-center gap-2">
-                 <div class="bg-duo-green p-2 rounded-xl">
-                    <i data-lucide="code-2" class="w-6 h-6 text-white"></i>
-                 </div>
-                 <h1 class="text-2xl font-extrabold text-slate-700 tracking-tight hidden sm:block">HTML Learn</h1>
-             </div>
-
-             <div class="flex items-center gap-3">
-                <!-- Streak -->
-                <div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl hover:bg-slate-100 transition cursor-help border-2 border-transparent hover:border-slate-200" title="Racha de días">
-                    <i id="streak-icon" data-lucide="flame" class="w-5 h-5 text-slate-300"></i>
-                    <span id="streak-count" class="text-lg font-extrabold text-slate-400">0</span>
-                </div>
-
-                <!-- User / Auth -->
+        <!-- Navbar Flotante -->
+        <div class="w-full max-w-6xl flex justify-end mb-8">
+             <div class="glass rounded-full p-1.5 pl-4 pr-1.5 flex items-center gap-4 shadow-xl">
+                <!-- User Info & Streak -->
                 <div id="user-info" class="hidden items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-duo-blue text-white flex items-center justify-center font-extrabold text-lg border-b-4 border-duo-blue-shade" id="user-avatar">U</div>
-                    <button onclick="window.doLogout()" class="p-2 text-slate-400 hover:bg-red-50 hover:text-red-500 rounded-xl transition" title="Salir">
-                        <i data-lucide="log-out" class="w-5 h-5"></i>
+                    <div class="flex items-center gap-2 mr-2 bg-slate-900/50 px-3 py-1.5 rounded-full border border-slate-800" title="Racha Actual">
+                        <i id="streak-icon" data-lucide="flame" class="w-4 h-4 text-orange-500 fill-orange-500/20 transition-all"></i>
+                        <span id="streak-count" class="text-sm font-bold text-orange-400 font-mono">0</span>
+                    </div>
+                    <div class="h-6 w-px bg-slate-700/50"></div>
+                    <div class="flex flex-col items-end leading-tight">
+                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Conectado como</span>
+                        <span class="text-xs text-slate-300 font-medium truncate max-w-[150px]" id="user-email">...</span>
+                    </div>
+                    <div class="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-indigo-500/30" id="user-avatar">U</div>
+                    <button onclick="window.doLogout()" class="w-9 h-9 rounded-full hover:bg-red-500/10 hover:text-red-400 text-slate-400 transition flex items-center justify-center ml-1" title="Cerrar Sesión">
+                        <i data-lucide="log-out" class="w-4 h-4"></i>
                     </button>
                 </div>
-                <button id="login-btn" onclick="window.toggleAuthModal(true)" class="btn-chunky bg-duo-blue hover:bg-duo-blue-hover text-white px-5 py-2 rounded-xl text-sm font-extrabold border-duo-blue-shade uppercase tracking-wide">
-                    Empezar
+                <button id="login-btn" onclick="window.toggleAuthModal(true)" class="bg-slate-800 hover:bg-slate-700 text-white px-5 py-2 rounded-full text-sm font-semibold transition flex items-center gap-2 border border-slate-700">
+                    <span>Acceder</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
                 </button>
             </div>
         </div>
 
-        <div class="max-w-3xl w-full pb-24">
-            <!-- Introducción Friendly -->
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-extrabold text-slate-800 mb-4">¡Aprende a programar!</h2>
-                <p class="text-xl text-slate-500 font-semibold">Selecciona una unidad para empezar tu aventura.</p>
-            </div>
+        <div class="max-w-5xl w-full">
+            <header class="text-center mb-16 animate-fade-in-up">
+                <div class="inline-flex p-3 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 mb-6 backdrop-blur shadow-[0_0_30px_-10px_rgba(99,102,241,0.3)]">
+                    <i data-lucide="sparkles" class="w-8 h-8 text-indigo-400"></i>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-200 to-indigo-400 mb-6 tracking-tight drop-shadow-sm">
+                    HTML Learn
+                </h1>
+                <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
+                    Tu camino para convertirte en desarrollador web. <span class="text-slate-200 font-normal">Escribe código real</span>, supera retos y construye proyectos desde cero.
+                </p>
+            </header>
 
-            <!-- Grid de Lecciones (Acordeón) -->
-            <div id="home-lesson-grid" class="flex flex-col gap-6">
+            <!-- Grid de Lecciones -->
+            <div id="home-lesson-grid" class="flex flex-col gap-8 pb-24">
                 <!-- Inyectado por JS -->
             </div>
         </div>
     </div>
 
-    <!-- VISTA 2: WORKSPACE (Editor Claro y Limpio) -->
-    <div id="view-workspace" class="hidden flex-1 flex flex-col h-full overflow-hidden bg-white">
+    <!-- VISTA 2: WORKSPACE (Mejorada) -->
+    <div id="view-workspace" class="hidden flex-1 flex flex-col h-full overflow-hidden relative z-10 bg-[#020617]">
         
         <main class="flex-1 flex flex-col lg:flex-row h-full relative overflow-hidden">
             
-            <!-- PANEL 1: GUÍA (Blanco) -->
-            <section id="panel-guide" class="mobile-panel active lg:flex w-full lg:w-[400px] flex-col border-r-2 border-slate-100 bg-white relative z-20 shadow-xl lg:shadow-none">
-                <header class="h-16 flex items-center px-5 justify-between bg-white shrink-0 border-b-2 border-slate-100">
-                    <button onclick="window.goHome()" class="text-slate-400 hover:text-slate-600 transition-colors flex items-center gap-2 group">
-                        <i data-lucide="x" class="w-6 h-6"></i>
+            <!-- PANEL 1: GUÍA -->
+            <section id="panel-guide" class="mobile-panel active lg:flex w-full lg:w-[350px] flex-col border-r border-slate-800/60 bg-[#0b1120] relative">
+                <header class="h-16 border-b border-slate-800/60 flex items-center px-5 justify-between bg-[#0f172a]/80 backdrop-blur-md shrink-0">
+                    <button onclick="window.goHome()" class="text-slate-400 hover:text-white transition-colors flex items-center gap-2 group">
+                        <div class="p-1.5 rounded-lg bg-slate-800 group-hover:bg-slate-700 transition">
+                            <i data-lucide="layout-grid" class="w-4 h-4"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-wider">Menú</span>
                     </button>
                     
-                    <!-- Progress bar simple -->
-                    <div class="flex-1 mx-4 h-4 bg-slate-100 rounded-full overflow-hidden relative">
-                        <div id="progress-fill" class="absolute left-0 top-0 bottom-0 bg-duo-green w-0 transition-all duration-500 rounded-full">
-                            <div class="absolute top-1 right-2 w-full h-1 bg-white/20 rounded-full"></div>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center gap-1">
-                        <i data-lucide="heart" class="w-6 h-6 text-red-500 fill-red-500"></i>
+                    <div class="flex items-center gap-1 bg-slate-900 rounded-lg p-1 border border-slate-800">
+                        <button onclick="window.prevLesson()" class="w-8 h-8 flex items-center justify-center rounded hover:bg-slate-800 text-slate-400 hover:text-white disabled:opacity-30 transition" id="btn-prev">
+                            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-px h-4 bg-slate-800"></div>
+                        <button onclick="window.checkAndNext()" id="btn-next" class="px-3 h-8 flex items-center gap-2 rounded hover:bg-slate-800 text-slate-400 hover:text-white disabled:opacity-50 transition text-xs font-bold uppercase tracking-wide">
+                            <span>Sig</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </button>
                     </div>
                 </header>
                 
-                <div class="flex-1 overflow-y-auto relative custom-scroll p-2">
-                    <div id="guide-content" class="p-6 prose-custom max-w-none pb-32">
+                <div class="flex-1 overflow-y-auto relative custom-scroll">
+                    <div id="guide-content" class="p-8 prose-custom max-w-none pb-32">
                         <!-- Content -->
                     </div>
                 </div>
 
-                <!-- Feedback Toast (Style Pop-up) -->
-                <div id="feedback-area" class="absolute bottom-4 left-4 right-4 p-4 rounded-2xl transform translate-y-4 opacity-0 transition-all duration-300 z-50 flex items-center gap-4 pointer-events-none border-2">
-                    <div id="feedback-icon" class="p-2 rounded-full bg-white"></div>
-                    <div class="flex-1">
-                        <h4 id="feedback-title" class="font-extrabold text-lg"></h4>
-                        <p id="feedback-msg" class="text-sm font-bold opacity-90"></p>
+                <!-- Feedback Toast -->
+                <div id="feedback-area" class="absolute bottom-6 left-4 right-4 p-4 rounded-xl border border-transparent transform translate-y-4 opacity-0 transition-all duration-500 z-50 shadow-2xl backdrop-blur-xl flex items-start gap-4 pointer-events-none">
+                    <div id="feedback-icon" class="mt-0.5"></div>
+                    <div>
+                        <h4 id="feedback-title" class="font-bold text-sm mb-0.5"></h4>
+                        <p id="feedback-msg" class="text-xs opacity-90 leading-relaxed"></p>
                     </div>
                 </div>
             </section>
 
-            <!-- PANEL 2: EDITOR (Claro) -->
-            <section id="panel-editor" class="mobile-panel lg:flex w-full lg:flex-1 flex-col border-r-2 border-slate-100 bg-white relative">
-                <header class="h-16 flex items-center px-6 justify-between bg-white border-b-2 border-slate-100 shrink-0 z-20">
-                    <div class="flex items-center gap-2 text-slate-400 font-bold text-sm">
-                        <i data-lucide="file-code" class="w-5 h-5"></i>
-                        <span>index.html</span>
+            <!-- PANEL 2: EDITOR CON SYNTAX HIGHLIGHTING (ALIGNED) -->
+            <section id="panel-editor" class="mobile-panel lg:flex w-full lg:flex-1 flex-col border-r border-slate-800/60 bg-[#0f172a] relative">
+                <header class="h-16 border-b border-slate-800/60 flex items-center px-6 justify-between bg-[#0f172a] text-slate-400 shrink-0 z-20 relative">
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="file-code" class="w-5 h-5 text-indigo-500"></i>
+                        <span class="text-sm font-mono text-slate-300">index.html</span>
                     </div>
-                    <div class="flex gap-3 items-center">
-                        <button onclick="window.askAI()" class="btn-chunky px-4 py-1.5 bg-white hover:bg-slate-50 text-duo-blue text-xs font-extrabold rounded-xl flex items-center gap-2 border-2 border-slate-200 border-b-4 active:border-b-2">
-                            <i data-lucide="sparkles" class="w-4 h-4 text-duo-yellow"></i> <span>AYUDA</span>
+                    <div class="flex gap-2 items-center">
+                        <button onclick="window.askAI()" class="group px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-indigo-300 text-xs font-bold rounded-lg flex items-center gap-2 transition-all border border-slate-700 hover:border-indigo-500/50">
+                            <i data-lucide="wand-2" class="w-3 h-3 group-hover:text-amber-300 transition-colors"></i> <span>¿Qué me falta?</span>
                         </button>
-                        
-                        <button onclick="window.resetCode()" class="p-2 text-slate-300 hover:text-slate-500 transition" title="Reiniciar">
-                            <i data-lucide="rotate-ccw" class="w-5 h-5"></i>
+                        <div class="w-px h-4 bg-slate-700 mx-1"></div>
+                         <button onclick="window.checkCode()" class="group relative px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-lg flex items-center gap-2 transition-all shadow-lg shadow-indigo-900/20 overflow-hidden">
+                            <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1s_infinite]"></div>
+                            <i data-lucide="play" class="w-3 h-3 fill-current"></i> <span>Ejecutar</span>
+                        </button>
+                        <button onclick="window.resetCode()" class="p-2 text-slate-500 hover:text-white hover:bg-white/5 rounded-lg transition" title="Reiniciar código">
+                            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
                         </button>
                     </div>
                 </header>
-                <div class="flex-1 relative group bg-[#f8fafc]">
+                <div class="flex-1 relative group bg-[#0f172a]">
+                    <!-- Editor Wrapper for Overlay -->
                     <div class="absolute inset-0 flex">
-                        <!-- Line Numbers -->
-                        <div class="hidden sm:block w-12 bg-white border-r border-slate-100 text-slate-300 text-xs font-mono text-right py-6 pr-3 select-none leading-[24px] z-10 h-full pt-[24px] font-bold">
+                        <!-- Line Numbers (Static for now) -->
+                        <div class="hidden sm:block w-14 bg-[#0f172a] border-r border-slate-800/40 text-slate-600 text-xs font-mono text-right py-6 pr-4 select-none leading-[24px] opacity-50 z-10 h-full pt-[24px]">
                             1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20
                         </div>
                         
+                        <!-- Main Overlay Container -->
                         <div class="relative flex-1 h-full overflow-hidden" id="editor-container">
-                            <!-- Background Text -->
-                            <pre id="highlighting-pre" aria-hidden="true" class="absolute inset-0 m-0 editor-layer text-slate-800"><code id="highlighting-code" class="language-html"></code></pre>
-                            <!-- Input Text -->
+                            <!-- Highlighting Layer (Bottom) -->
+                            <pre id="highlighting-pre" aria-hidden="true" class="absolute inset-0 m-0 editor-layer"><code id="highlighting-code" class="language-html"></code></pre>
+                            
+                            <!-- Input Layer (Top) -->
                             <textarea 
                                 id="code-editor" 
-                                class="absolute inset-0 w-full h-full editor-layer text-slate-800" 
+                                class="absolute inset-0 w-full h-full editor-layer" 
                                 spellcheck="false"
-                                placeholder="<!-- Escribe tu código aquí -->"
+                                placeholder="// Escribe tu código HTML aquí..."
                             ></textarea>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Bottom Action Bar (Floating in Editor) -->
-                <div class="absolute bottom-0 left-0 right-0 p-4 bg-white border-t-2 border-slate-100 flex justify-end gap-3 z-30">
-                     <button onclick="window.checkCode()" class="btn-chunky px-8 py-3 bg-duo-green hover:bg-duo-green-hover text-white font-extrabold rounded-2xl border-duo-green-shade flex items-center gap-2 uppercase tracking-wide">
-                        COMPROBAR
-                    </button>
-                    <button id="btn-next" onclick="window.checkAndNext()" class="hidden btn-chunky px-8 py-3 bg-duo-blue hover:bg-duo-blue-hover text-white font-extrabold rounded-2xl border-duo-blue-shade flex items-center gap-2 uppercase tracking-wide">
-                        SIGUIENTE <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </button>
-                </div>
             </section>
 
-            <!-- PANEL 3: PREVIEW (Celular) -->
-            <section id="panel-preview" class="mobile-panel lg:flex w-full lg:w-[35%] flex-col bg-slate-50 border-l-2 border-slate-100">
-                <header class="h-16 flex items-center px-6 justify-center bg-white border-b-2 border-slate-100 shrink-0">
-                    <span class="text-xs font-extrabold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                        VISTA PREVIA
+            <!-- PANEL 3: PREVIEW -->
+            <section id="panel-preview" class="mobile-panel lg:flex w-full lg:w-[40%] flex-col bg-[#f8fafc]">
+                <header class="h-16 border-b border-slate-200 flex items-center px-6 justify-between bg-white shrink-0">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                        <i data-lucide="globe" class="w-4 h-4 text-slate-400"></i> Navegador
                     </span>
+                    <div class="flex gap-1.5 opacity-50">
+                        <div class="w-2.5 h-2.5 rounded-full bg-slate-300"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-slate-300"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-slate-300"></div>
+                    </div>
                 </header>
-                <div class="flex-1 p-8 flex flex-col h-full overflow-hidden items-center justify-center">
-                    <div class="bg-white w-full h-full rounded-3xl shadow-[0_8px_0_0_#e5e7eb] overflow-hidden border-2 border-slate-200 relative">
+                <div class="flex-1 p-6 flex flex-col h-full overflow-hidden bg-slate-50/50">
+                    <div class="bg-white flex-1 rounded-xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] overflow-hidden border border-slate-200 relative transform transition-all hover:shadow-xl">
                         <iframe id="preview-frame" sandbox="allow-scripts allow-modals allow-same-origin allow-popups allow-forms" class="w-full h-full border-none"></iframe>
                     </div>
                 </div>
@@ -342,19 +423,19 @@
         </main>
     </div>
 
-    <!-- MOBILE NAV -->
-    <nav id="mobile-nav" class="lg:hidden h-20 bg-white border-t-2 border-slate-100 fixed bottom-0 left-0 right-0 flex justify-around items-center z-40 hidden pb-2">
-        <button onclick="window.switchTab('guide')" class="tab-btn active text-slate-400 flex flex-col items-center gap-1 p-2 w-1/3 transition font-bold" data-target="guide">
-            <i data-lucide="book-open" class="w-6 h-6"></i>
-            <span class="text-xs">Misión</span>
+    <!-- MOBILE NAV (Glass) -->
+    <nav id="mobile-nav" class="lg:hidden h-16 glass fixed bottom-0 left-0 right-0 flex justify-around items-center z-40 hidden border-t-0">
+        <button onclick="window.switchTab('guide')" class="tab-btn active text-slate-400 flex flex-col items-center gap-1 p-2 w-1/3 transition" data-target="guide">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Guía</span>
         </button>
-        <button onclick="window.switchTab('editor')" class="tab-btn text-slate-400 flex flex-col items-center gap-1 p-2 w-1/3 transition font-bold" data-target="editor">
-            <i data-lucide="code-2" class="w-6 h-6"></i>
-            <span class="text-xs">Código</span>
+        <button onclick="window.switchTab('editor')" class="tab-btn text-slate-400 flex flex-col items-center gap-1 p-2 w-1/3 transition" data-target="editor">
+            <i data-lucide="code-2" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Código</span>
         </button>
-        <button onclick="window.switchTab('preview')" class="tab-btn text-slate-400 flex flex-col items-center gap-1 p-2 w-1/3 transition font-bold" data-target="preview">
-            <i data-lucide="monitor" class="w-6 h-6"></i>
-            <span class="text-xs">Vista</span>
+        <button onclick="window.switchTab('preview')" class="tab-btn text-slate-400 flex flex-col items-center gap-1 p-2 w-1/3 transition" data-target="preview">
+            <i data-lucide="monitor" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Vista</span>
         </button>
     </nav>
 
@@ -411,8 +492,8 @@
         const aiContent = document.getElementById('ai-content');
         const streakCountEl = document.getElementById('streak-count');
         const streakIconEl = document.getElementById('streak-icon');
-        const progressFill = document.getElementById('progress-fill');
 
+        // --- HELPER: DATE ---
         const getTodayStr = () => new Date().toISOString().split('T')[0];
 
         // --- INIT ---
@@ -435,6 +516,7 @@
                     userInfo.classList.remove('hidden');
                     userInfo.classList.add('flex');
                     loginBtn.classList.add('hidden');
+                    document.getElementById('user-email').textContent = user.email;
                     document.getElementById('user-avatar').textContent = user.email[0].toUpperCase();
                     await Promise.all([loadUserProgress(), initStreak()]);
                 } else {
@@ -459,7 +541,6 @@
                 validateCode();
             });
 
-            // Tabs indentation
             editor.addEventListener('keydown', (e) => {
                 if (e.key === 'Tab') {
                     e.preventDefault();
@@ -493,27 +574,45 @@
             try {
                 const docRef = doc(db, 'artifacts', APP_ID, 'users', currentUser.uid, 'account', 'streak');
                 const docSnap = await getDoc(docRef);
+                
                 const today = getTodayStr();
                 
                 if (docSnap.exists()) {
                     userStreak = docSnap.data();
+                    
                     if (userStreak.lastActiveDate) {
                         const lastDate = new Date(userStreak.lastActiveDate);
                         const currDate = new Date(today);
                         const diffTime = Math.abs(currDate - lastDate);
                         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                        if (diffDays > 1) userStreak.count = 0; 
+                        
+                        // Si la diferencia es > 1 (o sea, 2 días o más), se pierde la racha
+                        // Ejemplo: Ayer (diff 1) -> OK. Anteayer (diff 2) -> Lost.
+                        if (diffDays > 1) {
+                            userStreak.count = 0; // Reset streak locally, will save next time user does something or we could save now.
+                            // Optional: Save reset state immediately
+                            // await setDoc(docRef, { count: 0, lastActiveDate: userStreak.lastActiveDate }, { merge: true });
+                        }
                     }
                 } else {
                     userStreak = { count: 0, lastActiveDate: null };
                 }
                 updateStreakUI();
-            } catch (e) { console.error(e); }
+            } catch (e) {
+                console.error("Error loading streak:", e);
+            }
         }
 
         async function updateStreak() {
             if (!currentUser) return;
             const today = getTodayStr();
+            let streakChanged = false;
+
+            // Logic:
+            // If lastActiveDate == today: Do nothing (already counted).
+            // If lastActiveDate == yesterday: Increment streak.
+            // If lastActiveDate < yesterday (or null): Reset to 1 (started today).
+            
             if (userStreak.lastActiveDate !== today) {
                 const lastDate = userStreak.lastActiveDate ? new Date(userStreak.lastActiveDate) : null;
                 const currDate = new Date(today);
@@ -521,75 +620,116 @@
                 if (lastDate) {
                     const diffTime = Math.abs(currDate - lastDate);
                     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                    if (diffDays === 1) userStreak.count++;
-                    else userStreak.count = 1;
-                } else userStreak.count = 1;
+                    
+                    if (diffDays === 1) {
+                        userStreak.count++;
+                        streakChanged = true;
+                    } else {
+                        // Reset to 1 because they are active TODAY
+                        userStreak.count = 1;
+                        streakChanged = true;
+                    }
+                } else {
+                    // First time ever
+                    userStreak.count = 1;
+                    streakChanged = true;
+                }
                 
                 userStreak.lastActiveDate = today;
+                
+                // Save to Firestore
                 try {
                     const docRef = doc(db, 'artifacts', APP_ID, 'users', currentUser.uid, 'account', 'streak');
                     await setDoc(docRef, userStreak, { merge: true });
-                    updateStreakUI(true);
-                } catch (e) { console.error(e); }
+                    updateStreakUI(true); // Animate
+                } catch (e) {
+                    console.error("Error saving streak:", e);
+                }
             }
         }
 
         function updateStreakUI(animate = false) {
             streakCountEl.textContent = userStreak.count;
             if (userStreak.count > 0) {
-                streakIconEl.classList.remove('text-slate-300');
-                streakIconEl.classList.add('text-duo-yellow', 'fill-duo-yellow');
-                streakCountEl.classList.remove('text-slate-400');
-                streakCountEl.classList.add('text-duo-yellow');
+                streakIconEl.classList.remove('text-slate-600', 'fill-transparent');
+                streakIconEl.classList.add('text-orange-500', 'fill-orange-500/20');
             } else {
-                streakIconEl.classList.add('text-slate-300');
-                streakIconEl.classList.remove('text-duo-yellow', 'fill-duo-yellow');
-                streakCountEl.classList.add('text-slate-400');
-                streakCountEl.classList.remove('text-duo-yellow');
+                streakIconEl.classList.add('text-slate-600', 'fill-transparent');
+                streakIconEl.classList.remove('text-orange-500', 'fill-orange-500/20');
             }
+            
             if (animate) {
                 streakIconEl.classList.add('animate-bounce-fire');
                 setTimeout(() => streakIconEl.classList.remove('animate-bounce-fire'), 2000);
             }
         }
 
-        // --- AI ---
+        // --- MISTRAL AI INTEGRATION ---
         window.askAI = async () => {
             if (!currentUser) { window.toggleAuthModal(true); return; }
+            
             const lesson = lessons[currentLessonIndex];
+            
+            // Show modal with loading state
             aiModal.classList.remove('hidden');
             aiContent.innerHTML = `
-                <div class="flex flex-col items-center justify-center py-10 text-slate-400 gap-3">
-                    <div class="animate-spin rounded-full h-8 w-8 border-4 border-duo-blue border-t-transparent"></div>
-                    <p class="text-sm font-bold">Pensando...</p>
+                <div class="flex flex-col items-center justify-center py-10 text-slate-500 gap-3">
+                    <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-indigo-500"></div>
+                    <p class="text-sm font-mono animate-pulse">Analizando tu código...</p>
                 </div>
             `;
 
             try {
                 const response = await fetch('https://api.mistral.ai/v1/chat/completions', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer mjVkbhVGVY43LJNMttSLDYOFSYFSkOuv' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer mjVkbhVGVY43LJNMttSLDYOFSYFSkOuv'
+                    },
                     body: JSON.stringify({
                         model: "mistral-small-latest",
                         messages: [
-                            { role: "system", content: "Eres un profesor de HTML amigable y divertido. Responde brevemente y al grano sobre qué le falta al código para pasar la validación. Usa emojis." },
-                            { role: "user", content: `Contexto Lección: ${lesson.title}\nValidación Regex: ${lesson.validation.regex}\nRequisito: ${lesson.validation.error}\n\nCódigo Estudiante:\n${editor.value}` }
+                            {
+                                role: "system",
+                                content: "Eres un tutor de HTML estricto pero útil. Analiza el código del estudiante. Solo dí qué le falta o qué está mal basándote en la validación. NO des código extra innecesario. Usa Markdown para formatear la respuesta."
+                            },
+                            {
+                                role: "user",
+                                content: `Contexto Lección: ${lesson.title}\nValidación Regex Requerida: ${lesson.validation.regex}\nRequisito Explicado: ${lesson.validation.error}\n\nCódigo del Estudiante:\n${editor.value}`
+                            }
                         ],
-                        temperature: 0.3
+                        temperature: 0.2
                     })
                 });
-                if (!response.ok) throw new Error('API Error');
+
+                if (!response.ok) throw new Error('Error en la API');
+                
                 const data = await response.json();
                 const aiText = data.choices[0].message.content;
+                
+                // Render Markdown
                 aiContent.innerHTML = `<div class="markdown-body p-2">${marked.parse(aiText)}</div>`;
+
             } catch (error) {
                 console.error(error);
-                aiContent.innerHTML = `<div class="text-center py-8 text-red-400"><p class="font-bold">Error de conexión 😵</p></div>`;
+                aiContent.innerHTML = `
+                    <div class="text-center py-8">
+                        <div class="bg-red-500/10 text-red-400 p-4 rounded-lg inline-block mb-2 border border-red-500/20">
+                            <i data-lucide="wifi-off" class="w-8 h-8 mx-auto mb-2"></i>
+                            <p class="text-sm font-bold">Error de conexión con la IA</p>
+                        </div>
+                        <p class="text-xs text-slate-500">Inténtalo de nuevo más tarde.</p>
+                    </div>
+                `;
+                lucide.createIcons();
             }
         };
 
-        window.closeAIModal = () => { aiModal.classList.add('hidden'); };
+        window.closeAIModal = () => {
+            aiModal.classList.add('hidden');
+        };
 
+        // --- HIGHLIGHTING LOGIC ---
         function updateHighlighting(text) {
             let html = text.replace(new RegExp("&", "g"), "&amp;").replace(new RegExp("<", "g"), "&lt;");
             if (text[text.length - 1] === "\n") html += " ";
@@ -597,20 +737,28 @@
             Prism.highlightElement(highlightingCode);
         }
 
+        // --- LOGIC ---
         async function loadUserProgress() {
             if (!currentUser) return;
             try {
                 const q = collection(db, 'artifacts', APP_ID, 'users', currentUser.uid, 'progress');
                 const querySnapshot = await getDocs(q);
                 userProgressMap = {};
-                querySnapshot.forEach((doc) => { userProgressMap[doc.id] = doc.data(); });
+                querySnapshot.forEach((doc) => {
+                    userProgressMap[doc.id] = doc.data();
+                });
             } catch (e) { console.error(e); }
         }
 
         async function saveProgress() {
             const lesson = lessons[currentLessonIndex];
             if (!currentUser || !lesson) return;
+            
+            // Only update streak if the lesson wasn't already completed today (or ever)
+            // But usually practice is practice. Let's just call updateStreak() on valid code submit.
+            // Logic inside updateStreak handles the "only once per day" rule.
             updateStreak();
+
             userProgressMap[lesson.id] = { completed: isCodeValid };
             try {
                 const docRef = doc(db, 'artifacts', APP_ID, 'users', currentUser.uid, 'progress', lesson.id);
@@ -618,9 +766,17 @@
             } catch (e) { console.error(e); }
         }
 
+        // --- AUTH ---
         window.toggleAuthModal = (show) => {
-            if (show) { authModal.classList.remove('hidden'); authError.classList.add('hidden'); authForm.reset(); }
-            else { authModal.classList.add('hidden'); }
+            if (show) {
+                authModal.classList.remove('hidden');
+                setTimeout(() => authModal.children[0].classList.remove('scale-95', 'opacity-0'), 10);
+                authError.classList.add('hidden');
+                authForm.reset();
+            } else {
+                authModal.children[0].classList.add('scale-95', 'opacity-0');
+                setTimeout(() => authModal.classList.add('hidden'), 200);
+            }
         };
 
         window.toggleAuthMode = () => {
@@ -629,16 +785,17 @@
             const btn = document.getElementById('auth-submit-btn');
             const switchText = document.getElementById('auth-switch-text');
             const switchBtn = document.getElementById('auth-switch-btn');
+
             if (isLoginMode) {
-                title.textContent = "Bienvenido";
-                btn.innerHTML = `<span>ENTRAR</span>`;
-                switchText.textContent = "¿Nuevo aquí?";
-                switchBtn.textContent = "CREAR CUENTA";
+                title.textContent = "Bienvenido de nuevo";
+                btn.innerHTML = `<span>Entrar</span>`;
+                switchText.textContent = "¿No tienes cuenta?";
+                switchBtn.textContent = "Regístrate gratis";
             } else {
-                title.textContent = "Crear perfil";
-                btn.innerHTML = `<span>REGISTRARSE</span>`;
+                title.textContent = "Crea tu cuenta";
+                btn.innerHTML = `<span>Registrarse</span>`;
                 switchText.textContent = "¿Ya tienes cuenta?";
-                switchBtn.textContent = "INICIA SESIÓN";
+                switchBtn.textContent = "Inicia sesión";
             }
             authError.classList.add('hidden');
         };
@@ -648,29 +805,46 @@
             const email = document.getElementById('auth-email').value;
             const password = document.getElementById('auth-password').value;
             authError.classList.add('hidden');
+
             try {
                 if (isLoginMode) await signInWithEmailAndPassword(auth, email, password);
                 else await createUserWithEmailAndPassword(auth, email, password);
                 window.toggleAuthModal(false);
             } catch (error) {
                 authError.classList.remove('hidden');
-                let msg = "Error desconocido";
-                if (error.code === 'auth/invalid-credential') msg = "Datos incorrectos";
-                if (error.code === 'auth/email-already-in-use') msg = "Email ya registrado";
-                if (error.code === 'auth/weak-password') msg = "Contraseña débil";
+                let msg = "Error de autenticación";
+                if (error.code === 'auth/invalid-credential') msg = "Usuario o contraseña incorrectos.";
+                if (error.code === 'auth/email-already-in-use') msg = "Este email ya está en uso.";
+                if (error.code === 'auth/weak-password') msg = "La contraseña es muy débil (min 6 caracteres).";
                 authError.querySelector('span').textContent = msg;
             }
         };
 
-        window.doLogout = async () => { if (confirm("¿Salir?")) { await signOut(auth); window.goHome(); } };
-        window.goHome = () => { viewWorkspace.classList.add('hidden'); viewHome.classList.remove('hidden'); mobileNav.classList.add('hidden'); document.title = "HTML Learn"; renderHome(); };
+        window.doLogout = async () => {
+            if (confirm("¿Cerrar sesión?")) {
+                await signOut(auth);
+                window.goHome();
+            }
+        };
+
+        // --- NAVIGATION ---
+        window.goHome = () => {
+            viewWorkspace.classList.add('hidden');
+            viewHome.classList.remove('hidden');
+            mobileNav.classList.add('hidden');
+            document.title = "HTML Master: Curso Completo";
+            renderHome();
+        };
 
         window.enterWorkspace = (index) => {
             if (!currentUser) { window.toggleAuthModal(true); return; }
             if (index > 0) {
                 const prevLesson = lessons[index - 1];
                 const prevProgress = userProgressMap[prevLesson.id];
-                if (!prevProgress || !prevProgress.completed) { alert("🔒 Completa la lección anterior primero."); return; }
+                if (!prevProgress || !prevProgress.completed) {
+                    alert("¡Ups! 🔒 Completa la lección anterior para desbloquear esta.");
+                    return;
+                }
             }
             currentLessonIndex = index;
             viewHome.classList.add('hidden');
@@ -702,27 +876,15 @@
                 const isHidden = !isCurrentUnit;
                 const rotateClass = isHidden ? '' : 'rotate-180';
                 
-                // Color de la unidad (alternando)
-                const unitColors = ['border-duo-green', 'border-duo-blue', 'border-purple-500', 'border-duo-yellow'];
-                const unitColor = unitColors[(unitNum - 1) % unitColors.length];
-                const bgColors = ['bg-duo-green', 'bg-duo-blue', 'bg-purple-500', 'bg-duo-yellow'];
-                const bgColor = bgColors[(unitNum - 1) % bgColors.length];
-
                 htmlContent += `
-                    <div class="mb-4">
-                        <div class="rounded-3xl border-2 border-slate-200 overflow-hidden bg-white shadow-[0_4px_0_0_#e5e7eb]">
-                            <button onclick="window.toggleUnit('${unitNum}')" class="w-full flex items-center justify-between p-5 bg-white hover:bg-slate-50 transition">
-                                <div class="flex flex-col items-start">
-                                    <span class="text-xl font-extrabold text-slate-700">Unidad ${unitNum}</span>
-                                    <span class="text-slate-400 font-bold text-sm">Conceptos básicos</span>
-                                </div>
-                                <div class="${bgColor} text-white px-4 py-2 rounded-2xl font-extrabold text-sm shadow-sm flex items-center gap-2">
-                                    <i data-lucide="${isHidden ? 'lock' : 'play'}" class="w-4 h-4"></i>
-                                    ${isHidden ? 'BLOQUEADO' : 'JUGAR'}
-                                </div>
-                            </button>
-                            
-                            <div id="unit-content-${unitNum}" class="p-5 bg-slate-50 border-t-2 border-slate-100 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ${isHidden ? 'hidden' : ''}">
+                    <div class="animate-fade-in-up" style="animation-delay: ${unitNum * 0.1}s">
+                        <button onclick="window.toggleUnit('${unitNum}')" class="w-full flex items-center gap-4 mb-6 group cursor-pointer focus:outline-none">
+                            <span class="text-xs font-bold text-indigo-400 uppercase tracking-[0.2em] bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20 group-hover:bg-indigo-500/20 transition">Unidad ${unitNum}</span>
+                            <div class="h-px bg-gradient-to-r from-indigo-500/20 to-transparent flex-1 group-hover:from-indigo-500/40 transition"></div>
+                            <i id="unit-icon-${unitNum}" data-lucide="chevron-down" class="w-5 h-5 text-slate-500 transition-transform duration-300 ${rotateClass}"></i>
+                        </button>
+                        
+                        <div id="unit-content-${unitNum}" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 transition-all duration-300 ${isHidden ? 'hidden' : ''}">
                 `;
 
                 htmlContent += unitLessons.map(l => {
@@ -740,41 +902,46 @@
 
                     if (isLocked) {
                         return `
-                        <div class="p-6 rounded-3xl border-2 border-slate-200 bg-slate-100 opacity-60 cursor-not-allowed flex flex-col items-center justify-center text-center gap-2">
-                            <div class="w-16 h-16 rounded-full bg-slate-200 flex items-center justify-center mb-2">
-                                <i data-lucide="lock" class="w-8 h-8 text-slate-400"></i>
+                        <div class="glass p-6 rounded-2xl opacity-40 grayscale select-none cursor-not-allowed relative overflow-hidden group">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="text-[10px] font-bold text-slate-500 bg-slate-800/50 px-2 py-1 rounded uppercase tracking-wider">Lección ${idx + 1}</span>
+                                <i data-lucide="lock" class="w-5 h-5 text-slate-600"></i>
                             </div>
-                            <span class="font-bold text-slate-400 text-sm">Lección ${idx + 1}</span>
+                            <h3 class="text-lg font-semibold text-slate-400 mb-2">${l.title}</h3>
+                            <div class="absolute inset-0 bg-slate-950/20"></div>
                         </div>`;
                     }
 
-                    // Card Styles Playful
-                    const activeColor = isChallenge ? 'bg-duo-yellow' : 'bg-duo-green';
-                    const activeBorder = isChallenge ? 'border-duo-yellow-shade' : 'border-duo-green-shade';
-                    
-                    if (isDone) {
-                        return `
-                        <button onclick="window.enterWorkspace(${idx})" class="group relative p-6 rounded-3xl bg-duo-yellow border-b-4 border-duo-yellow-shade hover:bg-duo-yellow-hover active:border-b-0 active:mt-1 transition-all flex flex-col items-center text-center">
-                            <div class="absolute top-3 right-3 bg-white/30 rounded-full p-1"><i data-lucide="check" class="w-4 h-4 text-white"></i></div>
-                            <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-3 text-white">
-                                <i data-lucide="${isChallenge ? 'trophy' : 'star'}" class="w-8 h-8"></i>
-                            </div>
-                            <h3 class="font-extrabold text-white text-lg leading-tight mb-1">${l.title}</h3>
-                        </button>
-                        `;
-                    }
+                    const borderClass = isChallenge ? 'border-amber-500/30' : 'border-slate-700/50';
+                    const hoverClass = isChallenge ? 'hover:border-amber-500/60 hover:shadow-amber-500/10' : 'hover:border-indigo-500/50 hover:shadow-indigo-500/20';
+                    const iconColor = isDone ? 'text-emerald-400' : (isChallenge ? 'text-amber-400' : 'text-slate-400');
+                    const iconBg = isDone ? 'bg-emerald-500/10' : (isChallenge ? 'bg-amber-500/10' : 'bg-slate-800');
+                    const icon = isDone ? 'check' : (isChallenge ? 'trophy' : 'code-2');
 
-                    // Current / Available
                     return `
-                    <button onclick="window.enterWorkspace(${idx})" class="group p-6 rounded-3xl bg-white border-2 border-slate-200 border-b-4 hover:bg-slate-50 active:border-b-2 active:mt-0.5 transition-all flex flex-col items-center text-center">
-                        <div class="w-16 h-16 rounded-full ${isChallenge ? 'bg-duo-yellow text-white' : 'bg-duo-green text-white'} flex items-center justify-center mb-3 shadow-sm group-hover:scale-110 transition-transform">
-                            <i data-lucide="${isChallenge ? 'crown' : 'play'}" class="w-8 h-8 ml-1"></i>
+                    <button onclick="window.enterWorkspace(${idx})" class="glass glass-hover text-left p-6 rounded-2xl transition-all duration-300 group relative overflow-hidden w-full ${borderClass} ${hoverClass}">
+                        ${isChallenge ? '<div class="absolute top-0 right-0 p-12 bg-amber-500/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>' : ''}
+                        
+                        <div class="relative z-10">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="text-[10px] font-bold ${isChallenge ? 'text-amber-400 bg-amber-500/10 border-amber-500/20' : 'text-slate-400 bg-slate-800 border-slate-700'} px-2.5 py-1 rounded border uppercase tracking-wider">
+                                    ${isChallenge ? 'Reto Final' : `Lección ${idx + 1}`}
+                                </span>
+                                <div class="w-8 h-8 rounded-lg ${iconBg} flex items-center justify-center ${iconColor} transition-colors">
+                                    <i data-lucide="${icon}" class="w-4 h-4"></i>
+                                </div>
+                            </div>
+                            
+                            <h3 class="text-lg font-bold text-slate-200 group-hover:text-white transition-colors mb-1 pr-4 leading-tight">${l.title}</h3>
+                            
+                            ${isDone 
+                                ? '<div class="mt-3 flex items-center gap-1.5 text-[10px] font-bold text-emerald-400 uppercase tracking-wider"><div class="w-1.5 h-1.5 rounded-full bg-emerald-400"></div> Completado</div>' 
+                                : `<div class="mt-4 h-1 w-full bg-slate-800 rounded-full overflow-hidden"><div class="h-full ${isChallenge ? 'bg-amber-500' : 'bg-indigo-500'} w-0 group-hover:w-full transition-all duration-700 ease-out"></div></div>`
+                            }
                         </div>
-                        <h3 class="font-extrabold text-slate-700 text-lg leading-tight mb-1">${l.title}</h3>
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wide">Empezar</span>
                     </button>
                     `;
-                }).join('') + `</div></div></div>`;
+                }).join('') + `</div></div>`;
             });
             homeLessonGrid.innerHTML = htmlContent;
             lucide.createIcons();
@@ -782,36 +949,38 @@
 
         window.toggleUnit = (unitNum) => {
             const content = document.getElementById(`unit-content-${unitNum}`);
-            if (content.classList.contains('hidden')) content.classList.remove('hidden');
-            else content.classList.add('hidden');
+            const icon = document.getElementById(`unit-icon-${unitNum}`);
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                content.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
         };
 
         function loadLesson(index) {
             const lesson = lessons[index];
-            document.title = `${lesson.title} - HTML Learn`;
+            document.title = `${lesson.title} - HTML Master`;
             guideContent.innerHTML = lesson.guide;
+            
+            // Set value for both layers
             editor.value = lesson.initialCode;
             updateHighlighting(lesson.initialCode);
             
-            // Progress Update
-            const total = lessons.length;
-            const progress = ((index + 1) / total) * 100;
-            progressFill.style.width = `${progress}%`;
-
             hideFeedback();
             preview.srcdoc = ""; 
             setTimeout(() => { updatePreview(); }, 100);
             validateCode(true);
+            document.getElementById('btn-prev').disabled = index === 0;
             
-            // Reset state buttons
-            btnNext.classList.add('hidden');
-            
+            // Animación scroll top
             document.getElementById('panel-guide').querySelector('.custom-scroll').scrollTop = 0;
         }
 
         function updatePreview() {
             let code = editor.value;
-            code = code.replace(/<meta\s+http-equiv=["']refresh["'][^>]*>/gi, '');
+            code = code.replace(/<meta\s+http-equiv=["']refresh["'][^>]*>/gi, '<!-- meta refresh disabled -->');
             const safetyScript = `
                 <script>
                     document.addEventListener('DOMContentLoaded', () => {
@@ -820,13 +989,14 @@
                             if (link && !link.getAttribute('href')?.startsWith('#')) {
                                 e.preventDefault();
                                 if(link.getAttribute('href') !== 'javascript:void(0)')
-                                    if(confirm('¿Abrir enlace externo?')) window.open(link.getAttribute('href'), '_blank');
+                                    if(confirm('¿Abrir enlace externo: ' + link.getAttribute('href') + '?')) window.open(link.getAttribute('href'), '_blank');
                             }
                         });
-                        document.body.addEventListener('submit', (e) => { e.preventDefault(); alert('🚀 ¡Formulario enviado!'); });
+                        document.body.addEventListener('submit', (e) => { e.preventDefault(); alert('🚀 Formulario enviado (Simulación)'); });
                     });
                 <\/script>`;
             
+            // Improved injection logic to handle unclosed tags
             if (code.match(/<!DOCTYPE\s+html>/i)) {
                 preview.srcdoc = code.replace(/(<!DOCTYPE\s+html>)/i, '$1' + safetyScript);
             } else {
@@ -841,31 +1011,33 @@
             const regex = new RegExp(lesson.validation.regex, "i");
             isCodeValid = regex.test(code);
             updateNextButtonState();
-            if (!silent && isCodeValid) {
-                showFeedback('success', '¡Excelente!', '¡Lo has conseguido!');
-                saveProgress();
-                triggerConfetti();
-            } else if (!silent) {
-                hideFeedback();
+            if (!silent) {
+                if (isCodeValid) { 
+                    showFeedback('success', '¡Excelente!', 'Has completado la misión.'); 
+                    saveProgress(); 
+                    triggerConfetti(); // Add this
+                }
+                else hideFeedback();
             }
         }
 
         window.checkCode = () => {
              const lesson = lessons[currentLessonIndex];
-             if (isCodeValid) {
-                 showFeedback('success', '¡Correcto!', 'Buen trabajo. Sigue así.');
-                 saveProgress();
-                 triggerConfetti();
-             } else {
-                 showFeedback('error', 'Casi...', lesson.validation.error);
-             }
+             if (isCodeValid) showFeedback('success', '¡Todo correcto!', 'Puedes avanzar.');
+             else showFeedback('error', 'Algo falta...', lesson.validation.error);
         }
 
         function updateNextButtonState() {
             if (isCodeValid) {
-                btnNext.classList.remove('hidden');
+                btnNext.disabled = false;
+                btnNext.className = "px-4 h-8 flex items-center gap-2 rounded bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg shadow-emerald-900/20 transition-all text-xs font-bold uppercase tracking-wide transform hover:scale-105";
+                btnNext.innerHTML = `<span>Siguiente</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>`;
+                lucide.createIcons();
             } else {
-                btnNext.classList.add('hidden');
+                btnNext.disabled = true;
+                btnNext.className = "px-3 h-8 flex items-center gap-2 rounded bg-slate-800 text-slate-500 cursor-not-allowed transition text-xs font-bold uppercase tracking-wide";
+                btnNext.innerHTML = `<span>Sig</span> <i data-lucide="chevron-right" class="w-4 h-4"></i>`;
+                lucide.createIcons();
             }
         }
 
@@ -873,7 +1045,7 @@
             if (isCodeValid) {
                 saveProgress();
                 if (currentLessonIndex < lessons.length - 1) window.enterWorkspace(currentLessonIndex + 1);
-                else { alert("🎉 ¡Curso completado! Eres un maestro del HTML."); window.goHome(); }
+                else { alert("🎉 ¡Felicidades! Has completado todo el curso."); window.goHome(); }
             } else window.checkCode();
         }
 
@@ -888,46 +1060,51 @@
 
         function showFeedback(type, title, msg) {
             clearTimeout(feedbackTimeout);
-            feedbackArea.classList.remove('translate-y-4', 'opacity-0', 'pointer-events-none', 'border-red-200', 'bg-red-50', 'border-duo-green', 'bg-green-50');
+            feedbackArea.classList.remove('translate-y-4', 'opacity-0', 'pointer-events-none', 'border-transparent');
             const iconContainer = document.getElementById('feedback-icon');
             const titleEl = document.getElementById('feedback-title');
             const msgEl = document.getElementById('feedback-msg');
             
             if (type === 'success') {
-                feedbackArea.classList.add('border-duo-green', 'bg-[#d7ffb8]', 'text-slate-800');
-                iconContainer.innerHTML = `<i data-lucide="check" class="w-6 h-6 text-duo-green"></i>`;
-                titleEl.className = "font-extrabold text-lg text-duo-green-shade";
-                titleEl.textContent = "¡GENIAL!";
+                feedbackArea.className = "absolute bottom-6 left-4 right-4 p-4 rounded-xl border transform transition-all duration-500 z-50 shadow-2xl backdrop-blur-xl flex items-start gap-4 bg-emerald-900/80 border-emerald-500/30 text-emerald-50 opacity-100 translate-y-0";
+                iconContainer.innerHTML = `<div class="p-1 rounded-full bg-emerald-500/20 text-emerald-400"><i data-lucide="check" class="w-5 h-5"></i></div>`;
+                titleEl.className = "font-bold text-sm mb-0.5 text-emerald-300";
+                msgEl.className = "text-xs opacity-90 leading-relaxed text-emerald-100/80";
             } else {
-                feedbackArea.classList.add('border-red-200', 'bg-red-50', 'text-slate-800');
-                iconContainer.innerHTML = `<i data-lucide="x" class="w-6 h-6 text-red-500"></i>`;
-                titleEl.className = "font-extrabold text-lg text-red-500";
-                titleEl.textContent = "HAY UN ERROR";
+                feedbackArea.className = "absolute bottom-6 left-4 right-4 p-4 rounded-xl border transform transition-all duration-500 z-50 shadow-2xl backdrop-blur-xl flex items-start gap-4 bg-red-900/80 border-red-500/30 text-red-50 opacity-100 translate-y-0";
+                iconContainer.innerHTML = `<div class="p-1 rounded-full bg-red-500/20 text-red-400"><i data-lucide="x" class="w-5 h-5"></i></div>`;
+                titleEl.className = "font-bold text-sm mb-0.5 text-red-300";
+                msgEl.className = "text-xs opacity-90 leading-relaxed text-red-100/80";
             }
+            titleEl.textContent = title;
             msgEl.textContent = msg;
             lucide.createIcons();
-            
-            // Auto hide after 5 seconds if not success (success stays until next)
-            if(type !== 'success') feedbackTimeout = setTimeout(() => hideFeedback(), 5000);
+            feedbackTimeout = setTimeout(() => hideFeedback(), 4000);
         }
 
         function hideFeedback() {
             clearTimeout(feedbackTimeout);
-            feedbackArea.classList.add('translate-y-4', 'opacity-0', 'pointer-events-none');
+            feedbackArea.className = "absolute bottom-6 left-4 right-4 p-4 rounded-xl border border-transparent transform translate-y-4 opacity-0 transition-all duration-500 z-50 shadow-2xl backdrop-blur-xl flex items-start gap-4 pointer-events-none";
         }
 
+        // --- CONFETTI FUNCTION ---
         function triggerConfetti() {
-            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, zIndex: 100, colors: ['#58cc02', '#1cb0f6', '#ffc800'] });
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                zIndex: 100
+            });
         }
 
         window.switchTab = (targetId) => {
             document.querySelectorAll('.mobile-panel').forEach(p => p.classList.remove('active'));
             document.getElementById(`panel-${targetId}`).classList.add('active');
             document.querySelectorAll('.tab-btn').forEach(b => {
-                b.classList.remove('text-duo-blue', 'active');
+                b.classList.remove('text-indigo-400', 'active');
                 b.classList.add('text-slate-400');
                 if(b.dataset.target === targetId) {
-                    b.classList.add('text-duo-blue', 'active');
+                    b.classList.add('text-indigo-400', 'active');
                     b.classList.remove('text-slate-400');
                 }
             });
