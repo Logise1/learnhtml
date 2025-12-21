@@ -25,6 +25,7 @@
                     animation: {
                         'blob': 'blob 7s infinite',
                         'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+                        'bounce-fire': 'bounceFire 1s infinite',
                     },
                     keyframes: {
                         blob: {
@@ -36,6 +37,10 @@
                         fadeInUp: {
                             '0%': { opacity: '0', transform: 'translateY(20px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        bounceFire: {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.2)' },
                         }
                     }
                 }
@@ -264,14 +269,19 @@
         <!-- Navbar Flotante -->
         <div class="w-full max-w-6xl flex justify-end mb-8">
              <div class="glass rounded-full p-1.5 pl-4 pr-1.5 flex items-center gap-4 shadow-xl">
+                <!-- User Info & Streak -->
                 <div id="user-info" class="hidden items-center gap-3">
+                    <div class="flex items-center gap-2 mr-2 bg-slate-900/50 px-3 py-1.5 rounded-full border border-slate-800" title="Racha Actual">
+                        <i id="streak-icon" data-lucide="flame" class="w-4 h-4 text-orange-500 fill-orange-500/20 transition-all"></i>
+                        <span id="streak-count" class="text-sm font-bold text-orange-400 font-mono">0</span>
+                    </div>
+                    <div class="h-6 w-px bg-slate-700/50"></div>
                     <div class="flex flex-col items-end leading-tight">
                         <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Conectado como</span>
                         <span class="text-xs text-slate-300 font-medium truncate max-w-[150px]" id="user-email">...</span>
                     </div>
                     <div class="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-indigo-500/30" id="user-avatar">U</div>
-                    <div class="h-6 w-px bg-slate-700/50 mx-1"></div>
-                    <button onclick="window.doLogout()" class="w-9 h-9 rounded-full hover:bg-red-500/10 hover:text-red-400 text-slate-400 transition flex items-center justify-center" title="Cerrar Sesión">
+                    <button onclick="window.doLogout()" class="w-9 h-9 rounded-full hover:bg-red-500/10 hover:text-red-400 text-slate-400 transition flex items-center justify-center ml-1" title="Cerrar Sesión">
                         <i data-lucide="log-out" class="w-4 h-4"></i>
                     </button>
                 </div>
@@ -454,6 +464,7 @@
         let isCodeValid = false;
         let currentUser = null;
         let userProgressMap = {};
+        let userStreak = { count: 0, lastActiveDate: null };
         let isLoginMode = true;
         let feedbackTimeout; 
 
@@ -477,6 +488,11 @@
         const loginBtn = document.getElementById('login-btn');
         const aiModal = document.getElementById('ai-modal');
         const aiContent = document.getElementById('ai-content');
+        const streakCountEl = document.getElementById('streak-count');
+        const streakIconEl = document.getElementById('streak-icon');
+
+        // --- HELPER: DATE ---
+        const getTodayStr = () => new Date().toISOString().split('T')[0];
 
         // --- INIT ---
         async function init() {
@@ -500,12 +516,13 @@
                     loginBtn.classList.add('hidden');
                     document.getElementById('user-email').textContent = user.email;
                     document.getElementById('user-avatar').textContent = user.email[0].toUpperCase();
-                    await loadUserProgress();
+                    await Promise.all([loadUserProgress(), initStreak()]);
                 } else {
                     userInfo.classList.add('hidden');
                     userInfo.classList.remove('flex');
                     loginBtn.classList.remove('hidden');
                     userProgressMap = {};
+                    userStreak = { count: 0, lastActiveDate: null };
                 }
                 renderHome();
                 loadingOverlay.classList.add('hidden');
@@ -547,6 +564,102 @@
                     updatePreview();
                 }
             });
+        }
+
+        // --- STREAK LOGIC ---
+        async function initStreak() {
+            if (!currentUser) return;
+            try {
+                const docRef = doc(db, 'artifacts', APP_ID, 'users', currentUser.uid, 'account', 'streak');
+                const docSnap = await getDoc(docRef);
+                
+                const today = getTodayStr();
+                
+                if (docSnap.exists()) {
+                    userStreak = docSnap.data();
+                    
+                    if (userStreak.lastActiveDate) {
+                        const lastDate = new Date(userStreak.lastActiveDate);
+                        const currDate = new Date(today);
+                        const diffTime = Math.abs(currDate - lastDate);
+                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                        
+                        // Si la diferencia es > 1 (o sea, 2 días o más), se pierde la racha
+                        // Ejemplo: Ayer (diff 1) -> OK. Anteayer (diff 2) -> Lost.
+                        if (diffDays > 1) {
+                            userStreak.count = 0; // Reset streak locally, will save next time user does something or we could save now.
+                            // Optional: Save reset state immediately
+                            // await setDoc(docRef, { count: 0, lastActiveDate: userStreak.lastActiveDate }, { merge: true });
+                        }
+                    }
+                } else {
+                    userStreak = { count: 0, lastActiveDate: null };
+                }
+                updateStreakUI();
+            } catch (e) {
+                console.error("Error loading streak:", e);
+            }
+        }
+
+        async function updateStreak() {
+            if (!currentUser) return;
+            const today = getTodayStr();
+            let streakChanged = false;
+
+            // Logic:
+            // If lastActiveDate == today: Do nothing (already counted).
+            // If lastActiveDate == yesterday: Increment streak.
+            // If lastActiveDate < yesterday (or null): Reset to 1 (started today).
+            
+            if (userStreak.lastActiveDate !== today) {
+                const lastDate = userStreak.lastActiveDate ? new Date(userStreak.lastActiveDate) : null;
+                const currDate = new Date(today);
+                
+                if (lastDate) {
+                    const diffTime = Math.abs(currDate - lastDate);
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                    
+                    if (diffDays === 1) {
+                        userStreak.count++;
+                        streakChanged = true;
+                    } else {
+                        // Reset to 1 because they are active TODAY
+                        userStreak.count = 1;
+                        streakChanged = true;
+                    }
+                } else {
+                    // First time ever
+                    userStreak.count = 1;
+                    streakChanged = true;
+                }
+                
+                userStreak.lastActiveDate = today;
+                
+                // Save to Firestore
+                try {
+                    const docRef = doc(db, 'artifacts', APP_ID, 'users', currentUser.uid, 'account', 'streak');
+                    await setDoc(docRef, userStreak, { merge: true });
+                    updateStreakUI(true); // Animate
+                } catch (e) {
+                    console.error("Error saving streak:", e);
+                }
+            }
+        }
+
+        function updateStreakUI(animate = false) {
+            streakCountEl.textContent = userStreak.count;
+            if (userStreak.count > 0) {
+                streakIconEl.classList.remove('text-slate-600', 'fill-transparent');
+                streakIconEl.classList.add('text-orange-500', 'fill-orange-500/20');
+            } else {
+                streakIconEl.classList.add('text-slate-600', 'fill-transparent');
+                streakIconEl.classList.remove('text-orange-500', 'fill-orange-500/20');
+            }
+            
+            if (animate) {
+                streakIconEl.classList.add('animate-bounce-fire');
+                setTimeout(() => streakIconEl.classList.remove('animate-bounce-fire'), 2000);
+            }
         }
 
         // --- MISTRAL AI INTEGRATION ---
@@ -638,6 +751,12 @@
         async function saveProgress() {
             const lesson = lessons[currentLessonIndex];
             if (!currentUser || !lesson) return;
+            
+            // Only update streak if the lesson wasn't already completed today (or ever)
+            // But usually practice is practice. Let's just call updateStreak() on valid code submit.
+            // Logic inside updateStreak handles the "only once per day" rule.
+            updateStreak();
+
             userProgressMap[lesson.id] = { completed: isCodeValid };
             try {
                 const docRef = doc(db, 'artifacts', APP_ID, 'users', currentUser.uid, 'progress', lesson.id);
