@@ -122,7 +122,7 @@
   {
     "id": "13",
     "title": "2.6 Multimedia: Favicon",
-    "guide": "<h3>Icono de Pestaña</h3><p>En el <code>head</code>, se usa <code>link</code> con rel='icon'.</p><p><strong>Misión:</strong> Pon <strong>'logo.png'</strong> como favicon.</p>",
+    "guide": "<h3>Icono de Pestaña</h3><p>En el <code>head</code>, se usa <code>link</code> con rel='icon'.</p><p><strong>¡Cuidado!</strong> A diferencia de las imágenes normales (<code>&lt;img&gt;</code>), la etiqueta <code>link</code> NO usa el atributo <code>src</code>. Debes usar <strong><code>href</code></strong> para indicar la ruta del archivo.</p><p><strong>Misión:</strong> Pon <strong>'logo.png'</strong> como favicon usando el atributo correcto.</p>",
     "initialCode": "<head>\n</head>",
     "validation": {
       "regex": "<link\\s+rel=['\"]icon['\"]\\s+href=['\"]logo\\.png['\"]",
@@ -132,11 +132,11 @@
   {
     "id": "14",
     "title": "2.7 JEFE UNIDAD 2: Galería",
-    "guide": "<h3>🔥 RETO FINAL UNIDAD 2</h3><p>Crea un <code>div</code> que funcione de galería. Debe contener:</p><ul><li>Un H2 'Mis Archivos'</li><li>Un enlace a Google que abra fuera</li><li>Una imagen 'logo.png' de 100px ancho</li><li>Un audio 'audio.mp3' con controles</li></ul>",
+    "guide": "<h3>🔥 RETO FINAL UNIDAD 2</h3><p>Crea un <code>div</code> que funcione de galería. Debe contener:</p><ul><li>Un H2 'Mis Archivos'</li><li>Un enlace a Google (usa <code>href='google.com'</code> y <code>target='_blank'</code>)</li><li>Una imagen <code>&lt;img&gt;</code> 'logo.png' de 100px de ancho</li><li>Un audio 'audio.mp3' con controles</li></ul>",
     "initialCode": "",
     "validation": {
-      "regex": "<div>[\\s\\S]*<h2>Mis Archivos<\\/h2>[\\s\\S]*<a[^>]*google[^>]*target=['\"]_blank['\"][\\s\\S]*<img[^>]*logo\\.png[^>]*width=['\"]100['\"][\\s\\S]*<audio[^>]*audio\\.mp3[^>]*controls",
-      "error": "Div con: H2, Enlace (_blank), Img (100px) y Audio (controls)."
+      "regex": "<div>[\\s\\S]*<h2>Mis Archivos<\\/h2>[\\s\\S]*<a[^>]*href=['\"][^'\"]*google[^'\"]*['\"][^>]*target=['\"]_blank['\"][\\s\\S]*<img[^>]*logo\\.png[^>]*width=['\"]100['\"][\\s\\S]*<audio[^>]*audio\\.mp3[^>]*controls",
+      "error": "Div con: H2, Enlace (google.com y _blank), Img (logo.png, width 100) y Audio (mp3, controls)."
     }
   },
   {
