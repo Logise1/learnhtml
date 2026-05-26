@@ -405,8 +405,10 @@
             <!-- PANEL 3: PREVIEW -->
             <section id="panel-preview" class="mobile-panel lg:flex w-full lg:w-[40%] flex-col bg-[#f8fafc]">
                 <header class="h-16 border-b border-slate-200 flex items-center px-6 justify-between bg-white shrink-0">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                        <i data-lucide="globe" class="w-4 h-4 text-slate-400"></i> Navegador
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2 max-w-[75%] truncate">
+                        <i data-lucide="globe" class="w-4 h-4 text-slate-400 shrink-0"></i>
+                        <!-- Dynamic Browser Title -->
+                        <span id="browser-title-text" class="truncate">Navegador</span>
                     </span>
                     <div class="flex gap-1.5 opacity-50">
                         <div class="w-2.5 h-2.5 rounded-full bg-slate-300"></div>
@@ -478,6 +480,7 @@
         const highlightingPre = document.getElementById('highlighting-pre');
         const highlightingCode = document.getElementById('highlighting-code');
         const preview = document.getElementById('preview-frame');
+        const browserTitleText = document.getElementById('browser-title-text');
         const guideContent = document.getElementById('guide-content');
         const feedbackArea = document.getElementById('feedback-area');
         const btnNext = document.getElementById('btn-next');
@@ -586,12 +589,8 @@
                         const diffTime = Math.abs(currDate - lastDate);
                         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
                         
-                        // Si la diferencia es > 1 (o sea, 2 días o más), se pierde la racha
-                        // Ejemplo: Ayer (diff 1) -> OK. Anteayer (diff 2) -> Lost.
                         if (diffDays > 1) {
-                            userStreak.count = 0; // Reset streak locally, will save next time user does something or we could save now.
-                            // Optional: Save reset state immediately
-                            // await setDoc(docRef, { count: 0, lastActiveDate: userStreak.lastActiveDate }, { merge: true });
+                            userStreak.count = 0; 
                         }
                     }
                 } else {
@@ -607,11 +606,6 @@
             if (!currentUser) return;
             const today = getTodayStr();
             let streakChanged = false;
-
-            // Logic:
-            // If lastActiveDate == today: Do nothing (already counted).
-            // If lastActiveDate == yesterday: Increment streak.
-            // If lastActiveDate < yesterday (or null): Reset to 1 (started today).
             
             if (userStreak.lastActiveDate !== today) {
                 const lastDate = userStreak.lastActiveDate ? new Date(userStreak.lastActiveDate) : null;
@@ -625,19 +619,16 @@
                         userStreak.count++;
                         streakChanged = true;
                     } else {
-                        // Reset to 1 because they are active TODAY
                         userStreak.count = 1;
                         streakChanged = true;
                     }
                 } else {
-                    // First time ever
                     userStreak.count = 1;
                     streakChanged = true;
                 }
                 
                 userStreak.lastActiveDate = today;
                 
-                // Save to Firestore
                 try {
                     const docRef = doc(db, 'artifacts', APP_ID, 'users', currentUser.uid, 'account', 'streak');
                     await setDoc(docRef, userStreak, { merge: true });
@@ -670,7 +661,6 @@
             
             const lesson = lessons[currentLessonIndex];
             
-            // Show modal with loading state
             aiModal.classList.remove('hidden');
             aiContent.innerHTML = `
                 <div class="flex flex-col items-center justify-center py-10 text-slate-500 gap-3">
@@ -707,7 +697,6 @@
                 const data = await response.json();
                 const aiText = data.choices[0].message.content;
                 
-                // Render Markdown
                 aiContent.innerHTML = `<div class="markdown-body p-2">${marked.parse(aiText)}</div>`;
 
             } catch (error) {
@@ -754,9 +743,6 @@
             const lesson = lessons[currentLessonIndex];
             if (!currentUser || !lesson) return;
             
-            // Only update streak if the lesson wasn't already completed today (or ever)
-            // But usually practice is practice. Let's just call updateStreak() on valid code submit.
-            // Logic inside updateStreak handles the "only once per day" rule.
             updateStreak();
 
             userProgressMap[lesson.id] = { completed: isCodeValid };
@@ -980,6 +966,15 @@
 
         function updatePreview() {
             let code = editor.value;
+
+            // --- EXTRACT TITLE FROM STUDENT CODE AND INJECT INTO SIMULATOR HEADER ---
+            const titleMatch = code.match(/<title>([\s\S]*?)<\/title>/i);
+            if (titleMatch && titleMatch[1]) {
+                browserTitleText.textContent = titleMatch[1].trim() || "Navegador";
+            } else {
+                browserTitleText.textContent = "Navegador";
+            }
+            
             code = code.replace(/<meta\s+http-equiv=["']refresh["'][^>]*>/gi, '<!-- meta refresh disabled -->');
             const safetyScript = `
                 <script>
@@ -1015,7 +1010,7 @@
                 if (isCodeValid) { 
                     showFeedback('success', '¡Excelente!', 'Has completado la misión.'); 
                     saveProgress(); 
-                    triggerConfetti(); // Add this
+                    triggerConfetti(); 
                 }
                 else hideFeedback();
             }
