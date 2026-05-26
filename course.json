@@ -2,7 +2,7 @@
   {
     "id": "1",
     "title": "1.1 Estructura: El Nacimiento",
-    "guide": "<h3>Unidad 1: Los Cimientos de la Web</h3><p>Bienvenido al mundo del desarrollo web. Todo sitio web comienza con <strong>HTML</strong> (HyperText Markup Language).</p><p>El HTML define la <strong>estructura</strong>. Imagina que es el esqueleto de una persona.</p><h4>La Estructura Sagrada</h4><p>Todo archivo HTML debe seguir este orden:</p><ol><li><code>&lt;!DOCTYPE html&gt;</code>: Le dice al navegador que usamos HTML5 moderno.</li><li><code>&lt;html&gt;</code>: La etiqueta raíz. Todo tu código va encerrado aquí.</li><li><code>&lt;head&gt;</code>: La \"cabeza\". Información para la máquina (configuraciones). El usuario NO ve esto.</li><li><code>&lt;body&gt;</code>: El \"cuerpo\". Aquí va todo lo visible: textos, imágenes, botones.</li></ol><p><strong>Misión:</strong> Escribe la estructura completa. Anida correctamente el <code>head</code> y el <code>body</code> dentro de la etiqueta <code>html</code>.</p>",
+    "guide": "<h3>Unidad 1: Los Cimientos de la Web</h3><p>Bienvenido al mundo del desarrollo web. Todo sitio web comienza con <strong>HTML</strong> (HyperText Markup Language).</p><p>El HTML define la <strong>estructura</strong>. Imagina que es el esqueleto de una persona.</p><h4>La Estructura Sagrada</h4><p>Todo archivo HTML debe seguir este orden:</p><ol><li><code>&lt;!DOCTYPE html&gt;</code>: Le dice al navegador que usamos HTML5 moderno.</li><li><code>&lt;html&gt;</code>: La etiqueta raíz. Todo tu código va encerrado aquí.</li><li><code>&lt;head&gt;</code>: La \"cabeza\". Información para la máquina (configuraciones). El usuario NO ve esto.</li><li><code>&lt;body&gt;</code>: El \"cuerpo\". Aquí va todo lo visible: textos, imágenes, botones.</li></ol><p><strong>Misión:</strong> Escribe la estructura completa. Anida correctamente el <code>head</code> and el <code>body</code> dentro de la etiqueta <code>html</code>.</p>",
     "initialCode": "",
     "validation": {
       "regex": "<!DOCTYPE\\s+html>\\s*<html[^>]*>\\s*<head[^>]*>[\\s\\S]*?<\\/head>\\s*<body[^>]*>[\\s\\S]*?<\\/body>\\s*<\\/html>",
@@ -15,14 +15,14 @@
     "guide": "<h3>Configurando el Cerebro (Head)</h3><p>El <code>&lt;head&gt;</code> es vital para que la web funcione bien.</p><h4>1. El Título de la Pestaña</h4><p>El texto en la pestaña del navegador se define con <code>&lt;title&gt;</code>.</p><pre>&lt;title&gt;Mi Primera Web&lt;/title&gt;</pre><h4>2. Codificación (Caracteres Especiales)</h4><p>Para usar tildes y la Ñ, definimos el estándar <strong>UTF-8</strong> con una etiqueta <em>vacía</em> (sin cierre) llamada <code>&lt;meta&gt;</code>.</p><pre>&lt;meta charset=\"UTF-8\"&gt;</pre><p><strong>Misión:</strong> Dentro del <code>head</code>, añade un título que diga 'Mi Web' y la etiqueta meta para UTF-8.</p>",
     "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <!-- Añade tu código aquí -->\n  </head>\n  <body>\n  </body>\n</html>",
     "validation": {
-      "regex": "<head>(?=.*<meta\\s+charset=['\"]UTF-8['\"]\\s*\\/?>)(?=.*<title>Mi Web<\\/title>)[\\s\\S]*?<\\/head>",
+      "regex": "<head>(?=[\\s\\S]*?<meta\\s+charset=['\"]UTF-8['\"]\\s*\\/?>)(?=[\\s\\S]*?<title>Mi Web<\\/title>)[\\s\\S]*?<\\/head>",
       "error": "Asegúrate de incluir ambas etiquetas dentro del <head>: <meta charset=\"UTF-8\"> y <title>Mi Web</title>. El orden no importa."
     }
   },
   {
     "id": "3",
     "title": "1.3 Texto: Títulos y Párrafos",
-    "guide": "<h3>Jerarquía Visual en el Body</h3><p>Entramos en el <code>&lt;body&gt;</code>. Es fundamental usar las etiquetas correctas para que Google entienda tu contenido.</p><h4>Encabezados (Headings)</h4><p>Los títulos usan la letra <code>h</code> y un número.</p><ul><li><code>&lt;h1&gt;</code>: Título principal. <strong>Solo uno por página</strong>.</li><li><code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>...: Subtítulos.</li></ul><h4>Párrafos</h4><p>Para texto normal usamos <code>&lt;p&gt;</code>.</p><p><strong>Misión:</strong> En el body, crea un <code>h1</code> con el texto 'Noticias' y debajo un párrafo <code>p</code> con una frase larga (al menos 10 letras).</p>",
+    "guide": "<h3>Jerarquía Visual en el Body</h3><p>Entramos en el <code>&lt;body&gt;</code>. Es fundamental usar las etiquetas correctas para que Google entienda tu contenido.</p><h4>Encabezados (Headings)</h4><p>Los títulos usan la letra <code>h</code> y un número.</p><ul><li><code>&lt;h1&gt;</code>: Título principal. <strong>Solo uno por página</strong>.</li><li><code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>...: Subtítulos.</li></ul><h4>Párrafos</h4><p>Para texto normal usamos <code>&lt;p&gt;</code>.</p><p><strong>Misión:</strong> En el body, crea un <code>h1</code> con el texto 'Noticias' and debajo un párrafo <code>p</code> con una frase larga (al menos 10 letras).</p>",
     "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Texto</title>\n  </head>\n  <body>\n    <!-- Escribe tu código aquí -->\n  </body>\n</html>",
     "validation": {
       "regex": "<h1[^>]*>\\s*Noticias\\s*<\\/h1>\\s*<p[^>]*>[\\s\\S]{10,}<\\/p>",
@@ -85,7 +85,7 @@
     "guide": "<h3>Controlando el Destino</h3><p>Si enlazas a una web externa, suele ser buena idea abrirla en una pestaña nueva para que el usuario no pierda tu página.</p><p>Añadimos el atributo <code>target=\"_blank\"</code>. <em>(Nota: el orden de los atributos no importa).</em></p><pre>&lt;a href=\"...\" target=\"_blank\"&gt;Abrir fuera&lt;/a&gt;</pre><p><strong>Misión:</strong> Crea un enlace a 'https://bing.com' y asegúrate de añadirle el atributo target para pestaña nueva.</p>",
     "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Target Blank</title>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
-      "regex": "<a(?=.*href=['\"]https:\\/\\/bing\\.com['\"])(?=.*target=['\"]_blank['\"])[^>]*>.*<\\/a>",
+      "regex": "<a(?=[^>]*?href=['\"]https:\\/\\/bing\\.com['\"])(?=[^>]*?target=['\"]_blank['\"])[^>]*>[\\s\\S]*?<\\/a>",
       "error": "Falta el enlace a bing.com o el atributo target='_blank'. Recuerda que debes poner ambos dentro de la etiqueta <a> de apertura."
     }
   },
@@ -95,8 +95,8 @@
     "guide": "<h3>Insertar Imágenes</h3><p>Usamos <code>&lt;img&gt;</code>. Es una etiqueta <strong>vacía</strong> (no tiene cierre ni texto dentro).</p><h4>Atributos Obligatorios</h4><ol><li><strong>src:</strong> La ruta del archivo o URL.</li><li><strong>alt:</strong> Descripción para ciegos o si la imagen falla.</li></ol><pre>&lt;img src=\"gato.jpg\" alt=\"Un gato lindo\"&gt;</pre><p><strong>Misión:</strong> Muestra la imagen 'logo.png' con el texto alternativo 'Logo'.</p>",
     "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Imágenes</title>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
-      "regex": "<img(?=.*src=['\"]logo\\.png['\"])(?=.*alt=['\"]Logo['\"])[^>]*\\/?>",
-      "error": "La etiqueta <img> debe tener src='logo.png' y alt='Logo'."
+      "regex": "<img(?=[^>]*?src=['\"]logo\\.png['\"])(?=[^>]*?alt=['\"]Logo['\"])[^>]*\\/?>",
+      "error": "La etiqueta <img> debe tener src='logo.png' and alt='Logo'."
     }
   },
   {
@@ -105,7 +105,7 @@
     "guide": "<h3>Reproductores de Sonido</h3><p>Usamos la etiqueta <code>&lt;audio&gt;</code>. Por defecto es invisible, necesitamos activar los controles.</p><h4>Atributos Booleanos</h4><p>El atributo <code>controls</code> es booleano, no necesita valor, solo con escribirlo se activa.</p><pre>&lt;audio src=\"musica.mp3\" controls&gt;&lt;/audio&gt;</pre><p><strong>Misión:</strong> Inserta el audio 'audio.mp3' y activa sus controles.</p>",
     "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Audio</title>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
-      "regex": "<audio(?=.*src=['\"]audio\\.mp3['\"])(?=.*controls)[^>]*>.*<\\/audio>",
+      "regex": "<audio(?=[^>]*?src=['\"]audio\\.mp3['\"])(?=[^>]*?controls)[^>]*>[\\s\\S]*?<\\/audio>",
       "error": "Asegúrate de usar <audio>, definir src='audio.mp3', añadir la palabra 'controls' y cerrar la etiqueta con </audio>."
     }
   },
@@ -115,7 +115,7 @@
     "guide": "<h3>Reproductores de Video</h3><p>Similar al audio, usamos <code>&lt;video&gt;</code>. Podemos controlar el tamaño inicial con atributos como <code>width</code>.</p><pre>&lt;video src=\"movie.mp4\" width=\"400\" controls&gt;&lt;/video&gt;</pre><p><strong>Misión:</strong> Inserta el video 'video.mp4', fíjale un <code>width</code> de 300 y activa los controles.</p>",
     "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Video</title>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
-      "regex": "<video(?=.*src=['\"]video\\.mp4['\"])(?=.*width=['\"]300['\"])(?=.*controls)[^>]*>.*<\\/video>",
+      "regex": "<video(?=[^>]*?src=['\"]video\\.mp4['\"])(?=[^>]*?width=['\"]300['\"])(?=[^>]*?controls)[^>]*>[\\s\\S]*?<\\/video>",
       "error": "Revisa que tu etiqueta <video> tenga src='video.mp4', width='300' y la palabra controls."
     }
   },
@@ -125,7 +125,7 @@
     "guide": "<h3>El Icono de la Pestaña (Favicon)</h3><p>A diferencia de otras imágenes, este icono va en el <strong>head</strong>, porque es configuración de la página.</p><p>Usamos la etiqueta genérica <code>&lt;link&gt;</code>:</p><pre>&lt;link rel=\"icon\" href=\"icono.png\"&gt;</pre><p><em>¡Ojo! Aquí se usa <code>href</code> en lugar de <code>src</code>.</em></p><p><strong>Misión:</strong> Configura el archivo 'logo.png' como icono de la web insertándolo en el head.</p>",
     "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Favicon</title>\n    <!-- Tu link aquí -->\n  </head>\n  <body>\n  </body>\n</html>",
     "validation": {
-      "regex": "<head>[\\s\\S]*?<link(?=.*rel=['\"]icon['\"])(?=.*href=['\"]logo\\.png['\"])[^>]*\\/?>[\\s\\S]*?<\\/head>",
+      "regex": "<head>[\\s\\S]*?<link(?=[^>]*?rel=['\"]icon['\"])(?=[^>]*?href=['\"]logo\\.png['\"])[^>]*\\/?>[\\s\\S]*?<\\/head>",
       "error": "Añade <link rel='icon' href='logo.png'> DENTRO de las etiquetas <head>."
     }
   },
@@ -135,7 +135,7 @@
     "guide": "<h3>🔥 RETO FINAL UNIDAD 2</h3><p>La etiqueta <code>&lt;div&gt;</code> es una 'caja' genérica que usamos para agrupar elementos y maquetar.</p><p><strong>Objetivo:</strong> Crea una tarjeta multimedia agrupada.</p><h4>Instrucciones:</h4><ol><li>Crea un <code>&lt;div&gt;</code> (ya tiene borde rojo por CSS).</li><li><strong>DENTRO</strong> del div, coloca en este orden:<br>- Un <code>h2</code> que diga 'Mis Archivos'.<br>- Un enlace a Google en pestaña nueva (<code>_blank</code>).<br>- Una imagen 'logo.png' con width 100.<br>- Un audio 'audio.mp3' con controles.</li></ol>",
     "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Reto 2</title>\n    <style>div { border: 2px dashed red; padding: 20px; }</style>\n  </head>\n  <body>\n    <!-- Tu div aquí -->\n  </body>\n</html>",
     "validation": {
-      "regex": "<div[^>]*>[\\s\\S]*?<h2[^>]*>\\s*Mis Archivos\\s*<\\/h2>[\\s\\S]*?<a(?=.*href=['\"][^'\"]*google[^'\"]*['\"])(?=.*target=['\"]_blank['\"])[^>]*>[\\s\\S]*?<\\/a>[\\s\\S]*?<img(?=.*logo\\.png)(?=.*width=['\"]100['\"])[^>]*>[\\s\\S]*?<audio(?=.*audio\\.mp3)(?=.*controls)[^>]*>[\\s\\S]*?<\\/audio>[\\s\\S]*?<\\/div>",
+      "regex": "<div[^>]*>[\\s\\S]*?<h2[^>]*>\\s*Mis Archivos\\s*<\\/h2>[\\s\\S]*?<a(?=[^>]*?href=['\"][^'\"]*google[^'\"]*['\"])(?=[^>]*?target=['\"]_blank['\"])[^>]*>[\\s\\S]*?<\\/a>[\\s\\S]*?<img(?=[^>]*?logo\\.png)(?=[^>]*?width=['\"]100['\"])[^>]*>[\\s\\S]*?<audio(?=[^>]*?audio\\.mp3)(?=[^>]*?controls)[^>]*>[\\s\\S]*?<\\/audio>[\\s\\S]*?<\\/div>",
       "error": "Comprueba que dentro del <div> existan: un H2, un enlace a Google con _blank, un img con logo.png y width 100, y un audio con audio.mp3 y controls, en ese orden."
     }
   },
@@ -215,7 +215,7 @@
     "guide": "<h3>Unidad 4: Interactividad y Datos</h3><p>Los formularios envían información. Todo debe ir dentro de <code>&lt;form&gt;</code>.</p><h4>Input de Texto</h4><p>La etiqueta <code>&lt;input&gt;</code> cambia según su atributo <code>type</code>. El texto guía gris se pone con <code>placeholder</code>.</p><pre>&lt;input type=\"text\" placeholder=\"Escribe tu nombre\"&gt;</pre><p><strong>Misión:</strong> Crea un formulario y dentro un input de texto con placeholder 'Nombre'.</p>",
     "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Formularios</title>\n  </head>\n  <body>\n    \n  </body>\n</html>",
     "validation": {
-      "regex": "<form[^>]*>[\\s\\S]*?<input(?=.*type=['\"]text['\"])(?=.*placeholder=['\"]Nombre['\"])[^>]*>[\\s\\S]*?<\\/form>",
+      "regex": "<form[^>]*>[\\s\\S]*?<input(?=[^>]*?type=['\"]text['\"])(?=[^>]*?placeholder=['\"]Nombre['\"])[^>]*>[\\s\\S]*?<\\/form>",
       "error": "Asegúrate de que haya un <form> y que dentro tenga un <input type=\"text\" placeholder=\"Nombre\">."
     }
   },
@@ -275,7 +275,7 @@
     "guide": "<h3>🔥 RETO FINAL UNIDAD 4</h3><p>Construye la interfaz de un login complejo.</p><h4>Requisitos dentro del form:</h4><ol><li>Un input <strong>text</strong> que sea obligatorio (<code>required</code>).</li><li>Un input <strong>password</strong>.</li><li>Un desplegable (<strong>select</strong>) con 2 opciones de país.</li><li>Un input <strong>checkbox</strong> acompañado del texto 'Recordarme'.</li><li>Un <strong>button</strong> tipo submit para enviar.</li></ol>",
     "initialCode": "<!DOCTYPE html>\n<html lang=\"es\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Login</title>\n    <style>\n      form { background: #eee; padding: 20px; border-radius: 10px; max-width: 300px; display: flex; flex-direction: column; gap: 10px; }\n    </style>\n  </head>\n  <body>\n    <form>\n\n    </form>\n  </body>\n</html>",
     "validation": {
-      "regex": "<form[^>]*>[\\s\\S]*?<input(?=.*type=['\"]text['\"])(?=.*required)[^>]*>[\\s\\S]*?<input[^>]*type=['\"]password['\"][^>]*>[\\s\\S]*?<select[^>]*>[\\s\\S]*?<option>[\\s\\S]*?<option>[\\s\\S]*?<\\/select>[\\s\\S]*?<input[^>]*type=['\"]checkbox['\"][^>]*>[\\s\\S]*?<button[^>]*type=['\"]submit['\"][^>]*>[\\s\\S]*?<\\/form>",
+      "regex": "<form[^>]*>[\\s\\S]*?<input(?=[^>]*?type=['\"]text['\"])(?=[^>]*?required)[^>]*>[\\s\\S]*?<input[^>]*type=['\"]password['\"][^>]*>[\\s\\S]*?<select[^>]*>[\\s\\S]*?<option>[\\s\\S]*?<option>[\\s\\S]*?<\\/select>[\\s\\S]*?<input[^>]*type=['\"]checkbox['\"][^>]*>[\\s\\S]*?<button[^>]*type=['\"]submit['\"][^>]*>[\\s\\S]*?<\\/form>",
       "error": "Faltan elementos o el orden es incorrecto: Input text required, Input password, Select(con 2 options), Input checkbox y Button submit."
     }
   },
