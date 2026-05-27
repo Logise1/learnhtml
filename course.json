@@ -7,7 +7,13 @@
     "validation": {
       "regex": "<!DOCTYPE\\s+html>\\s*<html[^>]*>\\s*<head[^>]*>[\\s\\S]*?<\\/head>\\s*<body[^>]*>[\\s\\S]*?<\\/body>\\s*<\\/html>",
       "error": "Revisa la estructura. Debe ser: <!DOCTYPE html> seguido de <html> que contenga primero <head> y luego <body>."
-    }
+    },
+    "requirements": [
+      "Estructura: Presencia de las etiquetas HTML estructurales primarias (<!DOCTYPE html>, <html>, <head>, <body>) correctamente anidadas. (6 puntos)",
+      "Textos y Lógica: No se requiere texto visible específico en esta lección. (0 puntos)",
+      "Parámetros: No se requieren atributos especiales. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "2",
@@ -17,7 +23,13 @@
     "validation": {
       "regex": "<head>(?=[\\s\\S]*?<meta\\s+charset=['\"]UTF-8['\"]\\s*\\/?>)(?=[\\s\\S]*?<title>Mi Web<\\/title>)[\\s\\S]*?<\\/head>",
       "error": "Asegúrate de incluir ambas etiquetas dentro del <head>: <meta charset=\"UTF-8\"> y <title>Mi Web</title>. El orden no importa."
-    }
+    },
+    "requirements": [
+      "Estructura: Inserción correcta de etiquetas <meta> y <title> dentro de la sección <head>. (4 puntos)",
+      "Textos y Lógica: El título de la página debe ser exactamente 'Mi Web'. (3 puntos)",
+      "Parámetros: El atributo charset de la etiqueta <meta> debe configurarse como 'UTF-8'. (2 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "3",
@@ -27,7 +39,13 @@
     "validation": {
       "regex": "<h1[^>]*>\\s*Noticias\\s*<\\/h1>\\s*<p[^>]*>[\\s\\S]{10,}<\\/p>",
       "error": "Necesitas un <h1>Noticias</h1> seguido de un <p> con al menos 10 caracteres de texto."
-    }
+    },
+    "requirements": [
+      "Estructura: Uso de un encabezado <h1> y un párrafo <p> en el cuerpo del documento. (3 puntos)",
+      "Textos y Lógica: El encabezado debe contener 'Noticias' y el párrafo debe tener una longitud mínima de 10 caracteres. (5 puntos)",
+      "Parámetros: No se requieren atributos específicos. (1 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "4",
@@ -37,7 +55,13 @@
     "validation": {
       "regex": "<p>[\\s\\S]*<strong[^>]*>\\s*Urgente\\s*<\\/strong>[\\s\\S]*<\\/p>",
       "error": "Asegúrate de crear un <p> y poner la palabra 'Urgente' exactamente entre etiquetas <strong>."
-    }
+    },
+    "requirements": [
+      "Estructura: Anidación semántica de la etiqueta <strong> dentro de un elemento de párrafo <p>. (4 puntos)",
+      "Textos y Lógica: El párrafo debe contener la palabra 'Urgente' destacada en negrita semántica. (4 puntos)",
+      "Parámetros: No se requieren atributos específicos. (1 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "5",
@@ -47,7 +71,13 @@
     "validation": {
       "regex": "<ul[^>]*>\\s*<li[^>]*>\\s*Pan\\s*<\\/li>\\s*<li[^>]*>\\s*Leche\\s*<\\/li>\\s*<\\/ul>",
       "error": "Debes usar un <ul> que envuelva a dos etiquetas <li> (una para 'Pan' y otra para 'Leche')."
-    }
+    },
+    "requirements": [
+      "Estructura: Estructura de lista usando la etiqueta contenedora <ul> y dos elementos de lista <li>. (4 puntos)",
+      "Textos y Lógica: Los elementos de la lista deben contener exactamente los textos 'Pan' y 'Leche'. (4 puntos)",
+      "Parámetros: No se requieren atributos específicos para la lista. (1 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "6",
@@ -57,7 +87,13 @@
     "validation": {
       "regex": "<ol[^>]*>\\s*<li[^>]*>\\s*Oro\\s*<\\/li>\\s*<li[^>]*>\\s*Plata\\s*<\\/li>\\s*<\\/ol>",
       "error": "Debes usar un <ol> que envuelva a dos <li> (Oro y Plata)."
-    }
+    },
+    "requirements": [
+      "Estructura: Estructura de lista usando la etiqueta contenedora <ol> y dos elementos de lista <li>. (4 puntos)",
+      "Textos y Lógica: Los elementos de la lista deben contener exactamente los textos 'Oro' y 'Plata'. (4 puntos)",
+      "Parámetros: No se requieren atributos específicos para la lista. (1 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "7",
@@ -67,7 +103,13 @@
     "validation": {
       "regex": "<body[^>]*>\\s*<h1[^>]*>\\s*Última Hora\\s*<\\/h1>[\\s\\S]*?<p[^>]*>[\\s\\S]+?<\\/p>[\\s\\S]*?<ul[^>]*>[\\s\\S]*?<li[^>]*>[\\s\\S]*?<\\/li>[\\s\\S]*?<li[^>]*>[\\s\\S]*?<\\/li>[\\s\\S]*?<\\/ul>[\\s\\S]*?<\\/body>",
       "error": "Falta algún elemento o el orden no es correcto: Recuerda incluir el H1 'Última Hora', seguido de un P, y luego un UL con al menos dos LI."
-    }
+    },
+    "requirements": [
+      "Estructura: Estructura completa de noticia: encabezado <h1>, párrafo <p> y lista desordenada <ul>. (4 puntos)",
+      "Textos y Lógica: El H1 debe decir 'Última Hora', el párrafo detallar el suceso y la lista tener al menos 2 elementos de detalle. (4 puntos)",
+      "Parámetros: Etiquetas cerradas correctamente y anidadas bajo <body>. (1 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "8",
@@ -77,7 +119,13 @@
     "validation": {
       "regex": "<a[^>]*href=['\"]https:\\/\\/google\\.com['\"][^>]*>\\s*Buscar\\s*<\\/a>",
       "error": "Crea una etiqueta <a>. Su atributo href debe ser exactamente 'https://google.com' y su texto interior 'Buscar'."
-    }
+    },
+    "requirements": [
+      "Estructura: Uso de la etiqueta de hipervínculo <a> en el cuerpo. (3 puntos)",
+      "Textos y Lógica: El texto visible del enlace debe ser exactamente 'Buscar'. (2 puntos)",
+      "Parámetros: Configuración del atributo href con el valor 'https://google.com'. (4 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "9",
@@ -87,7 +135,13 @@
     "validation": {
       "regex": "<a(?=[^>]*?href=['\"]https:\\/\\/bing\\.com['\"])(?=[^>]*?target=['\"]_blank['\"])[^>]*>[\\s\\S]*?<\\/a>",
       "error": "Falta el enlace a bing.com o el atributo target='_blank'. Recuerda que debes poner ambos dentro de la etiqueta <a> de apertura."
-    }
+    },
+    "requirements": [
+      "Estructura: Uso de la etiqueta de hipervínculo <a> en el cuerpo. (3 puntos)",
+      "Textos y Lógica: El texto del enlace debe ser coherente. (2 puntos)",
+      "Parámetros: Configuración del atributo href con 'https://bing.com' y target establecido en '_blank'. (4 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "10",
@@ -97,7 +151,13 @@
     "validation": {
       "regex": "<img(?=[^>]*?src=['\"]logo\\.png['\"])(?=[^>]*?alt=['\"]Logo['\"])[^>]*\\/?>",
       "error": "La etiqueta <img> debe tener src='logo.png' and alt='Logo'."
-    }
+    },
+    "requirements": [
+      "Estructura: Uso de la etiqueta de imagen auto-cerrada <img>. (3 puntos)",
+      "Textos y Lógica: No aplica texto interior (etiqueta vacía). (0 puntos)",
+      "Parámetros: Atributo src establecido en 'logo.png' y alt establecido en 'Logo' para accesibilidad. (6 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "11",
@@ -107,7 +167,13 @@
     "validation": {
       "regex": "<audio(?=[^>]*?src=['\"]audio\\.mp3['\"])(?=[^>]*?controls)[^>]*>[\\s\\S]*?<\\/audio>",
       "error": "Asegúrate de usar <audio>, definir src='audio.mp3', añadir la palabra 'controls' y cerrar la etiqueta con </audio>."
-    }
+    },
+    "requirements": [
+      "Estructura: Estructura del elemento contenedor <audio> con su respectiva etiqueta de cierre. (3 puntos)",
+      "Textos y Lógica: No aplica texto interior. (0 puntos)",
+      "Parámetros: Atributo src configurado en 'audio.mp3' y presencia del atributo booleano de reproducción 'controls'. (6 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "12",
@@ -117,7 +183,13 @@
     "validation": {
       "regex": "<video(?=[^>]*?src=['\"]video\\.mp4['\"])(?=[^>]*?width=['\"]300['\"])(?=[^>]*?controls)[^>]*>[\\s\\S]*?<\\/video>",
       "error": "Revisa que tu etiqueta <video> tenga src='video.mp4', width='300' y la palabra controls."
-    }
+    },
+    "requirements": [
+      "Estructura: Estructura del elemento <video> con su respectiva etiqueta de cierre. (3 puntos)",
+      "Textos y Lógica: No aplica texto interior. (0 puntos)",
+      "Parámetros: Atributo src en 'video.mp4', width en '300' y el atributo booleano 'controls'. (6 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "13",
@@ -127,7 +199,13 @@
     "validation": {
       "regex": "<head>[\\s\\S]*?<link(?=[^>]*?rel=['\"]icon['\"])(?=[^>]*?href=['\"]logo\\.png['\"])[^>]*\\/?>[\\s\\S]*?<\\/head>",
       "error": "Añade <link rel='icon' href='logo.png'> DENTRO de las etiquetas <head>."
-    }
+    },
+    "requirements": [
+      "Estructura: Uso de la etiqueta de enlace de recurso <link> dentro del bloque <head>. (3 puntos)",
+      "Textos y Lógica: No aplica texto interior. (0 puntos)",
+      "Parámetros: Atributo rel establecido en 'icon' y href apuntando a 'logo.png'. (6 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "14",
@@ -137,7 +215,13 @@
     "validation": {
       "regex": "<div[^>]*>[\\s\\S]*?<h2[^>]*>\\s*Mis Archivos\\s*<\\/h2>[\\s\\S]*?<a(?=[^>]*?href=['\"][^'\"]*google[^'\"]*['\"])(?=[^>]*?target=['\"]_blank['\"])[^>]*>[\\s\\S]*?<\\/a>[\\s\\S]*?<img(?=[^>]*?logo\\.png)(?=[^>]*?width=['\"]100['\"])[^>]*>[\\s\\S]*?<audio(?=[^>]*?audio\\.mp3)(?=[^>]*?controls)[^>]*>[\\s\\S]*?<\\/audio>[\\s\\S]*?<\\/div>",
       "error": "Comprueba que dentro del <div> existan: un H2, un enlace a Google con _blank, un img con logo.png y width 100, y un audio con audio.mp3 y controls, en ese orden."
-    }
+    },
+    "requirements": [
+      "Estructura: Integración de componentes multimedia: enlaces, imagen y reproductor de audio o video. (4 puntos)",
+      "Textos y Lógica: Los textos e información de los elementos multimedia deben ser descriptivos. (2 puntos)",
+      "Parámetros: Configuración correcta de atributos (href, src, alt, controls, target). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "15",
@@ -147,7 +231,13 @@
     "validation": {
       "regex": "<header[^>]*>[\\s\\S]*?<nav[^>]*>[\\s\\S]*?<\\/nav>[\\s\\S]*?<\\/header>",
       "error": "Asegúrate de que la etiqueta <nav> esté completamente dentro del <header>."
-    }
+    },
+    "requirements": [
+      "Estructura: Definición del contenedor genérico de bloque <div>. (4 puntos)",
+      "Textos y Lógica: Texto o contenido dentro del contenedor de bloque. (2 puntos)",
+      "Parámetros: No requiere atributos obligatorios. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "16",
@@ -157,7 +247,13 @@
     "validation": {
       "regex": "<main[^>]*>[\\s\\S]*?<section[^>]*>[\\s\\S]*?<\\/section>[\\s\\S]*?<\\/main>",
       "error": "Debes tener un <main> que envuelva a una etiqueta <section>."
-    }
+    },
+    "requirements": [
+      "Estructura: Definición del contenedor en línea <span> dentro de un párrafo u otro elemento. (4 puntos)",
+      "Textos y Lógica: Texto específico anidado en el span. (2 puntos)",
+      "Parámetros: No requiere atributos obligatorios. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "17",
@@ -167,7 +263,13 @@
     "validation": {
       "regex": "<article[^>]*>[\\s\\S]*?<\\/article>\\s*<footer[^>]*>[\\s\\S]*?<\\/footer>",
       "error": "Crea un <article> cerrado, y justo a continuación (no dentro) un <footer>."
-    }
+    },
+    "requirements": [
+      "Estructura: Uso de atributos de identificación de estilos: class y style. (3 puntos)",
+      "Textos y Lógica: Contenido de texto estructurado. (1 puntos)",
+      "Parámetros: Aplicación del atributo class='resaltado' en un span y style='color: red;' en otro. (5 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "18",
@@ -177,7 +279,13 @@
     "validation": {
       "regex": "<div[^>]*class=['\"]caja['\"][^>]*>[\\s\\S]*?<span[^>]*>[\\s\\S]*?<\\/span>[\\s\\S]*?<\\/div>",
       "error": "Crea <div class=\"caja\"> y pon una etiqueta <span> con algo de texto en su interior."
-    }
+    },
+    "requirements": [
+      "Estructura: Uso del atributo de identificación única id en un elemento. (4 puntos)",
+      "Textos y Lógica: Texto identificable. (1 puntos)",
+      "Parámetros: Atributo id establecido en 'unico' en un párrafo. (4 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "19",
@@ -187,7 +295,13 @@
     "validation": {
       "regex": ".+<br\\s*\\/?>.+<hr\\s*\\/?>",
       "error": "Asegúrate de tener texto, luego un <br>, más texto, y finalmente un <hr>."
-    }
+    },
+    "requirements": [
+      "Estructura: Estructura de maquetación semántica con etiquetas <header>, <main> y <footer>. (4 puntos)",
+      "Textos y Lógica: Textos coherentes dentro de cada sección. (2 puntos)",
+      "Parámetros: Anidación semántica correcta dentro del <body>. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "20",
@@ -197,7 +311,13 @@
     "validation": {
       "regex": "<details[^>]*>\\s*<summary[^>]*>\\s*Ver más\\s*<\\/summary>[\\s\\S]*?<\\/details>",
       "error": "Estructura requerida: <details><summary>Ver más</summary>...texto oculto...</details>"
-    }
+    },
+    "requirements": [
+      "Estructura: Creación de una página semántica completa usando divs, spans, clases y ids. (4 puntos)",
+      "Textos y Lógica: Contenido estructurado y descriptivo. (2 puntos)",
+      "Parámetros: Uso correcto de clases, ids y atributos de maquetación. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "21",
@@ -207,7 +327,13 @@
     "validation": {
       "regex": "<header[^>]*>[\\s\\S]*?<h1[^>]*>[\\s\\S]*?<\\/h1>[\\s\\S]*?<\\/header>\\s*<nav[^>]*>[\\s\\S]*?<a[^>]*>[\\s\\S]*?<\\/a>[\\s\\S]*?<a[^>]*>[\\s\\S]*?<\\/a>[\\s\\S]*?<\\/nav>\\s*<main[^>]*>[\\s\\S]*?<article[^>]*>[\\s\\S]*?<\\/article>[\\s\\S]*?<\\/main>\\s*<footer[^>]*>[\\s\\S]*?<\\/footer>",
       "error": "Verifica el orden y anidamiento: Header (con h1), Nav (con 2 enlaces), Main (con article dentro), Footer."
-    }
+    },
+    "requirements": [
+      "Estructura: Estructura del formulario <form> con un campo de entrada <input>. (4 puntos)",
+      "Textos y Lógica: No aplica texto libre obligatorio. (0 puntos)",
+      "Parámetros: El campo input debe tener type='text' y name='nombre'. (5 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "22",
@@ -217,7 +343,13 @@
     "validation": {
       "regex": "<form[^>]*>[\\s\\S]*?<input(?=[^>]*?type=['\"]text['\"])(?=[^>]*?placeholder=['\"]Nombre['\"])[^>]*>[\\s\\S]*?<\\/form>",
       "error": "Asegúrate de que haya un <form> y que dentro tenga un <input type=\"text\" placeholder=\"Nombre\">."
-    }
+    },
+    "requirements": [
+      "Estructura: Inserción de etiquetas <label> e <input> asociadas semánticamente. (4 puntos)",
+      "Textos y Lógica: El label debe tener un texto descriptivo. (1 puntos)",
+      "Parámetros: Atributo 'for' en label coincidiendo exactamente con el 'id' en input. (4 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "23",
@@ -227,7 +359,13 @@
     "validation": {
       "regex": "<label[^>]*for=['\"]edad['\"][^>]*>\\s*Edad\\s*<\\/label>\\s*<input[^>]*id=['\"]edad['\"][^>]*>",
       "error": "Debe existir un <label for=\"edad\">Edad</label> emparejado con un <input id=\"edad\">."
-    }
+    },
+    "requirements": [
+      "Estructura: Uso de campos de entrada especializados: contraseñas <input type='password'>. (4 puntos)",
+      "Textos y Lógica: Etiquetas asociadas correctamente. (1 puntos)",
+      "Parámetros: Atributo type='password' y atributo name='clave' u homólogo. (4 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "24",
@@ -237,7 +375,13 @@
     "validation": {
       "regex": "<form[^>]*>[\\s\\S]*?<input[^>]*type=['\"]password['\"][^>]*>[\\s\\S]*?<input[^>]*type=['\"]email['\"][^>]*>[\\s\\S]*?<\\/form>|<form[^>]*>[\\s\\S]*?<input[^>]*type=['\"]email['\"][^>]*>[\\s\\S]*?<input[^>]*type=['\"]password['\"][^>]*>[\\s\\S]*?<\\/form>",
       "error": "Añade ambos inputs (type=\"password\" y type=\"email\") dentro del <form>."
-    }
+    },
+    "requirements": [
+      "Estructura: Estructura de botones de envío <button> o <input type='submit'> dentro de un formulario. (4 puntos)",
+      "Textos y Lógica: El botón debe mostrar el texto de envío (ej: 'Enviar'). (2 puntos)",
+      "Parámetros: Atributo type='submit' en el botón y action/method en el formulario. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "25",
@@ -247,7 +391,13 @@
     "validation": {
       "regex": "<input[^>]*type=['\"]checkbox['\"][^>]*>[\\s\\S]*?<input[^>]*type=['\"]radio['\"][^>]*name=['\"]opcion['\"][^>]*>[\\s\\S]*?<input[^>]*type=['\"]radio['\"][^>]*name=['\"]opcion['\"][^>]*>",
       "error": "Se requiere un input tipo checkbox, y dos inputs tipo radio que compartan exactamente name=\"opcion\"."
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "26",
@@ -257,7 +407,13 @@
     "validation": {
       "regex": "<select[^>]*>[\\s\\S]*?<option[^>]*>\\s*Madrid\\s*<\\/option>[\\s\\S]*?<option[^>]*>\\s*Barcelona\\s*<\\/option>[\\s\\S]*?<\\/select>",
       "error": "Debe haber un <select> envolviendo dos <option> con los textos Madrid y Barcelona."
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "27",
@@ -267,7 +423,13 @@
     "validation": {
       "regex": "<input[^>]*required[^>]*>[\\s\\S]*?<button[^>]*type=['\"]submit['\"][^>]*>\\s*Enviar\\s*<\\/button>",
       "error": "Falta el input con la propiedad 'required' o el <button type=\"submit\">Enviar</button>."
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "28",
@@ -277,7 +439,13 @@
     "validation": {
       "regex": "<form[^>]*>[\\s\\S]*?<input(?=[^>]*?type=['\"]text['\"])(?=[^>]*?required)[^>]*>[\\s\\S]*?<input[^>]*type=['\"]password['\"][^>]*>[\\s\\S]*?<select[^>]*>[\\s\\S]*?<option>[\\s\\S]*?<option>[\\s\\S]*?<\\/select>[\\s\\S]*?<input[^>]*type=['\"]checkbox['\"][^>]*>[\\s\\S]*?<button[^>]*type=['\"]submit['\"][^>]*>[\\s\\S]*?<\\/form>",
       "error": "Faltan elementos o el orden es incorrecto: Input text required, Input password, Select(con 2 options), Input checkbox y Button submit."
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "29",
@@ -287,7 +455,13 @@
     "validation": {
       "regex": "<table[^>]*>\\s*<tr[^>]*>\\s*<td[^>]*>\\s*A\\s*<\\/td>\\s*<td[^>]*>\\s*B\\s*<\\/td>\\s*<\\/tr>\\s*<\\/table>",
       "error": "Estructura correcta: <table><tr><td>A</td><td>B</td></tr></table>"
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "30",
@@ -297,7 +471,13 @@
     "validation": {
       "regex": "<thead[^>]*>\\s*<tr[^>]*>\\s*<th[^>]*>\\s*Precio\\s*<\\/th>\\s*<\\/tr>\\s*<\\/thead>[\\s\\S]*?<tbody[^>]*>\\s*<tr[^>]*>\\s*<td[^>]*>\\s*10\\s*<\\/td>\\s*<\\/tr>\\s*<\\/tbody>",
       "error": "Debe haber un <thead> con un <th>Precio</th>, y un <tbody> con un <td>10</td> (ambos dentro de un <tr> respectivo)."
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "31",
@@ -307,7 +487,13 @@
     "validation": {
       "regex": "<tr[^>]*>\\s*<td[^>]*colspan=['\"]2['\"][^>]*>\\s*Total\\s*<\\/td>\\s*<\\/tr>",
       "error": "Añade un <tr> que contenga un <td colspan=\"2\">Total</td>."
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "32",
@@ -317,7 +503,13 @@
     "validation": {
       "regex": "h1\\s*\\{\\s*color:\\s*blue;?\\s*\\}",
       "error": "Dentro de <style>, escribe la regla CSS para h1: h1 { color: blue; }"
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "33",
@@ -327,7 +519,13 @@
     "validation": {
       "regex": "\\.alerta\\s*\\{\\s*color:\\s*orange;?\\s*\\}[\\s\\S]*<p[^>]*class=['\"]alerta['\"][^>]*>",
       "error": "Asegúrate de definir .alerta { color: orange; } en el style, y añadir class=\"alerta\" al segundo párrafo."
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "34",
@@ -337,7 +535,13 @@
     "validation": {
       "regex": "\\.caja-padre\\s*\\{[^}]*display:\\s*flex;?[^}]*\\}",
       "error": "Añade display: flex; dentro de las llaves de .caja-padre en el CSS."
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "35",
@@ -347,7 +551,13 @@
     "validation": {
       "regex": "\\.factura\\s*\\{[^}]*background-color:\\s*lightgray;?[^}]*\\}[\\s\\S]*?<table[^>]*class=['\"]factura['\"][^>]*>[\\s\\S]*?<thead[^>]*>[\\s\\S]*?<tbody[^>]*>",
       "error": "Debes tener .factura { background-color: lightgray; } en el CSS y un <table class=\"factura\"> con thead y tbody en el HTML."
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "36",
@@ -357,7 +567,13 @@
     "validation": {
       "regex": "<script>\\s*console\\.log\\(['\"]Iniciando['\"]\\);?\\s*<\\/script>",
       "error": "Usa console.log('Iniciando'); dentro del script."
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "37",
@@ -367,7 +583,13 @@
     "validation": {
       "regex": "const\\s+pi\\s*=\\s*3\\.14;?",
       "error": "Escribe: const pi = 3.14;"
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "38",
@@ -377,7 +599,13 @@
     "validation": {
       "regex": "const\\s+nombre\\s*=\\s*['\"]Ana['\"];?\\s*let\\s+edad\\s*=\\s*25;?",
       "error": "Declara const nombre = 'Ana'; y let edad = 25;"
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "39",
@@ -387,7 +615,13 @@
     "validation": {
       "regex": "alert\\(['\"]Bienvenido['\"]\\);?",
       "error": "Escribe alert('Bienvenido');"
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "40",
@@ -397,7 +631,13 @@
     "validation": {
       "regex": "const\\s+total\\s*=\\s*5\\s*\\+\\s*5;?",
       "error": "Escribe: const total = 5 + 5;"
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "41",
@@ -407,7 +647,13 @@
     "validation": {
       "regex": "const\\s+lado\\s*=\\s*10;?\\s*const\\s+area\\s*=\\s*lado\\s*\\*\\s*lado;?\\s*console\\.log\\(area\\);?",
       "error": "Define const lado = 10; const area = lado * lado; y luego haz console.log(area);"
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "42",
@@ -417,7 +663,13 @@
     "validation": {
       "regex": "document\\.getElementById\\(['\"]titulo['\"]\\)",
       "error": "Usa document.getElementById('titulo')"
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "43",
@@ -427,7 +679,13 @@
     "validation": {
       "regex": "document\\.getElementById\\(['\"]aviso['\"]\\)\\.innerText\\s*=\\s*['\"]Listo['\"];?",
       "error": "Selecciona 'aviso' y pon su .innerText = 'Listo'"
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "44",
@@ -437,7 +695,13 @@
     "validation": {
       "regex": "document\\.getElementById\\(['\"]caja['\"]\\)\\.innerHTML\\s*=\\s*['\"]<b>Hola<\\/b>['\"];?",
       "error": "Usa document.getElementById('caja').innerHTML = '<b>Hola</b>';"
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "45",
@@ -447,7 +711,13 @@
     "validation": {
       "regex": "const\\s+nombre\\s*=\\s*document\\.getElementById\\(['\"]user['\"]\\)\\.value;?",
       "error": "Guarda en const nombre el document.getElementById('user').value"
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "46",
@@ -457,7 +727,13 @@
     "validation": {
       "regex": "document\\.getElementById\\(['\"]foto['\"]\\)\\.src\\s*=\\s*['\"]logo\\.png['\"];?",
       "error": "Selecciona 'foto' y cambia su .src a 'logo.png'"
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "47",
@@ -467,7 +743,13 @@
     "validation": {
       "regex": "document\\.getElementById\\(['\"]titulo['\"]\\)\\.innerText\\s*=\\s*['\"]Hackeado['\"];?[\\s\\S]*?document\\.body\\.style\\.backgroundColor\\s*=\\s*['\"]black['\"];?",
       "error": "Debes cambiar el innerText de 'titulo' y el style.backgroundColor del body a 'black'."
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "48",
@@ -477,7 +759,13 @@
     "validation": {
       "regex": "b\\.addEventListener\\(['\"]click['\"]\\s*,\\s*\\(\\)\\s*=>\\s*alert\\(['\"]Pop['\"]\\)\\)",
       "error": "Añade: b.addEventListener('click', () => alert('Pop'));"
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "49",
@@ -487,7 +775,13 @@
     "validation": {
       "regex": "document\\.getElementById\\(['\"]secreto['\"]\\)\\.style\\.display\\s*=\\s*['\"]none['\"];?",
       "error": "Aplica .style.display = 'none' al elemento 'secreto'."
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "50",
@@ -497,7 +791,13 @@
     "validation": {
       "regex": "if\\s*\\(x\\s*>\\s*5\\)\\s*\\{\\s*console\\.log\\(['\"]Ok['\"]\\);?\\s*\\}",
       "error": "Escribe: if (x > 5) { console.log('Ok'); }"
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "51",
@@ -507,7 +807,13 @@
     "validation": {
       "regex": "if\\s*\\(clave\\s*===\\s*['\"]123['\"]\\)",
       "error": "Verifica usando: if (clave === '123')"
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "52",
@@ -517,7 +823,13 @@
     "validation": {
       "regex": "<button[^>]*onclick=['\"]document\\.body\\.style\\.backgroundColor\\s*=\\s*\\'black\\';\\s*document\\.body\\.style\\.color\\s*=\\s*\\'white\\';?['\"][^>]*>",
       "error": "El botón debe tener: onclick=\"document.body.style.backgroundColor = 'black'; document.body.style.color = 'white';\""
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "53",
@@ -527,7 +839,13 @@
     "validation": {
       "regex": "function\\s+saludar\\(\\)\\s*\\{\\s*console\\.log\\(['\"]Hola['\"]\\);?\\s*\\}",
       "error": "Crea: function saludar() { console.log('Hola'); }"
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "54",
@@ -537,7 +855,13 @@
     "validation": {
       "regex": "arrancar\\(\\);?",
       "error": "Simplemente escribe: arrancar();"
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "55",
@@ -547,7 +871,13 @@
     "validation": {
       "regex": "console\\.log\\(pass\\.length\\);?",
       "error": "Deberías imprimir pass.length dentro del console.log."
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "56",
@@ -557,7 +887,13 @@
     "validation": {
       "regex": "el\\.classList\\.add\\(['\"]activa['\"]\\);?",
       "error": "Ejecuta: el.classList.add('activa');"
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "57",
@@ -567,7 +903,13 @@
     "validation": {
       "regex": "c\\.addEventListener\\(['\"]input['\"]\\s*,\\s*\\(\\)\\s*=>\\s*console\\.log\\(['\"]Escribiendo['\"]\\)\\)",
       "error": "Añade: c.addEventListener('input', () => console.log('Escribiendo'));"
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "58",
@@ -577,7 +919,13 @@
     "validation": {
       "regex": "const\\s+bienvenida\\s*=\\s*`Usuario \\$\\{user\\} conectado`;?",
       "error": "Asegúrate de usar las comillas inclinadas (backticks `) y la sintaxis ${user}."
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   },
   {
     "id": "59",
@@ -587,6 +935,12 @@
     "validation": {
       "regex": "function\\s+validar\\(\\)\\s*\\{[\\s\\S]*?getElementById\\(['\"]pass['\"]\\)\\.value[\\s\\S]*?getElementById\\(['\"]mensaje['\"]\\)[\\s\\S]*?if\\s*\\([a-zA-Z0-9_]+\\s*===\\s*['\"]1234['\"]\\)\\s*\\{[\\s\\S]*?innerText\\s*=\\s*['\"]Acceso concedido['\"][\\s\\S]*?color\\s*=\\s*['\"]green['\"][\\s\\S]*?\\}\\s*else\\s*\\{[\\s\\S]*?innerText\\s*=\\s*['\"]Error['\"][\\s\\S]*?color\\s*=\\s*['\"]red['\"][\\s\\S]*?\\}",
       "error": "Verifica paso a paso: debes capturar el valor, capturar el elemento span, comprobar con un if(val==='1234') y dentro del if/else cambiar el innerText y el color según corresponzca."
-    }
+    },
+    "requirements": [
+      "Estructura: Formulario de contacto completo con campos de texto, contraseña, etiquetas asociadas y botón de envío. (4 puntos)",
+      "Textos y Lógica: Textos de etiquetas descriptivos y botón rotulado. (2 puntos)",
+      "Parámetros: Correcto uso de atributos (type, id, for, name, action). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
   }
 ]

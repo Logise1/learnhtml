@@ -1,0 +1,452 @@
+[
+  {
+    "id": "py_1",
+    "unit": 1,
+    "type": "lesson",
+    "title": "1.1 Hola Mundo",
+    "guide": "<h3>Unidad 1: Introducción a Python</h3><p>Python es un lenguaje interpretado, de alto nivel y con una sintaxis extremadamente limpia y fácil de leer.</p><p>A diferencia de C++ o HTML, Python no requiere una estructura compleja ni etiquetas iniciales. Puedes escribir código directamente y se ejecutará de arriba a abajo.</p><h4>Imprimir Texto</h4><p>Usamos la función <code>print()</code> para mostrar información en pantalla. Las cadenas de texto van entre comillas simples o dobles.</p><pre>print(\"Hola, mundo\")</pre><p><strong>Misión:</strong> Escribe una línea en Python que imprima el mensaje 'Hola Python'.</p>",
+    "initialCode": "# Escribe tu código Python aquí\n",
+    "validation": {
+      "regex": "print\\s*\\(\\s*['\"]Hola Python['\"]\\s*\\)",
+      "error": "Utiliza exactamente print(\"Hola Python\") para mostrar el mensaje en pantalla."
+    },
+    "requirements": [
+      "Estructura: Sintaxis básica de Python llamando a funciones integradas. (4 puntos)",
+      "Textos y Lógica: Uso de la función print() para mostrar exactamente 'Hola Python'. (5 puntos)",
+      "Parámetros: Paso correcto de argumento de cadena de texto. (0 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_2",
+    "unit": 1,
+    "type": "lesson",
+    "title": "1.2 Variables Dinámicas",
+    "guide": "<h3>Guardando Datos</h3><p>En Python, crear variables es muy sencillo. No necesitas indicar el tipo de dato (como `int` o `double` en C++). El intérprete lo deduce por el valor.</p><pre>nombre = \"Sofía\"\nedad = 25</pre><p><strong>Misión:</strong> Crea una variable llamada <code>puntos</code> y asígnale el valor numérico <code>100</code>.</p>",
+    "initialCode": "# Crea tu variable puntos aquí\n",
+    "validation": {
+      "regex": "puntos\\s*=\\s*100\\b",
+      "error": "Asigna el valor 100 a la variable puntos: puntos = 100"
+    },
+    "requirements": [
+      "Estructura: Declaración de variable con tipado dinámico. (4 puntos)",
+      "Textos y Lógica: Nombre de la variable definido como 'puntos'. (2 puntos)",
+      "Parámetros: Asignación del número entero 100. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_3",
+    "unit": 1,
+    "type": "lesson",
+    "title": "1.3 Tipos de Datos",
+    "guide": "<h3>Tipos Fundamentales</h3><p>Python infiere los tipos de datos automáticamente:</p><ul><li><code>str</code> (Texto): Envuelto en comillas. Ej: <code>\"Rojo\"</code>.</li><li><code>int</code> (Entero): Sin decimales. Ej: <code>10</code>.</li><li><code>float</code> (Decimal): Usa un punto decimal. Ej: <code>9.99</code>.</li><li><code>bool</code> (Booleano): Puede ser <code>True</code> o <code>False</code> (con mayúscula inicial).</li></ul><p><strong>Misión:</strong> Declara una variable llamada <code>precio</code> con el valor decimal <code>19.99</code> y otra variable llamada <code>activo</code> con el valor booleano verdadero (<code>True</code>).</p>",
+    "initialCode": "# Escribe tus variables precio y activo aquí\n",
+    "validation": {
+      "regex": "precio\\s*=\\s*19\\.99\\s*[\\s\\S]*activo\\s*=\\s*True\\b|activo\\s*=\\s*True\\s*[\\s\\S]*precio\\s*=\\s*19\\.99\\b",
+      "error": "Define: precio = 19.99 y activo = True"
+    },
+    "requirements": [
+      "Estructura: Definición de variables de tipo float y bool. (3 puntos)",
+      "Textos y Lógica: Variables llamadas 'precio' y 'activo'. (3 puntos)",
+      "Parámetros: Valores asignados: precio = 19.99, activo = True (con mayúscula). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_4",
+    "unit": 1,
+    "type": "lesson",
+    "title": "1.4 Entrada de Usuario",
+    "guide": "<h3>Preguntar al Usuario</h3><p>Para recibir datos desde el teclado usamos la función <code>input()</code>. Esta función siempre nos devuelve el texto (string) que introduzca el usuario.</p><pre>respuesta = input(\"¿Cómo te llamas?\")</pre><p><strong>Misión:</strong> Pide al usuario que ingrese su color favorito usando la frase 'Color: ' dentro de <code>input()</code>, y guarda la respuesta en una variable llamada <code>color</code>.</p>",
+    "initialCode": "# Pide el color favorita del usuario aquí\n",
+    "validation": {
+      "regex": "color\\s*=\\s*input\\s*\\(\\s*['\"]Color:\\s*['\"]\\s*\\)",
+      "error": "Debes guardar el resultado de la entrada en color: color = input(\"Color: \")"
+    },
+    "requirements": [
+      "Estructura: Uso de la función input() para recibir datos de usuario. (4 puntos)",
+      "Textos y Lógica: Almacenamiento de entrada en variable 'color'. (2 puntos)",
+      "Parámetros: Mensaje prompt establecido exactamente como 'Color: '. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_5",
+    "unit": 1,
+    "type": "challenge",
+    "title": "1.5 Reto: Operaciones",
+    "guide": "<h3>🔥 RETO DE LA UNIDAD 1</h3><p>¡Hagamos cálculos matemáticos sencillos en Python!</p><p>Las operaciones aritméticas básicas son idénticas a otros lenguajes: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>.</p><p><strong>Objetivo:</strong> Crea un código que:</p><ol><li>Declare una variable <code>lado</code> con valor 5.</li><li>Calcule el área de un cuadrado multiplicando lado por lado, guardando el resultado en una variable llamada <code>area</code>.</li><li>Imprima en pantalla el valor de la variable <code>area</code>.</li></ol>",
+    "initialCode": "# Resuelve el reto aquí\n",
+    "validation": {
+      "regex": "lado\\s*=\\s*5\\s*[\\s\\S]*area\\s*=\\s*(lado\\s*\\*\\s*lado|5\\s*\\*\\s*5|lado\\s*\\*\\*\\s*2)\\s*[\\s\\S]*print\\s*\\(\\s*area\\s*\\)",
+      "error": "Declara lado = 5, calcula area y usa print(area) para mostrar el resultado."
+    },
+    "requirements": [
+      "Estructura: Definición de variables y operaciones matemáticas básicas en Python. (3 puntos)",
+      "Textos y Lógica: Salida en pantalla usando print(area). (3 puntos)",
+      "Parámetros: Variable lado = 5, cálculo de area = lado * lado (o lado**2). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_6",
+    "unit": 2,
+    "type": "lesson",
+    "title": "2.1 Condicionales: If",
+    "guide": "<h3>Unidad 2: Condicionales</h3><p>En Python, la estructura <code>if</code> controla el flujo. En lugar de usar llaves como C++ o HTML, Python usa **dos puntos (<code>:</code>) e indentación (espacios al inicio)**. ¡Esto es crucial!</p><pre>if edad >= 18:\n    print(\"Mayor de edad\")</pre><p>Todo lo que tenga 4 espacios a la derecha de margen está dentro del <code>if</code>.</p><p><strong>Misión:</strong> Escribe un condicional <code>if</code> que compruebe si <code>temperatura</code> es mayor que 30. Si es así, imprime 'Hace calor'.</p>",
+    "initialCode": "temperatura = 35\n# Escribe tu condicional aquí\n",
+    "validation": {
+      "regex": "if\\s+temperatura\\s*>\\s*30\\s*:\\s*\\n\\s+print\\s*\\(\\s*['\"]Hace calor['\"]\\s*\\)",
+      "error": "Asegúrate de escribir 'if temperatura > 30:' y en la línea siguiente poner sangría/espacios antes de print(\"Hace calor\")."
+    },
+    "requirements": [
+      "Estructura: Estructura condicional if terminada en dos puntos (:) con bloque indentado. (4 puntos)",
+      "Textos y Lógica: Llamada a print('Hace calor') dentro de la rama condicional. (3 puntos)",
+      "Parámetros: Condición de comparación (temperatura > 30). (2 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_7",
+    "unit": 2,
+    "type": "lesson",
+    "title": "2.2 Condicionales: Else",
+    "guide": "<h3>Bifurcaciones: If / Else</h3><p>El bloque <code>else</code> se ejecuta si no se cumple el <code>if</code>. Va al mismo nivel de sangría que el `if`.</p><pre>if nota >= 5:\n    print(\"Aprobado\")\nelse:\n    print(\"Reprobado\")</pre><p><strong>Misión:</strong> Crea un bloque <code>if/else</code> para la variable <code>edad</code>. Si es menor que 18, imprime 'Menor'. Si no, imprime 'Mayor'.</p>",
+    "initialCode": "edad = 16\n# Escribe el if/else aquí\n",
+    "validation": {
+      "regex": "if\\s+edad\\s*<\\s*18\\s*:[\\s\\S]*?print\\(['\"]Menor['\"]\\)[\\s\\S]*?else\\s*:[\\s\\S]*?print\\(['\"]Mayor['\"]\\)",
+      "error": "Revisa el formato: if edad < 18: con su print, y luego else: con su respectivo print."
+    },
+    "requirements": [
+      "Estructura: Estructura condicional bifurcada if/else con bloques indentados y dos puntos. (4 puntos)",
+      "Textos y Lógica: Impresión de 'Menor' en el if, e impresión de 'Mayor' en el else. (3 puntos)",
+      "Parámetros: Condición de edad menor a 18 (edad < 18). (2 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_8",
+    "unit": 2,
+    "type": "lesson",
+    "title": "2.3 Bifurcación Múltiple: Elif",
+    "guide": "<h3>Condiciones Múltiples (Elif)</h3><p>Si quieres evaluar múltiples opciones exclusivas, usamos <code>elif</code> (abreviatura de *else if*).</p><pre>if puntuacion > 90:\n    print(\"Excelente\")\nelif puntuacion > 50:\n    print(\"Aprobado\")\nelse:\n    print(\"Insuficiente\")</pre><p><strong>Misión:</strong> Completa el condicional usando <code>elif</code> para comprobar si <code>estado</code> es igual a 'medio' e imprimir 'Moderado'.</p>",
+    "initialCode": "estado = \"medio\"\n\nif estado == \"alto\":\n    print(\"Peligro\")\n# Añade el elif para 'medio' aquí\nelse:\n    print(\"Bajo\")",
+    "validation": {
+      "regex": "elif\\s+estado\\s*==\\s*['\"]medio['\"]\\s*:\\s*\\n\\s+print\\s*\\(\\s*['\"]Moderado['\"]\\s*\\)",
+      "error": "Añade la instrucción: elif estado == \"medio\": seguida de print(\"Moderado\")."
+    },
+    "requirements": [
+      "Estructura: Uso de la palabra clave elif para condiciones adicionales exclusivas. (4 puntos)",
+      "Textos y Lógica: Llamada a print('Moderado') bajo la condición media. (3 puntos)",
+      "Parámetros: Condición de igualdad (estado == 'medio'). (2 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_9",
+    "unit": 2,
+    "type": "lesson",
+    "title": "2.4 Operadores Lógicos",
+    "guide": "<h3>Operadores and, or, not</h3><p>En Python los operadores lógicos se escriben con palabras en inglés:</p><ul><li><code>and</code>: Y lógico (ambos deben cumplirse).</li><li><code>or</code>: O lógico (al menos uno debe cumplirse).</li><li><code>not</code>: Negación (invierte el valor).</li></ul><pre>if tiene_usuario and tiene_clave:\n    print(\"Entrar\")</pre><p><strong>Misión:</strong> Escribe un condicional <code>if</code> que evalúe si <code>edad</code> es mayor o igual a 18 <code>and</code> <code>tiene_entrada</code> es verdadero (<code>True</code>). Si se cumple, imprime 'Pasa'.</p>",
+    "initialCode": "edad = 20\ntiene_entrada = True\n# Escribe el condicional aquí\n",
+    "validation": {
+      "regex": "if\\s+edad\\s*>=\\s*18\\s+and\\s+tiene_entrada\\s*:[\\s\\S]*?print\\(\\s*['\"]Pasa['\"]\\s*\\)",
+      "error": "Usa 'if edad >= 18 and tiene_entrada:' e imprime 'Pasa'."
+    },
+    "requirements": [
+      "Estructura: Uso del operador lógico 'and' en minúscula para combinar expresiones. (4 puntos)",
+      "Textos y Lógica: Salida del texto 'Pasa' al cumplirse las condiciones. (2 puntos)",
+      "Parámetros: Condiciones edad >= 18 y tiene_entrada evaluadas conjuntamente. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_10",
+    "unit": 2,
+    "type": "challenge",
+    "title": "2.5 Reto: Control de Acceso",
+    "guide": "<h3>🔥 RETO DE LA UNIDAD 2</h3><p>Vamos a programar el sistema de acceso a un parque de atracciones.</p><p>Escribe el código necesario para evaluar las variables <code>edad</code> y <code>altura</code>:</p><ol><li>Si <code>edad</code> es mayor o igual a 12 <strong>Y</strong> <code>altura</code> es mayor o igual a 140, imprime 'Permitido'.</li><li>En caso contrario, imprime 'Denegado'.</li></ol>",
+    "initialCode": "edad = 14\naltura = 135\n# Escribe tu lógica de validación de acceso aquí\n",
+    "validation": {
+      "regex": "if\\s+(edad\\s*>=\\s*12\\s+and\\s+altura\\s*>=\\s*140|altura\\s*>=\\s*140\\s+and\\s+edad\\s*>=\\s*12)\\s*:[\\s\\S]*?print\\(['\"]Permitido['\"]\\)[\\s\\S]*?else\\s*:[\\s\\S]*?print\\(['\"]Denegado['\"]\\)",
+      "error": "Evalúa ambas condiciones con and. Si se cumplen imprime 'Permitido', si no, usa else para imprimir 'Denegado'."
+    },
+    "requirements": [
+      "Estructura: Bifurcación lógica con operadores lógicos combinados e if/else. (4 puntos)",
+      "Textos y Lógica: Mensajes impresos 'Permitido' o 'Denegado' según corresponda. (3 puntos)",
+      "Parámetros: Lógica de evaluación y dos puntos (:) requeridos. (2 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_11",
+    "unit": 3,
+    "type": "lesson",
+    "title": "3.1 Listas Básicas",
+    "guide": "<h3>Unidad 3: Colecciones y Bucles</h3><p>Las listas permiten guardar múltiples elementos de forma ordenada en una sola variable. Se declaran usando corchetes <code>[]</code>.</p><pre>frutas = [\"manzana\", \"plátano\"]</pre><p>Para añadir un elemento nuevo al final de la lista, usamos la función <code>.append()</code>:</p><pre>frutas.append(\"uva\")</pre><p><strong>Misión:</strong> Añade el texto 'naranja' a la lista <code>frutas</code> usando <code>.append()</code>.</p>",
+    "initialCode": "frutas = [\"manzana\", \"pera\"]\n# Añade 'naranja' aquí\n",
+    "validation": {
+      "regex": "frutas\\.append\\(\\s*['\"]naranja['\"]\\s*\\)",
+      "error": "Añade la fruta usando frutas.append('naranja')"
+    },
+    "requirements": [
+      "Estructura: Uso de colecciones mutables (listas) en Python. (4 puntos)",
+      "Textos y Lógica: Declaración inicial de lista frutas. (2 puntos)",
+      "Parámetros: Llamada al método .append('naranja') para modificar la lista. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_12",
+    "unit": 3,
+    "type": "lesson",
+    "title": "3.2 Bucle For y Range",
+    "guide": "<h3>Bucle For</h3><p>En Python, el bucle <code>for</code> se usa para iterar sobre secuencias (como listas o rangos numéricos).</p><p>Para repetir algo un número determinado de veces, usamos la función <code>range(inicio, fin)</code> (no incluye el número de fin):</p><pre>for i in range(1, 4):\n    print(i)  # Imprime 1, 2, 3</pre><p><strong>Misión:</strong> Escribe un bucle <code>for</code> que use <code>range(1, 5)</code> para imprimir el valor de <code>i</code> en cada iteración.</p>",
+    "initialCode": "# Escribe tu bucle for con range aquí\n",
+    "validation": {
+      "regex": "for\\s+[a-zA-Z0-9_]+\\s+in\\s+range\\(\\s*1\\s*,\\s*5\\s*\\)\\s*:\\s*\\n\\s+print\\s*\\(\\s*[a-zA-Z0-9_]+\\s*\\)",
+      "error": "Escribe un bucle for que vaya del 1 al 4 e imprima la variable del bucle."
+    },
+    "requirements": [
+      "Estructura: Bucle de repetición for iterando un rango numérico. (4 puntos)",
+      "Textos y Lógica: Impresión del número o variable de control del bucle. (2 puntos)",
+      "Parámetros: Uso de la función range(1, 5) para generar los números del 1 al 4. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_13",
+    "unit": 3,
+    "type": "lesson",
+    "title": "3.3 Bucle While",
+    "guide": "<h3>Bucle While</h3><p>El bucle <code>while</code> repite el código mientras la condición sea verdadera. Recuerda incrementar la variable de control para evitar bucles infinitos.</p><pre>contador = 1\nwhile contador <= 3:\n    print(contador)\n    contador += 1</pre><p><strong>Misión:</strong> Crea un bucle <code>while</code> que se ejecute mientras <code>numero</code> sea menor o igual a 5. Dentro, imprime <code>numero</code> e incrementa su valor en 1.</p>",
+    "initialCode": "numero = 1\n# Escribe el bucle while aquí\n",
+    "validation": {
+      "regex": "while\\s+numero\\s*<=\\s*5\\s*:[\\s\\S]*?print\\(\\s*numero\\s*\\)[\\s\\S]*?numero\\s*\\+=\\s*1",
+      "error": "Comprueba que la condición sea 'numero <= 5', imprimas 'numero' e incrementes con 'numero += 1' dentro del bucle."
+    },
+    "requirements": [
+      "Estructura: Bucle while estructurado con bloque de código indentado. (4 puntos)",
+      "Textos y Lógica: Impresión de la variable numero en cada ciclo. (2 puntos)",
+      "Parámetros: Condición de permanencia numero <= 5 e incremento manual (numero += 1). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_14",
+    "unit": 3,
+    "type": "lesson",
+    "title": "3.4 Iterar Listas",
+    "guide": "<h3>Recorriendo Listas</h3><p>La forma más potente del bucle <code>for</code> en Python es recorrer los elementos de una lista directamente, uno por uno.</p><pre>colores = [\"rojo\", \"azul\"]\nfor color in colores:\n    print(color)</pre><p><strong>Misión:</strong> Completa el bucle <code>for</code> para recorrer la lista de <code>nombres</code> e imprimir cada uno.</p>",
+    "initialCode": "nombres = [\"Ana\", \"Luis\", \"Carlos\"]\n# Completa el bucle\nfor nombre in nombres:\n    # Imprime aquí\n",
+    "validation": {
+      "regex": "for\\s+nombre\\s+in\\s+nombres\\s*:\\s*\\n\\s+print\\s*\\(\\s*nombre\\s*\\)",
+      "error": "Asegúrate de que dentro del for esté la instrucción print(nombre) correctamente alineada con espacios."
+    },
+    "requirements": [
+      "Estructura: Bucle for iterando a través de los elementos de una lista. (4 puntos)",
+      "Textos y Lógica: Impresión de cada elemento (nombre) en el bucle. (3 puntos)",
+      "Parámetros: Sintaxis del bucle 'for nombre in nombres:'. (2 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_15",
+    "unit": 3,
+    "type": "challenge",
+    "title": "3.5 Reto: Sumando Números",
+    "guide": "<h3>🔥 RETO DE LA UNIDAD 3</h3><p>Completa el código para sumar todos los números contenidos en la lista <code>valores</code> y mostrar el total al final.</p><p><strong>Requisitos:</strong></p><ol><li>Usa un bucle <code>for num in valores:</code>.</li><li>Suma cada número a la variable acumuladora <code>suma_total</code>.</li><li>Fuera del bucle, imprime el valor de <code>suma_total</code>.</li></ol>",
+    "initialCode": "valores = [10, 20, 30]\nsuma_total = 0\n# Escribe el acumulador aquí\n",
+    "validation": {
+      "regex": "for\\s+[a-zA-Z0-9_]+\\s+in\\s+valores\\s*:[\\s\\S]*?suma_total\\s*\\+=\\s*[a-zA-Z0-9_]+[\\s\\S]*?print\\(\\s*suma_total\\s*\\)",
+      "error": "Debes iterar la lista sumando num a suma_total en cada iteración y al final hacer print(suma_total)."
+    },
+    "requirements": [
+      "Estructura: Bucle acumulador sobre una lista numérica. (4 puntos)",
+      "Textos y Lógica: Impresión del resultado final fuera del bucle. (3 puntos)",
+      "Parámetros: Acumulación de valores sumando num a la variable externa suma_total. (2 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_16",
+    "unit": 4,
+    "type": "lesson",
+    "title": "4.1 Definir Funciones",
+    "guide": "<h3>Unidad 4: Funciones</h3><p>Las funciones agrupan un conjunto de instrucciones reutilizables para evitar repetir código. En Python las declaramos con la palabra clave <code>def</code>.</p><pre>def saludar():\n    print(\"Hola\")</pre><p><strong>Misión:</strong> Define una función llamada <code>bienvenida</code> que imprima el mensaje 'Acceso concedido'.</p>",
+    "initialCode": "# Define tu función aquí\n",
+    "validation": {
+      "regex": "def\\s+bienvenida\\s*\\(\\s*\\)\\s*:\\s*\\n\\s+print\\s*\\(\\s*['\"]Acceso concedido['\"]\\s*\\)",
+      "error": "Crea la función 'def bienvenida():' y pon print('Acceso concedido') con indentación."
+    },
+    "requirements": [
+      "Estructura: Definición de función con la palabra clave def. (4 puntos)",
+      "Textos y Lógica: Impresión de 'Acceso concedido' dentro del bloque de función. (3 puntos)",
+      "Parámetros: Nombre de función bienvenida() sin parámetros. (2 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_17",
+    "unit": 4,
+    "type": "lesson",
+    "title": "4.2 Parámetros",
+    "guide": "<h3>Pasando Argumentos</h3><p>Las funciones pueden recibir parámetros para trabajar con datos variables.</p><pre>def saludar_usuario(nombre):\n    print(\"Hola \" + nombre)</pre><p><strong>Misión:</strong> Crea una función llamada <code>duplicar</code> que reciba un número <code>x</code> e imprima el valor de <code>x * 2</code>.</p>",
+    "initialCode": "# Define la función duplicar aquí\n",
+    "validation": {
+      "regex": "def\\s+duplicar\\s*\\(\\s*[a-zA-Z0-9_]+\\s*\\)\\s*:\\s*\\n\\s+print\\s*\\(\\s*[a-zA-Z0-9_]+\\s*\\*\\s*2\\s*\\)",
+      "error": "Declara 'def duplicar(x):' y dentro de ella imprime x * 2."
+    },
+    "requirements": [
+      "Estructura: Definición de función especificando parámetros posicionales. (4 puntos)",
+      "Textos y Lógica: Cálculo e impresión del valor de entrada por 2. (3 puntos)",
+      "Parámetros: Parámetro x en la definición de la función duplicar(x). (2 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_18",
+    "unit": 4,
+    "type": "lesson",
+    "title": "4.3 Retorno de Valores",
+    "guide": "<h3>Devolviendo Resultados</h3><p>Para que una función realice un cálculo y nos envíe el resultado de vuelta para usarlo en otras partes del programa, usamos <code>return</code>.</p><pre>def sumar(a, b):\n    return a + b</pre><p><strong>Misión:</strong> Crea una función llamada <code>cuadrado</code> que reciba un número <code>n</code> y devuelva (<code>return</code>) su valor al cuadrado (<code>n * n</code>).</p>",
+    "initialCode": "# Define la función cuadrado aquí\n",
+    "validation": {
+      "regex": "def\\s+cuadrado\\s*\\(\\s*([a-zA-Z0-9_]+)\\s*\\)\\s*:\\s*\\n\\s+return\\s+\\1\\s*\\*\\s*\\1|def\\s+cuadrado\\s*\\(\\s*([a-zA-Z0-9_]+)\\s*\\)\\s*:\\s*\\n\\s+return\\s+\\2\\s*\\*\\*\\s*2",
+      "error": "La función cuadrado debe recibir n y retornar n * n."
+    },
+    "requirements": [
+      "Estructura: Uso de la palabra return para retornar resultados en funciones. (4 puntos)",
+      "Textos y Lógica: Cálculo matemático correcto. (2 puntos)",
+      "Parámetros: Parámetro n y retorno del valor n * n en la función cuadrado(n). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_19",
+    "unit": 4,
+    "type": "lesson",
+    "title": "4.4 Invocación de Funciones",
+    "guide": "<h3>Llamar a la Función</h3><p>Declarar la función no la ejecuta. Debes llamarla pasándole los datos necesarios.</p><pre>resultado = sumar(5, 10)</pre><p><strong>Misión:</strong> Llama a la función <code>saludar()</code> que ya está definida en el código.</p>",
+    "initialCode": "def saludar():\n    print(\"Hola desde la función\")\n\n# Llama a la función aquí\n",
+    "validation": {
+      "regex": "saludar\\s*\\(\\s*\\)",
+      "error": "Escribe la llamada a la función: saludar()"
+    },
+    "requirements": [
+      "Estructura: Invocación de función definida previamente. (5 puntos)",
+      "Textos y Lógica: Coherencia de ejecución. (1 puntos)",
+      "Parámetros: Llamada a la función saludar() sin argumentos. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_20",
+    "unit": 4,
+    "type": "challenge",
+    "title": "4.5 Reto: Multiplicador",
+    "guide": "<h3>🔥 RETO DE LA UNIDAD 4</h3><p>Escribe una función en Python llamada <code>multiplicar</code> que tome dos parámetros numéricos, los multiplique y devuelva el resultado (usando <code>return</code>).</p><p>Fuera de la función, llámala pasándole los valores 5 y 4, y guarda ese resultado en una variable llamada <code>total</code>.</p>",
+    "initialCode": "# Escribe tu función y su llamada aquí\n",
+    "validation": {
+      "regex": "def\\s+multiplicar\\s*\\([a-zA-Z0-9_,\\s]+\\)\\s*:[\\s\\S]*?return[\\s\\S]*?total\\s*=\\s*multiplicar\\s*\\(\\s*5\\s*,\\s*4\\s*\\)",
+      "error": "Asegúrate de definir multiplicar(a, b) que retorne a * b, y luego guardar el resultado de multiplicar(5, 4) en 'total'."
+    },
+    "requirements": [
+      "Estructura: Definición de función con múltiples parámetros y retorno de datos con su llamada. (3 puntos)",
+      "Textos y Lógica: Nombres de función 'multiplicar' y variable 'total' en el programa. (3 puntos)",
+      "Parámetros: Retorno de a * b, y asignación de llamar a multiplicar(5, 4). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_21",
+    "unit": 5,
+    "type": "lesson",
+    "title": "5.1 Introducción a Clases",
+    "guide": "<h3>Unidad 5: Programación Orientada a Objetos</h3><p>La POO permite estructurar programas agrupando propiedades y comportamientos relacionados en clases.</p><p>Para definir una clase en Python usamos la palabra clave <code>class</code>.</p><pre>class Persona:\n    pass # pass es para dejar la clase vacía temporalmente</pre><p><strong>Misión:</strong> Define una clase vacía llamada <code>Coche</code> usando la palabra clave <code>pass</code> en su interior.</p>",
+    "initialCode": "# Define la clase Coche aquí\n",
+    "validation": {
+      "regex": "class\\s+Coche\\s*:\\s*\\n\\s+pass\\b",
+      "error": "Crea una clase con 'class Coche:' e inserta 'pass' indentado dentro."
+    },
+    "requirements": [
+      "Estructura: Declaración de clases con la palabra clave class. (4 puntos)",
+      "Textos y Lógica: Identificador de clase Coche. (2 puntos)",
+      "Parámetros: Uso de la sentencia pass para definir un cuerpo de clase vacío. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_22",
+    "unit": 5,
+    "type": "lesson",
+    "title": "5.2 El Constructor __init__",
+    "guide": "<h3>Inicializando Atributos</h3><p>Para definir atributos iniciales en una clase, usamos el método constructor especial <code>__init__</code>. El primer parámetro siempre debe llamarse <code>self</code>, que representa al objeto creado.</p><pre>class Persona:\n    def __init__(self, nombre):\n        self.nombre = nombre</pre><p><strong>Misión:</strong> Crea una clase <code>Coche</code> con un constructor que reciba <code>self</code> y <code>marca</code>, y asigne <code>marca</code> a <code>self.marca</code>.</p>",
+    "initialCode": "# Escribe la clase Coche con su constructor aquí\n",
+    "validation": {
+      "regex": "class\\s+Coche\\s*:[\\s\\S]*?def\\s+__init__\\s*\\(\\s*self\\s*,\\s*marca\\s*\\)\\s*:\\s*\\n\\s+self\\.marca\\s*=\\s*marca",
+      "error": "Define la clase Coche con el método __init__(self, marca) y asigna self.marca = marca."
+    },
+    "requirements": [
+      "Estructura: Definición del constructor __init__ con referencia al objeto self. (4 puntos)",
+      "Textos y Lógica: Parámetro de inicialización marca. (2 puntos)",
+      "Parámetros: Asignación de atributo de instancia self.marca = marca. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_23",
+    "unit": 5,
+    "type": "lesson",
+    "title": "5.3 Creando Objetos",
+    "guide": "<h3>Instanciar un Objeto</h3><p>Para crear un objeto real del molde que es la clase, lo llamamos por su nombre pasándole los parámetros requeridos por su constructor.</p><pre>p1 = Persona(\"Sofía\")\nprint(p1.nombre)</pre><p><strong>Misión:</strong> Crea una instancia de la clase <code>Coche</code> llamada <code>mi_coche</code> pasándole la marca 'Toyota' como argumento.</p>",
+    "initialCode": "class Coche:\n    def __init__(self, marca):\n        self.marca = marca\n\n# Crea tu objeto mi_coche aquí\n",
+    "validation": {
+      "regex": "mi_coche\\s*=\\s*Coche\\s*\\(\\s*['\"]Toyota['\"]\\s*\\)",
+      "error": "Instancia la clase guardando el objeto en mi_coche: mi_coche = Coche(\"Toyota\")"
+    },
+    "requirements": [
+      "Estructura: Creación de instancias de clase pasando argumentos al constructor. (4 puntos)",
+      "Textos y Lógica: Nombre del objeto mi_coche. (2 puntos)",
+      "Parámetros: Asignación de mi_coche = Coche('Toyota') llamando al constructor. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_24",
+    "unit": 5,
+    "type": "lesson",
+    "title": "5.4 Métodos de Clase",
+    "guide": "<h3>Métodos (Acciones)</h3><p>Los métodos son funciones definidas dentro de la clase que describen el comportamiento del objeto. El primer parámetro debe ser siempre <code>self</code>.</p><pre>class Perro:\n    def ladrar(self):\n        print(\"Guau\")</pre><p><strong>Misión:</strong> Agrega un método llamado <code>arrancar</code> a la clase <code>Coche</code> que imprima el mensaje 'En marcha'.</p>",
+    "initialCode": "class Coche:\n    def __init__(self, marca):\n        self.marca = marca\n    \n    # Escribe el método arrancar aquí\n",
+    "validation": {
+      "regex": "def\\s+arrancar\\s*\\(\\s*self\\s*\\)\\s*:\\s*\\n\\s+print\\s*\\(\\s*['\"]En marcha['\"]\\s*\\)",
+      "error": "Crea el método arrancar(self) e imprime 'En marcha' en su interior."
+    },
+    "requirements": [
+      "Estructura: Definición de métodos de clase que interactúan con el objeto. (4 puntos)",
+      "Textos y Lógica: Impresión del texto 'En marcha' al llamar al método. (3 puntos)",
+      "Parámetros: Firma del método arrancar(self) incluyendo self. (2 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "py_25",
+    "unit": 5,
+    "type": "challenge",
+    "title": "5.5 Reto: Cuenta Bancaria",
+    "guide": "<h3>🔥 RETO FINAL DEL CURSO PYTHON</h3><p>¡Modelaremos una cuenta de ahorros!</p><p>Escribe una clase completa llamada <code>Cuenta</code> que cumpla los siguientes puntos:</p><ol><li>Un constructor <code>__init__(self, saldo)</code> que inicialice el atributo <code>self.saldo</code>.</li><li>Un método <code>ingresar(self, cantidad)</code> que sume esa cantidad a <code>self.saldo</code>.</li><li>Un método <code>mostrar(self)</code> que imprima en pantalla el saldo actual.</li></ol>",
+    "initialCode": "# Define la clase Cuenta con saldo, ingresar y mostrar aquí\n",
+    "validation": {
+      "regex": "class\\s+Cuenta\\s*:[\\s\\S]*?def\\s+__init__\\s*\\(\\s*self\\s*,\\s*saldo\\s*\\)\\s*:[\\s\\S]*?self\\.saldo\\s*=\\s*saldo[\\s\\S]*?def\\s+ingresar\\s*\\(\\s*self\\s*,\\s*cantidad\\s*\\)\\s*:[\\s\\S]*?self\\.saldo\\s*\\+=\\s*cantidad[\\s\\S]*?def\\s+mostrar\\s*\\(\\s*self\\s*\\)\\s*:[\\s\\S]*?print\\(\\s*self\\.saldo\\s*\\)",
+      "error": "Define el init con saldo, el método ingresar sumando la cantidad al saldo y el método mostrar que imprima self.saldo."
+    },
+    "requirements": [
+      "Estructura: Definición de clase Cuenta con constructor y métodos arrancar/mostrar. (3 puntos)",
+      "Textos y Lógica: Definición de métodos __init__, ingresar y mostrar. (3 puntos)",
+      "Parámetros: Inicialización de atributo saldo, suma de cantidad en ingresar, e impresión en mostrar. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  }
+]

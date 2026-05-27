@@ -53,6 +53,9 @@
     <!-- PrismJS Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-html.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     
@@ -221,6 +224,75 @@
         </div>
     </div>
 
+    <!-- EVALUATION MODAL -->
+    <div id="evaluation-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="glass bg-[#0f172a]/95 rounded-2xl w-full max-w-xl p-6 shadow-2xl relative overflow-hidden transform transition-all scale-100 border border-indigo-500/30">
+            <!-- Decorative header line -->
+            <div id="eval-modal-header-line" class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+            
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex items-center gap-3">
+                    <div id="eval-modal-icon-container" class="p-2 rounded-lg bg-indigo-500/20 text-indigo-400">
+                        <i data-lucide="award" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white leading-none">Resultado de la Evaluación</h3>
+                        <p class="text-xs text-slate-400 mt-1">Evaluación personalizada con Mistral AI</p>
+                    </div>
+                </div>
+                <button onclick="window.closeEvaluationModal()" class="text-slate-400 hover:text-white transition p-1 rounded-lg hover:bg-white/10">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            
+            <!-- Content -->
+            <div class="max-h-[65vh] overflow-y-auto custom-scroll pr-1 flex flex-col gap-6 text-left">
+                <!-- Score Summary & Pass status -->
+                <div class="flex flex-col sm:flex-row items-center gap-6 bg-slate-900/60 p-5 rounded-xl border border-slate-800">
+                    <div class="flex flex-col items-center justify-center">
+                        <div id="eval-modal-score-circle" class="w-24 h-24 rounded-full flex flex-col items-center justify-center border-4 border-emerald-500 text-emerald-400 bg-emerald-500/5 shadow-lg shadow-emerald-500/10">
+                            <span id="eval-modal-score-num" class="text-3xl font-extrabold font-mono">8.5</span>
+                            <span class="text-[10px] uppercase font-bold tracking-wider opacity-60">Puntos</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 text-center sm:text-left">
+                        <div id="eval-modal-status-badge" class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">APROBADO</div>
+                        <h4 id="eval-modal-status-title" class="font-bold text-base text-white mb-1">¡Excelente trabajo!</h4>
+                        <p id="eval-modal-status-desc" class="text-xs text-slate-400 leading-relaxed">Has superado la nota mínima requerida para esta lección.</p>
+                    </div>
+                </div>
+
+                <!-- Rubric breakdown -->
+                <div>
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Rúbrica de Evaluación</h4>
+                    <div id="eval-modal-rubric-list" class="flex flex-col gap-3">
+                        <!-- Items injected here -->
+                    </div>
+                </div>
+
+                <!-- General feedback -->
+                <div>
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Comentarios del Tutor</h4>
+                    <div class="p-4 rounded-xl bg-slate-900/40 border border-slate-800/80 text-sm leading-relaxed text-slate-300 italic relative">
+                        <span class="absolute top-2 left-2 text-indigo-500/20 text-4xl select-none font-serif">“</span>
+                        <p id="eval-modal-feedback-text" class="pl-4 pr-2">...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer actions -->
+            <div class="mt-6 pt-4 border-t border-slate-800 flex justify-end gap-3">
+                <button onclick="window.closeEvaluationModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-bold rounded-lg transition">
+                    Seguir Editando
+                </button>
+                <button id="eval-modal-next-btn" onclick="window.evaluateNext()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold rounded-lg transition flex items-center gap-2 shadow-lg shadow-emerald-900/20">
+                    <span>Siguiente</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- AUTH MODAL -->
     <div id="auth-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="glass bg-[#0f172a]/90 rounded-2xl w-full max-w-md p-8 shadow-2xl relative overflow-hidden transform transition-all scale-100">
@@ -265,43 +337,172 @@
         </div>
     </div>
 
-    <!-- VISTA 1: HOME (Mejorada) -->
-    <div id="view-home" class="flex-1 overflow-y-auto flex flex-col items-center p-6 md:p-12 relative z-10 scroll-smooth">
-        
-        <!-- Navbar Flotante -->
-        <div class="w-full max-w-6xl flex justify-end mb-8">
-             <div class="glass rounded-full p-1.5 pl-4 pr-1.5 flex items-center gap-4 shadow-xl">
-                <!-- User Info & Streak -->
-                <div id="user-info" class="hidden items-center gap-3">
-                    <div class="flex items-center gap-2 mr-2 bg-slate-900/50 px-3 py-1.5 rounded-full border border-slate-800" title="Racha Actual">
-                        <i id="streak-icon" data-lucide="flame" class="w-4 h-4 text-orange-500 fill-orange-500/20 transition-all"></i>
-                        <span id="streak-count" class="text-sm font-bold text-orange-400 font-mono">0</span>
-                    </div>
-                    <div class="h-6 w-px bg-slate-700/50"></div>
-                    <div class="flex flex-col items-end leading-tight">
-                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Conectado como</span>
-                        <span class="text-xs text-slate-300 font-medium truncate max-w-[150px]" id="user-email">...</span>
-                    </div>
-                    <div class="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-indigo-500/30" id="user-avatar">U</div>
-                    <button onclick="window.doLogout()" class="w-9 h-9 rounded-full hover:bg-red-500/10 hover:text-red-400 text-slate-400 transition flex items-center justify-center ml-1" title="Cerrar Sesión">
-                        <i data-lucide="log-out" class="w-4 h-4"></i>
-                    </button>
+    <!-- Shared Top Navbar -->
+    <header id="main-navbar" class="w-full max-w-6xl mx-auto px-6 pt-6 flex justify-between items-center relative z-20 shrink-0">
+         <div class="flex items-center gap-2 cursor-pointer" onclick="window.showCourseSelector()">
+             <div class="p-2 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 shadow-[0_0_15px_-3px_rgba(99,102,241,0.4)]">
+                 <i data-lucide="code-2" class="w-6 h-6"></i>
+             </div>
+             <span class="font-extrabold text-white tracking-widest text-lg hidden sm:block">LEARN CODE</span>
+         </div>
+         
+         <div class="glass rounded-full p-1.5 pl-4 pr-1.5 flex items-center gap-4 shadow-xl">
+            <!-- User Info & Streak -->
+            <div id="user-info" class="hidden items-center gap-3">
+                <div class="flex items-center gap-2 mr-2 bg-slate-900/50 px-3 py-1.5 rounded-full border border-slate-800" title="Racha Actual">
+                    <i id="streak-icon" data-lucide="flame" class="w-4 h-4 text-orange-500 fill-orange-500/20 transition-all"></i>
+                    <span id="streak-count" class="text-sm font-bold text-orange-400 font-mono">0</span>
                 </div>
-                <button id="login-btn" onclick="window.toggleAuthModal(true)" class="bg-slate-800 hover:bg-slate-700 text-white px-5 py-2 rounded-full text-sm font-semibold transition flex items-center gap-2 border border-slate-700">
-                    <span>Acceder</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                <div class="h-6 w-px bg-slate-700/50"></div>
+                <div class="flex flex-col items-end leading-tight">
+                    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Conectado como</span>
+                    <span class="text-xs text-slate-300 font-medium truncate max-w-[150px]" id="user-email">...</span>
+                </div>
+                <div class="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-indigo-500/30" id="user-avatar">U</div>
+                <button onclick="window.doLogout()" class="w-9 h-9 rounded-full hover:bg-red-500/10 hover:text-red-400 text-slate-400 transition flex items-center justify-center ml-1" title="Cerrar Sesión">
+                    <i data-lucide="log-out" class="w-4 h-4"></i>
                 </button>
             </div>
+            <button id="login-btn" onclick="window.toggleAuthModal(true)" class="bg-slate-800 hover:bg-slate-700 text-white px-5 py-2 rounded-full text-sm font-semibold transition flex items-center gap-2 border border-slate-700">
+                <span>Acceder</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
         </div>
+    </header>
 
+    <!-- VISTA 0: SELECT COURSE (Dashboard) -->
+    <div id="view-course-select" class="flex-1 overflow-y-auto flex flex-col items-center p-6 md:p-12 relative z-10 scroll-smooth">
         <div class="max-w-5xl w-full">
-            <header class="text-center mb-16 animate-fade-in-up">
+            <header class="text-center mb-16 animate-fade-in-up mt-8">
                 <div class="inline-flex p-3 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 mb-6 backdrop-blur shadow-[0_0_30px_-10px_rgba(99,102,241,0.3)]">
                     <i data-lucide="sparkles" class="w-8 h-8 text-indigo-400"></i>
                 </div>
-                <h1 class="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-200 to-indigo-400 mb-6 tracking-tight drop-shadow-sm">
+                <h1 class="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-200 to-indigo-400 mb-6 tracking-tight drop-shadow-sm">
+                    Elige tu Ruta de Aprendizaje
+                </h1>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto font-light leading-relaxed">
+                    Aprende escribiendo código real en nuestro editor interactivo con validación inmediata.
+                </p>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-24">
+                
+                <!-- CARD: HTML + CSS + JS -->
+                <div class="glass p-8 rounded-2xl border border-orange-500/25 relative overflow-hidden group flex flex-col justify-between transition-all duration-300 hover:border-orange-500/50 hover:shadow-[0_15px_30px_-10px_rgba(249,115,22,0.15)] hover:-translate-y-1">
+                    <div class="absolute top-0 right-0 p-12 bg-orange-500/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
+                    <div class="relative z-10 flex-1 flex flex-col">
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="text-[10px] font-bold text-orange-400 bg-orange-500/15 border-orange-500/20 px-2.5 py-1 rounded border uppercase tracking-wider">
+                                Web Front-end
+                            </span>
+                            <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-400 border border-orange-500/20">
+                                <i data-lucide="layout" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">HTML + CSS + JS</h3>
+                        <p class="text-slate-400 text-sm font-light leading-relaxed mb-6 flex-1">
+                            Domina el esqueleto, diseño y lógica de la web. Construye interfaces interactivas y dinámicas en vivo.
+                        </p>
+                        
+                        <div id="progress-html" class="mb-6 hidden">
+                            <div class="flex justify-between text-xs text-slate-400 mb-1.5 font-medium">
+                                <span>Progreso</span>
+                                <span class="progress-lbl font-semibold text-orange-400">0%</span>
+                            </div>
+                            <div class="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
+                                <div class="progress-bar h-full bg-gradient-to-r from-orange-500 to-rose-500 w-0 transition-all duration-700"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="window.selectCourse('html')" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-xl text-sm transition border border-slate-700 hover:border-orange-500/30 flex items-center justify-center gap-2 group cursor-pointer">
+                        <span>Empezar Ruta</span> <i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform"></i>
+                    </button>
+                </div>
+
+                <!-- CARD: C++ -->
+                <div class="glass p-8 rounded-2xl border border-blue-500/25 relative overflow-hidden group flex flex-col justify-between transition-all duration-300 hover:border-blue-500/50 hover:shadow-[0_15px_30px_-10px_rgba(59,130,246,0.15)] hover:-translate-y-1">
+                    <div class="absolute top-0 right-0 p-12 bg-blue-500/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
+                    <div class="relative z-10 flex-1 flex flex-col">
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="text-[10px] font-bold text-blue-400 bg-blue-500/15 border-blue-500/20 px-2.5 py-1 rounded border uppercase tracking-wider">
+                                Sistemas y Juegos
+                            </span>
+                            <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 border border-blue-500/20">
+                                <i data-lucide="terminal" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">C++</h3>
+                        <p class="text-slate-400 text-sm font-light leading-relaxed mb-6 flex-1">
+                            Domina el desarrollo de sistemas, algoritmos y estructuras de datos eficientes con uno de los lenguajes más rápidos.
+                        </p>
+                        
+                        <div id="progress-cpp" class="mb-6 hidden">
+                            <div class="flex justify-between text-xs text-slate-400 mb-1.5 font-medium">
+                                <span>Progreso</span>
+                                <span class="progress-lbl font-semibold text-blue-400">0%</span>
+                            </div>
+                            <div class="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
+                                <div class="progress-bar h-full bg-gradient-to-r from-blue-500 to-indigo-500 w-0 transition-all duration-700"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="window.selectCourse('cpp')" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-xl text-sm transition border border-slate-700 hover:border-blue-500/30 flex items-center justify-center gap-2 group cursor-pointer">
+                        <span>Empezar Ruta</span> <i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform"></i>
+                    </button>
+                </div>
+
+                <!-- CARD: Python -->
+                <div class="glass p-8 rounded-2xl border border-yellow-500/25 relative overflow-hidden group flex flex-col justify-between transition-all duration-300 hover:border-yellow-500/50 hover:shadow-[0_15px_30px_-10px_rgba(234,179,8,0.15)] hover:-translate-y-1">
+                    <div class="absolute top-0 right-0 p-12 bg-yellow-500/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
+                    <div class="relative z-10 flex-1 flex flex-col">
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="text-[10px] font-bold text-yellow-400 bg-yellow-500/15 border-yellow-500/20 px-2.5 py-1 rounded border uppercase tracking-wider">
+                                IA y Ciencia de Datos
+                            </span>
+                            <div class="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center text-yellow-400 border border-yellow-500/20">
+                                <i data-lucide="brain" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">Python</h3>
+                        <p class="text-slate-400 text-sm font-light leading-relaxed mb-6 flex-1">
+                            Aprende el lenguaje líder en Inteligencia Artificial, Ciencia de Datos y automatización con una sintaxis limpia.
+                        </p>
+                        
+                        <div id="progress-python" class="mb-6 hidden">
+                            <div class="flex justify-between text-xs text-slate-400 mb-1.5 font-medium">
+                                <span>Progreso</span>
+                                <span class="progress-lbl font-semibold text-yellow-400">0%</span>
+                            </div>
+                            <div class="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
+                                <div class="progress-bar h-full bg-gradient-to-r from-yellow-500 to-emerald-500 w-0 transition-all duration-700"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="window.selectCourse('python')" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-xl text-sm transition border border-slate-700 hover:border-yellow-500/30 flex items-center justify-center gap-2 group cursor-pointer">
+                        <span>Empezar Ruta</span> <i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- VISTA 1: HOME (Mejorada) -->
+    <div id="view-home" class="hidden flex-1 overflow-y-auto flex flex-col items-center p-6 md:p-12 relative z-10 scroll-smooth">
+        <div class="max-w-5xl w-full">
+            <!-- Back to selection -->
+            <button onclick="window.showCourseSelector()" class="mb-8 inline-flex items-center gap-2 text-slate-400 hover:text-white transition text-xs font-bold uppercase tracking-wider group bg-slate-900/50 hover:bg-slate-900 px-4 py-2 rounded-full border border-slate-800">
+                <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform"></i>
+                <span>Volver a Cursos</span>
+            </button>
+
+            <header class="text-center mb-16 animate-fade-in-up">
+                <div class="inline-flex p-3 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 mb-6 backdrop-blur shadow-[0_0_30px_-10px_rgba(99,102,241,0.3)]">
+                    <i id="course-header-icon" data-lucide="sparkles" class="w-8 h-8 text-indigo-400"></i>
+                </div>
+                <h1 id="course-title" class="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-200 to-indigo-400 mb-6 tracking-tight drop-shadow-sm">
                     HTML Learn
                 </h1>
-                <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
+                <p id="course-desc" class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
                     Tu camino para convertirte en desarrollador web. <span class="text-slate-200 font-normal">Escribe código real</span>, supera retos y construye proyectos desde cero.
                 </p>
             </header>
@@ -361,16 +562,19 @@
                 <header class="h-16 border-b border-slate-800/60 flex items-center px-6 justify-between bg-[#0f172a] text-slate-400 shrink-0 z-20 relative">
                     <div class="flex items-center gap-3">
                         <i data-lucide="file-code" class="w-5 h-5 text-indigo-500"></i>
-                        <span class="text-sm font-mono text-slate-300">index.html</span>
+                        <span id="editor-filename" class="text-sm font-mono text-slate-300">index.html</span>
                     </div>
                     <div class="flex gap-2 items-center">
                         <button onclick="window.askAI()" class="group px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-indigo-300 text-xs font-bold rounded-lg flex items-center gap-2 transition-all border border-slate-700 hover:border-indigo-500/50">
                             <i data-lucide="wand-2" class="w-3 h-3 group-hover:text-amber-300 transition-colors"></i> <span>¿Qué me falta?</span>
                         </button>
                         <div class="w-px h-4 bg-slate-700 mx-1"></div>
-                         <button onclick="window.checkCode()" class="group relative px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-lg flex items-center gap-2 transition-all shadow-lg shadow-indigo-900/20 overflow-hidden">
-                            <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1s_infinite]"></div>
+                         <button onclick="window.handleRunClick()" class="group relative px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-lg flex items-center gap-2 transition-all border border-slate-700 hover:border-indigo-500/30 overflow-hidden">
                             <i data-lucide="play" class="w-3 h-3 fill-current"></i> <span>Ejecutar</span>
+                        </button>
+                        <button onclick="window.evaluateWithAI()" id="btn-eval" class="group relative px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-lg flex items-center gap-2 transition-all shadow-lg shadow-indigo-900/20 overflow-hidden">
+                            <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1s_infinite]"></div>
+                            <i data-lucide="award" class="w-3.5 h-3.5"></i> <span>Evaluar</span>
                         </button>
                         <button onclick="window.resetCode()" class="p-2 text-slate-500 hover:text-white hover:bg-white/5 rounded-lg transition" title="Reiniciar código">
                             <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
@@ -416,9 +620,26 @@
                         <div class="w-2.5 h-2.5 rounded-full bg-slate-300"></div>
                     </div>
                 </header>
-                <div class="flex-1 p-6 flex flex-col h-full overflow-hidden bg-slate-50/50">
-                    <div class="bg-white flex-1 rounded-xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] overflow-hidden border border-slate-200 relative transform transition-all hover:shadow-xl">
+                <div class="flex-1 p-6 flex flex-col h-full overflow-hidden bg-slate-50/50" id="preview-outer-container">
+                    <!-- Browser Iframe Container -->
+                    <div id="iframe-container" class="bg-white flex-1 rounded-xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] overflow-hidden border border-slate-200 relative transform transition-all hover:shadow-xl h-full">
                         <iframe id="preview-frame" sandbox="allow-scripts allow-modals allow-same-origin allow-popups allow-forms" class="w-full h-full border-none"></iframe>
+                    </div>
+                    
+                    <!-- Simulated Terminal Container (for C++ & Python) -->
+                    <div id="preview-terminal" class="bg-[#090d16] flex-1 rounded-xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] overflow-hidden border border-slate-800 relative transform transition-all hover:shadow-xl flex flex-col font-mono text-sm hidden p-4 text-emerald-400 h-full">
+                        <div class="flex items-center gap-2 mb-3 border-b border-slate-800 pb-2 text-slate-555 text-xs justify-between select-none">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/30"></span>
+                                <span class="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/30"></span>
+                                <span class="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/30"></span>
+                                <span class="ml-2 text-slate-400">bash - terminal</span>
+                            </div>
+                            <button onclick="window.clearTerminal()" class="text-slate-500 hover:text-slate-300 transition text-[10px] uppercase font-bold tracking-wider">Limpiar</button>
+                        </div>
+                        <div id="terminal-content" class="flex-1 overflow-y-auto custom-scroll whitespace-pre-wrap select-text pr-2 leading-relaxed text-left text-emerald-400">
+                            <span class="text-slate-500">Terminal iniciada. Esperando ejecución de código...</span>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -468,11 +689,21 @@
         let isCodeValid = false;
         let currentUser = null;
         let userProgressMap = {};
+        let userProgressMapHTML = {};
+        let userProgressMapCPP = {};
+        let userProgressMapPython = {};
+        let currentCourse = 'html'; // 'html' | 'cpp' | 'python'
+        let courseData = {
+            html: null,
+            cpp: null,
+            python: null
+        };
         let userStreak = { count: 0, lastActiveDate: null };
         let isLoginMode = true;
         let feedbackTimeout; 
 
         // --- DOM ELEMENTS ---
+        const viewCourseSelect = document.getElementById('view-course-select');
         const viewHome = document.getElementById('view-home');
         const viewWorkspace = document.getElementById('view-workspace');
         const homeLessonGrid = document.getElementById('home-lesson-grid');
@@ -493,8 +724,10 @@
         const loginBtn = document.getElementById('login-btn');
         const aiModal = document.getElementById('ai-modal');
         const aiContent = document.getElementById('ai-content');
+        const evaluationModal = document.getElementById('evaluation-modal');
         const streakCountEl = document.getElementById('streak-count');
         const streakIconEl = document.getElementById('streak-icon');
+        const mainNavbar = document.getElementById('main-navbar');
 
         // --- HELPER: DATE ---
         const getTodayStr = () => new Date().toISOString().split('T')[0];
@@ -502,16 +735,6 @@
         // --- INIT ---
         async function init() {
             lucide.createIcons();
-
-            try {
-                const response = await fetch('course.json');
-                if (!response.ok) throw new Error('Error cargando course.json');
-                lessons = await response.json();
-            } catch (error) {
-                console.error("Fallback JSON error:", error);
-                loadingOverlay.innerHTML = `<div class='text-red-400 p-4 font-mono'>Error: ${error.message} <br> <small>Usa Live Server</small></div>`;
-                return;
-            }
 
             onAuthStateChanged(auth, async (user) => {
                 currentUser = user;
@@ -521,15 +744,29 @@
                     loginBtn.classList.add('hidden');
                     document.getElementById('user-email').textContent = user.email;
                     document.getElementById('user-avatar').textContent = user.email[0].toUpperCase();
-                    await Promise.all([loadUserProgress(), initStreak()]);
+                    await Promise.all([loadAllUserProgress(), initStreak()]);
                 } else {
                     userInfo.classList.add('hidden');
                     userInfo.classList.remove('flex');
                     loginBtn.classList.remove('hidden');
+                    userProgressMapHTML = {};
+                    userProgressMapCPP = {};
+                    userProgressMapPython = {};
                     userProgressMap = {};
                     userStreak = { count: 0, lastActiveDate: null };
+                    updateStreakUI();
                 }
-                renderHome();
+                
+                // Route views
+                if (viewWorkspace.classList.contains('hidden') && !viewHome.classList.contains('hidden')) {
+                    if (currentCourse === 'html') userProgressMap = userProgressMapHTML;
+                    else if (currentCourse === 'cpp') userProgressMap = userProgressMapCPP;
+                    else if (currentCourse === 'python') userProgressMap = userProgressMapPython;
+                    renderHome();
+                } else if (viewWorkspace.classList.contains('hidden') && viewHome.classList.contains('hidden')) {
+                    renderCourseSelector();
+                }
+                
                 loadingOverlay.classList.add('hidden');
             });
             
@@ -541,7 +778,8 @@
             editor.addEventListener('input', () => {
                 updateHighlighting(editor.value);
                 updatePreview();
-                validateCode();
+                isCodeValid = false;
+                updateNextButtonState();
             });
 
             editor.addEventListener('keydown', (e) => {
@@ -718,6 +956,246 @@
             aiModal.classList.add('hidden');
         };
 
+        window.closeEvaluationModal = () => {
+            if (evaluationModal) {
+                evaluationModal.classList.add('hidden');
+            }
+        };
+
+        window.evaluateNext = () => {
+            window.closeEvaluationModal();
+            window.checkAndNext();
+        };
+
+        window.evaluateWithAI = async () => {
+            if (!currentUser) { window.toggleAuthModal(true); return; }
+            
+            const btnEval = document.getElementById('btn-eval');
+            if (!btnEval) return;
+            const originalContent = btnEval.innerHTML;
+            
+            // Set loading state on button
+            btnEval.disabled = true;
+            btnEval.innerHTML = `<svg class="animate-spin h-3.5 w-3.5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> <span>Evaluando...</span>`;
+            
+            const lesson = lessons[currentLessonIndex];
+            const code = editor.value;
+            
+            // Collect terminal output or simulator state if C++ or Python to help evaluation
+            let runnerOutput = "";
+            if (currentCourse !== 'html') {
+                const terminalContent = document.getElementById('terminal-content');
+                if (terminalContent) {
+                    runnerOutput = terminalContent.textContent;
+                }
+            }
+
+            const promptContent = `
+Evaluación para el curso: ${currentCourse.toUpperCase()}
+Lección actual: ${lesson.title}
+Instrucciones / Guía de la Lección:
+${lesson.guide.replace(/<[^>]*>/g, '')}
+
+Requisitos de la Rúbrica (Puntuación máxima total: 10 puntos):
+${lesson.requirements.join('\n')}
+
+${runnerOutput ? `Salida/Errores del Runner (Simulación): \n${runnerOutput}\n` : ''}
+Código del estudiante a evaluar:
+\`\`\`${currentCourse === 'html' ? 'html' : (currentCourse === 'cpp' ? 'cpp' : 'python')}
+${code}
+\`\`\`
+
+Por favor, evalúa el código del estudiante contra la rúbrica proporcionada. Sé un evaluador riguroso pero justo. Revisa la estructura general del código, que el texto o salida coincida con lo pedido, que los parámetros y nombres de variables/atributos sean correctos, y que la sintaxis y limpieza del código sean correctas (la limpieza e indentación siempre vale 1 punto de los 10 totales).
+IMPORTANTE: Debes responder ÚNICAMENTE con un objeto JSON válido con la siguiente estructura, sin textos explicativos ni antes ni después. El JSON debe contener la nota total de 0 a 10 (con decimales si es necesario), el desglose de la rúbrica y comentarios específicos para cada parte.
+Formato JSON esperado:
+{
+  "nota": [Nota de 0 a 10, número o flotante],
+  "rubrica": [
+    {
+      "requisito": "[Nombre o categoría del requisito evaluado de la rúbrica]",
+      "puntos_maximos": [Puntos máximos para este requisito],
+      "puntos_obtenidos": [Puntos que merece el estudiante],
+      "comentario": "[Comentario breve sobre qué hizo bien o qué falló en este requisito]"
+    }
+  ],
+  "feedback": "[Feedback general, alentador y constructivo en español para el estudiante]"
+}
+`;
+
+            try {
+                const response = await fetch('https://api.mistral.ai/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer mjVkbhVGVY43LJNMttSLDYOFSYFSkOuv'
+                    },
+                    body: JSON.stringify({
+                        model: "mistral-medium-latest",
+                        messages: [
+                            {
+                                role: "system",
+                                content: "Eres un evaluador de código experto y justo. Responde única y exclusivamente con el JSON solicitado sin formateo adicional."
+                            },
+                            {
+                                role: "user",
+                                content: promptContent
+                            }
+                        ],
+                        temperature: 0.1
+                    })
+                });
+
+                if (!response.ok) throw new Error('Error de comunicación con el servidor de evaluación.');
+                
+                const data = await response.json();
+                let responseText = data.choices[0].message.content.trim();
+                
+                let result;
+                try {
+                    result = JSON.parse(responseText);
+                } catch (e) {
+                    const jsonMatch = responseText.match(/```json\s*([\s\S]*?)\s*```/) || responseText.match(/```\s*([\s\S]*?)\s*```/);
+                    if (jsonMatch) {
+                        result = JSON.parse(jsonMatch[1]);
+                    } else {
+                        const firstBrace = responseText.indexOf('{');
+                        const lastBrace = responseText.lastIndexOf('}');
+                        if (firstBrace !== -1 && lastBrace !== -1) {
+                            result = JSON.parse(responseText.substring(firstBrace, lastBrace + 1));
+                        } else {
+                            throw new Error("Formato de respuesta de evaluación inválido.");
+                        }
+                    }
+                }
+
+                if (typeof result.nota === 'undefined' || !result.rubrica) {
+                    throw new Error("Respuesta incompleta del evaluador.");
+                }
+
+                const grade = parseFloat(result.nota);
+                const isChallenge = lesson.type === 'challenge' || lesson.title.toLowerCase().includes('reto') || lesson.title.toLowerCase().includes('jefe');
+                const minPassingGrade = isChallenge ? 8.0 : 5.0;
+                const passed = grade >= minPassingGrade;
+
+                window.lastEvaluationFeedback = result.feedback;
+                isCodeValid = passed;
+                updateNextButtonState();
+
+                // Show modal
+                if (evaluationModal) {
+                    evaluationModal.classList.remove('hidden');
+                }
+
+                const scoreCircle = document.getElementById('eval-modal-score-circle');
+                const scoreNum = document.getElementById('eval-modal-score-num');
+                const statusBadge = document.getElementById('eval-modal-status-badge');
+                const statusTitle = document.getElementById('eval-modal-status-title');
+                const statusDesc = document.getElementById('eval-modal-status-desc');
+                const headerLine = document.getElementById('eval-modal-header-line');
+                const iconContainer = document.getElementById('eval-modal-icon-container');
+                const nextBtn = document.getElementById('eval-modal-next-btn');
+
+                if (scoreNum) scoreNum.textContent = grade.toFixed(1);
+
+                if (passed) {
+                    if (scoreCircle) scoreCircle.className = "w-24 h-24 rounded-full flex flex-col items-center justify-center border-4 border-emerald-500 text-emerald-400 bg-emerald-500/5 shadow-lg shadow-emerald-500/10 animate-[pulse_2s_infinite]";
+                    if (statusBadge) {
+                        statusBadge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+                        statusBadge.textContent = "APROBADO";
+                    }
+                    if (statusTitle) {
+                        statusTitle.className = "font-bold text-base text-white mb-1";
+                        statusTitle.textContent = isChallenge ? "¡Reto Superado con Éxito! 🎉" : "¡Lección Completada! 🌟";
+                    }
+                    if (statusDesc) statusDesc.textContent = `Has superado la nota mínima de ${minPassingGrade.toFixed(1)} puntos requerida.`;
+                    if (headerLine) headerLine.className = "absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-400";
+                    if (iconContainer) {
+                        iconContainer.className = "p-2 rounded-lg bg-emerald-500/20 text-emerald-400";
+                        iconContainer.innerHTML = `<i data-lucide="award" class="w-6 h-6"></i>`;
+                    }
+                    
+                    if (nextBtn) nextBtn.classList.remove('hidden');
+                    
+                    triggerConfetti();
+                    saveProgress();
+                } else {
+                    if (scoreCircle) scoreCircle.className = "w-24 h-24 rounded-full flex flex-col items-center justify-center border-4 border-rose-500 text-rose-400 bg-rose-500/5 shadow-lg shadow-rose-500/10";
+                    if (statusBadge) {
+                        statusBadge.className = "inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 bg-rose-500/20 text-rose-300 border border-rose-500/30";
+                        statusBadge.textContent = "NO APROBADO";
+                    }
+                    if (statusTitle) {
+                        statusTitle.className = "font-bold text-base text-white mb-1";
+                        statusTitle.textContent = "Aún quedan detalles que corregir";
+                    }
+                    if (statusDesc) statusDesc.textContent = `Necesitas obtener una nota mínima de ${minPassingGrade.toFixed(1)} puntos. ¡Puedes hacerlo mejor!`;
+                    if (headerLine) headerLine.className = "absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-500 to-orange-500";
+                    if (iconContainer) {
+                        iconContainer.className = "p-2 rounded-lg bg-rose-500/20 text-rose-400";
+                        iconContainer.innerHTML = `<i data-lucide="alert-triangle" class="w-6 h-6"></i>`;
+                    }
+                    
+                    if (nextBtn) nextBtn.classList.add('hidden');
+                }
+
+                // Render rubric list
+                const rubricList = document.getElementById('eval-modal-rubric-list');
+                if (rubricList) {
+                    rubricList.innerHTML = result.rubrica.map(item => {
+                        const itemObtained = parseFloat(item.puntos_obtenidos);
+                        const itemMax = parseFloat(item.puntos_maximos);
+                        const itemPercent = itemMax > 0 ? (itemObtained / itemMax) : 0;
+                        
+                        let scoreColor = "text-rose-400";
+                        let scoreBg = "bg-rose-500/10 border-rose-500/20";
+                        let iconHtml = `<i data-lucide="x" class="w-4 h-4 text-rose-400 mt-0.5 shrink-0"></i>`;
+                        
+                        if (itemPercent >= 0.8) {
+                            scoreColor = "text-emerald-400";
+                            scoreBg = "bg-emerald-500/10 border-emerald-500/20";
+                            iconHtml = `<i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i>`;
+                        } else if (itemPercent >= 0.5) {
+                            scoreColor = "text-amber-400";
+                            scoreBg = "bg-amber-500/10 border-amber-500/20";
+                            iconHtml = `<i data-lucide="alert-circle" class="w-4 h-4 text-amber-400 mt-0.5 shrink-0"></i>`;
+                        }
+                        
+                        return `
+                            <div class="flex items-start justify-between p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 gap-3 hover:border-slate-700/60 transition-colors">
+                                <div class="flex gap-2.5 items-start">
+                                    ${iconHtml}
+                                    <div>
+                                        <h5 class="text-xs font-bold text-slate-200 leading-tight">${item.requisito}</h5>
+                                        <p class="text-[11px] text-slate-400 mt-1 leading-normal">${item.comentario || ''}</p>
+                                    </div>
+                                </div>
+                                <div class="text-right shrink-0">
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold ${scoreColor} ${scoreBg} border">
+                                        ${itemObtained.toFixed(1)}/${itemMax.toFixed(1)}
+                                    </span>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+
+                // Render general feedback
+                const feedbackText = document.getElementById('eval-modal-feedback-text');
+                if (feedbackText) feedbackText.textContent = result.feedback;
+                
+                lucide.createIcons();
+
+            } catch (error) {
+                console.error(error);
+                showFeedback('error', 'Error de Evaluación', error.message || 'No se pudo comunicar con el evaluador de IA. Revisa tu conexión.');
+            } finally {
+                // Restore button state
+                btnEval.disabled = false;
+                btnEval.innerHTML = originalContent;
+                lucide.createIcons();
+            }
+        };
+
         // --- HIGHLIGHTING LOGIC ---
         function updateHighlighting(text) {
             let html = text.replace(new RegExp("&", "g"), "&amp;").replace(new RegExp("<", "g"), "&lt;");
@@ -727,16 +1205,42 @@
         }
 
         // --- LOGIC ---
-        async function loadUserProgress() {
+        async function loadAllUserProgress() {
             if (!currentUser) return;
             try {
-                const q = collection(db, 'artifacts', APP_ID, 'users', currentUser.uid, 'progress');
-                const querySnapshot = await getDocs(q);
-                userProgressMap = {};
-                querySnapshot.forEach((doc) => {
-                    userProgressMap[doc.id] = doc.data();
+                // HTML
+                const qHtml = collection(db, 'artifacts', APP_ID, 'users', currentUser.uid, 'progress');
+                const snapHtml = await getDocs(qHtml);
+                userProgressMapHTML = {};
+                snapHtml.forEach((doc) => {
+                    userProgressMapHTML[doc.id] = doc.data();
                 });
-            } catch (e) { console.error(e); }
+
+                // C++
+                const qCpp = collection(db, 'artifacts', APP_ID, 'users', currentUser.uid, 'progress_cpp');
+                const snapCpp = await getDocs(qCpp);
+                userProgressMapCPP = {};
+                snapCpp.forEach((doc) => {
+                    userProgressMapCPP[doc.id] = doc.data();
+                });
+
+                // Python
+                const qPy = collection(db, 'artifacts', APP_ID, 'users', currentUser.uid, 'progress_python');
+                const snapPy = await getDocs(qPy);
+                userProgressMapPython = {};
+                snapPy.forEach((doc) => {
+                    userProgressMapPython[doc.id] = doc.data();
+                });
+            } catch (e) {
+                console.error("Error loading progress:", e);
+            }
+        }
+
+        async function loadUserProgress() {
+            await loadAllUserProgress();
+            if (currentCourse === 'html') userProgressMap = userProgressMapHTML;
+            else if (currentCourse === 'cpp') userProgressMap = userProgressMapCPP;
+            else if (currentCourse === 'python') userProgressMap = userProgressMapPython;
         }
 
         async function saveProgress() {
@@ -746,11 +1250,348 @@
             updateStreak();
 
             userProgressMap[lesson.id] = { completed: isCodeValid };
+            
+            let colName = 'progress';
+            if (currentCourse === 'cpp') colName = 'progress_cpp';
+            else if (currentCourse === 'python') colName = 'progress_python';
+
             try {
-                const docRef = doc(db, 'artifacts', APP_ID, 'users', currentUser.uid, 'progress', lesson.id);
+                const docRef = doc(db, 'artifacts', APP_ID, 'users', currentUser.uid, colName, lesson.id);
                 await setDoc(docRef, { completed: isCodeValid, updatedAt: new Date().toISOString() }, { merge: true });
-            } catch (e) { console.error(e); }
+            } catch (e) { console.error("Error saving progress:", e); }
         }
+
+        function getCourseStats(courseKey) {
+            let completed = 0;
+            let total = courseKey === 'html' ? 59 : 25;
+            let progressMap = courseKey === 'html' ? userProgressMapHTML : (courseKey === 'cpp' ? userProgressMapCPP : userProgressMapPython);
+            
+            Object.keys(progressMap).forEach(k => {
+                if (progressMap[k]?.completed) completed++;
+            });
+            
+            return {
+                completed,
+                total,
+                percent: total > 0 ? Math.round((completed / total) * 100) : 0
+            };
+        }
+
+        window.renderCourseSelector = () => {
+            const courses = ['html', 'cpp', 'python'];
+            courses.forEach(c => {
+                const stats = getCourseStats(c);
+                const progressDiv = document.getElementById(`progress-${c}`);
+                if (currentUser && progressDiv) {
+                    progressDiv.classList.remove('hidden');
+                    progressDiv.querySelector('.progress-lbl').textContent = `${stats.percent}% (${stats.completed}/${stats.total})`;
+                    progressDiv.querySelector('.progress-bar').style.width = `${stats.percent}%`;
+                } else if (progressDiv) {
+                    progressDiv.classList.add('hidden');
+                }
+            });
+            lucide.createIcons();
+        };
+
+        window.showCourseSelector = () => {
+            viewHome.classList.add('hidden');
+            viewWorkspace.classList.add('hidden');
+            mobileNav.classList.add('hidden');
+            mainNavbar.classList.remove('hidden');
+            viewCourseSelect.classList.remove('hidden');
+            document.title = "Aprende a Programar - Learn Code";
+            
+            // Reload all progress to ensure dashboard stats are fresh
+            loadAllUserProgress().then(() => {
+                renderCourseSelector();
+            });
+        };
+
+        window.selectCourse = async (courseKey) => {
+            currentCourse = courseKey;
+            
+            // Set App Document Title & Header details
+            const courseTitleEl = document.getElementById('course-title');
+            const courseDescEl = document.getElementById('course-desc');
+            const courseIconEl = document.getElementById('course-header-icon');
+            
+            if (courseKey === 'html') {
+                document.title = "HTML + CSS + JS Master";
+                if (courseTitleEl) courseTitleEl.textContent = "HTML + CSS + JS";
+                if (courseDescEl) courseDescEl.innerHTML = 'Tu camino para convertirte en desarrollador web. <span class="text-slate-200 font-normal">Escribe código real</span>, supera retos y construye proyectos desde cero.';
+                if (courseIconEl) courseIconEl.setAttribute('data-lucide', 'layout');
+            } else if (courseKey === 'cpp') {
+                document.title = "C++ Master";
+                if (courseTitleEl) courseTitleEl.textContent = "C++";
+                if (courseDescEl) courseDescEl.innerHTML = 'Domina la programación de alto rendimiento. <span class="text-slate-200 font-normal">Aprende la sintaxis de C++</span>, gestiona memoria y construye algoritmos rápidos.';
+                if (courseIconEl) courseIconEl.setAttribute('data-lucide', 'terminal');
+            } else if (courseKey === 'python') {
+                document.title = "Python Master";
+                if (courseTitleEl) courseTitleEl.textContent = "Python";
+                if (courseDescEl) courseDescEl.innerHTML = 'Aprende el lenguaje de la Inteligencia Artificial. <span class="text-slate-200 font-normal">Sintaxis limpia y poderosa</span> para automatización, scripts y análisis de datos.';
+                if (courseIconEl) courseIconEl.setAttribute('data-lucide', 'brain');
+            }
+            
+            if (!courseData[courseKey]) {
+                loadingOverlay.classList.remove('hidden');
+                try {
+                    const filename = courseKey === 'html' ? 'course.json' : `course_${courseKey}.json`;
+                    const response = await fetch(filename);
+                    if (!response.ok) throw new Error(`Error cargando ${filename}`);
+                    courseData[courseKey] = await response.json();
+                } catch (error) {
+                    console.error(error);
+                    alert("No se pudo cargar el curso. Por favor, inténtalo de nuevo.");
+                    loadingOverlay.classList.add('hidden');
+                    return;
+                }
+                loadingOverlay.classList.add('hidden');
+            }
+            
+            lessons = courseData[courseKey];
+            
+            // Link progress map
+            if (courseKey === 'html') userProgressMap = userProgressMapHTML;
+            else if (courseKey === 'cpp') userProgressMap = userProgressMapCPP;
+            else if (courseKey === 'python') userProgressMap = userProgressMapPython;
+            
+            // Show Home view and hide Selector
+            viewCourseSelect.classList.add('hidden');
+            viewHome.classList.remove('hidden');
+            mainNavbar.classList.remove('hidden');
+            
+            renderHome();
+        };
+
+        // --- MOCK COMPILER RUNNER ---
+        function escapeHtml(text) {
+            return text.toString()
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        window.clearTerminal = () => {
+            const terminalContent = document.getElementById('terminal-content');
+            if (terminalContent) {
+                terminalContent.innerHTML = `<span class="text-slate-500">Consola limpia. Esperando ejecución de código...</span>`;
+            }
+        };
+
+        function runSimulatedCPP(code) {
+            let scope = {};
+            let output = [];
+            let lines = code.split('\n');
+            for (let line of lines) {
+                line = line.trim();
+                if (!line || line.startsWith('//') || line.startsWith('#')) continue;
+                
+                // Match variable assignments: type var = val; or var = val;
+                let assignMatch = line.match(/^(?:[a-zA-Z_][a-zA-Z0-9_:<>\s]*\s+)?([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*([^;]+);/);
+                if (assignMatch) {
+                    let varName = assignMatch[1];
+                    let expr = assignMatch[2].trim();
+                    if ((expr.startsWith('"') && expr.endsWith('"')) || (expr.startsWith("'") && expr.endsWith("'"))) {
+                        scope[varName] = expr.slice(1, -1);
+                    } else {
+                        let evaluatedExpr = expr;
+                        for (let [k, v] of Object.entries(scope)) {
+                            let r = new RegExp('\\b' + k + '\\b', 'g');
+                            evaluatedExpr = evaluatedExpr.replace(r, v);
+                        }
+                        try {
+                            let result = eval(evaluatedExpr);
+                            scope[varName] = result;
+                        } catch(e) {}
+                    }
+                }
+                
+                // Match std::cout << arg1 << arg2 ...;
+                if (line.startsWith('std::cout')) {
+                    let parts = line.split('<<').map(p => p.trim());
+                    let lineOutput = "";
+                    for (let i = 1; i < parts.length; i++) {
+                        let part = parts[i];
+                        if (part.endsWith(';')) part = part.slice(0, -1).trim();
+                        
+                        if (part === 'std::endl' || part === '"\\n"' || part === "'\\n'") {
+                            lineOutput += '\n';
+                        } else if ((part.startsWith('"') && part.endsWith('"')) || (part.startsWith("'") && part.endsWith("'"))) {
+                            lineOutput += part.slice(1, -1);
+                        } else {
+                            if (scope[part] !== undefined) {
+                                lineOutput += scope[part];
+                            } else {
+                                let evaluatedPart = part;
+                                for (let [k, v] of Object.entries(scope)) {
+                                    let r = new RegExp('\\b' + k + '\\b', 'g');
+                                    evaluatedPart = evaluatedPart.replace(r, v);
+                                }
+                                try {
+                                    lineOutput += eval(evaluatedPart);
+                                } catch(e) {
+                                    lineOutput += part;
+                                }
+                            }
+                        }
+                    }
+                    output.push(lineOutput);
+                }
+            }
+            return output.join('');
+        }
+
+        function runSimulatedPython(code) {
+            let scope = {};
+            let output = [];
+            let lines = code.split('\n');
+            for (let line of lines) {
+                line = line.trim();
+                if (!line || line.startsWith('#')) continue;
+                
+                // Match variable assignments
+                let assignMatch = line.match(/^([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(.+)$/);
+                if (assignMatch) {
+                    let varName = assignMatch[1];
+                    let expr = assignMatch[2].trim();
+                    if ((expr.startsWith('"') && expr.endsWith('"')) || (expr.startsWith("'") && expr.endsWith("'"))) {
+                        scope[varName] = expr.slice(1, -1);
+                    } else if (expr === 'True') {
+                        scope[varName] = true;
+                    } else if (expr === 'False') {
+                        scope[varName] = false;
+                    } else {
+                        let evaluatedExpr = expr;
+                        for (let [k, v] of Object.entries(scope)) {
+                            let r = new RegExp('\\b' + k + '\\b', 'g');
+                            evaluatedExpr = evaluatedExpr.replace(r, typeof v === 'string' ? `"${v}"` : v);
+                        }
+                        try {
+                            evaluatedExpr = evaluatedExpr.replace(/\*\*/g, '^');
+                            let result;
+                            if (evaluatedExpr.includes('input(')) {
+                                result = "EntradaSimulada";
+                            } else {
+                                result = eval(evaluatedExpr.replace(/\^/g, '**'));
+                            }
+                            scope[varName] = result;
+                        } catch(e) {}
+                    }
+                }
+                
+                // Match print statements
+                let printMatch = line.match(/^print\s*\((.*)\)$/);
+                if (printMatch) {
+                    let arg = printMatch[1].trim();
+                    if (arg.startsWith('f"') && arg.endsWith('"')) {
+                        let content = arg.slice(2, -1);
+                        let interpolated = content.replace(/\{([^}]+)\}/g, (m, g) => {
+                            return scope[g.trim()] !== undefined ? scope[g.trim()] : '';
+                        });
+                        output.push(interpolated);
+                    } else if (arg.startsWith('f\'') && arg.endsWith('\'')) {
+                        let content = arg.slice(2, -1);
+                        let interpolated = content.replace(/\{([^}]+)\}/g, (m, g) => {
+                            return scope[g.trim()] !== undefined ? scope[g.trim()] : '';
+                        });
+                        output.push(interpolated);
+                    } else if ((arg.startsWith('"') && arg.endsWith('"')) || (arg.startsWith("'") && arg.endsWith("'"))) {
+                        output.push(arg.slice(1, -1));
+                    } else {
+                        let evaluatedArg = arg;
+                        for (let [k, v] of Object.entries(scope)) {
+                            let r = new RegExp('\\b' + k + '\\b', 'g');
+                            evaluatedArg = evaluatedArg.replace(r, v);
+                        }
+                        try {
+                            let result = eval(evaluatedArg);
+                            output.push(result);
+                        } catch(e) {
+                            if (scope[arg] !== undefined) output.push(scope[arg]);
+                            else output.push(arg);
+                        }
+                    }
+                }
+            }
+            return output.join('\n');
+        }
+
+        window.handleRunClick = () => {
+            if (currentCourse === 'html') {
+                updatePreview();
+                showFeedback('success', 'Vista Previa Actualizada', 'Tu diseño se muestra a la derecha. Haz clic en "Evaluar" para calificarlo.');
+            } else {
+                window.runTerminalCode();
+            }
+        };
+
+        window.runTerminalCode = () => {
+            const lesson = lessons[currentLessonIndex];
+            const code = editor.value;
+            const terminalContent = document.getElementById('terminal-content');
+            
+            if (!terminalContent) return;
+            
+            terminalContent.innerHTML = "";
+            let outputHTML = "";
+            if (currentCourse === 'cpp') {
+                outputHTML += `<span class="text-slate-500">$ g++ main.cpp -o main</span>\n`;
+                outputHTML += `<span class="text-indigo-400">Compilando main.cpp...</span>\n`;
+            } else {
+                outputHTML += `<span class="text-slate-500">$ python3 main.py</span>\n`;
+                outputHTML += `<span class="text-indigo-400">Ejecutando main.py...</span>\n`;
+            }
+            
+            terminalContent.innerHTML = outputHTML;
+            terminalContent.scrollTop = terminalContent.scrollHeight;
+
+            setTimeout(() => {
+                const regex = new RegExp(lesson.validation.regex, "i");
+                const passed = regex.test(code);
+                
+                if (passed) {
+                    if (currentCourse === 'cpp') {
+                        outputHTML += `<span class="text-emerald-500">[OK] Compilación completada con éxito.</span>\n`;
+                        outputHTML += `<span class="text-slate-500">$ ./main</span>\n`;
+                    } else {
+                        outputHTML += `<span class="text-emerald-500">[OK] Intérprete iniciado.</span>\n`;
+                    }
+                    outputHTML += `<span class="text-slate-600 opacity-40">--------------------------------------</span>\n`;
+                    
+                    let userStdout = currentCourse === 'cpp' ? runSimulatedCPP(code) : runSimulatedPython(code);
+                    
+                    if (userStdout && userStdout.trim()) {
+                        outputHTML += `<span class="text-white">${escapeHtml(userStdout)}</span>\n`;
+                    } else {
+                        outputHTML += `<span class="text-slate-500 italic">[El programa finalizó sin producir salida]</span>\n`;
+                    }
+                    
+                    outputHTML += `<span class="text-slate-600 opacity-40">--------------------------------------</span>\n`;
+                    outputHTML += `<span class="text-emerald-400 font-bold">[Proceso finalizado con código de salida 0]</span>\n`;
+                    
+                    terminalContent.innerHTML = outputHTML;
+                    terminalContent.scrollTop = terminalContent.scrollHeight;
+                    
+                    showFeedback('success', 'Ejecución Correcta', 'Tu código se ejecutó sin errores. Haz clic en "Evaluar" para validarlo y obtener tu nota.');
+                } else {
+                    if (currentCourse === 'cpp') {
+                        outputHTML += `<span class="text-red-500 font-bold">[ERROR] Error de compilación en main.cpp:</span>\n`;
+                    } else {
+                        outputHTML += `<span class="text-red-500 font-bold">[ERROR] Runtime Error en main.py:</span>\n`;
+                    }
+                    outputHTML += `<span class="text-red-400">${escapeHtml(lesson.validation.error)}</span>\n`;
+                    outputHTML += `<span class="text-slate-600 opacity-40">--------------------------------------</span>\n`;
+                    outputHTML += `<span class="text-red-400 font-bold">[Proceso finalizado con código de salida 1 (Error)]</span>\n`;
+                    
+                    terminalContent.innerHTML = outputHTML;
+                    terminalContent.scrollTop = terminalContent.scrollHeight;
+                    
+                    showFeedback('error', 'Error de Ejecución', lesson.validation.error);
+                }
+            }, 400);
+        };
 
         // --- AUTH ---
         window.toggleAuthModal = (show) => {
@@ -818,7 +1659,10 @@
             viewWorkspace.classList.add('hidden');
             viewHome.classList.remove('hidden');
             mobileNav.classList.add('hidden');
-            document.title = "HTML Master: Curso Completo";
+            mainNavbar.classList.remove('hidden');
+            if (currentCourse === 'html') document.title = "HTML + CSS + JS Master";
+            else if (currentCourse === 'cpp') document.title = "C++ Master";
+            else if (currentCourse === 'python') document.title = "Python Master";
             renderHome();
         };
 
@@ -834,6 +1678,7 @@
             }
             currentLessonIndex = index;
             viewHome.classList.add('hidden');
+            mainNavbar.classList.add('hidden');
             viewWorkspace.classList.remove('hidden');
             if(window.innerWidth < 1024) mobileNav.classList.remove('hidden');
             loadLesson(index);
@@ -947,24 +1792,87 @@
 
         function loadLesson(index) {
             const lesson = lessons[index];
-            document.title = `${lesson.title} - HTML Master`;
+            const courseName = currentCourse === 'html' ? 'HTML' : (currentCourse === 'cpp' ? 'C++' : 'Python');
+            document.title = `${lesson.title} - ${courseName} Master`;
             guideContent.innerHTML = lesson.guide;
             
+            // Configure editor settings based on current course
+            const editorFilename = document.getElementById('editor-filename');
+            if (currentCourse === 'html') {
+                highlightingCode.className = "language-html";
+                if (editorFilename) editorFilename.textContent = "index.html";
+                editor.placeholder = "<!-- Escribe tu código HTML aquí... -->";
+            } else if (currentCourse === 'cpp') {
+                highlightingCode.className = "language-cpp";
+                if (editorFilename) editorFilename.textContent = "main.cpp";
+                editor.placeholder = "// Escribe tu código C++ aquí...";
+            } else if (currentCourse === 'python') {
+                highlightingCode.className = "language-python";
+                if (editorFilename) editorFilename.textContent = "main.py";
+                editor.placeholder = "# Escribe tu código Python aquí...";
+            }
+
             // Set value for both layers
             editor.value = lesson.initialCode;
             updateHighlighting(lesson.initialCode);
             
             hideFeedback();
-            preview.srcdoc = ""; 
-            setTimeout(() => { updatePreview(); }, 100);
+            
+            // Adjust preview panels and layout themes based on course type
+            const panelPreview = document.getElementById('panel-preview');
+            const previewHeader = panelPreview ? panelPreview.querySelector('header') : null;
+            const iframeContainer = document.getElementById('iframe-container');
+            const previewTerminal = document.getElementById('preview-terminal');
+            
+            const iconEl = browserTitleText.parentElement.querySelector('svg, i');
+            if (iconEl) {
+                const newIcon = document.createElement('i');
+                newIcon.className = "w-4 h-4 text-slate-400 shrink-0";
+                newIcon.setAttribute('data-lucide', currentCourse === 'html' ? 'globe' : 'terminal');
+                iconEl.parentNode.replaceChild(newIcon, iconEl);
+            }
+            
+            if (currentCourse === 'html') {
+                if (iframeContainer) iframeContainer.classList.remove('hidden');
+                if (previewTerminal) previewTerminal.classList.add('hidden');
+                if (panelPreview) panelPreview.className = "mobile-panel lg:flex w-full lg:w-[40%] flex-col bg-[#f8fafc]";
+                if (previewHeader) {
+                    previewHeader.className = "h-16 border-b border-slate-200 flex items-center px-6 justify-between bg-white shrink-0 text-slate-400";
+                    previewHeader.querySelector('.flex.gap-1\\.5').className = "flex gap-1.5 opacity-50";
+                    previewHeader.querySelector('.flex.gap-1\\.5').querySelectorAll('div').forEach(d => {
+                        d.className = "w-2.5 h-2.5 rounded-full bg-slate-300";
+                    });
+                }
+                browserTitleText.textContent = "Navegador";
+                
+                preview.srcdoc = ""; 
+                setTimeout(() => { updatePreview(); }, 100);
+            } else {
+                if (iframeContainer) iframeContainer.classList.add('hidden');
+                if (previewTerminal) previewTerminal.classList.remove('hidden');
+                if (panelPreview) panelPreview.className = "mobile-panel lg:flex w-full lg:w-[40%] flex-col bg-[#0b1120] border-l border-slate-800/60";
+                if (previewHeader) {
+                    previewHeader.className = "h-16 border-b border-slate-800/60 flex items-center px-6 justify-between bg-[#0f172a] shrink-0 text-slate-500";
+                    previewHeader.querySelector('.flex.gap-1\\.5').className = "flex gap-1.5 opacity-30";
+                    previewHeader.querySelector('.flex.gap-1\\.5').querySelectorAll('div').forEach(d => {
+                        d.className = "w-2.5 h-2.5 rounded-full bg-slate-700";
+                    });
+                }
+                browserTitleText.textContent = currentCourse === 'cpp' ? "Terminal C++ (g++)" : "Consola Python 3";
+                
+                window.clearTerminal();
+            }
+            
             validateCode(true);
             document.getElementById('btn-prev').disabled = index === 0;
             
             // Animación scroll top
             document.getElementById('panel-guide').querySelector('.custom-scroll').scrollTop = 0;
+            lucide.createIcons();
         }
 
         function updatePreview() {
+            if (currentCourse !== 'html') return;
             let code = editor.value;
 
             // --- EXTRACT TITLE FROM STUDENT CODE AND INJECT INTO SIMULATOR HEADER ---
@@ -1001,25 +1909,23 @@
 
         function validateCode(silent = false) {
             const lesson = lessons[currentLessonIndex];
-            const code = editor.value;
-            if (!lesson.validation) { isCodeValid = true; updateNextButtonState(); return; }
-            const regex = new RegExp(lesson.validation.regex, "i");
-            isCodeValid = regex.test(code);
+            const isCompleted = !!(userProgressMap && userProgressMap[lesson.id]?.completed);
+            isCodeValid = isCompleted;
             updateNextButtonState();
-            if (!silent) {
-                if (isCodeValid) { 
-                    showFeedback('success', '¡Excelente!', 'Has completado la misión.'); 
-                    saveProgress(); 
-                    triggerConfetti(); 
-                }
-                else hideFeedback();
-            }
         }
 
         window.checkCode = () => {
              const lesson = lessons[currentLessonIndex];
-             if (isCodeValid) showFeedback('success', '¡Todo correcto!', 'Puedes avanzar.');
-             else showFeedback('error', 'Algo falta...', lesson.validation.error);
+             const isCompleted = !!(userProgressMap && userProgressMap[lesson.id]?.completed);
+             if (isCodeValid || isCompleted) {
+                 showFeedback('success', '¡Todo correcto!', 'Puedes avanzar a la siguiente lección.');
+             } else {
+                 if (window.lastEvaluationFeedback) {
+                     showFeedback('error', 'Evaluación fallida', window.lastEvaluationFeedback);
+                 } else {
+                     showFeedback('error', 'Evaluación requerida', 'Por favor, haz clic en el botón "Evaluar" para calificar tu solución con Inteligencia Artificial.');
+                 }
+             }
         }
 
         function updateNextButtonState() {
@@ -1036,11 +1942,19 @@
             }
         }
 
+        let isProcessingNext = false;
         window.checkAndNext = () => {
-            if (isCodeValid) {
-                saveProgress();
+            if (isProcessingNext) return;
+            const lesson = lessons[currentLessonIndex];
+            const isCompleted = !!(userProgressMap && userProgressMap[lesson.id]?.completed);
+            if (isCodeValid || isCompleted) {
+                isProcessingNext = true;
+                if (isCodeValid) {
+                    saveProgress();
+                }
                 if (currentLessonIndex < lessons.length - 1) window.enterWorkspace(currentLessonIndex + 1);
                 else { alert("🎉 ¡Felicidades! Has completado todo el curso."); window.goHome(); }
+                setTimeout(() => { isProcessingNext = false; }, 300);
             } else window.checkCode();
         }
 
@@ -1049,7 +1963,9 @@
             if(confirm('¿Reiniciar código?')) {
                 editor.value = lessons[currentLessonIndex].initialCode;
                 updateHighlighting(editor.value);
-                updatePreview(); validateCode(); saveProgress();
+                updatePreview(); 
+                isCodeValid = false;
+                updateNextButtonState();
             }
         }
 

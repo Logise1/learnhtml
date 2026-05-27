@@ -1,0 +1,452 @@
+[
+  {
+    "id": "cpp_1",
+    "unit": 1,
+    "type": "lesson",
+    "title": "1.1 Estructura Básica",
+    "guide": "<h3>Unidad 1: Introducción a C++</h3><p>C++ es un lenguaje compilado, rápido y de tipado fuerte muy utilizado en sistemas operativos, videojuegos y aplicaciones de alto rendimiento.</p><p>Todo programa en C++ comienza con una función principal llamada <code>main</code>. Esta es la puerta de entrada de la ejecución.</p><h4>El Esqueleto de C++</h4><pre>#include &lt;iostream&gt;\n\nint main() {\n    // Tu código va aquí\n    return 0;\n}</pre><ul><li><code>#include &lt;iostream&gt;</code>: Biblioteca necesaria para entrada/salida de datos.</li><li><code>int main()</code>: La función que ejecuta el sistema operativo. Retorna un entero (0 si todo fue bien).</li></ul><p><strong>Misión:</strong> Escribe la estructura básica de un programa en C++ con la función <code>main</code> retornando 0.</p>",
+    "initialCode": "// Escribe tu código C++ aquí\n",
+    "validation": {
+      "regex": "#include\\s*<iostream>\\s*int\\s+main\\s*\\(\\s*\\)\\s*\\{[\\s\\S]*return\\s+0\\s*;\\s*\\}",
+      "error": "Asegúrate de incluir <iostream>, definir la función int main() y retornar 0 al final."
+    },
+    "requirements": [
+      "Estructura: Estructura de programa C++ con #include <iostream>, int main() y retorno de valor. (5 puntos)",
+      "Textos y Lógica: No aplica salida de texto en esta lección. (0 puntos)",
+      "Parámetros: Sentencia 'return 0;' obligatoria para finalizar el main. (4 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_2",
+    "unit": 1,
+    "type": "lesson",
+    "title": "1.2 Salida de Datos",
+    "guide": "<h3>Imprimiendo en Pantalla</h3><p>Para mostrar texto en la consola de C++, usamos la instrucción <code>std::cout</code> (character output) de la biblioteca <code>iostream</code>.</p><pre>std::cout &lt;&lt; \"Hola Mundo\";</pre><p>Para dar un salto de línea, usamos <code>std::endl</code> (end line):</p><pre>std::cout &lt;&lt; \"Línea 1\" &lt;&lt; std::endl;</pre><p><strong>Misión:</strong> Modifica el programa para imprimir en pantalla el mensaje 'Hola C++' seguido de un salto de línea.</p>",
+    "initialCode": "#include <iostream>\n\nint main() {\n    // Imprime 'Hola C++' aquí\n    \n    return 0;\n}",
+    "validation": {
+      "regex": "std::cout\\s*<<\\s*[\"']Hola C\\+\\+[\"']\\s*(<<\\s*std::endl)?\\s*;",
+      "error": "Asegúrate de escribir std::cout << \"Hola C++\"; dentro del main."
+    },
+    "requirements": [
+      "Estructura: Uso del flujo de salida std::cout dentro del cuerpo de la función main. (4 puntos)",
+      "Textos y Lógica: El mensaje a imprimir en consola debe ser exactamente 'Hola C++'. (4 puntos)",
+      "Parámetros: Uso opcional pero recomendado de std::endl o salto de línea. (1 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_3",
+    "unit": 1,
+    "type": "lesson",
+    "title": "1.3 Variables y Enteros",
+    "guide": "<h3>Guardando Números Enteros</h3><p>En C++, debes especificar el <strong>tipo de dato</strong> de una variable al declararla. Para números enteros (sin decimales), usamos <code>int</code>.</p><pre>int edad = 20;</pre><p>No olvides finalizar cada instrucción con punto y coma (<code>;</code>).</p><p><strong>Misión:</strong> Declara una variable entera llamada <code>puntos</code> con el valor de 100.</p>",
+    "initialCode": "#include <iostream>\n\nint main() {\n    // Declara la variable puntos aquí\n    \n    return 0;\n}",
+    "validation": {
+      "regex": "int\\s+puntos\\s*=\\s*100\\s*;",
+      "error": "Declara la variable de tipo entero usando 'int puntos = 100;'"
+    },
+    "requirements": [
+      "Estructura: Declaración correcta del tipo de variable entera int. (4 puntos)",
+      "Textos y Lógica: Identificador de variable denominado 'puntos'. (2 puntos)",
+      "Parámetros: Asignación inicial del valor entero 100. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_4",
+    "unit": 1,
+    "type": "lesson",
+    "title": "1.4 Tipos de Datos",
+    "guide": "<h3>Decimales, Caracteres y Texto</h3><p>Además de <code>int</code>, C++ maneja otros tipos de datos fundamentales:</p><ul><li><code>double</code>: Números con decimales (ej: <code>3.14</code>).</li><li><code>char</code>: Un solo carácter envuelto en comillas simples (ej: <code>'A'</code>).</li><li><code>std::string</code>: Cadena de texto (requiere incluir <code>&lt;string&gt;</code>).</li></ul><p><strong>Misión:</strong> Declara una variable de tipo <code>double</code> llamada <code>precio</code> con el valor <code>19.99</code>.</p>",
+    "initialCode": "#include <iostream>\n#include <string>\n\nint main() {\n    // Escribe tu variable precio aquí\n    \n    return 0;\n}",
+    "validation": {
+      "regex": "double\\s+precio\\s*=\\s*19\\.99\\s*;",
+      "error": "Debes declarar 'double precio = 19.99;'"
+    },
+    "requirements": [
+      "Estructura: Declaración de tipos de datos de coma flotante double. (4 puntos)",
+      "Textos y Lógica: Identificador de variable denominado 'precio'. (2 puntos)",
+      "Parámetros: Asignación inicial del valor decimal 19.99. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_5",
+    "unit": 1,
+    "type": "challenge",
+    "title": "1.5 Reto: Ficha de Personaje",
+    "guide": "<h3>🔥 RETO DE LA UNIDAD 1</h3><p>¡Es hora de poner a prueba lo aprendido en la unidad 1!</p><p>Crea un programa en C++ que declare las siguientes variables con sus tipos de datos correctos:</p><ol><li>Una variable entera llamada <code>nivel</code> con valor 5.</li><li>Una variable decimal <code>vida</code> con valor 99.5.</li><li>Una variable de carácter <code>inicial</code> con valor 'G'.</li></ol>",
+    "initialCode": "#include <iostream>\n\nint main() {\n    // Define las variables del personaje aquí\n    \n    return 0;\n}",
+    "validation": {
+      "regex": "int\\s+nivel\\s*=\\s*5\\s*;[\\s\\S]*double\\s+vida\\s*=\\s*99\\.5\\s*;[\\s\\S]*char\\s+inicial\\s*=\\s*['\"]G['\"]\\s*;",
+      "error": "Verifica que hayas declarado: int nivel = 5; double vida = 99.5; y char inicial = 'G';"
+    },
+    "requirements": [
+      "Estructura: Declaración de múltiples variables con sus tipos correctos en main (int, double, char). (3 puntos)",
+      "Textos y Lógica: Variables identificadas como 'nivel', 'vida' e 'inicial'. (3 puntos)",
+      "Parámetros: Valores iniciales asignados: nivel = 5, vida = 99.5, inicial = 'G'. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_6",
+    "unit": 2,
+    "type": "lesson",
+    "title": "2.1 Condicionales: If",
+    "guide": "<h3>Unidad 2: Condicionales</h3><p>Los condicionales controlan el flujo de la aplicación. Ejecutan un bloque de código sólo si se cumple una condición.</p><pre>if (edad >= 18) {\n    std::cout &lt;&lt; \"Eres mayor de edad\";\n}</pre><p><strong>Misión:</strong> Escribe una estructura <code>if</code> que compruebe si <code>temperatura</code> es mayor que 30, y en ese caso imprima 'Calor'.</p>",
+    "initialCode": "#include <iostream>\n\nint main() {\n    int temperatura = 35;\n    // Escribe el condicional aquí\n    \n    return 0;\n}",
+    "validation": {
+      "regex": "if\\s*\\(\\s*temperatura\\s*>\\s*30\\s*\\)\\s*\\{\\s*std::cout\\s*<<\\s*[\"']Calor[\"']\\s*;?\\s*\\}",
+      "error": "Revisa la condición: if (temperatura > 30) y recuerda imprimir \"Calor\" si se cumple."
+    },
+    "requirements": [
+      "Estructura: Estructura condicional if con sus respectivos paréntesis de condición y llaves de bloque. (4 puntos)",
+      "Textos y Lógica: Impresión en pantalla del texto 'Calor' mediante std::cout. (3 puntos)",
+      "Parámetros: Expresión lógica de comparación (temperatura > 30). (2 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_7",
+    "unit": 2,
+    "type": "lesson",
+    "title": "2.2 Condicionales: Else",
+    "guide": "<h3>Bifurcaciones: If / Else</h3><p>Si la condición del <code>if</code> no se cumple, el bloque <code>else</code> se ejecuta de forma alternativa.</p><pre>if (nota >= 5) {\n    std::cout &lt;&lt; \"Aprobado\";\n} else {\n    std::cout &lt;&lt; \"Suspenso\";\n}</pre><p><strong>Misión:</strong> Escribe un bloque <code>if/else</code>. Si la variable entera <code>edad</code> es menor que 18, imprime 'Joven'. Si no, imprime 'Adulto'.</p>",
+    "initialCode": "#include <iostream>\n\nint main() {\n    int edad = 20;\n    // Escribe tu if-else aquí\n    \n    return 0;\n}",
+    "validation": {
+      "regex": "if\\s*\\(\\s*edad\\s*<\\s*18\\s*\\)\\s*\\{[\\s\\S]*?std::cout\\s*<<\\s*[\"']Joven[\"'][\\s\\S]*?\\}\\s*else\\s*\\{[\\s\\S]*?std::cout\\s*<<\\s*[\"']Adulto[\"'][\\s\\S]*?\\}",
+      "error": "Debe haber una estructura if (edad < 18) que imprima 'Joven', y un else que imprima 'Adulto'."
+    },
+    "requirements": [
+      "Estructura: Estructura condicional bifurcada if/else con bloques delimitados. (4 puntos)",
+      "Textos y Lógica: Impresión de 'Joven' si se cumple la condición, y 'Adulto' en el bloque else. (3 puntos)",
+      "Parámetros: Condición de comparación de edad menor a 18 (edad < 18). (2 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_8",
+    "unit": 2,
+    "type": "lesson",
+    "title": "2.3 Operadores Comparativos",
+    "guide": "<h3>Comparando Valores</h3><p>Para hacer preguntas complejas, usamos operadores de comparación:</p><ul><li><code>==</code>: Igual a.</li><li><code>!=</code>: Distinto de.</li><li><code>&lt;=</code>: Menor o igual.</li><li><code>&gt;=</code>: Mayor o igual.</li></ul><p><strong>Misión:</strong> Escribe un condicional <code>if</code> que compruebe si <code>clave</code> es igual a 1234, y si es así imprima 'Acceso'.</p>",
+    "initialCode": "#include <iostream>\n\nint main() {\n    int clave = 1234;\n    // Comprueba si la clave es igual a 1234\n    \n    return 0;\n}",
+    "validation": {
+      "regex": "if\\s*\\(\\s*clave\\s*==\\s*1234\\s*\\)\\s*\\{\\s*std::cout\\s*<<\\s*[\"']Acceso[\"']\\s*;?\\s*\\}",
+      "error": "Usa la comparación clave == 1234 para imprimir 'Acceso'."
+    },
+    "requirements": [
+      "Estructura: Uso de operador relacional de igualdad (==) dentro del condicional. (4 puntos)",
+      "Textos y Lógica: Impresión del texto 'Acceso' en caso de éxito. (2 puntos)",
+      "Parámetros: Comparación de variable clave con valor numérico 1234 (clave == 1234). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_9",
+    "unit": 2,
+    "type": "lesson",
+    "title": "2.4 Operadores Lógicos",
+    "guide": "<h3>Y lógico (&&) y O lógico (||)</h3><p>Podemos unir varias condiciones en un solo <code>if</code>:</p><ul><li><code>&&</code> (Y): Ambas condiciones deben ser verdaderas.</li><li><code>||</code> (O): Al menos una condición debe ser verdadera.</li></ul><pre>if (tieneLlave && sabeClave) {\n    std::cout &lt;&lt; \"Entra\";\n}</pre><p><strong>Misión:</strong> Escribe un <code>if</code> que compruebe si la variable <code>edad</code> es mayor o igual a 18 <strong>Y</strong> la variable <code>tieneId</code> es verdadera (<code>true</code>). En ese caso, imprime 'Autorizado'.</p>",
+    "initialCode": "#include <iostream>\n\nint main() {\n    int edad = 20;\n    bool tieneId = true;\n    // Escribe el condicional aquí\n    \n    return 0;\n}",
+    "validation": {
+      "regex": "if\\s*\\(\\s*edad\\s*>=\\s*18\\s*&&\\s*tieneId\\s*\\)\\s*\\{\\s*std::cout\\s*<<\\s*[\"']Autorizado[\"']\\s*;?\\s*\\}|if\\s*\\(\\s*tieneId\\s*&&\\s*edad\\s*>=\\s*18\\s*\\)\\s*\\{\\s*std::cout\\s*<<\\s*[\"']Autorizado[\"']\\s*;?\\s*\\}",
+      "error": "Comprueba ambas condiciones usando && e imprime 'Autorizado'."
+    },
+    "requirements": [
+      "Estructura: Uso de operador lógico AND (&&) para combinar condiciones. (4 puntos)",
+      "Textos y Lógica: Salida en consola del texto 'Autorizado'. (2 puntos)",
+      "Parámetros: Evaluación de edad mayor o igual a 18 y valor booleano tieneId verdadero. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_10",
+    "unit": 2,
+    "type": "challenge",
+    "title": "2.5 Reto: Control de Temperatura",
+    "guide": "<h3>🔥 RETO DE LA UNIDAD 2</h3><p>Vamos a hacer un termostato inteligente.</p><p>Escribe un condicional para la variable <code>temp</code>:</p><ol><li>Si <code>temp</code> es menor que 15, imprime 'Calentador encendido'.</li><li>Si <code>temp</code> está entre 15 y 25 (inclusive ambos), imprime 'Temperatura normal'.</li><li>Si <code>temp</code> es mayor que 25, imprime 'Aire acondicionado encendido'.</li></ol>",
+    "initialCode": "#include <iostream>\n\nint main() {\n    int temp = 22;\n    // Escribe el termostato aquí\n    \n    return 0;\n}",
+    "validation": {
+      "regex": "if\\s*\\(\\s*temp\\s*<\\s*15\\s*\\)\\s*\\{[\\s\\S]*?Calentador[\\s\\S]*?\\}\\s*else\\s+if\\s*\\(\\s*temp\\s*>=\\s*15\\s*&&\\s*temp\\s*<=\\s*25\\s*\\)\\s*\\{[\\s\\S]*?normal[\\s\\S]*?\\}\\s*else\\s*\\{[\\s\\S]*?Aire[\\s\\S]*?\\}",
+      "error": "Asegúrate de usar if, else if con las condiciones adecuadas, y else para la temperatura alta."
+    },
+    "requirements": [
+      "Estructura: Uso de estructura de control condicional anidada/múltiple if / else if / else. (4 puntos)",
+      "Textos y Lógica: Salidas en consola: 'Calentador encendido', 'Temperatura normal', 'Aire acondicionado encendido' según corresponda. (3 puntos)",
+      "Parámetros: Condiciones correctas evaluando temp < 15, temp >= 15 && temp <= 25, y temp > 25. (2 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_11",
+    "unit": 3,
+    "type": "lesson",
+    "title": "3.1 Bucle While",
+    "guide": "<h3>Unidad 3: Bucles y Repetición</h3><p>Un bucle repite un bloque de código mientras se cumpla una condición. El bucle <code>while</code> es el más simple.</p><pre>int contador = 0;\nwhile (contador < 3) {\n    std::cout &lt;&lt; contador;\n    contador++;\n}</pre><p><strong>Misión:</strong> Escribe un bucle <code>while</code> que se ejecute mientras <code>i</code> sea menor o igual a 5. Dentro del bucle, imprime <code>i</code> y luego incrementa <code>i</code> en 1 (<code>i++</code>).</p>",
+    "initialCode": "#include <iostream>\n\nint main() {\n    int i = 1;\n    // Escribe tu bucle while aquí\n    \n    return 0;\n}",
+    "validation": {
+      "regex": "while\\s*\\(\\s*i\\s*<=\\s*5\\s*\\)\\s*\\{[\\s\\S]*?std::cout\\s*<<\\s*i[\\s\\S]*?i\\+\\+\\s*;[\\s\\S]*?\\}",
+      "error": "Verifica que el while compruebe i <= 5, imprima i, y aumente el valor de i."
+    },
+    "requirements": [
+      "Estructura: Estructura del bucle de repetición while. (4 puntos)",
+      "Textos y Lógica: Impresión de la variable contadora i en cada paso. (2 puntos)",
+      "Parámetros: Condición de parada i <= 5 e incremento explícito de la variable (i++). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_12",
+    "unit": 3,
+    "type": "lesson",
+    "title": "3.2 Bucle For",
+    "guide": "<h3>Bucle For: El Contador</h3><p>Cuando sabes exactamente cuántas veces quieres repetir un código, el bucle <code>for</code> es la mejor opción. Agrupa la declaración, condición e incremento en una sola línea.</p><pre>for (int i = 0; i < 5; i++) {\n    std::cout &lt;&lt; i;\n}</pre><p><strong>Misión:</strong> Escribe un bucle <code>for</code> que comience con <code>int k = 1</code>, corra mientras <code>k</code> sea menor o igual a 3, e imprima 'Hola' en cada iteración.</p>",
+    "initialCode": "#include <iostream>\n\nint main() {\n    // Escribe el bucle for aquí\n    \n    return 0;\n}",
+    "validation": {
+      "regex": "for\\s*\\(\\s*int\\s+k\\s*=\\s*1\\s*;\\s*k\\s*<=\\s*3\\s*;\\s*k\\+\\+\\s*\\)\\s*\\{\\s*std::cout\\s*<<\\s*[\"']Hola[\"']\\s*;?\\s*\\}",
+      "error": "Define el bucle for con la variable k de 1 a 3 e imprime \"Hola\"."
+    },
+    "requirements": [
+      "Estructura: Estructura compacta del bucle de repetición for con inicializador, condición e incremento. (4 puntos)",
+      "Textos y Lógica: Impresión del mensaje 'Hola' en cada repetición. (3 puntos)",
+      "Parámetros: Contador k inicializado en 1, condición k <= 3 e incremento k++. (2 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_13",
+    "unit": 3,
+    "type": "lesson",
+    "title": "3.3 Bucles: Acumuladores",
+    "guide": "<h3>Sumando en un Bucle</h3><p>Un uso común de los bucles es sumar o acumular valores en una variable exterior.</p><pre>int suma = 0;\nfor (int i = 1; i <= 3; i++) {\n    suma += i;\n}</pre><p><strong>Misión:</strong> Completa el bucle <code>for</code> para que sume todos los números del 1 al 4 dentro de la variable <code>total</code>.</p>",
+    "initialCode": "#include <iostream>\n\nint main() {\n    int total = 0;\n    // Escribe un for que vaya del 1 al 4 y sume i a total\n    \n    return 0;\n}",
+    "validation": {
+      "regex": "for\\s*\\(\\s*int\\s+i\\s*=\\s*1\\s*;\\s*i\\s*<=\\s*4\\s*;\\s*i\\+\\+\\s*\\)\\s*\\{\\s*total\\s*\\+=\\s*i\\s*;?\\s*\\}",
+      "error": "El bucle debe ir de i = 1 hasta i <= 4 y hacer total += i en cada paso."
+    },
+    "requirements": [
+      "Estructura: Implementación de bucle para acumular valores en variable externa. (4 puntos)",
+      "Textos y Lógica: Operador de suma acumulativa (+=). (2 puntos)",
+      "Parámetros: Bucle de 1 a 4 y acumulación correcta en la variable total. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_14",
+    "unit": 3,
+    "type": "lesson",
+    "title": "3.4 Bucle Do-While",
+    "guide": "<h3>Hacer y luego Comprobar</h3><p>El bucle <code>do-while</code> es especial porque **siempre se ejecuta al menos una vez**, ya que la condición se evalúa al final.</p><pre>int x = 10;\ndo {\n    std::cout &lt;&lt; x;\n} while (x < 5);</pre><p><strong>Misión:</strong> Crea un bucle <code>do-while</code> que imprima la variable <code>num</code> e incremente su valor (<code>num++</code>) mientras <code>num</code> sea menor que 5.</p>",
+    "initialCode": "#include <iostream>\n\nint main() {\n    int num = 1;\n    // Escribe tu bucle do-while aquí\n    \n    return 0;\n}",
+    "validation": {
+      "regex": "do\\s*\\{[\\s\\S]*?std::cout\\s*<<\\s*num[\\s\\S]*?num\\+\\+\\s*;[\\s\\S]*?\\}\\s*while\\s*\\(\\s*num\\s*<\\s*5\\s*\\)\\s*;",
+      "error": "Define el bloque 'do { ... } while (num < 5);' e incrementa num en su interior."
+    },
+    "requirements": [
+      "Estructura: Estructura del bucle post-prueba do-while con punto y coma final. (4 puntos)",
+      "Textos y Lógica: Impresión e incremento de variable contadora. (2 puntos)",
+      "Parámetros: Condición de permanencia num < 5 definida al final en la cláusula while. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_15",
+    "unit": 3,
+    "type": "challenge",
+    "title": "3.5 Reto: Cuenta Regresiva",
+    "guide": "<h3>🔥 RETO DE LA UNIDAD 3</h3><p>¡Cuenta atrás y despegue!</p><p>Escribe un programa en C++ que simule una cuenta atrás desde 5 hasta 1 usando un bucle. En cada iteración debe imprimir el número de la cuenta. Tras salir del bucle, debe imprimir '¡Despegue!'.</p>",
+    "initialCode": "#include <iostream>\n\nint main() {\n    // Escribe el bucle de cuenta regresiva aquí\n    \n    return 0;\n}",
+    "validation": {
+      "regex": "(for|while)[\\s\\S]*?std::cout\\s*<<[\\s\\S]*?std::cout\\s*<<\\s*[\"']¡Despegue![\"']",
+      "error": "Asegúrate de usar un bucle para la cuenta atrás (5 a 1) y luego imprimir '¡Despegue!' al final."
+    },
+    "requirements": [
+      "Estructura: Uso de bucle para realizar cuenta regresiva y código secuencial fuera de él. (4 puntos)",
+      "Textos y Lógica: Impresión de los números de 5 a 1 e impresión final del texto '¡Despegue!'. (3 puntos)",
+      "Parámetros: Lógica de disminución en el bucle y condición de parada. (2 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_16",
+    "unit": 4,
+    "type": "lesson",
+    "title": "4.1 Definir Funciones",
+    "guide": "<h3>Unidad 4: Funciones</h3><p>Una función es un bloque de código reutilizable. Evita repetir código y organiza el programa.</p><p>En C++, debes declarar el tipo de valor que la función va a devolver. Si no devuelve nada, usamos <code>void</code>.</p><pre>void saludar() {\n    std::cout &lt;&lt; \"Hola\";\n}</pre><p><strong>Misión:</strong> Declara una función llamada <code>mostrarMensaje</code> (de tipo <code>void</code>) que imprima 'Mensaje'. Colócala antes de la función <code>main</code>.</p>",
+    "initialCode": "#include <iostream>\n\n// Declara tu función aquí\n\nint main() {\n    return 0;\n}",
+    "validation": {
+      "regex": "void\\s+mostrarMensaje\\s*\\(\\s*\\)\\s*\\{\\s*std::cout\\s*<<\\s*[\"']Mensaje[\"']\\s*;?\\s*\\}",
+      "error": "Define la función void mostrarMensaje() que imprima 'Mensaje' antes de la función main."
+    },
+    "requirements": [
+      "Estructura: Definición y declaración de función personalizada de tipo de retorno void. (4 puntos)",
+      "Textos y Lógica: Salida en pantalla del texto 'Mensaje' dentro de la función. (3 puntos)",
+      "Parámetros: Definición de la función mostrarMensaje() antes de main o su prototipo. (2 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_17",
+    "unit": 4,
+    "type": "lesson",
+    "title": "4.2 Funciones con Parámetros",
+    "guide": "<h3>Pasando Datos a las Funciones</h3><p>Los parámetros actúan como variables locales dentro de la función y reciben valores (argumentos) cuando la llamamos.</p><pre>void felicitar(std::string nombre) {\n    std::cout &lt;&lt; \"Felicidades \" &lt;&lt; nombre;\n}</pre><p><strong>Misión:</strong> Crea una función <code>doble</code> que reciba un entero <code>x</code> e imprima el valor de <code>x * 2</code>.</p>",
+    "initialCode": "#include <iostream>\n\n// Define la función doble aquí\n\nint main() {\n    return 0;\n}",
+    "validation": {
+      "regex": "void\\s+doble\\s*\\(\\s*int\\s+[a-zA-Z0-9_]+\\s*\\)\\s*\\{[\\s\\S]*?\\*\\s*2[\\s\\S]*?\\}",
+      "error": "La función doble debe ser de tipo void, recibir un parámetro int, e imprimir ese parámetro multiplicado por 2."
+    },
+    "requirements": [
+      "Estructura: Definición de función con recepción de parámetros de entrada. (4 puntos)",
+      "Textos y Lógica: Impresión del valor calculado. (2 puntos)",
+      "Parámetros: Parámetro entero int y cálculo/impresión de su valor multiplicado por 2. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_18",
+    "unit": 4,
+    "type": "lesson",
+    "title": "4.3 Retorno de Valores",
+    "guide": "<h3>Retornar un Resultado</h3><p>Si queremos que la función calcule algo y nos devuelva el resultado para usarlo fuera, usamos la palabra clave <code>return</code> y especificamos el tipo de retorno.</p><pre>int sumar(int a, int b) {\n    return a + b;\n}</pre><p><strong>Misión:</strong> Define una función llamada <code>cuadrado</code> que reciba un entero <code>n</code> y devuelva (<code>return</code>) su valor al cuadrado (<code>n * n</code>). El tipo de retorno debe ser <code>int</code>.</p>",
+    "initialCode": "#include <iostream>\n\n// Define la función cuadrado aquí\n\nint main() {\n    return 0;\n}",
+    "validation": {
+      "regex": "int\\s+cuadrado\\s*\\(\\s*int\\s+([a-zA-Z0-9_]+)\\s*\\)\\s*\\{\\s*return\\s+\\1\\s*\\*\\s*\\1\\s*;?\\s*\\}",
+      "error": "Define la función 'int cuadrado(int n)' que retorne 'n * n'."
+    },
+    "requirements": [
+      "Estructura: Uso de la palabra clave return en función con tipo de retorno int. (4 puntos)",
+      "Textos y Lógica: No aplica impresión (la función devuelve el valor). (0 puntos)",
+      "Parámetros: Función cuadrado que toma un int n y retorna n * n. (5 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_19",
+    "unit": 4,
+    "type": "lesson",
+    "title": "4.4 Llamar Funciones",
+    "guide": "<h3>Invocando el Código</h3><p>Para ejecutar una función, simplemente escribimos su nombre pasándole los argumentos requeridos desde la función <code>main</code>.</p><pre>int resultado = sumar(5, 3);</pre><p><strong>Misión:</strong> Llama a la función <code>saludar()</code> dentro de la función <code>main</code>.</p>",
+    "initialCode": "#include <iostream>\n\nvoid saludar() {\n    std::cout << \"Hola de nuevo\" << std::endl;\n}\n\nint main() {\n    // Llama a la función saludar aquí\n    \n    return 0;\n}",
+    "validation": {
+      "regex": "int\\s+main\\s*\\(\\s*\\)\\s*\\{[\\s\\S]*?saludar\\s*\\(\\s*\\)\\s*;[\\s\\S]*?return\\s+0\\s*;\\s*\\}",
+      "error": "Llama a la función 'saludar();' dentro del cuerpo de la función main."
+    },
+    "requirements": [
+      "Estructura: Invocación o llamada de función desde la función principal main. (5 puntos)",
+      "Textos y Lógica: Coherencia de ejecución. (1 puntos)",
+      "Parámetros: Llamada a la función saludar() sin parámetros. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_20",
+    "unit": 4,
+    "type": "challenge",
+    "title": "4.5 Reto: Multiplicador",
+    "guide": "<h3>🔥 RETO DE LA UNIDAD 4</h3><p>Crea una función llamada <code>multiplicar</code> que tome dos números enteros como parámetros, calcule su producto y lo <strong>devuelva</strong> (<code>return</code>).</p><p>Luego, en tu función <code>main</code>, llama a esa función multiplicando 5 por 4 y guarda el resultado en una variable llamada <code>total</code>.</p>",
+    "initialCode": "#include <iostream>\n\n// Define la función multiplicar aquí\n\nint main() {\n    // Llama a la función y guarda el resultado en 'total'\n    \n    return 0;\n}",
+    "validation": {
+      "regex": "int\\s+multiplicar\\s*\\(\\s*int\\s+[a-zA-Z0-9_]+\\s*,\\s*int\\s+[a-zA-Z0-9_]+\\s*\\)[\\s\\S]*?int\\s+total\\s*=\\s*multiplicar\\s*\\(\\s*5\\s*,\\s*4\\s*\\)\\s*;",
+      "error": "Verifica que definas 'int multiplicar(int a, int b)' y en el main asignes 'int total = multiplicar(5, 4);'."
+    },
+    "requirements": [
+      "Estructura: Declaración de función con retorno de datos y su llamada desde main. (3 puntos)",
+      "Textos y Lógica: Nombre de función 'multiplicar' y variable de almacenamiento 'total'. (3 puntos)",
+      "Parámetros: Parámetros enteros, retorno de multiplicación, y asignación de multiplicar(5,4). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_21",
+    "unit": 5,
+    "type": "lesson",
+    "title": "5.1 Vectores Básicos",
+    "guide": "<h3>Unidad 5: Colecciones y POO</h3><p>Un vector es una colección dinámica de elementos del mismo tipo. Requiere <code>#include &lt;vector&gt;</code>.</p><pre>std::vector&lt;int&gt; numeros = {1, 2, 3};</pre><p>Para añadir un elemento al final, usamos <code>push_back</code>:</p><pre>numeros.push_back(4);</pre><p><strong>Misión:</strong> Añade el número 10 al vector <code>valores</code> usando el método <code>push_back</code>.</p>",
+    "initialCode": "#include <iostream>\n#include <vector>\n\nint main() {\n    std::vector<int> valores = {5, 8};\n    // Añade el 10 aquí\n    \n    return 0;\n}",
+    "validation": {
+      "regex": "valores\\.push_back\\(\\s*10\\s*\\)\\s*;",
+      "error": "Usa la instrucción 'valores.push_back(10);'."
+    },
+    "requirements": [
+      "Estructura: Uso de contenedor std::vector de la librería estándar. (4 puntos)",
+      "Textos y Lógica: Inclusión de cabecera <vector>. (2 puntos)",
+      "Parámetros: Llamada al método push_back para insertar el número 10. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_22",
+    "unit": 5,
+    "type": "lesson",
+    "title": "5.2 Introducción a Clases",
+    "guide": "<h3>Clases y Objetos (POO)</h3><p>La Programación Orientada a Objetos modela conceptos del mundo real. Una Clase es un molde o plantilla.</p><pre>class Persona {\npublic:\n    std::string nombre;\n};</pre><p>La palabra clave <code>public:</code> indica que sus atributos son accesibles desde fuera de la clase. ¡No olvides el punto y coma final de la clase!</p><p><strong>Misión:</strong> Crea una clase llamada <code>Coche</code> que contenga un atributo público de tipo entero llamado <code>velocidad</code>.</p>",
+    "initialCode": "#include <iostream>\n#include <string>\n\n// Define la clase Coche aquí\n\nint main() {\n    return 0;\n}",
+    "validation": {
+      "regex": "class\\s+Coche\\s*\\{[\\s\\S]*?public\\s*:[\\s\\S]*?int\\s+velocidad\\s*;[\\s\\S]*?\\}\\s*;",
+      "error": "Asegúrate de definir la clase Coche con el atributo público int velocidad, y finalizar la definición con '};'."
+    },
+    "requirements": [
+      "Estructura: Definición de clase (class) con delimitadores y punto y coma final. (4 puntos)",
+      "Textos y Lógica: Identificador de clase Coche. (2 puntos)",
+      "Parámetros: Atributo público velocidad de tipo int (declarado bajo public:). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_23",
+    "unit": 5,
+    "type": "lesson",
+    "title": "5.3 Instanciando Objetos",
+    "guide": "<h3>Crear Objetos a partir de la Clase</h3><p>Una vez definida la clase, creamos 'objetos' (instancias) en el main y accedemos a sus atributos usando el punto (<code>.</code>).</p><pre>Persona p1;\np1.nombre = \"Ana\";</pre><p><strong>Misión:</strong> En la función <code>main</code>, crea un objeto de la clase <code>Coche</code> llamado <code>miCoche</code> y asígnale una <code>velocidad</code> de 120.</p>",
+    "initialCode": "#include <iostream>\n\nclass Coche {\npublic:\n    int velocidad;\n};\n\nint main() {\n    // Crea el objeto miCoche y dale velocidad 120\n    \n    return 0;\n}",
+    "validation": {
+      "regex": "Coche\\s+miCoche\\s*;[\\s\\S]*miCoche\\.velocidad\\s*=\\s*120\\s*;",
+      "error": "Crea el objeto 'Coche miCoche;' y luego asigna 'miCoche.velocidad = 120;'."
+    },
+    "requirements": [
+      "Estructura: Instanciación de objetos de clase en el bloque main. (4 puntos)",
+      "Textos y Lógica: Nombre de la instancia miCoche. (2 puntos)",
+      "Parámetros: Asignación de atributo velocidad a 120 mediante operador de acceso punto (miCoche.velocidad = 120). (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_24",
+    "unit": 5,
+    "type": "lesson",
+    "title": "5.4 Constructores",
+    "guide": "<h3>El Constructor</h3><p>El constructor es un método especial que tiene el **mismo nombre que la clase** y se ejecuta automáticamente al crear un objeto para inicializar sus atributos.</p><pre>class Persona {\npublic:\n    std::string nombre;\n    Persona(std::string n) {\n        nombre = n;\n    }\n};</pre><p><strong>Misión:</strong> Agrega un constructor a la clase <code>Coche</code> que reciba un entero y lo asigne a <code>velocidad</code>.</p>",
+    "initialCode": "#include <iostream>\n\nclass Coche {\npublic:\n    int velocidad;\n    // Escribe el constructor aquí\n};\n\nint main() {\n    return 0;\n}",
+    "validation": {
+      "regex": "Coche\\s*\\(\\s*int\\s+[a-zA-Z0-9_]+\\s*\\)\\s*\\{[\\s\\S]*?velocidad\\s*=\\s*[a-zA-Z0-9_]+;?[\\s\\S]*\\}",
+      "error": "Crea un constructor Coche(int v) dentro de la clase Coche que asigne v a la propiedad velocidad."
+    },
+    "requirements": [
+      "Estructura: Definición de constructor dentro de la clase para inicializar variables. (4 puntos)",
+      "Textos y Lógica: Constructor Coche(int v) homónimo a la clase. (2 puntos)",
+      "Parámetros: Asignación del parámetro v al atributo de clase velocidad. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  },
+  {
+    "id": "cpp_25",
+    "unit": 5,
+    "type": "challenge",
+    "title": "5.5 Reto: Cuenta Bancaria",
+    "guide": "<h3>🔥 RETO FINAL DEL CURSO C++</h3><p>¡Vamos a modelar una cuenta bancaria real!</p><p>Completa el programa con los siguientes requisitos:</p><ol><li>Crea una clase llamada <code>Cuenta</code>.</li><li>Tiene un atributo público decimal <code>saldo</code>.</li><li>Tiene un constructor <code>Cuenta(double s)</code> que inicializa el <code>saldo</code>.</li><li>Tiene un método público <code>void ingresar(double cantidad)</code> que suma esa cantidad al saldo.</li></ol>",
+    "initialCode": "#include <iostream>\n\n// Define la clase Cuenta aquí con su constructor y método ingresar\n\nint main() {\n    // Puedes probar tu cuenta aquí creando una cuenta y haciendo un ingreso\n    \n    return 0;\n}",
+    "validation": {
+      "regex": "class\\s+Cuenta\\s*\\{[\\s\\S]*?public\\s*:[\\s\\S]*?double\\s+saldo\\s*;[\\s\\S]*?Cuenta\\s*\\(\\s*double\\s+[a-zA-Z0-9_]+\\s*\\)[\\s\\S]*?void\\s+ingresar\\s*\\(\\s*double\\s+[a-zA-Z0-9_]+\\s*\\)\\s*\\{[\\s\\S]*?saldo\\s*\\+=[\\s\\S]*?\\}",
+      "error": "Asegúrate de definir la clase Cuenta con saldo, constructor Cuenta(double s) y método void ingresar(double cantidad) que actualice el saldo."
+    },
+    "requirements": [
+      "Estructura: Definición de clase Cuenta con constructor y métodos miembros. (3 puntos)",
+      "Textos y Lógica: Identificadores de clase Cuenta y método ingresar. (3 puntos)",
+      "Parámetros: Atributo double saldo, constructor de inicialización y método ingresar que actualiza saldo. (3 puntos)",
+      "Limpieza: Sintaxis limpia, indentación correcta y ausencia de caracteres o código innecesarios. (1 punto)"
+    ]
+  }
+]
